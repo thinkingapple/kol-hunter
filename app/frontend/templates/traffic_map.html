@@ -652,56 +652,6 @@
         <p class="text-xs text-gray-700 leading-relaxed">{{ conversion_analysis.saturation_note }}</p>
     </div>
 
-    <!-- 散点图: 执行难度(X轴) vs 转化难度(Y轴) -->
-    <div class="mb-6">
-        <h4 class="text-sm font-semibold text-gray-700 mb-1">执行难度 vs 转化难度 散点图</h4>
-        <p class="text-xs text-gray-400 mb-3">X轴=执行难度(越右越难做), Y轴=转化难度(越上越难转化) | 圆圈大小=投资者人数 | 颜色=饱和度</p>
-        <div class="relative bg-gray-50 border border-gray-200 rounded-xl p-6" style="height: 420px">
-            <!-- 四象限标签 -->
-            <div class="absolute top-2 left-8 text-xs text-gray-300 font-medium">难转化 · 易执行</div>
-            <div class="absolute top-2 right-8 text-xs text-gray-300 font-medium">难转化 · 难执行</div>
-            <div class="absolute bottom-2 left-8 text-xs text-gray-300 font-medium">易转化 · 易执行</div>
-            <div class="absolute bottom-2 right-8 text-xs text-gray-300 font-medium">易转化 · 难执行</div>
-            <!-- 中线 -->
-            <div class="absolute left-6 right-6 top-1/2 border-t border-dashed border-gray-300"></div>
-            <div class="absolute top-6 bottom-6 left-1/2 border-l border-dashed border-gray-300"></div>
-            <!-- 轴标签 -->
-            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 text-xs text-gray-400">执行难度 &rarr;</div>
-            <div class="absolute top-1/2 left-0 -translate-y-1/2 -rotate-90 text-xs text-gray-400">转化难度 &rarr;</div>
-
-            {% for ch in conversion_analysis.channels %}
-            {% set x_pct = (ch.execution - 1) / 9 * 80 + 8 %}
-            {% set y_pct = 92 - (ch.conversion - 1) / 9 * 80 %}
-            {% set sat_color = 'bg-red-400' if ch.saturation == '高' else ('bg-amber-400' if ch.saturation == '中' else ('bg-green-400' if ch.saturation == '低' else 'bg-blue-400')) %}
-            <div class="absolute flex flex-col items-center group cursor-default"
-                 style="left: {{ x_pct }}%; top: {{ y_pct }}%; transform: translate(-50%, -50%)">
-                <div class="{{ sat_color }} rounded-full opacity-70 hover:opacity-100 transition-opacity border-2 border-white shadow-sm"
-                     style="width: {{ [16, (ch.est_conversion_rate * 3000) | round | int + 12] | max }}px; height: {{ [16, (ch.est_conversion_rate * 3000) | round | int + 12] | max }}px"
-                     title="{{ ch.name }}: 执行{{ ch.execution }}/10, 转化{{ ch.conversion }}/10, 饱和度{{ ch.saturation }}, 转化率{{ ch.conversion_label }}"></div>
-                <span class="text-xs text-gray-600 font-medium mt-0.5 whitespace-nowrap">{{ ch.name }}</span>
-                <!-- 悬浮详情 -->
-                <div class="hidden group-hover:block absolute z-20 bottom-full mb-1 w-56 bg-white border border-gray-200 rounded-lg shadow-lg p-3 text-xs pointer-events-none">
-                    <div class="font-semibold text-gray-800 mb-1">{{ ch.name }}</div>
-                    <div class="space-y-0.5 text-gray-600">
-                        <div><span class="text-gray-400">执行难度:</span> {{ ch.execution }}/10 <span class="text-gray-400">— {{ ch.execution_note[:40] }}...</span></div>
-                        <div><span class="text-gray-400">转化难度:</span> {{ ch.conversion }}/10 <span class="text-gray-400">— {{ ch.conversion_note[:40] }}...</span></div>
-                        <div><span class="text-gray-400">估算转化率:</span> <span class="font-semibold">{{ ch.conversion_label }}</span></div>
-                        <div><span class="text-gray-400">饱和度:</span> {{ ch.saturation }} — {{ ch.saturation_note[:50] }}...</div>
-                        <div><span class="text-gray-400">新增潜力:</span> {{ ch.new_user_potential }} — {{ ch.new_user_note[:50] }}...</div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        <div class="flex items-center gap-4 mt-2 text-xs text-gray-400">
-            <span>饱和度:</span>
-            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-red-400 rounded-full opacity-70"></span>高(易转化用户已耗尽)</span>
-            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-amber-400 rounded-full opacity-70"></span>中</span>
-            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-green-400 rounded-full opacity-70"></span>低</span>
-            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-blue-400 rounded-full opacity-70"></span>极低(蓝海)</span>
-        </div>
-    </div>
-
     <!-- ===== 全渠道转化潜力散点图 ===== -->
     {% if conversion_analysis.full_scatter %}
     <div class="mb-6">
