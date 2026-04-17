@@ -1,0 +1,12 @@
+{
+  "competitors": [
+    {"name": "Tiger Brokers", "aliases": ["老虎證券", "老虎证券", "Tiger Trade", "TIGR"]},
+    {"name": "Interactive Brokers", "aliases": ["IB", "盈透證券", "盈透证券", "IBKR"]},
+    {"name": "Longbridge", "aliases": ["長橋證券", "长桥证券", "長橋"]},
+    {"name": "Webull", "aliases": ["微牛", "微牛證券"]},
+    {"name": "uSMART", "aliases": ["盈立證券", "盈立证券"]},
+    {"name": "Valuable", "aliases": ["華盛證券", "华盛证券", "華盛"]},
+    {"name": "SoFi Hong Kong", "aliases": ["SoFi HK"]},
+    {"name": "Saxo", "aliases": ["盛寶", "盛宝"]}
+  ]
+}

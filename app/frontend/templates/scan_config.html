@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Scan & Discover{% endblock %}
+{% block content %}
+<div class="mb-8">
+    <h2 class="text-2xl font-bold text-gray-900">Scan & Discover</h2>
+    <p class="text-gray-500 mt-1">Search for KOLs across social platforms</p>
+</div>
+
+<!-- Trigger Scan -->
+<div class="stat-card mb-8">
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">Run New Scan</h3>
+    <form method="post" action="/scans/trigger" id="scan-form">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+                <label class="block text-xs font-medium text-gray-500 mb-1">Platform</label>
+                <select name="platform_name" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm">
+                    <option value="">All Platforms</option>
+                    {% for p in platforms %}
+                    <option value="{{ p.name }}">{{ p.display_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-gray-500 mb-1">Keywords (comma separated)</label>
+                <input type="text" name="keywords" placeholder="港股分析, 美股投資, HK stock"
+                       class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm">
+                <p class="text-xs text-gray-400 mt-1">Leave empty to use default keywords</p>
+            </div>
+            <div class="flex items-end">
+                <button type="submit" class="btn btn-primary"
+                        hx-post="/scans/trigger"
+                        hx-target="#scan-result"
+                        hx-swap="innerHTML">
+                    Start Scan
+                </button>
+            </div>
+        </div>
+    </form>
+    <div id="scan-result" class="mt-4"></div>
+</div>
+
+<!-- Scan History -->
+<div class="stat-card">
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">Scan History</h3>
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">KOLs Found</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Started</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Completed</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Error</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                {% for scan in scans %}
+                <tr>
+                    <td class="px-4 py-3 text-sm text-gray-500">{{ scan.id }}</td>
+                    <td class="px-4 py-3 text-sm text-gray-900">{{ scan.job_type }}</td>
+                    <td class="px-4 py-3">
+                        {% if scan.status == 'completed' %}
+                        <span class="badge bg-green-100 text-green-700">completed</span>
+                        {% elif scan.status == 'running' %}
+                        <span class="badge bg-blue-100 text-blue-700">running</span>
+                        {% elif scan.status == 'failed' %}
+                        <span class="badge bg-red-100 text-red-700">failed</span>
+                        {% else %}
+                        <span class="badge bg-gray-100 text-gray-700">{{ scan.status }}</span>
+                        {% endif %}
+                    </td>
+                    <td class="px-4 py-3 text-sm font-medium text-gray-900">{{ scan.kols_found }}</td>
+                    <td class="px-4 py-3 text-sm text-gray-500">{{ scan.started_at.strftime('%m/%d %H:%M') if scan.started_at else '--' }}</td>
+                    <td class="px-4 py-3 text-sm text-gray-500">{{ scan.completed_at.strftime('%m/%d %H:%M') if scan.completed_at else '--' }}</td>
+                    <td class="px-4 py-3 text-sm text-red-500 max-w-xs truncate">{{ scan.error_log or '' }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" class="px-4 py-8 text-center text-gray-400">No scans yet. Run your first scan above.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

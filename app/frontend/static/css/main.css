@@ -1,0 +1,7 @@
+/* Custom overrides - most styling handled by Tailwind */
+.htmx-indicator {
+    display: none;
+}
+.htmx-request .htmx-indicator {
+    display: inline-block;
+}

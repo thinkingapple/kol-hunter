@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Campaigns{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-8">
+    <div>
+        <h2 class="text-2xl font-bold text-gray-900">Outreach Campaigns</h2>
+        <p class="text-gray-500 mt-1">Manage email outreach to KOLs</p>
+    </div>
+</div>
+
+<!-- Create Campaign -->
+<div class="stat-card mb-8">
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">Create New Campaign</h3>
+    <form method="post" action="/campaigns/create" class="flex flex-wrap gap-4 items-end">
+        <div>
+            <label class="block text-xs font-medium text-gray-500 mb-1">Campaign Name</label>
+            <input type="text" name="name" required placeholder="e.g. Q2 2026 HK Finance KOLs"
+                   class="border border-gray-200 rounded-lg px-3 py-2 text-sm w-64">
+        </div>
+        <div>
+            <label class="block text-xs font-medium text-gray-500 mb-1">Description</label>
+            <input type="text" name="description" placeholder="Optional description"
+                   class="border border-gray-200 rounded-lg px-3 py-2 text-sm w-64">
+        </div>
+        <div>
+            <label class="block text-xs font-medium text-gray-500 mb-1">Language</label>
+            <select name="language" class="border border-gray-200 rounded-lg px-3 py-2 text-sm">
+                <option value="zh">Chinese</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
+
+<!-- Campaign List -->
+<div class="stat-card">
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">All Campaigns</h3>
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Language</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Sent</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Replied</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Created</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                {% for c in campaigns %}
+                <tr>
+                    <td class="px-4 py-3">
+                        <div class="text-sm font-medium text-gray-900">{{ c.name }}</div>
+                        {% if c.description %}<div class="text-xs text-gray-500">{{ c.description }}</div>{% endif %}
+                    </td>
+                    <td class="px-4 py-3">
+                        {% if c.status == 'active' %}
+                        <span class="badge bg-green-100 text-green-700">active</span>
+                        {% elif c.status == 'completed' %}
+                        <span class="badge bg-blue-100 text-blue-700">completed</span>
+                        {% elif c.status == 'draft' %}
+                        <span class="badge bg-gray-100 text-gray-700">draft</span>
+                        {% else %}
+                        <span class="badge bg-yellow-100 text-yellow-700">{{ c.status }}</span>
+                        {% endif %}
+                    </td>
+                    <td class="px-4 py-3 text-sm text-gray-500">{{ c.language }}</td>
+                    <td class="px-4 py-3 text-sm font-medium text-gray-900">{{ c.total_sent }}</td>
+                    <td class="px-4 py-3 text-sm font-medium text-gray-900">{{ c.total_replied }}</td>
+                    <td class="px-4 py-3 text-sm text-gray-500">{{ c.created_at.strftime('%Y-%m-%d') if c.created_at else '' }}</td>
+                    <td class="px-4 py-3">
+                        <a href="/campaigns/{{ c.id }}" class="text-sm text-indigo-600 hover:text-indigo-800">View</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" class="px-4 py-8 text-center text-gray-400">No campaigns yet. Create one above.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

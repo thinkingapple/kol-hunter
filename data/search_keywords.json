@@ -1,0 +1,38 @@
+{
+  "finance_general": [
+    "香港股票 投資",
+    "港股分析",
+    "美股投資",
+    "Hong Kong stock trading",
+    "HK investment",
+    "港股開戶",
+    "美股開戶教學",
+    "股票新手",
+    "投資理財",
+    "ETF投資",
+    "IPO分析",
+    "港股推薦",
+    "美股分析",
+    "股市分析"
+  ],
+  "competitors": [
+    "富途牛牛",
+    "moomoo",
+    "Tiger Brokers 老虎證券",
+    "Interactive Brokers",
+    "長橋證券 Longbridge",
+    "華盛證券",
+    "微牛 Webull",
+    "uSMART"
+  ],
+  "platform_specific": {
+    "youtube": "site:youtube.com",
+    "instagram": "site:instagram.com",
+    "twitter": "site:twitter.com OR site:x.com",
+    "xiaohongshu": "site:xiaohongshu.com OR site:xhslink.com",
+    "bilibili": "site:bilibili.com OR site:space.bilibili.com",
+    "facebook": "site:facebook.com",
+    "tiktok": "site:tiktok.com",
+    "threads": "site:threads.net"
+  }
+}

@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Settings{% endblock %}
+{% block content %}
+<div class="mb-8">
+    <h2 class="text-2xl font-bold text-gray-900">Settings</h2>
+    <p class="text-gray-500 mt-1">Configure platforms, email, and scoring</p>
+</div>
+
+<!-- Platform Configuration -->
+<div class="stat-card mb-8">
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">Platforms</h3>
+    <p class="text-sm text-gray-500 mb-4">Enable or disable platforms for scanning.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+        {% for p in platforms %}
+        <div class="flex items-center justify-between border border-gray-100 rounded-lg p-3">
+            <div>
+                <span class="text-sm font-medium text-gray-900">{{ p.display_name }}</span>
+                <span class="text-xs text-gray-400 ml-1">#{{ p.priority }}</span>
+            </div>
+            <form method="post" action="/settings/platforms/{{ p.id }}/toggle">
+                <button type="submit" class="text-xs px-2 py-1 rounded {% if p.is_active %}bg-green-100 text-green-700{% else %}bg-gray-100 text-gray-500{% endif %}">
+                    {% if p.is_active %}Active{% else %}Disabled{% endif %}
+                </button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Email Configuration Guide -->
+<div class="stat-card mb-8">
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">Email Configuration</h3>
+    <p class="text-sm text-gray-500 mb-4">Email settings are configured via the <code class="bg-gray-100 px-1 rounded">.env</code> file in the project root.</p>
+    <div class="bg-gray-50 rounded-lg p-4 text-sm font-mono">
+        <div class="text-gray-600"># Choose provider: gmail, sendgrid, mailgun</div>
+        <div>EMAIL_PROVIDER=gmail</div>
+        <br>
+        <div class="text-gray-600"># Gmail SMTP (requires App Password)</div>
+        <div>GMAIL_ADDRESS=your-email@gmail.com</div>
+        <div>GMAIL_APP_PASSWORD=xxxx-xxxx-xxxx-xxxx</div>
+        <br>
+        <div class="text-gray-600"># Sender identity</div>
+        <div>SENDER_NAME=Your Name</div>
+        <div>SENDER_TITLE=Partnership Manager</div>
+        <div>SENDER_EMAIL=your-email@gmail.com</div>
+    </div>
+</div>
+
+<!-- Scoring Weights -->
+<div class="stat-card mb-8">
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">Scoring Weights</h3>
+    <p class="text-sm text-gray-500 mb-4">Current scoring configuration (edit in <code class="bg-gray-100 px-1 rounded">config.py</code>).</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {% set weights = [
+            ('Reach (Audience Size)', 0.20),
+            ('Engagement Rate', 0.25),
+            ('Content Relevance', 0.25),
+            ('Region Match', 0.15),
+            ('Recency', 0.05),
+            ('Competitor History', 0.10),
+        ] %}
+        {% for name, weight in weights %}
+        <div class="flex items-center justify-between border border-gray-100 rounded-lg p-3">
+            <span class="text-sm text-gray-700">{{ name }}</span>
+            <span class="text-sm font-bold text-indigo-600">{{ (weight * 100)|int }}%</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Scheduled Tasks -->
+<div class="stat-card">
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">Scheduled Tasks</h3>
+    {% if scheduled_tasks %}
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Cron</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Last Run</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                {% for task in scheduled_tasks %}
+                <tr>
+                    <td class="px-4 py-3 text-sm text-gray-900">{{ task.name }}</td>
+                    <td class="px-4 py-3 text-sm text-gray-500">{{ task.task_type }}</td>
+                    <td class="px-4 py-3 text-sm font-mono text-gray-500">{{ task.cron_expression }}</td>
+                    <td class="px-4 py-3">
+                        <span class="badge {% if task.is_active %}bg-green-100 text-green-700{% else %}bg-gray-100 text-gray-500{% endif %}">
+                            {% if task.is_active %}active{% else %}paused{% endif %}
+                        </span>
+                    </td>
+                    <td class="px-4 py-3 text-sm text-gray-500">{{ task.last_run_at.strftime('%Y-%m-%d %H:%M') if task.last_run_at else 'Never' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-gray-400 text-sm">No scheduled tasks configured yet. Tasks can be set up via the API.</p>
+    {% endif %}
+</div>
+{% endblock %}

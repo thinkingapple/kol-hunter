@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="mb-8">
+    <h2 class="text-2xl font-bold text-gray-900">Dashboard</h2>
+    <p class="text-gray-500 mt-1">KOL Discovery & Outreach Overview</p>
+</div>
+
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="stat-card">
+        <div class="text-sm font-medium text-gray-500">Total KOLs</div>
+        <div class="text-3xl font-bold text-gray-900 mt-2">{{ total_kols }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="text-sm font-medium text-gray-500">KOLs with Email</div>
+        <div class="text-3xl font-bold text-indigo-600 mt-2">{{ kols_with_email }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="text-sm font-medium text-gray-500">Emails Sent</div>
+        <div class="text-3xl font-bold text-green-600 mt-2">{{ total_emails_sent }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="text-sm font-medium text-gray-500">Tier A KOLs</div>
+        <div class="text-3xl font-bold text-yellow-600 mt-2">{{ tier_counts.get('A', 0) }}</div>
+    </div>
+</div>
+
+<!-- Tier Distribution & Funnel -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <!-- Tier Distribution -->
+    <div class="stat-card">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">KOL Tier Distribution</h3>
+        {% set tiers = [('A', 'bg-green-500'), ('B', 'bg-blue-500'), ('C', 'bg-yellow-500'), ('D', 'bg-gray-400')] %}
+        {% for tier_name, color in tiers %}
+        {% set count = tier_counts.get(tier_name, 0) %}
+        <div class="flex items-center gap-3 mb-3">
+            <span class="w-12 text-sm font-semibold text-gray-700">Tier {{ tier_name }}</span>
+            <div class="flex-1 bg-gray-100 rounded-full h-6">
+                <div class="{{ color }} rounded-full h-6 flex items-center justify-end pr-2"
+                     style="width: {{ (count / (total_kols or 1) * 100) | round }}%; min-width: {% if count > 0 %}2rem{% else %}0{% endif %}">
+                    <span class="text-xs text-white font-medium">{{ count }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Status Funnel -->
+    <div class="stat-card">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Outreach Funnel</h3>
+        {% set statuses = [
+            ('discovered', 'Discovered', 'bg-gray-400'),
+            ('qualified', 'Qualified', 'bg-blue-500'),
+            ('contacted', 'Contacted', 'bg-yellow-500'),
+            ('negotiating', 'Negotiating', 'bg-purple-500'),
+            ('contracted', 'Contracted', 'bg-green-500'),
+        ] %}
+        {% for status_key, label, color in statuses %}
+        {% set count = status_counts.get(status_key, 0) %}
+        <div class="flex items-center gap-3 mb-3">
+            <span class="w-24 text-sm text-gray-700">{{ label }}</span>
+            <div class="flex-1 bg-gray-100 rounded-full h-6">
+                <div class="{{ color }} rounded-full h-6 flex items-center justify-end pr-2"
+                     style="width: {{ (count / (total_kols or 1) * 100) | round }}%; min-width: {% if count > 0 %}2rem{% else %}0{% endif %}">
+                    <span class="text-xs text-white font-medium">{{ count }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Platform Distribution & Recent Scans -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Platform Distribution -->
+    <div class="stat-card">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">KOLs by Platform</h3>
+        {% if platform_counts %}
+        <div class="space-y-3">
+            {% for name, count in platform_counts %}
+            <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-700">{{ name }}</span>
+                <span class="text-sm font-semibold text-gray-900">{{ count }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-gray-400 text-sm">No KOLs discovered yet. Run a scan to get started.</p>
+        {% endif %}
+    </div>
+
+    <!-- Recent Scans -->
+    <div class="stat-card">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">Recent Scans</h3>
+            <a href="/scans" class="text-sm text-indigo-600 hover:text-indigo-800">View All</a>
+        </div>
+        {% if recent_scans %}
+        <div class="space-y-3">
+            {% for scan in recent_scans %}
+            <div class="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
+                <div>
+                    <span class="text-sm text-gray-900">{{ scan.job_type }}</span>
+                    <span class="text-xs text-gray-400 ml-2">{{ scan.created_at.strftime('%m/%d %H:%M') if scan.created_at else '' }}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-gray-500">{{ scan.kols_found }} found</span>
+                    {% if scan.status == 'completed' %}
+                    <span class="badge bg-green-100 text-green-700">Done</span>
+                    {% elif scan.status == 'running' %}
+                    <span class="badge bg-blue-100 text-blue-700">Running</span>
+                    {% elif scan.status == 'failed' %}
+                    <span class="badge bg-red-100 text-red-700">Failed</span>
+                    {% else %}
+                    <span class="badge bg-gray-100 text-gray-700">{{ scan.status }}</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-gray-400 text-sm">No scans yet. <a href="/scans" class="text-indigo-600">Start your first scan</a>.</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="mt-8 flex gap-4">
+    <a href="/scans" class="btn btn-primary">Run Scan</a>
+    <a href="/kols" class="btn btn-secondary">View KOLs</a>
+    <a href="/campaigns" class="btn btn-secondary">Create Campaign</a>
+</div>
+{% endblock %}
