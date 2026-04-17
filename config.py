@@ -5,7 +5,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent
-DATA_DIR = BASE_DIR / "data"
+
+# Use /tmp on serverless (Vercel), otherwise use local data/
+IS_SERVERLESS = os.getenv("VERCEL", "") == "1"
+if IS_SERVERLESS:
+    DATA_DIR = Path("/tmp/kol_data")
+else:
+    DATA_DIR = BASE_DIR / "data"
 DATA_DIR.mkdir(exist_ok=True)
 
 DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{DATA_DIR / 'kol_hunter.db'}")

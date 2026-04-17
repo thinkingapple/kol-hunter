@@ -6,7 +6,8 @@ from duckduckgo_search import DDGS
 
 from app.scrapers.base import BaseScraper
 
-DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"
+import config
+DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"  # JSON seed files always here
 
 
 def load_keywords() -> dict:
