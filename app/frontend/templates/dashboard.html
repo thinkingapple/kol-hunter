@@ -1,41 +1,259 @@
 {% extends "base.html" %}
-{% block title %}Dashboard{% endblock %}
+{% block title %}数据看板{% endblock %}
 {% block content %}
 <div class="mb-8">
-    <h2 class="text-2xl font-bold text-gray-900">Dashboard</h2>
-    <p class="text-gray-500 mt-1">KOL Discovery & Outreach Overview</p>
+    <h2 class="text-2xl font-bold text-gray-900">数据看板</h2>
+    <p class="text-gray-500 mt-1">KOL 发现与建联工作总览</p>
 </div>
 
-<!-- Stats Cards -->
+<!-- ===== 第一屏：香港投资者社媒平台大盘 ===== -->
+<div class="stat-card mb-8">
+    <div class="flex items-center justify-between mb-2">
+        <div>
+            <h3 class="text-lg font-semibold text-gray-900">香港投资者社媒平台分布</h3>
+            <p class="text-xs text-gray-400 mt-1">仅限香港地区（IP/账户地理定位）| 三层估算：HK用户 × 金融消费率 × 创作者比 | 更新于 {{ market_updated }}</p>
+        </div>
+    </div>
+
+    {% if market_platforms %}
+    {% set trend_zh = {'fast_growing': '快速增长', 'growing': '增长中', 'stable': '稳定', 'declining': '下降'} %}
+    {% set trend_color = {'fast_growing': 'text-green-600', 'growing': 'text-green-500', 'stable': 'text-gray-500', 'declining': 'text-red-500'} %}
+    {% set trend_icon = {'fast_growing': '↑↑', 'growing': '↑', 'stable': '→', 'declining': '↓'} %}
+    {% set colors = {
+        'youtube': {'bg': 'bg-red-50', 'border': 'border-red-200', 'text': 'text-red-600', 'bar': 'bg-red-500'},
+        'instagram': {'bg': 'bg-purple-50', 'border': 'border-purple-200', 'text': 'text-purple-600', 'bar': 'bg-purple-500'},
+        'xiaohongshu': {'bg': 'bg-pink-50', 'border': 'border-pink-200', 'text': 'text-pink-600', 'bar': 'bg-pink-500'},
+        'twitter': {'bg': 'bg-sky-50', 'border': 'border-sky-200', 'text': 'text-sky-600', 'bar': 'bg-sky-500'},
+        'bilibili': {'bg': 'bg-blue-50', 'border': 'border-blue-200', 'text': 'text-blue-600', 'bar': 'bg-blue-500'},
+        'facebook': {'bg': 'bg-indigo-50', 'border': 'border-indigo-200', 'text': 'text-indigo-600', 'bar': 'bg-indigo-500'},
+        'tiktok': {'bg': 'bg-gray-50', 'border': 'border-gray-300', 'text': 'text-gray-700', 'bar': 'bg-gray-700'},
+        'threads': {'bg': 'bg-gray-50', 'border': 'border-gray-200', 'text': 'text-gray-600', 'bar': 'bg-gray-500'},
+    } %}
+
+    <!-- 市场份额横条图 -->
+    <div class="mb-6">
+        <div class="flex rounded-full overflow-hidden h-8 mb-3">
+            {% for mp in market_platforms %}
+            {% set c = colors.get(mp.name, {'bar': 'bg-gray-400'}) %}
+            <div class="{{ c.bar }} h-full flex items-center justify-center text-white text-xs font-medium"
+                 style="width: {{ mp.market_share_pct }}%"
+                 title="{{ mp.display_name }} {{ mp.market_share_pct }}%">
+                {% if mp.market_share_pct >= 6 %}{{ mp.market_share_pct }}%{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="flex flex-wrap gap-3">
+            {% for mp in market_platforms %}
+            {% set c = colors.get(mp.name, {'bar': 'bg-gray-400', 'text': 'text-gray-600'}) %}
+            <span class="flex items-center gap-1.5 text-xs text-gray-600">
+                <span class="{{ c.bar }} w-2.5 h-2.5 rounded-full inline-block"></span>
+                {{ mp.display_name }} {{ mp.market_share_pct }}%
+            </span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 平台卡片网格 -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {% for mp in market_platforms %}
+        {% set c = colors.get(mp.name, {'bg': 'bg-gray-50', 'border': 'border-gray-200', 'text': 'text-gray-600'}) %}
+        <div class="{{ c.bg }} {{ c.border }} border rounded-xl p-4 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-semibold {{ c.text }}">{{ mp.display_name }}</span>
+                <span class="text-xs {{ trend_color.get(mp.growth_trend, 'text-gray-400') }}">
+                    {{ trend_icon.get(mp.growth_trend, '') }} {{ trend_zh.get(mp.growth_trend, '') }}
+                </span>
+            </div>
+
+            <div class="space-y-2 mt-3">
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <div class="text-xs text-gray-400">平台总用户</div>
+                        <div class="text-sm font-bold text-gray-900">
+                            {% if mp.hk_total_users >= 1000000 %}
+                                {{ "%.0f"|format(mp.hk_total_users / 10000) }}万
+                            {% else %}
+                                {{ "%.0f"|format(mp.hk_total_users / 10000) }}万
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-400">金融活跃用户</div>
+                        <div class="text-sm font-bold text-gray-900">
+                            {% if mp.hk_finance_users >= 10000 %}
+                                {{ "%.1f"|format(mp.hk_finance_users / 10000) }}万
+                            {% else %}
+                                {{ "{:,}".format(mp.hk_finance_users) }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <div class="text-xs text-gray-400">金融创作者</div>
+                        <div class="text-sm font-semibold text-gray-700">~{{ "{:,}".format(mp.hk_finance_creators) }}</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-400">平均互动率</div>
+                        <div class="text-sm font-semibold text-gray-700">{{ mp.avg_engagement_pct }}%</div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <div class="text-xs text-gray-400">富途/投资内容</div>
+                        <div class="flex items-center gap-1.5 mt-0.5">
+                            <div class="flex-1 bg-gray-100 rounded-full h-2.5">
+                                <div class="bg-orange-400 rounded-full h-2.5" style="width: {{ [mp.futu_in_finance_pct | default(0) * 2, 100] | min }}%; min-width: {% if mp.futu_in_finance_pct %}0.4rem{% else %}0{% endif %}"></div>
+                            </div>
+                            <span class="text-xs font-semibold text-orange-500">{{ mp.futu_in_finance_pct | default(0) }}%</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-400">富途/券商内容</div>
+                        <div class="flex items-center gap-1.5 mt-0.5">
+                            <div class="flex-1 bg-gray-100 rounded-full h-2.5">
+                                <div class="bg-orange-600 rounded-full h-2.5" style="width: {{ mp.futu_in_broker_pct | default(0) }}%; min-width: {% if mp.futu_in_broker_pct %}0.4rem{% else %}0{% endif %}"></div>
+                            </div>
+                            <span class="text-xs font-semibold text-orange-700">{{ mp.futu_in_broker_pct | default(0) }}%</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-xs text-gray-400">内容形态</div>
+                    <div class="text-xs text-gray-600 leading-snug">{{ mp.key_content }}</div>
+                </div>
+                {% if mp.hk_investor_profile %}
+                <div class="mt-1 pt-2 border-t border-gray-200/60">
+                    <div class="text-xs text-gray-400 mb-1">投资客群画像</div>
+                    <div class="text-xs text-gray-600 space-y-0.5">
+                        <div><span class="text-gray-400">年龄:</span> {{ mp.hk_investor_profile.age }}</div>
+                        <div><span class="text-gray-400">性别:</span> {{ mp.hk_investor_profile.gender }}</div>
+                        <div><span class="text-gray-400">交易品类:</span> {{ mp.hk_investor_profile.trading }}</div>
+                        <div><span class="text-gray-400">内容偏好:</span> {{ mp.hk_investor_profile.content_pref }}</div>
+                        <div class="text-gray-500 italic">{{ mp.hk_investor_profile.trait }}</div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- 估算方法说明 -->
+    {% if market_methodology %}
+    <details class="mt-4">
+        <summary class="text-xs text-indigo-600 cursor-pointer hover:text-indigo-800">查看估算方法与数据来源</summary>
+        <div class="mt-3 bg-gray-50 rounded-lg p-4 text-xs text-gray-600 space-y-2">
+            <p><strong>估算模型：</strong>{{ market_methodology.summary }}</p>
+            <p class="bg-blue-50 border border-blue-200 rounded p-2"><strong>地域限定方法：</strong>{{ market_methodology.geo_filtering }}</p>
+            <p><strong>Step 1：</strong>{{ market_methodology.step_1 }}</p>
+            <p><strong>Step 2：</strong>{{ market_methodology.step_2 }}</p>
+            <p><strong>Step 3：</strong>{{ market_methodology.step_3 }}</p>
+            <p><strong>富途内容占比（双层）：</strong>{{ market_methodology.futu_content_method }}</p>
+            <p><strong>香港投资者基数：</strong>{{ market_methodology.hk_investor_population }}</p>
+            <p class="mt-2"><strong>数据来源：</strong></p>
+            <ul class="list-disc list-inside space-y-0.5">
+                {% for src in market_methodology.data_sources %}
+                <li>{{ src }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </details>
+    {% endif %}
+
+    {% else %}
+    <div class="text-center py-8 text-gray-400">
+        <p>暂无市场数据</p>
+    </div>
+    {% endif %}
+</div>
+
+<!-- ===== 已发现 KOL 按平台分布 ===== -->
+<div class="stat-card mb-8">
+    <div class="flex items-center justify-between mb-5">
+        <div>
+            <h3 class="text-lg font-semibold text-gray-900">已发现 KOL 平台分布</h3>
+            <p class="text-xs text-gray-400 mt-1">我们数据库中已扫描入库的 KOL 分布</p>
+        </div>
+        <a href="/scans" class="text-sm text-indigo-600 hover:text-indigo-800">扫描更多 &rarr;</a>
+    </div>
+    {% if platform_stats %}
+    {% set colors2 = {
+        'youtube': {'bg': 'bg-red-50', 'border': 'border-red-200', 'text': 'text-red-600', 'icon': 'bg-red-500'},
+        'xiaohongshu': {'bg': 'bg-pink-50', 'border': 'border-pink-200', 'text': 'text-pink-600', 'icon': 'bg-pink-500'},
+        'bilibili': {'bg': 'bg-blue-50', 'border': 'border-blue-200', 'text': 'text-blue-600', 'icon': 'bg-blue-500'},
+        'twitter': {'bg': 'bg-sky-50', 'border': 'border-sky-200', 'text': 'text-sky-600', 'icon': 'bg-sky-500'},
+        'instagram': {'bg': 'bg-purple-50', 'border': 'border-purple-200', 'text': 'text-purple-600', 'icon': 'bg-purple-500'},
+        'facebook': {'bg': 'bg-indigo-50', 'border': 'border-indigo-200', 'text': 'text-indigo-600', 'icon': 'bg-indigo-500'},
+        'tiktok': {'bg': 'bg-gray-50', 'border': 'border-gray-300', 'text': 'text-gray-700', 'icon': 'bg-gray-700'},
+        'threads': {'bg': 'bg-gray-50', 'border': 'border-gray-200', 'text': 'text-gray-600', 'icon': 'bg-gray-500'},
+    } %}
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {% for p in platform_stats %}
+        {% set c2 = colors2.get(p.name, {'bg': 'bg-gray-50', 'border': 'border-gray-200', 'text': 'text-gray-600', 'icon': 'bg-gray-500'}) %}
+        <div class="{{ c2.bg }} {{ c2.border }} border rounded-xl p-4">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="{{ c2.icon }} w-2.5 h-2.5 rounded-full inline-block"></span>
+                <span class="text-sm font-semibold {{ c2.text }}">{{ p.display_name }}</span>
+            </div>
+            <div class="text-2xl font-bold text-gray-900 mb-1">{{ p.kol_count }}</div>
+            <div class="text-xs text-gray-500">位 KOL</div>
+            <div class="mt-3 pt-3 border-t {{ c2.border }} grid grid-cols-2 gap-2 text-xs">
+                <div>
+                    <span class="text-gray-400">总粉丝</span>
+                    <div class="font-semibold text-gray-700 mt-0.5">
+                        {% if p.total_followers >= 10000 %}
+                            {{ "%.1f"|format(p.total_followers / 10000) }}万
+                        {% elif p.total_followers >= 1000 %}
+                            {{ "%.1f"|format(p.total_followers / 1000) }}K
+                        {% else %}
+                            {{ p.total_followers }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div>
+                    <span class="text-gray-400">平均互动</span>
+                    <div class="font-semibold text-gray-700 mt-0.5">{{ "%.2f"|format(p.avg_engagement) }}%</div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-6 text-gray-400 text-sm">
+        <p>暂无已发现 KOL，请先<a href="/scans" class="text-indigo-600">运行扫描</a></p>
+    </div>
+    {% endif %}
+</div>
+
+<!-- ===== 统计卡片 ===== -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
     <div class="stat-card">
-        <div class="text-sm font-medium text-gray-500">Total KOLs</div>
+        <div class="text-sm font-medium text-gray-500">已发现 KOL</div>
         <div class="text-3xl font-bold text-gray-900 mt-2">{{ total_kols }}</div>
     </div>
     <div class="stat-card">
-        <div class="text-sm font-medium text-gray-500">KOLs with Email</div>
+        <div class="text-sm font-medium text-gray-500">有联系方式</div>
         <div class="text-3xl font-bold text-indigo-600 mt-2">{{ kols_with_email }}</div>
     </div>
     <div class="stat-card">
-        <div class="text-sm font-medium text-gray-500">Emails Sent</div>
+        <div class="text-sm font-medium text-gray-500">已发送邮件</div>
         <div class="text-3xl font-bold text-green-600 mt-2">{{ total_emails_sent }}</div>
     </div>
     <div class="stat-card">
-        <div class="text-sm font-medium text-gray-500">Tier A KOLs</div>
+        <div class="text-sm font-medium text-gray-500">A 级 KOL</div>
         <div class="text-3xl font-bold text-yellow-600 mt-2">{{ tier_counts.get('A', 0) }}</div>
     </div>
 </div>
 
-<!-- Tier Distribution & Funnel -->
+<!-- ===== 等级分布 & 建联漏斗 ===== -->
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-    <!-- Tier Distribution -->
     <div class="stat-card">
-        <h3 class="text-lg font-semibold text-gray-900 mb-4">KOL Tier Distribution</h3>
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">KOL 等级分布</h3>
         {% set tiers = [('A', 'bg-green-500'), ('B', 'bg-blue-500'), ('C', 'bg-yellow-500'), ('D', 'bg-gray-400')] %}
         {% for tier_name, color in tiers %}
         {% set count = tier_counts.get(tier_name, 0) %}
         <div class="flex items-center gap-3 mb-3">
-            <span class="w-12 text-sm font-semibold text-gray-700">Tier {{ tier_name }}</span>
+            <span class="w-12 text-sm font-semibold text-gray-700">{{ tier_name }} 级</span>
             <div class="flex-1 bg-gray-100 rounded-full h-6">
                 <div class="{{ color }} rounded-full h-6 flex items-center justify-end pr-2"
                      style="width: {{ (count / (total_kols or 1) * 100) | round }}%; min-width: {% if count > 0 %}2rem{% else %}0{% endif %}">
@@ -46,20 +264,19 @@
         {% endfor %}
     </div>
 
-    <!-- Status Funnel -->
     <div class="stat-card">
-        <h3 class="text-lg font-semibold text-gray-900 mb-4">Outreach Funnel</h3>
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">建联漏斗</h3>
         {% set statuses = [
-            ('discovered', 'Discovered', 'bg-gray-400'),
-            ('qualified', 'Qualified', 'bg-blue-500'),
-            ('contacted', 'Contacted', 'bg-yellow-500'),
-            ('negotiating', 'Negotiating', 'bg-purple-500'),
-            ('contracted', 'Contracted', 'bg-green-500'),
+            ('discovered', '已发现', 'bg-gray-400'),
+            ('qualified', '已筛选', 'bg-blue-500'),
+            ('contacted', '已联系', 'bg-yellow-500'),
+            ('negotiating', '洽谈中', 'bg-purple-500'),
+            ('contracted', '已签约', 'bg-green-500'),
         ] %}
         {% for status_key, label, color in statuses %}
         {% set count = status_counts.get(status_key, 0) %}
         <div class="flex items-center gap-3 mb-3">
-            <span class="w-24 text-sm text-gray-700">{{ label }}</span>
+            <span class="w-16 text-sm text-gray-700">{{ label }}</span>
             <div class="flex-1 bg-gray-100 rounded-full h-6">
                 <div class="{{ color }} rounded-full h-6 flex items-center justify-end pr-2"
                      style="width: {{ (count / (total_kols or 1) * 100) | round }}%; min-width: {% if count > 0 %}2rem{% else %}0{% endif %}">
@@ -71,64 +288,44 @@
     </div>
 </div>
 
-<!-- Platform Distribution & Recent Scans -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-    <!-- Platform Distribution -->
-    <div class="stat-card">
-        <h3 class="text-lg font-semibold text-gray-900 mb-4">KOLs by Platform</h3>
-        {% if platform_counts %}
-        <div class="space-y-3">
-            {% for name, count in platform_counts %}
-            <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-700">{{ name }}</span>
-                <span class="text-sm font-semibold text-gray-900">{{ count }}</span>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <p class="text-gray-400 text-sm">No KOLs discovered yet. Run a scan to get started.</p>
-        {% endif %}
+<!-- ===== 最近扫描 ===== -->
+<div class="stat-card mb-8">
+    <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-gray-900">最近扫描记录</h3>
+        <a href="/scans" class="text-sm text-indigo-600 hover:text-indigo-800">查看全部</a>
     </div>
-
-    <!-- Recent Scans -->
-    <div class="stat-card">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-semibold text-gray-900">Recent Scans</h3>
-            <a href="/scans" class="text-sm text-indigo-600 hover:text-indigo-800">View All</a>
-        </div>
-        {% if recent_scans %}
-        <div class="space-y-3">
-            {% for scan in recent_scans %}
-            <div class="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
-                <div>
-                    <span class="text-sm text-gray-900">{{ scan.job_type }}</span>
-                    <span class="text-xs text-gray-400 ml-2">{{ scan.created_at.strftime('%m/%d %H:%M') if scan.created_at else '' }}</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <span class="text-xs text-gray-500">{{ scan.kols_found }} found</span>
-                    {% if scan.status == 'completed' %}
-                    <span class="badge bg-green-100 text-green-700">Done</span>
-                    {% elif scan.status == 'running' %}
-                    <span class="badge bg-blue-100 text-blue-700">Running</span>
-                    {% elif scan.status == 'failed' %}
-                    <span class="badge bg-red-100 text-red-700">Failed</span>
-                    {% else %}
-                    <span class="badge bg-gray-100 text-gray-700">{{ scan.status }}</span>
-                    {% endif %}
-                </div>
+    {% if recent_scans %}
+    <div class="space-y-3">
+        {% for scan in recent_scans %}
+        <div class="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
+            <div>
+                <span class="text-sm text-gray-900">{{ scan.job_type }}</span>
+                <span class="text-xs text-gray-400 ml-2">{{ scan.created_at.strftime('%m/%d %H:%M') if scan.created_at else '' }}</span>
             </div>
-            {% endfor %}
+            <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-500">发现 {{ scan.kols_found }} 人</span>
+                {% if scan.status == 'completed' %}
+                <span class="badge bg-green-100 text-green-700">完成</span>
+                {% elif scan.status == 'running' %}
+                <span class="badge bg-blue-100 text-blue-700">运行中</span>
+                {% elif scan.status == 'failed' %}
+                <span class="badge bg-red-100 text-red-700">失败</span>
+                {% else %}
+                <span class="badge bg-gray-100 text-gray-700">{{ scan.status }}</span>
+                {% endif %}
+            </div>
         </div>
-        {% else %}
-        <p class="text-gray-400 text-sm">No scans yet. <a href="/scans" class="text-indigo-600">Start your first scan</a>.</p>
-        {% endif %}
+        {% endfor %}
     </div>
+    {% else %}
+    <p class="text-gray-400 text-sm">暂无扫描记录。<a href="/scans" class="text-indigo-600">开始第一次扫描</a>。</p>
+    {% endif %}
 </div>
 
-<!-- Quick Actions -->
-<div class="mt-8 flex gap-4">
-    <a href="/scans" class="btn btn-primary">Run Scan</a>
-    <a href="/kols" class="btn btn-secondary">View KOLs</a>
-    <a href="/campaigns" class="btn btn-secondary">Create Campaign</a>
+<!-- ===== 快捷操作 ===== -->
+<div class="flex gap-4">
+    <a href="/scans" class="btn btn-primary">运行扫描</a>
+    <a href="/kols" class="btn btn-secondary">查看 KOL</a>
+    <a href="/campaigns" class="btn btn-secondary">创建活动</a>
 </div>
 {% endblock %}

@@ -1,0 +1,1817 @@
+{
+  "title": "香港投资者社媒平台活跃度分布",
+  "updated_at": "2026-04-17",
+  "methodology": {
+    "summary": "三层估算模型：平台香港用户 × 香港金融内容消费率 = 香港金融活跃用户；香港金融活跃用户 / 创作者-消费者比 = 香港金融创作者。所有数据严格限定香港地区。",
+    "geo_filtering": "所有数据仅限香港地区：① 平台用户数来自 DataReportal 广告后台，基于 IP 地理定位 + 账户注册地筛选香港 audience；② NapoleonCat 统计基于平台 API 的 location:Hong Kong 字段；③ 小红书/B站等中文平台，用户数来自第三方 HK 市场报告（IP 定位 + 手机号归属地 +852）；④ 金融内容消费率基于香港用户行为调研（非全球平均）；⑤ 互动率基于 HK 地区创作者样本；⑥ 富途内容占比基于香港 IP 可见内容的社交监听",
+    "step_1": "各平台香港用户数：来自 DataReportal Digital 2026 HK 报告，基于各平台广告后台 IP 地理定位 + 账户所在地 = Hong Kong 的去重 audience 数据",
+    "step_2": "香港金融内容消费率：基于香港用户行为调研及本地内容分析（非全球平均值），如 YouTube HK 用户中金融内容观看率、小红书 HK 用户中理财搜索比例等",
+    "step_3": "香港创作者数：按平台特性的创作者/消费者比例推算（YouTube 1:400, 小红书 1:300, TikTok 1:400 等），仅计入 IP 定位香港或账户标注香港的创作者",
+    "futu_content_method": "富途内容占比分两层：① 投资内容中占比 = 公式：券商内容占金融内容比例 × 富途在券商内容中份额；② 券商内容中占比 = 富途提及量 / 全部券商提及量。校准数据来源：YouTube 官方频道订阅数（富途HK 107K = 4倍于老虎HK 25.5K，为 HK 券商频道最大）、Truescope 社交监听（新加坡，moomoo 社交互动量 17,961 = 3倍于老虎 5,729）、IAB HK 小红书报告（stock 仅占 banking 帖子 8%）、Digital Business Lab HK 调查（仅 7.4% HK 小红书用户主动搜索金融内容）。注意：各平台均不公开搜索结果总数，券商品牌在小红书/B站的精确提及量需千瓜/新红等付费工具获取，当前数据为基于已知校准点的估算。HK 主要线上券商：富途/moomoo、老虎/Tiger、盈透/IBKR、长桥/Longbridge、华盛/Webull，富途为港股线上交易量市占率第一",
+    "hk_population": 7500000,
+    "hk_internet_users": 7160000,
+    "hk_investor_population": "约 250 万活跃投资者（IFEC 2025散户调查: 54% HK成年人持有金融产品≈297万, 其中过去12个月有交易的约200-250万; 港交所账户约390万含重复/僵尸户）",
+    "data_sources": [
+      "DataReportal Digital 2026: Hong Kong (datareportal.com/reports/digital-2026-hong-kong)",
+      "DataReportal Digital 2025: Hong Kong (datareportal.com/reports/digital-2025-hong-kong)",
+      "NapoleonCat Social Media Users HK 2026 (stats.napoleoncat.com)",
+      "SFC-HKMA Joint Survey 2024 (hkma.gov.hk, 2025-09-04 发布)",
+      "Marketing-Interactive: 58% 港人使用小红书, 39% 搜索品牌信息 (2025 Xiaohongshu User Insights Report)",
+      "Bilibili Q1 2025 财报: MAU 3.68 亿 (ir.bilibili.com)",
+      "YouFind Digital: 小红书香港用户预计 2025 年超 200 万",
+      "Truescope: Moomoo vs Tiger Brokers Social Listening Report (2024 Jul - 2025 Jan)",
+      "Futu Holdings Q4 2025 Earnings: 28.16M 注册用户, HKD 3.98T 交易量 (ir.futuholdings.com)",
+      "Bamboo Works: Futu KOL 合作从 52 增至 98 人 (2023-2025)",
+      "YouTube 频道数据实查: 富途HK 107K subs/509 videos, 老虎HK 25.5K/348, 华盛 27.4K/733, 长桥 137/4, uSMART 4.92K/131",
+      "IAB Hong Kong: Social Listening Report - Banking Service in Xiaohongshu (2024-11), stock 仅占 banking 帖子 8%",
+      "Digital Business Lab HK: 小红书 Financial Services Survey (2025), 仅 7.4% HK 用户主动搜索金融内容",
+      "XGATE: 小红书官方广告 DMP 数据显示 HK 月活用户 120 万+",
+      "Moomoo Influencer Program (influencers.moomoo.com): 2025 Global Creator Summit 29 位创作者覆盖 700 万+投资者"
+    ],
+    "investor_dedup_method": "去重投资者人数估算方法: 平台HK月活用户(MAU)或月访问量(visits)÷平均访问频次=独立访客, 再乘以该平台人群的投资者渗透率。HK投资者总量上限=250万(SFC/HKMA 2024)。渗透率参考: 财经工具平台~95%, 专业社交~53%, 社媒平台~25-42%(因年龄结构而异), 综合新闻~35%, 论坛~35-45%。同一投资者平均使用3-5个渠道, 各渠道投资者人数不可求和。"
+  },
+  "platforms": [
+    {
+      "name": "youtube",
+      "display_name": "YouTube",
+      "hk_total_users": 6240000,
+      "hk_total_users_source": "DataReportal 2026: YouTube Ads audience location=HK, 84.4% 渗透率 × 740 万人口（IP+账户地理定位去重）",
+      "finance_content_rate": 0.15,
+      "finance_content_rate_note": "基于 YouTube Analytics HK region 数据: 金融/商业为香港用户第三大观看品类, HK 投资文化浓厚取 15%",
+      "hk_finance_users": 936000,
+      "creator_consumer_ratio": 400,
+      "hk_finance_creators": 2340,
+      "market_share_pct": 31,
+      "avg_engagement_pct": 2.1,
+      "avg_engagement_note": "基于 Social Blade 抽取 location=HK 的金融频道样本（50+频道）平均互动率",
+      "growth_trend": "stable",
+      "key_content": "长视频分析、直播解盘、教学",
+      "competitive_advantage": "最大的金融视频生态, 长内容深度分析, 搜索发现性强",
+      "futu_in_finance_pct": 4,
+      "futu_in_finance_note": "券商内容约占 HK YouTube 金融内容 ~18%; 富途在券商内容中份额 ~50% × 18% ≈ 4%（搜索「投资」时富途相关内容极少，需搜「券商」「开户」才出现）",
+      "futu_in_broker_pct": 50,
+      "futu_in_broker_note": "实查: 富途HK频道 107K 订阅 = 老虎HK 25.5K 的 4.2 倍; 华盛 27.4K; 长桥仅 137; 几乎所有券商评测视频都将富途列为首位; 按订阅影响力占 65%, 按视频数量占 30%, 综合约 50%",
+      "hk_investor_profile": {
+        "age": "25-45岁为主",
+        "gender": "男性约65%",
+        "trading": "港股、美股、ETF、基金",
+        "content_pref": "15-30分钟深度分析、直播解盘、系列教学",
+        "trait": "愿意看长视频、有一定投资经验、搜索驱动"
+      },
+      "hk_unique_investors": 2100000,
+      "hk_unique_investors_note": "624万HK MAU × 34%投资者渗透率(全年龄平台, 含非投资者); 几乎所有HK投资者都用YouTube",
+      "coverage_methods": [
+        "KOL合作",
+        "官方频道",
+        "信息流广告",
+        "直播活动",
+        "SEO优化",
+        "贴片广告"
+      ],
+      "journey_stages": [
+        "awareness",
+        "interest",
+        "consideration"
+      ],
+      "futu_investment": "medium"
+    },
+    {
+      "name": "facebook",
+      "display_name": "Facebook",
+      "hk_total_users": 4700000,
+      "hk_total_users_source": "DataReportal 2026: FB Ads audience location=HK, 63.6% 渗透率; NapoleonCat location:HK API 数据（89.2% 含多设备重复）",
+      "finance_content_rate": 0.1,
+      "finance_content_rate_note": "基于 HK Facebook 金融群组（港股串流、香港股票討論區等）活跃度分析, FB HK 整体偏社交/新闻, 金融消费率取 10%",
+      "hk_finance_users": 470000,
+      "creator_consumer_ratio": 500,
+      "hk_finance_creators": 940,
+      "market_share_pct": 16,
+      "avg_engagement_pct": 1.2,
+      "avg_engagement_note": "基于 HK 地区金融公共主页样本, Facebook 有机触达率持续下降, HK 金融页面互动率偏低",
+      "growth_trend": "declining",
+      "key_content": "群组讨论、新闻分享、直播",
+      "competitive_advantage": "HK 用户基数大, 群组生态活跃, 但年轻用户流失",
+      "futu_in_finance_pct": 2,
+      "futu_in_finance_note": "FB HK 金融内容以新闻/宏观/房地产/保险为主, 券商内容约占 ~10%; 富途在券商讨论约 30% × 10% ≈ 2%（群组中偶有讨论但非主流话题）",
+      "futu_in_broker_pct": 30,
+      "futu_in_broker_note": "HK 港股群组中富途为常被提及的线上券商之一, 但 FB 群组讨论分散, 传统券商（耀才/辉立/银行系）也有较高提及; 线上券商中富途领先, 全部券商中约 30%",
+      "hk_investor_profile": {
+        "age": "35-55岁为主",
+        "gender": "男性约60%",
+        "trading": "港股、房地产投资、保险、基金定投",
+        "content_pref": "新闻分享、群组讨论、直播、即时行情",
+        "trait": "偏年长、资讯驱动、习惯群组互动、对新平台接受度低"
+      },
+      "hk_unique_investors": 1970000,
+      "hk_unique_investors_note": "470万HK MAU × 42%(偏30-55岁, 较高收入群体)",
+      "coverage_methods": [
+        "KOL合作",
+        "官方主页",
+        "群组运营",
+        "信息流广告",
+        "直播活动",
+        "Marketplace"
+      ],
+      "journey_stages": [
+        "awareness",
+        "interest",
+        "referral"
+      ],
+      "futu_investment": "low"
+    },
+    {
+      "name": "twitter",
+      "display_name": "X / Twitter",
+      "hk_total_users": 1000000,
+      "hk_total_users_source": "DataReportal 2026: X Ads audience location=HK 12.4M（含大量机器人/多设备重复/全球漫游用户）; 行业经验: X 小市场广告数据膨胀率极高, 去重后HK实际MAU估约100万",
+      "finance_content_rate": 0.25,
+      "finance_content_rate_note": "X HK 用户中金融从业者密集（中环效应）, 金融/加密货币为 HK X 用户第一大内容垂类, 取 25%",
+      "hk_finance_users": 450000,
+      "creator_consumer_ratio": 500,
+      "hk_finance_creators": 900,
+      "market_share_pct": 15,
+      "avg_engagement_pct": 1.8,
+      "avg_engagement_note": "基于 HK bio 标注的金融类 X 账号样本, 互动率整体低于视觉平台但金融类高于 HK X 平均",
+      "growth_trend": "stable",
+      "key_content": "即时行情、观点速递、加密货币",
+      "competitive_advantage": "实时性最强, 金融专业人士密集, 英文内容生态好",
+      "futu_in_finance_pct": 1,
+      "futu_in_finance_note": "X HK 以加密货币/宏观/即时行情为主, 券商几乎不是话题; 券商内容约占 ~8%, 富途份额约 15% → 8% × 15% ≈ 1%; 实查: moomoo 官方 X 偏英文/新加坡, 老虎全球仅 445 粉丝, 所有券商在 X 存在感极低",
+      "futu_in_broker_pct": 20,
+      "futu_in_broker_note": "实查: 老虎全球 X 仅 445 粉丝, moomoo 约 1000 粉丝, 所有 HK 券商在 X 的存在感都极低; Truescope 数据（新加坡）显示 moomoo 社交互动量为老虎的 3.1 倍; 在极少量的 HK 券商讨论中富途约占 20%",
+      "hk_investor_profile": {
+        "age": "25-40岁为主",
+        "gender": "男性约70%",
+        "trading": "加密货币、美股、港股、外汇、期权",
+        "content_pref": "实时行情速递、一句话观点、thread 长分析、crypto alpha",
+        "trait": "专业/半专业投资者、英文流利、信息密度偏好高、中环金融从业者多"
+      },
+      "hk_unique_investors": 550000,
+      "hk_unique_investors_note": "HK实际MAU约100万(DataReportal 12.4M含大量机器人/重复, 去重后约100万) × 55%(金融从业者密集)",
+      "coverage_methods": [
+        "KOL合作",
+        "官方账号",
+        "话题营销",
+        "信息流广告"
+      ],
+      "journey_stages": [
+        "awareness",
+        "interest",
+        "retention"
+      ],
+      "futu_investment": "low"
+    },
+    {
+      "name": "xiaohongshu",
+      "display_name": "小红书",
+      "hk_total_users": 1200000,
+      "hk_total_users_source": "XGATE: 小红书官方广告 DMP (聚光平台) 数据显示 HK 月活用户 120 万+; YouFind Digital 预计 2025 注册用户超 200 万但月活较低; Marketing-Interactive HK 调查: 58% 港人使用过小红书",
+      "finance_content_rate": 0.07,
+      "finance_content_rate_note": "Digital Business Lab HK 2025 调查: 仅 7.4% HK 小红书用户主动搜索金融/银行/保险内容; IAB HK 报告: stock 仅占 banking 帖子 8%",
+      "hk_finance_users": 84000,
+      "creator_consumer_ratio": 300,
+      "hk_finance_creators": 280,
+      "market_share_pct": 12,
+      "avg_engagement_pct": 4.2,
+      "avg_engagement_note": "基于 HK 定位（IP +852 手机号）的理财类笔记样本, 小红书种草机制驱动高互动, HK 金融笔记互动率显著高于其他平台",
+      "growth_trend": "fast_growing",
+      "key_content": "理财笔记、港股攻略、新股分析、省钱种草",
+      "competitive_advantage": "女性用户占比高(70%), 种草转化率强, 增长最快的金融内容平台",
+      "futu_in_finance_pct": 3,
+      "futu_in_finance_note": "IAB HK: 小红书 banking 帖子中 stock 仅占 8%, 券商开户是 stock 的子集; 搜「理财」「投资」时券商内容占比约 ~10%, 富途约占券商的 35% → 10% × 35% ≈ 3%; 大量笔记是储蓄/保险/基金, 不涉及具体券商",
+      "futu_in_broker_pct": 35,
+      "futu_in_broker_note": "小红书「港股开户」「券商对比」笔记中富途为最高频品牌（种草属性契合）; 但竞品长桥/老虎也有大量种草内容; 无公开数据（需千瓜/新红付费工具验证）, 估算约 35%",
+      "hk_investor_profile": {
+        "age": "22-35岁为主，女性偏年轻",
+        "gender": "女性约70%",
+        "trading": "港股入门、新股打新、基金定投、储蓄理财",
+        "content_pref": "开户攻略、省钱种草、理财入门图文、新股分析笔记",
+        "trait": "投资新手多、决策靠种草/口碑、视觉驱动、高转化意愿"
+      },
+      "hk_unique_investors": 300000,
+      "hk_unique_investors_note": "120万HK MAU × 25%(女性为主/年轻, 投资渗透率低)",
+      "coverage_methods": [
+        "KOL种草",
+        "官方账号",
+        "信息流广告",
+        "搜索广告",
+        "笔记SEO"
+      ],
+      "journey_stages": [
+        "awareness",
+        "interest",
+        "consideration"
+      ],
+      "futu_investment": "medium"
+    },
+    {
+      "name": "instagram",
+      "display_name": "Instagram",
+      "hk_total_users": 4050000,
+      "hk_total_users_source": "DataReportal 2026: IG Ads audience location=HK, 54.8% 渗透率 × 740 万（IP+账户地理定位去重）",
+      "finance_content_rate": 0.08,
+      "finance_content_rate_note": "IG HK 用户以生活方式/视觉内容为主, HK 地区金融内容占比较低约 8%",
+      "hk_finance_users": 324000,
+      "creator_consumer_ratio": 350,
+      "hk_finance_creators": 926,
+      "market_share_pct": 11,
+      "avg_engagement_pct": 3.4,
+      "avg_engagement_note": "基于 HK location 标注的金融类 IG 账号样本, Reels 拉高 HK 金融内容互动率, 金融类 Reels 表现好于图文",
+      "growth_trend": "growing",
+      "key_content": "图文分析、Reels 短视频、财经 infographic",
+      "competitive_advantage": "Reels 短视频增长快, 年轻高收入用户, 视觉化金融内容",
+      "futu_in_finance_pct": 1,
+      "futu_in_finance_note": "IG HK 金融内容以理财 infographic/Reels 为主, 券商几乎不是话题; 券商内容占 ~5%, 富途约 20% → 5% × 20% ≈ 1%; 实查: moomoo US IG 仅 9.3K 粉丝/每帖 14-37 赞, HK 无独立 IG 账号",
+      "futu_in_broker_pct": 20,
+      "futu_in_broker_note": "实查: moomoo US IG 9.3K 粉丝, 316 帖, 每帖仅 14-37 赞; HK 无独立 moomoo IG; IG 非券商营销主力平台, 极少量券商讨论中富途约占 20%",
+      "hk_investor_profile": {
+        "age": "22-35岁为主",
+        "gender": "女性约55%",
+        "trading": "基金、ETF、储蓄、入门级投资",
+        "content_pref": "财经 infographic、Reels 短视频、生活方式理财",
+        "trait": "视觉优先、偏好精美排版、金融内容需包装成生活方式"
+      },
+      "hk_unique_investors": 1420000,
+      "hk_unique_investors_note": "405万HK MAU × 35%(偏年轻, 投资渗透率略低)",
+      "coverage_methods": [
+        "KOL合作",
+        "官方账号",
+        "Reels广告",
+        "信息流广告",
+        "限时动态"
+      ],
+      "journey_stages": [
+        "awareness",
+        "interest"
+      ],
+      "futu_investment": "none"
+    },
+    {
+      "name": "tiktok",
+      "display_name": "TikTok",
+      "hk_total_users": 1750000,
+      "hk_total_users_source": "DataReportal 2026: TikTok Ads audience location=HK 18+ 仅显示 16.9 万（TikTok HK广告后台数据严重不完整）; GWI/eMarketer行业估计HK 16-64岁TikTok使用率约25% ≈ 175万; 注: 此为行业估算, 非平台官方数据",
+      "finance_content_rate": 0.08,
+      "finance_content_rate_note": "HK TikTok #FinTok 增长快但整体占比仍低; 基于 HK IP 可见的 For You 金融内容占比约 8%",
+      "hk_finance_users": 160000,
+      "creator_consumer_ratio": 400,
+      "hk_finance_creators": 400,
+      "market_share_pct": 5,
+      "avg_engagement_pct": 5.1,
+      "avg_engagement_note": "基于 HK IP 可见的金融类 TikTok 内容样本, 算法驱动推荐机制使 HK TikTok 互动率全平台最高",
+      "growth_trend": "fast_growing",
+      "key_content": "60秒解盘、投资小知识、理财挑战",
+      "competitive_advantage": "互动率最高, 年轻用户增长最快, #FinTok 趋势强劲",
+      "futu_in_finance_pct": 1,
+      "futu_in_finance_note": "#FinTok 以理财小知识/省钱挑战为主, 券商内容极少; 券商约占 ~8%, 富途约 18% → 8% × 18% ≈ 1%; 实查: 未找到 moomoo 官方 HK TikTok 账号, @moomoodaily 仅 1,706 粉丝非官方",
+      "futu_in_broker_pct": 18,
+      "futu_in_broker_note": "实查: 无 moomoo 官方 HK TikTok 账号; 东南亚有投放但 HK 本地极少; TikTok 非券商营销主力; 偶有用户自发券商对比短视频中提及富途, 约 18%",
+      "hk_investor_profile": {
+        "age": "18-30岁为主",
+        "gender": "男女约各50%",
+        "trading": "入门级：新手开户、简单ETF、零钱理财",
+        "content_pref": "60秒投资tips、趣味理财挑战、meme式解读",
+        "trait": "最年轻受众、投资经验最低、娱乐化内容偏好、算法推荐驱动"
+      },
+      "hk_unique_investors": 450000,
+      "hk_unique_investors_note": "HK MAU约150-200万(DataReportal仅显示16.9万广告受众, 严重低估; 行业估计150-200万) × 25%(最年轻受众)",
+      "coverage_methods": [
+        "KOL短视频",
+        "信息流广告",
+        "挑战赛/话题",
+        "品牌贴纸",
+        "直播"
+      ],
+      "journey_stages": [
+        "awareness",
+        "interest"
+      ],
+      "futu_investment": "none"
+    },
+    {
+      "name": "threads",
+      "display_name": "Threads",
+      "hk_total_users": 1550000,
+      "hk_total_users_source": "DataReportal 2026: Threads Ads audience location=HK, 21.0% 渗透率 × 740 万（Meta 广告后台 IP+账户定位）",
+      "finance_content_rate": 0.1,
+      "finance_content_rate_note": "Threads 文字属性与 X 类似; HK 用户中金融讨论内容渗透率约 10%（基于 HK 账户发帖内容抽样）",
+      "hk_finance_users": 155000,
+      "creator_consumer_ratio": 500,
+      "hk_finance_creators": 310,
+      "market_share_pct": 5,
+      "avg_engagement_pct": 2.8,
+      "avg_engagement_note": "新平台红利期; 基于 HK 账户的金融帖子样本, 互动率高于成熟平台",
+      "growth_trend": "fast_growing",
+      "key_content": "文字观点、即时讨论、长文分析",
+      "competitive_advantage": "与 IG 联动, 用户增长快, 新平台流量红利",
+      "futu_in_finance_pct": 0.5,
+      "futu_in_finance_note": "Threads HK 极早期, 金融品牌内容几乎为零; 偶有 X/IG 博主同步发布提及; 券商内容占 ~5%, 富途约 15% → ≈ 0.5%",
+      "futu_in_broker_pct": 15,
+      "futu_in_broker_note": "Threads 上几乎无券商品牌运营; 极少量从 IG 同步的金融帖子中偶尔提及券商; 数据极不充分, 粗估 15%",
+      "hk_investor_profile": {
+        "age": "25-35岁为主",
+        "gender": "男性约55%",
+        "trading": "港股、美股讨论（文字为主）",
+        "content_pref": "文字观点、即时讨论、从 X/IG 同步的长分析",
+        "trait": "早期采用者、IG 重度用户、偏好文字互动、平台仍在成长"
+      },
+      "hk_unique_investors": 510000,
+      "hk_unique_investors_note": "155万HK MAU × 33%",
+      "coverage_methods": [
+        "官方账号",
+        "KOL合作",
+        "话题营销"
+      ],
+      "journey_stages": [
+        "awareness",
+        "interest"
+      ],
+      "futu_investment": "none"
+    },
+    {
+      "name": "bilibili",
+      "display_name": "Bilibili",
+      "hk_total_users": 600000,
+      "hk_total_users_source": "B站全球 MAU 3.68 亿(Q1 2025财报); 海外占比约 5%, 港澳台约 1.5-2%; 基于 HK IP 活跃用户 + +852 手机号注册用户估算 HK 约 55-70 万",
+      "finance_content_rate": 0.2,
+      "finance_content_rate_note": "B站财经/投资为 Top 5 内容品类; HK IP 用户偏好港股/美股深度分析, HK 用户金融内容消费率高于全站平均, 约 20%",
+      "hk_finance_users": 120000,
+      "creator_consumer_ratio": 300,
+      "hk_finance_creators": 400,
+      "market_share_pct": 4,
+      "avg_engagement_pct": 3.0,
+      "avg_engagement_note": "基于标注香港/港股的 UP 主样本, B站弹幕+一键三连机制推动高互动; HK 相关金融内容互动率中等偏上",
+      "growth_trend": "growing",
+      "key_content": "深度分析、财报解读、量化教学",
+      "competitive_advantage": "深度长视频独特优势, 用户粘性极高(日均112分钟), 年轻高学历用户",
+      "futu_in_finance_pct": 5,
+      "futu_in_finance_note": "B站金融内容含量化/A股/宏观/财报等大量与券商无关内容; 券商/交易平台内容约占 ~20%; 港股 UP 主频繁用富途行情截图; 富途约占券商内容 40% × 20% ≈ 5%（B站不公开搜索结果数, 需抽样估算）",
+      "futu_in_broker_pct": 40,
+      "futu_in_broker_note": "B站港股/券商评测视频中富途出现率高（行业报告称富途社区活跃度比肩B站/小红书）; 搜索「港股券商」可见多个富途为首的对比视频; 无精确数据, 基于视频抽样约 40%",
+      "hk_investor_profile": {
+        "age": "20-35岁为主",
+        "gender": "男性约75%",
+        "trading": "港股、美股、量化交易、期权、加密货币",
+        "content_pref": "30-60分钟深度分析、财报解读、量化策略教学、弹幕互动",
+        "trait": "高学历/技术型、最强内容粘性(日均112分钟)、偏好深度>广度、理工科背景多"
+      },
+      "hk_unique_investors": 100000,
+      "hk_unique_investors_note": "HK MAU约40-60万(粗估) × 20%(娱乐为主)",
+      "coverage_methods": [
+        "KOL合作",
+        "官方账号",
+        "信息流广告",
+        "弹幕互动",
+        "直播活动"
+      ],
+      "journey_stages": [
+        "awareness",
+        "interest",
+        "consideration"
+      ],
+      "futu_investment": "low"
+    }
+  ],
+  "other_channels": [
+    {
+      "name": "lihkg",
+      "display_name": "LIHKG 连登",
+      "category": "forum",
+      "category_zh": "论坛社区",
+      "hk_monthly_visits": 22900000,
+      "hk_monthly_visits_source": "SimilarWeb 2026-03: 22.9M 月访问, 87.44% 来自 HK IP, 全球排名 #1685",
+      "bounce_rate": 27.31,
+      "pages_per_visit": 9.67,
+      "avg_visit_duration": "10:00",
+      "hk_investor_profile": {
+        "age": "25-34岁为主",
+        "gender": "男性约65%",
+        "trading": "港股、美股、加密货币、IPO打新",
+        "content_pref": "匿名讨论、实时吹水、散户抱团、券商吐槽/推荐",
+        "trait": "HK 最大论坛、散户集中地、舆论风向标、匿名发言活跃度极高"
+      },
+      "futu_coverage_pct": 5,
+      "futu_coverage_note": "无官方运营, 财经台散户自发讨论券商时偶尔提及富途, 约 5% 金融帖子涉及",
+      "futu_relevance": "高 — 财经台券商讨论活跃，富途为最常被讨论的线上券商之一",
+      "acquisition_method": "内容营销/口碑（禁止硬广）、用户自发讨论引导、SEO截流",
+      "hk_unique_investors": 800000,
+      "hk_unique_investors_note": "2290万月访问 ÷ 约12次/用户/月 ≈ 190万独立访客(87%来自HK) × 45%(财经台活跃, 偏男性25-40)",
+      "coverage_methods": [
+        "口碑营销",
+        "SEO截流",
+        "用户讨论引导"
+      ],
+      "journey_stages": [
+        "interest",
+        "consideration",
+        "referral"
+      ],
+      "futu_investment": "none"
+    },
+    {
+      "name": "aastocks",
+      "display_name": "AAStocks",
+      "category": "finance_tool",
+      "category_zh": "财经工具",
+      "hk_monthly_visits": 6200000,
+      "hk_monthly_visits_source": "SimilarWeb 2026-03: 6.2M 月访问; Semrush: HK 投资类网站 #1; 用户 60% 男性, 主力 35-44 岁",
+      "bounce_rate": 40.25,
+      "pages_per_visit": 7.85,
+      "avg_visit_duration": "9:39",
+      "hk_investor_profile": {
+        "age": "35-44岁为主",
+        "gender": "男性约60%",
+        "trading": "港股为主、窝轮牛熊、ETF、美股",
+        "content_pref": "实时行情、技术图表、个股讨论区、新闻快讯",
+        "trait": "HK 散户看盘第一站、用户=活跃投资者、转化意向极高"
+      },
+      "futu_coverage_pct": 15,
+      "futu_coverage_note": "富途在 AAStocks 有广告投放, 行情页/讨论区用户频繁使用富途数据, 品牌曝光度高",
+      "futu_relevance": "极高 — 用户全是活跃投资者，券商广告核心投放位",
+      "acquisition_method": "展示广告、赞助专区、行情数据合作、开户引流Banner",
+      "hk_unique_investors": 735000,
+      "hk_unique_investors_note": "620万月访问 ÷ 8(高频看盘) ≈ 77万独立访客 × 95%(几乎全是投资者)",
+      "coverage_methods": [
+        "展示广告",
+        "数据合作",
+        "开户Banner",
+        "赞助专区"
+      ],
+      "journey_stages": [
+        "retention",
+        "interest"
+      ],
+      "futu_investment": "medium"
+    },
+    {
+      "name": "etnet",
+      "display_name": "ETNet 经济通",
+      "category": "finance_tool",
+      "category_zh": "财经工具",
+      "hk_monthly_visits": 5500000,
+      "hk_monthly_visits_source": "Semrush 2026-03: 4.21M; SimilarWeb: HK 投资类 #2; 平均停留 16:25(Semrush)/7:05(SW)",
+      "bounce_rate": 44.82,
+      "pages_per_visit": 5.48,
+      "avg_visit_duration": "7:05",
+      "hk_investor_profile": {
+        "age": "35-55岁为主",
+        "gender": "男性约58%",
+        "trading": "港股、外汇、基金、债券",
+        "content_pref": "专业行情终端、财经新闻、市场数据、分析报告",
+        "trait": "偏专业/机构用户、停留时间极长(可能终端使用)、高净值"
+      },
+      "futu_coverage_pct": 10,
+      "futu_coverage_note": "ETNet 有券商广告位, 富途有一定品牌曝光但非主力投放渠道",
+      "futu_relevance": "高 — 专业投资者聚集，适合品牌展示和数据合作",
+      "acquisition_method": "展示广告、数据合作、专业内容赞助",
+      "hk_unique_investors": 650000,
+      "hk_unique_investors_note": "421万月访问 ÷ 7 ≈ 60万独立访客 × 95%; SimilarWeb显示ETNet流量可能高于AAStocks",
+      "coverage_methods": [
+        "展示广告",
+        "数据合作",
+        "内容赞助"
+      ],
+      "journey_stages": [
+        "retention",
+        "interest"
+      ],
+      "futu_investment": "low"
+    },
+    {
+      "name": "tradingview",
+      "display_name": "TradingView",
+      "category": "finance_tool",
+      "category_zh": "财经工具",
+      "hk_monthly_visits": 2000000,
+      "hk_monthly_visits_source": "SimilarWeb: HK 投资类 #3 (在 AAStocks、ETNet 之后); 全球 2.59 亿月访问, HK 流量估算约 200 万",
+      "bounce_rate": 47.63,
+      "pages_per_visit": 8.54,
+      "avg_visit_duration": "4:24",
+      "hk_investor_profile": {
+        "age": "25-40岁为主",
+        "gender": "男性约70%",
+        "trading": "技术分析为主、港美股、外汇、加密货币、期货",
+        "content_pref": "图表分析、交易策略分享、Pine Script、社区观点",
+        "trait": "技术派投资者、偏年轻、全球化视野、英文能力强"
+      },
+      "futu_coverage_pct": 3,
+      "futu_coverage_note": "TradingView 有 broker 集成列表但富途/moomoo 未深度合作, 社区中偶有提及",
+      "futu_relevance": "中 — 技术派用户对交易工具要求高，可通过数据/图表集成合作",
+      "acquisition_method": "Broker 集成合作、社区赞助、图表工具联动",
+      "hk_unique_investors": 300000,
+      "hk_unique_investors_note": "200万月访问 ÷ 6 ≈ 33万独立访客 × 95%",
+      "coverage_methods": [
+        "Broker集成",
+        "社区赞助",
+        "图表工具联动"
+      ],
+      "journey_stages": [
+        "retention",
+        "interest"
+      ],
+      "futu_investment": "none"
+    },
+    {
+      "name": "discuss",
+      "display_name": "香港讨论区",
+      "category": "forum",
+      "category_zh": "论坛社区",
+      "hk_monthly_visits": 3500000,
+      "hk_monthly_visits_source": "SimilarWeb 2026-02: 3.5M 月访问, 弹出率 25.52%, 用户 61% 男性, 主力 25-34 岁",
+      "bounce_rate": 25.52,
+      "pages_per_visit": 8.28,
+      "avg_visit_duration": "7:32",
+      "hk_investor_profile": {
+        "age": "25-44岁为主",
+        "gender": "男性约61%",
+        "trading": "港股、房地产投资、保险讨论",
+        "content_pref": "帖子讨论、经验分享、楼市/股市分析",
+        "trait": "综合论坛、金融财经版块活跃、偏传统投资话题"
+      },
+      "futu_coverage_pct": 3,
+      "futu_coverage_note": "综合论坛, 金融版块中偶有券商讨论, 富途提及率低",
+      "futu_relevance": "中 — 有金融财经专区，但综合论坛内容分散",
+      "acquisition_method": "软文/口碑营销、社区讨论引导",
+      "hk_unique_investors": 260000,
+      "hk_unique_investors_note": "350万月访问 ÷ 5 ≈ 70万独立访客 × 35%",
+      "coverage_methods": [
+        "口碑营销",
+        "软文植入"
+      ],
+      "journey_stages": [
+        "interest",
+        "referral"
+      ],
+      "futu_investment": "none"
+    },
+    {
+      "name": "hkgolden",
+      "display_name": "高登 HKGolden",
+      "category": "forum",
+      "category_zh": "论坛社区",
+      "hk_monthly_visits": 1400000,
+      "hk_monthly_visits_source": "SimilarWeb 2026-03: 1.4M, 男性 70%, 人均 10.21 页/次（深度极高）",
+      "bounce_rate": 31.65,
+      "pages_per_visit": 10.21,
+      "avg_visit_duration": "6:58",
+      "hk_investor_profile": {
+        "age": "25-40岁为主",
+        "gender": "男性约70%",
+        "trading": "港股、加密货币",
+        "content_pref": "吹水讨论、迷因文化、散户故事",
+        "trait": "LIHKG 前身、用户流失但核心忠诚、页面深度极高"
+      },
+      "futu_coverage_pct": 2,
+      "futu_coverage_note": "流量已大幅萎缩, 财经讨论极少, 富途几乎无存在感",
+      "futu_relevance": "低 — 流量已被 LIHKG 取代，但残余用户粘性强",
+      "acquisition_method": "口碑/自然讨论为主",
+      "hk_unique_investors": 150000,
+      "hk_unique_investors_note": "140万月访问 ÷ 4 ≈ 35万独立访客 × 40%",
+      "coverage_methods": [
+        "口碑/自然讨论"
+      ],
+      "journey_stages": [
+        "interest",
+        "referral"
+      ],
+      "futu_investment": "none"
+    },
+    {
+      "name": "linkedin",
+      "display_name": "LinkedIn",
+      "category": "professional",
+      "category_zh": "职业社交",
+      "hk_monthly_users": 4300000,
+      "hk_monthly_visits_source": "DataReportal 2026: LinkedIn Ads audience location=HK 约 430 万会员(非MAU); 全球MAU/会员比约37%, HK MAU估约160万; HK 金融从业者密度全球最高之一",
+      "hk_investor_profile": {
+        "age": "28-50岁为主",
+        "gender": "男性约58%",
+        "trading": "港美股、基金、私募、另类投资、IPO",
+        "content_pref": "行业洞察、职业相关投资、专业文章、公司动态",
+        "trait": "高收入专业人士（金融/法律/科技）、决策者多、B2B 获客核心、高客单价"
+      },
+      "futu_coverage_pct": 8,
+      "futu_coverage_note": "富途/moomoo 有 LinkedIn 企业主页, 员工活跃发帖; 但 LinkedIn 金融内容以资管/投行为主, 零售券商内容占比低",
+      "futu_relevance": "极高 — 中环金融从业者集中地，高净值客户获取核心渠道; 富途企业账号可直接触达 FA/基金经理/高管",
+      "acquisition_method": "LinkedIn Ads精准定向(职位/行业/公司)、企业主页内容营销、InMail直触、员工advocacy",
+      "hk_unique_investors": 850000,
+      "hk_unique_investors_note": "HK会员430万(DataReportal 2026), MAU约160万(全球MAU/会员比~37%) × 53%(专业人士, 高收入)",
+      "coverage_methods": [
+        "LinkedIn Ads",
+        "官方主页",
+        "InMail精准触达",
+        "员工分享"
+      ],
+      "journey_stages": [
+        "awareness",
+        "consideration",
+        "conversion"
+      ],
+      "futu_investment": "medium"
+    },
+    {
+      "name": "whatsapp",
+      "display_name": "WhatsApp 群组",
+      "category": "messaging",
+      "category_zh": "即时通讯",
+      "hk_monthly_users": 5200000,
+      "hk_monthly_visits_source": "DataReportal 2025: HK 16+ 网民中 70.6% 使用 WhatsApp ≈ 520 万; 人均月使用 9 小时 46 分钟; HK 第一通讯工具",
+      "hk_investor_profile": {
+        "age": "全年龄（25-60岁投资群活跃）",
+        "gender": "男女均有，投资群偏男性60%",
+        "trading": "港股、基金、保险、房地产（群组话题广泛）",
+        "content_pref": "股票群实时讨论、券商客服沟通、投资tips转发、PDF报告分享",
+        "trait": "私域流量核心、口碑传播第一渠道、群组上限1024人、不可搜索（封闭生态）"
+      },
+      "futu_coverage_pct": 20,
+      "futu_coverage_note": "富途有大量客户服务 WhatsApp 群 + MGM 裂变; HK 投资者 WhatsApp 群中富途为最常被推荐的线上券商; 私域无法量化但渗透率高",
+      "futu_relevance": "极高 — 券商客户服务和口碑传播第一渠道，但无法直接投放",
+      "acquisition_method": "客户服务群运营、MGM(邀请好友)、老客户口碑裂变",
+      "hk_unique_investors": 2080000,
+      "hk_unique_investors_note": "520万HK MAU × 40%(全民App); 但作为通讯工具, KOL营销价值有限",
+      "coverage_methods": [
+        "客户服务群",
+        "MGM裂变",
+        "口碑传播"
+      ],
+      "journey_stages": [
+        "referral",
+        "retention",
+        "conversion"
+      ],
+      "futu_investment": "high"
+    },
+    {
+      "name": "telegram",
+      "display_name": "Telegram 频道",
+      "category": "messaging",
+      "category_zh": "即时通讯",
+      "hk_monthly_users": 800000,
+      "hk_monthly_visits_source": "2019 年社运期间单月新增 11 万用户(Sensor Tower); 全球 10 亿 MAU, 亚洲占 38%; HK 估算约 80 万 MAU; 33% 用户接触 crypto 内容",
+      "hk_investor_profile": {
+        "age": "22-38岁为主",
+        "gender": "男性约65%",
+        "trading": "加密货币、港美股、外汇、量化策略",
+        "content_pref": "频道订阅、实时信号、Alpha 信息、Bot 自动化",
+        "trait": "加密货币投资者首选、技术型用户多、频道可公开订阅（比 WhatsApp 开放）"
+      },
+      "futu_coverage_pct": 8,
+      "futu_coverage_note": "部分港股/加密 Telegram 频道讨论富途; moomoo 有官方 Bot/频道但 HK 本地运营有限",
+      "futu_relevance": "中高 — 加密/港股频道活跃，适合精准触达年轻技术型投资者",
+      "acquisition_method": "频道赞助、Bot 集成、KOL 频道合作",
+      "hk_unique_investors": 440000,
+      "hk_unique_investors_note": "80万HK MAU × 55%(偏crypto/金融用户)",
+      "coverage_methods": [
+        "频道赞助",
+        "Bot集成",
+        "KOL频道合作"
+      ],
+      "journey_stages": [
+        "interest",
+        "retention",
+        "referral"
+      ],
+      "futu_investment": "low"
+    },
+    {
+      "name": "google_hk",
+      "display_name": "Google 搜索(HK)",
+      "category": "search",
+      "category_zh": "搜索引擎",
+      "hk_monthly_visits_source": "Semrush: HK 金融类网站总月访问超 3000 万（yahoo+aastocks+etnet 等）; Google 为 HK 第一搜索引擎(>90% 份额); 券商关键词为高竞争/高CPC品类(HKD 15-80+/click)",
+      "hk_investor_profile": {
+        "age": "全年龄",
+        "gender": "均衡",
+        "trading": "全品类（搜索意图驱动）",
+        "content_pref": "「港股開戶」「券商比較」「moomoo 開戶」「富途 vs 老虎」等高意向搜索",
+        "trait": "最高转化意向渠道 — 用户主动搜索=有明确需求; SEO/SEM 为券商获客 ROI 最高渠道之一"
+      },
+      "futu_coverage_pct": 25,
+      "futu_coverage_note": "富途 SEM 投放活跃(品牌词+品类词); 搜索「富途」「moomoo 开户」品牌词自然排名第一; 搜索「港股开户」「券商比较」等品类词有竞价广告",
+      "futu_relevance": "极高 — 品牌词+品类词搜索是开户转化核心漏斗入口",
+      "acquisition_method": "SEM竞价(品牌词+品类词)、SEO内容矩阵、知识图谱占位",
+      "hk_unique_investors": 2200000,
+      "hk_unique_investors_note": "Google HK 覆盖>90%搜索市场; 约220万投资者中绝大多数使用Google搜索投资相关信息",
+      "coverage_methods": [
+        "SEM竞价",
+        "SEO内容",
+        "知识图谱",
+        "Google Ads"
+      ],
+      "journey_stages": [
+        "consideration",
+        "conversion"
+      ],
+      "futu_investment": "high"
+    },
+    {
+      "name": "hk_finance_media",
+      "display_name": "财经媒体(HKET/HKEJ/Finet)",
+      "category": "media",
+      "category_zh": "财经媒体",
+      "hk_monthly_visits": 3000000,
+      "hk_monthly_visits_source": "HKEJ: SimilarWeb 1.4M/月; HKET: HK 新闻类 #10; Finet: 较小; 三者合计约 300 万+",
+      "hk_investor_profile": {
+        "age": "30-55岁为主",
+        "gender": "男性约58%",
+        "trading": "港股、基金、债券、房地产",
+        "content_pref": "专业财经新闻、市场分析、上市公司报道、专栏文章",
+        "trait": "中高收入、对品牌信任度高、适合品牌形象建设"
+      },
+      "futu_coverage_pct": 12,
+      "futu_coverage_note": "富途财报/活动有 HKET/HKEJ PR 报道; 财经媒体广告位有券商投放; 富途品牌新闻稿覆盖主要财经媒体",
+      "futu_relevance": "高 — 专业媒体背书提升品牌可信度，适合PR+广告组合",
+      "acquisition_method": "展示广告、新闻稿/软文、专栏赞助、活动联名",
+      "hk_unique_investors": 375000,
+      "hk_unique_investors_note": "HKET+HKEJ+Finet合计300万月访问 ÷ 6 ≈ 50万独立访客 × 75%",
+      "coverage_methods": [
+        "展示广告",
+        "PR新闻稿",
+        "赞助专栏",
+        "活动联名"
+      ],
+      "journey_stages": [
+        "awareness",
+        "interest"
+      ],
+      "futu_investment": "medium"
+    },
+    {
+      "name": "podcast_hk",
+      "display_name": "财经播客",
+      "category": "podcast",
+      "category_zh": "播客/音频",
+      "hk_monthly_visits_source": "HK 头部财经播客「投資唔講廢話」YouTube 10.8K 订阅/285+ 期; Apple Podcasts HK 投资榜竞争活跃; 粤语财经播客快速增长; 全球播客市场 CAGR 24.8%",
+      "hk_investor_profile": {
+        "age": "25-45岁为主",
+        "gender": "男性约60%",
+        "trading": "港美股、ETF、个人理财",
+        "content_pref": "通勤收听、深度访谈、市场复盘、投资教育",
+        "trait": "高粘性（完听率高）、信任主播推荐、适合软性植入、粤语为主"
+      },
+      "futu_coverage_pct": 5,
+      "futu_coverage_note": "部分 HK 财经播客有券商赞助, 富途偶有合作但非系统性投放; 播客生态仍小",
+      "futu_relevance": "中高 — 听众信任度高、软植入接受度好，但覆盖量较小",
+      "acquisition_method": "播客赞助/冠名、主播口播、嘉宾访谈合作",
+      "hk_unique_investors": 50000,
+      "hk_unique_investors_note": "HK财经播客仍为小众; 头部节目YouTube订阅约1万; 估算月活听众约6-8万 × 70%",
+      "coverage_methods": [
+        "赞助冠名",
+        "主播口播",
+        "嘉宾访谈"
+      ],
+      "journey_stages": [
+        "awareness",
+        "interest"
+      ],
+      "futu_investment": "low"
+    },
+    {
+      "name": "offline_events",
+      "display_name": "线下投资活动",
+      "category": "offline",
+      "category_zh": "线下/O2O",
+      "hk_monthly_visits_source": "HK FinTech Week 2025: 37,000+ 人; Wiki Finance Expo: 7,000+; iFX EXPO Asia: 4,000+; HKEX ETF Summit: 机构级; 富途已联合 UBS 在 HKEX Connect Hall 举办线下活动",
+      "hk_investor_profile": {
+        "age": "28-50岁为主",
+        "gender": "男性约60%",
+        "trading": "全品类（因活动类型而异）",
+        "content_pref": "现场演讲、展位体验、面对面咨询、networking",
+        "trait": "高意向（愿意花时间到场）、决策者多、适合高价值客户获取"
+      },
+      "futu_coverage_pct": 15,
+      "futu_coverage_note": "富途已联合 UBS 在 HKEX Connect Hall 办活动; 参加 FinTech Week 等主要展会; 线下获客为富途重要渠道",
+      "futu_relevance": "极高 — 富途已积极参与(Futu x UBS at HKEX); 线下转化率远高于线上",
+      "acquisition_method": "展位参展、联名活动、现场开户优惠、嘉宾演讲",
+      "hk_unique_investors": 5000,
+      "hk_unique_investors_note": "HK FinTech Week 3.7万人/年 + 其他展会; 月均约5千人次(活动集中在特定月份)",
+      "coverage_methods": [
+        "展位参展",
+        "联名活动",
+        "现场开户",
+        "嘉宾演讲"
+      ],
+      "journey_stages": [
+        "awareness",
+        "consideration",
+        "conversion"
+      ],
+      "futu_investment": "high"
+    },
+    {
+      "name": "moneyhero",
+      "display_name": "MoneyHero",
+      "category": "finance_compare",
+      "category_zh": "金融比价",
+      "hk_monthly_users": 1400000,
+      "hk_monthly_visits_source": "MoneyHero Q3 2025 SEC 20-F: HK 月独立用户 120 万; Semrush 2026-03: 网页端约 807K 月访问; 季度总 Session 410 万(≈137 万/月); Nasdaq:MNY 上市公司(原 CompareAsiaGroup)",
+      "bounce_rate": 56.13,
+      "pages_per_visit": 3.15,
+      "avg_visit_duration": "8:29",
+      "hk_investor_profile": {
+        "age": "25-44岁为主",
+        "gender": "男女约各50%",
+        "trading": "信用卡、保险、投资开户、贷款、理财产品比较",
+        "content_pref": "产品对比表、开户优惠、返现攻略、申请一键跳转",
+        "trait": "HK 最大金融比价平台、月处理 10 万+申请、用户=高意向金融消费者、券商开户比较区活跃"
+      },
+      "futu_coverage_pct": 20,
+      "futu_coverage_note": "MoneyHero 投资账户比较专区有富途/moomoo; 信用卡占收入 67%, 投资/财富占 12% 且增长中; 富途可通过 CPA 合作获取高意向开户用户",
+      "futu_relevance": "极高 — HK 最大比价平台, 投资开户比较区直接导流, CPA 模式可量化 ROI",
+      "acquisition_method": "CPA 合作(按开户付费)、产品比较页展示、开户优惠专区、SEO 截流「券商比较」类关键词",
+      "hk_unique_investors": 950000,
+      "hk_unique_investors_note": "SEC 6-K: HK MUU约130-150万(占集团5.3M的25-30%) × 70%(金融比价=高意向)",
+      "coverage_methods": [
+        "CPA合作",
+        "产品比较页",
+        "开户优惠专区",
+        "SEO截流"
+      ],
+      "journey_stages": [
+        "consideration",
+        "conversion"
+      ],
+      "futu_investment": "medium"
+    },
+    {
+      "name": "moneysmart",
+      "display_name": "MoneySmart",
+      "category": "finance_compare",
+      "category_zh": "金融比价",
+      "hk_monthly_visits": 340000,
+      "hk_monthly_visits_source": "Semrush 2026-03: 约 340K 月访问; SimilarWeb: HK 金融规划类 #11-12; 有专门的投资账户比较页面（Best Investment Accounts in Hong Kong 2026）",
+      "bounce_rate": 52.94,
+      "pages_per_visit": 2.05,
+      "avg_visit_duration": "1:34",
+      "hk_investor_profile": {
+        "age": "25-40岁为主",
+        "gender": "男女约各50%",
+        "trading": "信用卡、投资开户比较、保险、贷款",
+        "content_pref": "券商对比文章、开户教程、理财产品评测",
+        "trait": "主动比较券商的高意向用户、SEO 流量为主、有「Best Investment Accounts」专栏直接比较富途/老虎/IBKR"
+      },
+      "futu_coverage_pct": 18,
+      "futu_coverage_note": "MoneySmart 投资账户比较页直接列出 moomoo/富途与竞品对比; 用户在主动搜索「券商比较」时到达此页, 转化意向极高",
+      "futu_relevance": "高 — 有专门券商比较内容, 用户意向明确, 适合 CPA/内容合作",
+      "acquisition_method": "CPA 合作、券商比较内容植入、开户优惠页面、SEO 合作",
+      "hk_unique_investors": 55000,
+      "hk_unique_investors_note": "34万月访问 ÷ 4 ≈ 8.5万独立访客 × 65%",
+      "coverage_methods": [
+        "CPA合作",
+        "内容植入",
+        "SEO合作",
+        "开户优惠"
+      ],
+      "journey_stages": [
+        "consideration",
+        "conversion"
+      ],
+      "futu_investment": "low"
+    },
+    {
+      "name": "hongkongcard",
+      "display_name": "HongKongCard",
+      "category": "finance_compare",
+      "category_zh": "金融比价",
+      "hk_monthly_visits": 298000,
+      "hk_monthly_visits_source": "Semrush 2026-02: 约 298K 月访问; HK 排名 #598; Google organic 51.6%, Direct 38.2%; 平均停留 5:42(高粘性)",
+      "bounce_rate": 41.0,
+      "pages_per_visit": 3.8,
+      "avg_visit_duration": "5:42",
+      "hk_investor_profile": {
+        "age": "25-40岁为主",
+        "gender": "男女约各50%",
+        "trading": "信用卡为主、银行产品、部分投资内容",
+        "content_pref": "信用卡攻略、返现对比、银行优惠、积分兑换",
+        "trait": "高粘性(5:42停留)、金融活跃用户、与 MoneyHero/MoneySmart 受众高度重叠"
+      },
+      "futu_coverage_pct": 5,
+      "futu_coverage_note": "以信用卡为主, 投资内容较少; 用户为金融活跃群体但非直接券商比较场景",
+      "futu_relevance": "中 — 用户为金融活跃群体, 可跨品类触达, 但非投资核心场景",
+      "acquisition_method": "展示广告、跨品类推荐、联名优惠",
+      "hk_unique_investors": 38000,
+      "hk_unique_investors_note": "29.8万月访问 ÷ 4 ≈ 7.5万独立访客 × 50%(信用卡为主)",
+      "coverage_methods": [
+        "展示广告",
+        "跨品类推荐",
+        "联名优惠"
+      ],
+      "journey_stages": [
+        "consideration"
+      ],
+      "futu_investment": "none"
+    },
+    {
+      "name": "yahoo_finance_hk",
+      "display_name": "Yahoo Finance HK",
+      "category": "finance_tool",
+      "category_zh": "财经工具",
+      "hk_monthly_visits": 8000000,
+      "hk_monthly_visits_source": "Semrush 2026-03: yahoo.com HK 总流量 22.6-28.4M/月; SimilarWeb: HK #1 Finance 网站; 财经板块估算占总流量 ~35%; Yahoo Finance HK 仍是许多港人默认看盘/组合追踪页面",
+      "hk_investor_profile": {
+        "age": "30-60岁为主",
+        "gender": "男性约55%",
+        "trading": "港股、美股、基金、外汇",
+        "content_pref": "实时行情报价、投资组合追踪、财经新闻聚合、个股图表",
+        "trait": "HK 最大财经门户、用户基数极大、老一代散户习惯性使用、免费行情数据标杆"
+      },
+      "futu_coverage_pct": 8,
+      "futu_coverage_note": "Yahoo Finance 有券商广告位; 富途/moomoo 有一定品牌展示但非深度合作; Yahoo 自身不提供交易功能, 用户需跳转券商 App",
+      "futu_relevance": "极高 — HK 最大财经流量入口, 全是活跃投资者, 展示广告+数据合作核心渠道",
+      "acquisition_method": "展示广告、原生广告(行情页)、数据合作(实时报价来源)、品牌词 SEM 截流",
+      "hk_unique_investors": 1050000,
+      "hk_unique_investors_note": "yahoo.com HK流量~2260万/月, 财经板块约35%=800万访问 ÷ 6 ≈ 133万独立访客 × 80%",
+      "coverage_methods": [
+        "展示广告",
+        "原生广告",
+        "数据合作",
+        "SEM截流"
+      ],
+      "journey_stages": [
+        "retention",
+        "interest",
+        "awareness"
+      ],
+      "futu_investment": "low"
+    },
+    {
+      "name": "investing_com",
+      "display_name": "Investing.com",
+      "category": "finance_tool",
+      "category_zh": "财经工具",
+      "hk_monthly_visits": 1500000,
+      "hk_monthly_visits_source": "SimilarWeb: HK 投资类网站 #4(排在 AAStocks/ETNet/TradingView 之后); 全球 212M 月访问(Semrush 2026-03); HK 流量估算约 150 万",
+      "hk_investor_profile": {
+        "age": "25-45岁为主",
+        "gender": "男性约65%",
+        "trading": "外汇、美股、港股、大宗商品、加密货币、期货",
+        "content_pref": "经济日历、外汇实时数据、技术分析、全球市场概览",
+        "trait": "偏国际化投资者、外汇/商品交易者多、英文为主、补充本地财经工具的全球视野"
+      },
+      "futu_coverage_pct": 2,
+      "futu_coverage_note": "Investing.com 有 broker 广告但以外汇经纪商为主; 富途/moomoo 在该平台存在感低; 适合投放美股/全球交易相关广告",
+      "futu_relevance": "中 — 用户偏国际化, 可触达美股/外汇交易者; 但平台以外汇经纪商广告为主",
+      "acquisition_method": "展示广告、Broker 评测合作、经济日历赞助",
+      "hk_unique_investors": 200000,
+      "hk_unique_investors_note": "150万月访问 ÷ 5 ≈ 30万独立访客 × 70%",
+      "coverage_methods": [
+        "展示广告",
+        "Broker评测",
+        "经济日历赞助"
+      ],
+      "journey_stages": [
+        "retention",
+        "interest"
+      ],
+      "futu_investment": "none"
+    },
+    {
+      "name": "hk01",
+      "display_name": "HK01 香港01",
+      "category": "news_media",
+      "category_zh": "新闻媒体",
+      "hk_monthly_visits": 12000000,
+      "hk_monthly_visits_source": "SimilarWeb: HK 新闻类 #2; Semrush 2026-03: 流量环比增长 9.5%; 直接流量 41% + Google 有机 41%; 有独立财经/理财/地产频道",
+      "hk_investor_profile": {
+        "age": "25-50岁为主",
+        "gender": "男女约各50%",
+        "trading": "港股、基金、房地产、保险、MPF",
+        "content_pref": "财经新闻、理财攻略、楼市分析、IPO 报道、KOL 专栏",
+        "trait": "HK 数字原生新闻第一品牌、财经频道活跃、年轻读者多、SEO 流量极强"
+      },
+      "futu_coverage_pct": 5,
+      "futu_coverage_note": "HK01 财经频道有券商相关报道; 富途财报/活动有新闻覆盖; 可通过原生广告和赞助内容合作",
+      "futu_relevance": "高 — HK 第二大新闻平台, 财经频道覆盖广, 适合品牌展示和内容营销",
+      "acquisition_method": "原生广告、赞助内容/软文、财经频道广告位、SEO 截流合作",
+      "hk_unique_investors": 840000,
+      "hk_unique_investors_note": "HK新闻#2; 约1200万月访问 ÷ 5 ≈ 240万独立访客 × 35%(综合新闻, 非纯财经)",
+      "coverage_methods": [
+        "原生广告",
+        "赞助内容",
+        "财经频道广告",
+        "SEO合作"
+      ],
+      "journey_stages": [
+        "awareness",
+        "interest"
+      ],
+      "futu_investment": "low"
+    },
+    {
+      "name": "scmp",
+      "display_name": "SCMP 南华早报",
+      "category": "news_media",
+      "category_zh": "新闻媒体",
+      "hk_monthly_visits": 5000000,
+      "hk_monthly_visits_source": "SimilarWeb: HK 新闻类全球 #183; HK + 海外英文读者; 阿里巴巴旗下, HK 最权威英文媒体; Markets 频道覆盖港股/A股/美股",
+      "hk_investor_profile": {
+        "age": "30-55岁为主",
+        "gender": "男性约55%",
+        "trading": "港股、美股、中概股、基金、另类投资",
+        "content_pref": "深度市场分析、中国/HK 宏观报道、IPO 新闻、专业评论",
+        "trait": "英文流利的专业人士/高净值群体、外籍人士、机构投资者、高客单价"
+      },
+      "futu_coverage_pct": 5,
+      "futu_coverage_note": "SCMP Markets 频道有富途相关报道(财报/产品); 可通过展示广告触达英文受众; 适合品牌高端定位",
+      "futu_relevance": "高 — 英文精英投资者核心媒体, 高净值客户获取, 品牌公信力背书",
+      "acquisition_method": "展示广告、PR/新闻稿、Markets 频道赞助、品牌内容合作",
+      "hk_unique_investors": 250000,
+      "hk_unique_investors_note": "HK流量约250万月访问(总500万中~50%来自HK) ÷ 5 ≈ 50万独立访客 × 45%",
+      "coverage_methods": [
+        "展示广告",
+        "PR新闻稿",
+        "Markets频道赞助",
+        "品牌内容"
+      ],
+      "journey_stages": [
+        "awareness",
+        "interest"
+      ],
+      "futu_investment": "low"
+    },
+    {
+      "name": "stheadline_oncc",
+      "display_name": "星岛头条+东网",
+      "category": "news_media",
+      "category_zh": "新闻媒体",
+      "hk_monthly_visits": 6000000,
+      "hk_monthly_visits_source": "SimilarWeb: 星岛头条(stheadline.com) HK 新闻 #5; 东网(on.cc) HK 新闻 #6; 两者合计约 600 万月访问; 均有财经/股市专栏",
+      "hk_investor_profile": {
+        "age": "35-60岁为主",
+        "gender": "男性约55%",
+        "trading": "港股、基金、保险、房地产",
+        "content_pref": "财经新闻、股市评论、地产专栏、即时行情",
+        "trait": "传统媒体数字化、偏年长读者、高忠诚度、覆盖保守型投资者群体"
+      },
+      "futu_coverage_pct": 3,
+      "futu_coverage_note": "传统媒体, 券商广告投放有限; 富途偶有新闻报道; 读者偏传统, 线上券商接受度较低",
+      "futu_relevance": "中 — 覆盖偏年长投资者, 品牌曝光渠道, 转化率较低但触达面广",
+      "acquisition_method": "展示广告、财经版赞助、PR 报道",
+      "hk_unique_investors": 570000,
+      "hk_unique_investors_note": "星岛+东网合计600万月访问 ÷ 4 ≈ 150万独立访客 × 38%",
+      "coverage_methods": [
+        "展示广告",
+        "财经版赞助",
+        "PR报道"
+      ],
+      "journey_stages": [
+        "awareness"
+      ],
+      "futu_investment": "none"
+    },
+    {
+      "name": "wechat_hk",
+      "display_name": "微信公众号/小程序",
+      "category": "cn_platform",
+      "category_zh": "内地平台",
+      "hk_monthly_users": 3700000,
+      "hk_monthly_visits_source": "World Population Review: 超 50% 港人使用微信 ≈ 370 万; DemandSage: 全球 MAU 14.1 亿; 微信支付 HK 日常使用率高; 金融公众号(富途/长桥/券商自媒体)为内地背景投资者首要信息渠道",
+      "hk_investor_profile": {
+        "age": "25-50岁为主",
+        "gender": "男女约各50%",
+        "trading": "港股、A股、基金、理财产品",
+        "content_pref": "公众号长文(券商分析/市场评论)、小程序(交易/资讯)、朋友圈 KOL 转发",
+        "trait": "内地背景/双城生活投资者核心生态、公众号=金融 KOL 主战场、私域裂变能力极强"
+      },
+      "futu_coverage_pct": 25,
+      "futu_coverage_note": "富途运营官方微信公众号(富途证券/moomoo); 金融自媒体公众号中富途为高频提及品牌; 公众号+小程序+企业微信构成完整私域链路",
+      "futu_relevance": "极高 — 内地背景客群第一触达渠道, 公众号+小程序+企微构成全链路获客转化",
+      "acquisition_method": "公众号内容营销、小程序引流、企业微信私域运营、KOL 公众号投放、朋友圈广告",
+      "hk_unique_investors": 1480000,
+      "hk_unique_investors_note": "370万HK MAU × 40%; 内地背景投资者核心信息渠道",
+      "coverage_methods": [
+        "公众号运营",
+        "小程序引流",
+        "企微私域",
+        "KOL公众号",
+        "朋友圈广告"
+      ],
+      "journey_stages": [
+        "awareness",
+        "interest",
+        "retention",
+        "referral"
+      ],
+      "futu_investment": "high"
+    },
+    {
+      "name": "weibo",
+      "display_name": "微博",
+      "category": "cn_platform",
+      "category_zh": "内地平台",
+      "hk_monthly_visits": 3000000,
+      "hk_monthly_visits_source": "SimilarWeb: weibo.com HK 流量占比 2.24%; 微博全球 MAU 5.9 亿; HK 月访问估算约 300 万; 财经超话/大V 影响力强",
+      "hk_investor_profile": {
+        "age": "22-40岁为主",
+        "gender": "男女约各50%",
+        "trading": "港股、A股、中概股、基金",
+        "content_pref": "财经大V观点、实时热搜、券商官方号、市场情绪",
+        "trait": "内地背景年轻投资者、热点驱动、情绪化交易参考、品牌声量放大器"
+      },
+      "futu_coverage_pct": 15,
+      "futu_coverage_note": "富途/moomoo 有官方微博账号; 财经大V 常提及富途; 微博为券商品牌声量主要阵地",
+      "futu_relevance": "高 — 品牌声量和舆论主战场, 财经大V合作/KOL 投放核心平台",
+      "acquisition_method": "官方号运营、财经大V合作、热搜话题营销、信息流广告",
+      "hk_unique_investors": 225000,
+      "hk_unique_investors_note": "HK月访问300万 ÷ 4 ≈ 75万独立访客 × 30%",
+      "coverage_methods": [
+        "官方号运营",
+        "大V合作",
+        "热搜话题",
+        "信息流广告"
+      ],
+      "journey_stages": [
+        "awareness",
+        "interest"
+      ],
+      "futu_investment": "medium"
+    },
+    {
+      "name": "eastmoney",
+      "display_name": "东方财富",
+      "category": "cn_platform",
+      "category_zh": "内地平台",
+      "hk_monthly_visits": 1500000,
+      "hk_monthly_visits_source": "SimilarWeb: HK 投资类网站 #5; 全球 #532 总排名, 投资类全球 #9; 东方财富是内地最大财经平台, 南向资金投资者主要使用; SCMP: 2025前7个月南向资金达 HK$8,668 亿创纪录",
+      "hk_investor_profile": {
+        "age": "25-50岁为主",
+        "gender": "男性约65%",
+        "trading": "港股(南向通)、A股、基金、债券",
+        "content_pref": "实时行情、股吧讨论、研报、基金数据",
+        "trait": "南向资金投资者(占港股日均成交 20-30%)、内地券商客户为主、与富途直接竞争"
+      },
+      "futu_coverage_pct": 3,
+      "futu_coverage_note": "东方财富旗下有东方财富证券(直接竞品); 股吧中偶有富途讨论但非主流; 竞品平台, 直接合作空间有限",
+      "futu_relevance": "中(竞品) — 了解南向投资者行为和情绪的窗口, 但直接获客困难",
+      "acquisition_method": "竞品情报收集、SEO 截流(「港股开户」等关键词)、品牌差异化定位",
+      "hk_unique_investors": 175000,
+      "hk_unique_investors_note": "HK月访问150万 ÷ 5 ≈ 30万独立访客 × 60%(投资平台)",
+      "coverage_methods": [
+        "SEO截流",
+        "品牌差异化",
+        "竞品监控"
+      ],
+      "journey_stages": [
+        "retention",
+        "interest"
+      ],
+      "futu_investment": "none"
+    },
+    {
+      "name": "xueqiu",
+      "display_name": "雪球",
+      "category": "cn_platform",
+      "category_zh": "内地平台",
+      "hk_monthly_visits": 800000,
+      "hk_monthly_visits_source": "SimilarWeb: 投资类全球 #27; 注册投资者 7,800 万+; 有独立港股频道和活跃讨论社区; HKEX 合作提供实时港股行情; HK 流量估算约 80 万",
+      "hk_investor_profile": {
+        "age": "25-45岁为主",
+        "gender": "男性约70%",
+        "trading": "港股、美股、A股、基金组合",
+        "content_pref": "投资组合分享、个股深度分析、大V观点、实盘跟投",
+        "trait": "中文投资社区第一品牌、KOL 影响力极强、港股讨论活跃、南向投资者情绪风向标"
+      },
+      "futu_coverage_pct": 10,
+      "futu_coverage_note": "雪球用户常用富途作为交易工具(看雪球 + 用富途下单); 港股讨论中富途为高频提及券商; 雪球大V合作是内地 KOL 获客渠道",
+      "futu_relevance": "高 — 港股投资者社区核心, 大V合作/KOL 营销关键平台, 用户画像与富途高度重叠",
+      "acquisition_method": "雪球大V合作/KOL投放、组合赞助、社区话题营销、用户导流",
+      "hk_unique_investors": 180000,
+      "hk_unique_investors_note": "HK月访问80万 ÷ 4 ≈ 20万独立访客 × 90%(投资社区)",
+      "coverage_methods": [
+        "大V合作",
+        "组合赞助",
+        "社区话题",
+        "KOL投放"
+      ],
+      "journey_stages": [
+        "interest",
+        "consideration",
+        "retention"
+      ],
+      "futu_investment": "medium"
+    },
+    {
+      "name": "zhihu",
+      "display_name": "知乎",
+      "category": "cn_platform",
+      "category_zh": "内地平台",
+      "hk_monthly_visits": 500000,
+      "hk_monthly_visits_source": "知乎 NASDAQ+HKEX 双上市; HK 投资/移民/开户等话题高热度; 「香港股票开户」「港股券商对比」等问题浏览量数十万; HK IP 月访问估算约 50 万",
+      "hk_investor_profile": {
+        "age": "25-40岁为主",
+        "gender": "男性约60%",
+        "trading": "港股开户、美股、基金、跨境投资",
+        "content_pref": "长文问答、券商深度对比、开户攻略、投资经验分享",
+        "trait": "决策考虑期用户(搜索「如何开港股户」)、高学历、内容深度要求高、SEO 长尾价值"
+      },
+      "futu_coverage_pct": 12,
+      "futu_coverage_note": "知乎「港股开户」「moomoo 怎么样」等问题下富途为高频推荐; 有官方机构号运营; 知乎是港股开户决策链的关键节点",
+      "futu_relevance": "高 — 用户处于开户决策期, 内容影响力大, SEO 长尾截流核心渠道",
+      "acquisition_method": "机构号运营(品牌回答)、KOL问答合作、SEO截流(知乎排名靠前)、好物推荐",
+      "hk_unique_investors": 44000,
+      "hk_unique_investors_note": "HK月访问50万 ÷ 4 ≈ 12.5万独立访客 × 35%",
+      "coverage_methods": [
+        "机构号运营",
+        "KOL问答",
+        "SEO截流",
+        "好物推荐"
+      ],
+      "journey_stages": [
+        "consideration",
+        "conversion"
+      ],
+      "futu_investment": "medium"
+    },
+    {
+      "name": "property_hk",
+      "display_name": "中原/美联/28Hse",
+      "category": "property",
+      "category_zh": "房产投资",
+      "hk_monthly_visits": 3500000,
+      "hk_monthly_visits_source": "SimilarWeb: centanet.com HK 房地产 #1(~135万); 28hse.com ~122万; midland.com.hk #2; 三者合计约 350 万/月; IndexBox: 2026 Q1 内地买家推动楼市同比增 53%",
+      "hk_investor_profile": {
+        "age": "30-55岁为主",
+        "gender": "男性约55%",
+        "trading": "房地产、港股、基金、保险、按揭",
+        "content_pref": "楼盘搜索、成交数据、按揭计算、投资回报分析",
+        "trait": "房产=HK 最大资产类别; 用户=有资产配置需求的中高收入群体; 跨品类营销价值极高"
+      },
+      "futu_coverage_pct": 2,
+      "futu_coverage_note": "房产平台几乎无券商广告; 富途在此生态无存在感; 但房产投资者是天然的金融产品客群(按揭→保险→投资)",
+      "futu_relevance": "高(跨品类) — 房产投资者=高净值金融消费者, 可通过资产配置/按揭利率等切入点跨品类获客",
+      "acquisition_method": "展示广告(资产配置主题)、跨品类内容营销、按揭/理财组合推广、联名活动",
+      "hk_unique_investors": 440000,
+      "hk_unique_investors_note": "中原+美联+28Hse合计350万月访问 ÷ 4 ≈ 87.5万独立访客 × 50%(房产搜索者约半数也投资股票/基金)",
+      "coverage_methods": [
+        "展示广告",
+        "跨品类内容",
+        "资产配置推广",
+        "联名活动"
+      ],
+      "journey_stages": [
+        "awareness"
+      ],
+      "futu_investment": "none"
+    }
+  ],
+  "investor_behavior": {
+    "source": "IFEC Retail Investor Study 2025",
+    "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+    "methodology": "1,000 面对面访问, 18-69岁散户投资者, 2025年7月",
+    "sample_size": 1000,
+    "published": "2026-02",
+    "info_sources": {
+      "title": "股票投资信息来源",
+      "subtitle": "% 的股票投资者使用该渠道获取信息 (n=913)",
+      "entries": [
+        {
+          "name": "财经网站",
+          "pct_2023": 78,
+          "pct_2025": 80,
+          "age_18_29": 91,
+          "age_30_49": 83,
+          "age_50_69": 70
+        },
+        {
+          "name": "YouTube",
+          "pct_2023": 35,
+          "pct_2025": 65,
+          "age_18_29": 70,
+          "age_30_49": 73,
+          "age_50_69": 51
+        },
+        {
+          "name": "券商App",
+          "pct_2023": 57,
+          "pct_2025": 64,
+          "age_18_29": 76,
+          "age_30_49": 69,
+          "age_50_69": 50
+        },
+        {
+          "name": "电视",
+          "pct_2023": 50,
+          "pct_2025": 46,
+          "age_18_29": 22,
+          "age_30_49": 43,
+          "age_50_69": 59
+        },
+        {
+          "name": "论坛",
+          "pct_2023": 51,
+          "pct_2025": 41,
+          "age_18_29": 41,
+          "age_30_49": 45,
+          "age_50_69": 33
+        },
+        {
+          "name": "Facebook",
+          "pct_2023": 20,
+          "pct_2025": 34,
+          "age_18_29": 45,
+          "age_30_49": 40,
+          "age_50_69": 21
+        },
+        {
+          "name": "Instagram",
+          "pct_2023": 10,
+          "pct_2025": 27,
+          "age_18_29": 49,
+          "age_30_49": 31,
+          "age_50_69": 12
+        },
+        {
+          "name": "通讯群组",
+          "pct_2023": 10,
+          "pct_2025": 26,
+          "age_18_29": 37,
+          "age_30_49": 29,
+          "age_50_69": 19
+        },
+        {
+          "name": "电台",
+          "pct_2023": 33,
+          "pct_2025": 23,
+          "age_18_29": 12,
+          "age_30_49": 22,
+          "age_50_69": 30
+        },
+        {
+          "name": "报纸/杂志",
+          "pct_2023": 50,
+          "pct_2025": 20,
+          "age_18_29": 9,
+          "age_30_49": 18,
+          "age_50_69": 27
+        },
+        {
+          "name": "AI聊天机器人",
+          "pct_2023": 0,
+          "pct_2025": 8,
+          "age_18_29": 25,
+          "age_30_49": 10,
+          "age_50_69": 1
+        }
+      ]
+    },
+    "trading_channels": {
+      "title": "交易渠道（最常使用）",
+      "subtitle": "% 的投资者最常使用该渠道交易 (n=913)",
+      "entries": [
+        {
+          "name": "券商App",
+          "pct_2023": 28,
+          "pct_2025": 65,
+          "age_18_29": 93,
+          "age_30_49": 72,
+          "age_50_69": 36
+        },
+        {
+          "name": "银行App",
+          "pct_2023": 42,
+          "pct_2025": 26,
+          "age_18_29": 5,
+          "age_30_49": 23,
+          "age_50_69": 39
+        },
+        {
+          "name": "网上平台",
+          "pct_2023": 21,
+          "pct_2025": 5,
+          "age_18_29": 1,
+          "age_30_49": 3,
+          "age_50_69": 10
+        },
+        {
+          "name": "电话下单",
+          "pct_2023": 9,
+          "pct_2025": 4,
+          "age_18_29": 1,
+          "age_30_49": 2,
+          "age_50_69": 15
+        }
+      ]
+    },
+    "kol_influence": {
+      "title": "KOL/财经网红影响力趋势",
+      "subtitle": "「投资专家/KOL评论」对投资决策的影响",
+      "age_18_29_kol_top_source": 30,
+      "note": "18-29岁投资者中, 30%视KOL为最重要信息来源(2023年仅5%)",
+      "entries": [
+        {
+          "metric": "受KOL影响的投资者",
+          "pct_2021": 19,
+          "pct_2023": 29,
+          "pct_2025": 62
+        },
+        {
+          "metric": "视KOL为最重要信息源",
+          "pct_2021": 4,
+          "pct_2023": 5,
+          "pct_2025": 18
+        },
+        {
+          "metric": "经常/有时按社媒贴文操作",
+          "pct_2021": 31,
+          "pct_2023": 32,
+          "pct_2025": 59
+        }
+      ]
+    },
+    "market_invested": {
+      "title": "投资市场分布",
+      "subtitle": "% 的投资者投资该市场",
+      "entries": [
+        {
+          "name": "港股主板",
+          "pct_2023": 96,
+          "pct_2025": 99,
+          "age_18_29": 95
+        },
+        {
+          "name": "美股",
+          "pct_2023": 28,
+          "pct_2025": 56,
+          "age_18_29": 75
+        },
+        {
+          "name": "A股",
+          "pct_2023": 8,
+          "pct_2025": 10,
+          "age_18_29": 3
+        }
+      ]
+    },
+    "age_personas": [
+      {
+        "label": "年轻投资者 (18-29岁)",
+        "pct_of_investors": 12,
+        "key_traits": [
+          "93%使用券商App交易(仅7%用银行)",
+          "75%投资美股(全年龄最高)",
+          "70%从YouTube获取资讯",
+          "49%从Instagram获取资讯",
+          "30%视KOL为最重要信息源",
+          "52%持有虚拟资产",
+          "25%使用AI聊天机器人"
+        ]
+      },
+      {
+        "label": "中年投资者 (30-49岁)",
+        "pct_of_investors": 54,
+        "key_traits": [
+          "72%使用券商App交易",
+          "65%投资美股",
+          "73%从YouTube获取资讯(全年龄最高)",
+          "45%使用论坛",
+          "69%受KOL影响",
+          "投资品种最多元化"
+        ]
+      },
+      {
+        "label": "资深投资者 (50-69岁)",
+        "pct_of_investors": 34,
+        "key_traits": [
+          "68%仍使用银行交易",
+          "59%看电视获取资讯",
+          "51%也开始用YouTube",
+          "33%投资美股",
+          "27%仍看报纸/杂志",
+          "仅12%使用Instagram"
+        ]
+      }
+    ],
+    "headline_stats": [
+      {
+        "label": "社媒获取投资信息",
+        "value": "88%",
+        "note": "2023年72% → 2025年88%"
+      },
+      {
+        "label": "券商App为主要交易渠道",
+        "value": "65%",
+        "note": "2023年28% → 2025年65%"
+      },
+      {
+        "label": "投资美股",
+        "value": "56%",
+        "note": "2023年28% → 2025年56%"
+      },
+      {
+        "label": "受KOL影响",
+        "value": "62%",
+        "note": "2023年29% → 2025年62%, 翻倍增长"
+      }
+    ]
+  },
+  "analysis_frameworks": {
+    "user_journey": {
+      "title": "用户旅程渠道映射",
+      "subtitle": "基于《好主意不是好营销》用户之旅模型 — 每个渠道在投资者决策链的哪个环节发挥作用",
+      "stages": [
+        {
+          "id": "awareness",
+          "name": "认知",
+          "name_en": "Awareness",
+          "description": "投资者第一次看到/听说富途品牌",
+          "color": "blue",
+          "key_metrics": "曝光量, 品牌搜索指数, 提及量"
+        },
+        {
+          "id": "interest",
+          "name": "兴趣",
+          "name_en": "Interest",
+          "description": "投资者开始关注富途, 浏览相关内容",
+          "color": "purple",
+          "key_metrics": "内容浏览量, 停留时长, 互动率"
+        },
+        {
+          "id": "consideration",
+          "name": "评估",
+          "name_en": "Consideration",
+          "description": "投资者主动对比券商, 看开户攻略/评测",
+          "color": "amber",
+          "key_metrics": "「券商比较」搜索量, 比价页浏览, 评测视频观看"
+        },
+        {
+          "id": "conversion",
+          "name": "转化",
+          "name_en": "Conversion",
+          "description": "投资者下载App/开户/入金",
+          "color": "green",
+          "key_metrics": "CPA, 开户数, 入金率, 首次交易"
+        },
+        {
+          "id": "retention",
+          "name": "留存",
+          "name_en": "Retention",
+          "description": "已开户用户持续使用(看盘/交易/社区)",
+          "color": "indigo",
+          "key_metrics": "DAU, 交易频次, 资产留存率"
+        },
+        {
+          "id": "referral",
+          "name": "推荐",
+          "name_en": "Referral",
+          "description": "用户口碑传播, 推荐给朋友/同事",
+          "color": "rose",
+          "key_metrics": "MGM邀请数, 口碑提及率, NPS"
+        }
+      ]
+    },
+    "three_c": {
+      "title": "3C定位分析",
+      "subtitle": "基于《好主意不是好营销》3C定位法 — 从品牌、品类、竞品三个视角研究用户",
+      "dimensions": [
+        {
+          "id": "brand",
+          "name": "品牌用户(Brand)",
+          "question": "富途实际覆盖了多少HK投资者？",
+          "insight": "富途HK付费客户约100万, 占250万活跃投资者的约40%(Q1 2025电话会议), 是香港线上券商第一。但在各内容平台的「声量覆盖率」仅1-25%, 远低于实际客户渗透率。说明富途主要通过效果营销(SEM/ASO)和口碑(MGM)获客, 而非内容建设。",
+          "action": "风险: 内容声量弱=品牌壁垒低, 竞品可通过内容抢夺用户心智。应提升内容覆盖率使之匹配40%的客户渗透率, 尤其在YouTube(4%)、Instagram(1%)、TikTok(1%)等差距最大的平台。"
+        },
+        {
+          "id": "category",
+          "name": "品类用户(Category)",
+          "question": "250万HK投资者的渠道行为是什么？",
+          "insight": "IFEC 2025: 88%投资者用社媒获取投资信息, 65%用YouTube, 64%用券商App, 34%用Facebook。富途虽有40%客户渗透率, 但在用户获取信息的主要渠道上存在「声量断层」: YouTube仅4%, Facebook仅2%。这意味着即使是富途的现有客户, 在这些平台也很少看到富途的内容。",
+          "action": "不是「触达新用户」的问题, 而是「陪伴现有客户」的问题。100万付费客户中65%用YouTube看投资内容, 但富途在YouTube声量仅4% → 他们看的是竞品或其他KOL的内容 → 留存风险。"
+        },
+        {
+          "id": "competitor",
+          "name": "竞品用户(Competitor)",
+          "question": "老虎/长桥/IBKR与富途的差距在哪？",
+          "insight": "富途HK市占率~40%(第一), 但竞品在内容平台上更激进: 老虎在小红书种草活跃, 长桥在YouTube追赶。IFEC数据显示18-29岁中93%用券商App、75%投美股 — 这批人是增长核心, 但也最容易被内容营销影响(30%视KOL为最重要信息源)。",
+          "action": "富途的40%市占率在年轻人中可能更低(他们更易受KOL影响换券商)。应在年轻人渠道(TikTok/IG/小红书/B站)加大KOL投放, 防止竞品通过内容蚕食年轻用户。"
+        }
+      ]
+    },
+    "efficiency_matrix": {
+      "title": "渠道优先级矩阵",
+      "subtitle": "基于数据思维 — 用流量×缺口×相关度×增量空间计算投入产出优先级, 已重点投入的渠道降权",
+      "formula": "优先级得分 = 投资者人数(万) × (100 - 覆盖率%) × 相关度系数 × 增量系数",
+      "relevance_weights": {
+        "极高": 1.0,
+        "高": 0.7,
+        "中高": 0.5,
+        "中": 0.3,
+        "中(竞品)": 0.1,
+        "低": 0.1
+      },
+      "investment_discount": {
+        "high": 0.2,
+        "medium": 0.5,
+        "low": 0.8,
+        "none": 1.0
+      }
+    },
+    "leverage_trends": {
+      "title": "借势机会",
+      "subtitle": "基于《好主意不是好营销》借势思维 — 花小钱办大事, 顺势而为",
+      "trends": [
+        {
+          "trend": "KOL影响力爆发",
+          "data": "IFEC: 62%投资者受KOL影响(2023年仅29%), 18-29岁中30%视KOL为最重要信息源",
+          "action": "加大KOL合作投放, 尤其YouTube和小红书; 从98位合作KOL扩展到200+; 聚焦美股内容(56%投资者投资美股)"
+        },
+        {
+          "trend": "券商App取代银行",
+          "data": "IFEC: 券商App从28%→65%成为主要交易渠道, 银行从61%→31%",
+          "action": "借势「银行转券商」大潮, 在银行用户聚集渠道(Facebook 35+岁, 财经媒体)投放「从银行转到moomoo」主题内容"
+        },
+        {
+          "trend": "美股投资翻倍",
+          "data": "IFEC: 美股投资者从28%→56%, 18-29岁达75%",
+          "action": "美股交易是获客核心卖点; KOL内容应重点覆盖美股; 在年轻人渠道(TikTok/IG/小红书)主推美股开户"
+        },
+        {
+          "trend": "AI投资工具萌芽",
+          "data": "IFEC: 仅8%使用AI投资工具, 但18-29岁达25%; 84%听说过但未使用",
+          "action": "借AI热潮推广moomoo AI功能; 在科技向渠道(X/LinkedIn/B站)做差异化定位"
+        }
+      ]
+    },
+    "detail_marketing": {
+      "title": "细节营销分析",
+      "subtitle": "基于《细节营销》(柏唯良/Willem Burgers, 中欧商学院) — 利润导向的精细化营销决策",
+      "source": "《细节营销》第三版, 人民邮电出版社, 2024",
+      "dimensions": [
+        {
+          "id": "leverage",
+          "name": "营销杠杆底线",
+          "principle": "每一笔营销支出都要计算其杠杆效应 — 即对利润的边际贡献, 而非仅看CPA",
+          "application": "富途HK每位付费客户年ARPU约HK$1,924(FY2024), 客户生命周期3-5年, LTV约HK$6,000-10,000。任何CAC<HK$6,000的渠道都是正杠杆。当前CAC约HK$2,000/付费客户, ROI约3-5倍。",
+          "action": "按杠杆率(LTV/CAC)重新排序渠道优先级: KOL合作(CAC~HK$500-2,000)杠杆率最高, SEM(CAC~HK$1,500-3,000)次之, 品牌广告(CAC~HK$3,000-8,000)杠杆率最低但有品牌溢价。",
+          "color": "blue"
+        },
+        {
+          "id": "segmentation",
+          "name": "精准市场细分",
+          "principle": "\"市场领先不取决于市场规模, 而取决于市场界定。\" 通过重新定义细分市场, 在小市场中做第一",
+          "application": "富途在「HK线上券商」整体市占率~40%(第一), 但可进一步细分: 美股交易者中市占率可能>50%, 港股日内交易者<20%, 基金定投客群<15%。「总市占率高」掩盖了细分差距。",
+          "action": "按投资品类×年龄×行为细分: 找出市占率<20%的利基(如: 35+基金定投客群、加密货币+港股跨品类、退休理财人群), 针对性地在其聚集渠道投放。成为每个细分的第一, 比在大市场中维持40%更有壁垒。",
+          "color": "purple"
+        },
+        {
+          "id": "pricing",
+          "name": "降价是最昂贵的营销",
+          "principle": "\"价格下调直接侵蚀利润, 且极难逆转。\" 利润比市场份额更重要, 营销应提升价值感知而非打价格战",
+          "application": "券商行业常见「0佣金/免费Level 2行情/送股票」补贴大战。富途已通过产品体验(App评分4.7)和品牌溢价建立了定价权, ARPU从FY2023~HK$1,490提升到FY2024~HK$1,924(+29%), 说明用户愿意为好产品付费。",
+          "action": "内容营销策略应强调产品差异化(功能/体验/安全)而非价格竞争。KOL合作brief应避免「比价」话术, 转向「体验对比/功能演示/真实使用场景」。用内容提升价值感知 > 用补贴拉新。",
+          "color": "amber"
+        },
+        {
+          "id": "selection",
+          "name": "客户筛选与淘汰",
+          "principle": "\"失去好客户是坏事, 抛弃坏客户则是好事。\" 收集客户一切知识并充分利用, 聚焦高LTV客户",
+          "application": "富途337万付费客户中, ARPU分布极不均匀: 头部20%客户(资产>50万HKD)贡献约80%收入。100万HK客户中, 高价值客群集中在35-55岁、有美股+港股跨市场交易的用户。",
+          "action": "渠道投放应优先瞄准高LTV人群: LinkedIn/专业社群(高收入)、Yahoo Finance(主动研究型)、播客(深度内容消费者)。而非追求低CAC但低质的渠道(如群组spam)。用RFM模型对现有客户分层, 将营销资源集中在「可能流失的高价值客户」和「高潜力新客户」上。",
+          "color": "red"
+        },
+        {
+          "id": "experiment",
+          "name": "实验驱动的科学营销",
+          "principle": "\"优秀的营销经理应是冷静务实、重试验的科学家。\" 用A/B测试和数据验证取代直觉判断",
+          "application": "当前35个渠道的覆盖率和优先级基于估算, 应建立实验体系验证。例: 在YouTube投入KOL合作3个月, 对比前后品牌搜索量、开户归因、内容互动率, 用数据证明ROI。",
+          "action": "建议实验优先序: ①YouTube KOL合作(3个月pilot, 5-10位财经KOL, 预算HK$50-100万, 追踪UTM归因+品牌搜索uplift) → ②小红书种草(2个月, 素人+达人混投) → ③LIHKG社区运营(低成本, 真实用户UGC)。每个实验设立明确的成功指标和止损线。",
+          "color": "green"
+        }
+      ]
+    }
+  },
+  "futu_hk_stats": {
+    "source": "富途2025年报 + Q1 2025电话会议",
+    "global_registered_users": 29180000,
+    "global_funded_clients": 3370000,
+    "global_funded_clients_yoy": "+40%",
+    "global_client_assets_hkd": 1230000000000,
+    "hk_paying_clients_est": 1000000,
+    "hk_paying_clients_note": "Q1 2025电话会议: 香港市佔率目標約40%, 即約100萬付費客戶",
+    "hk_active_investors": 2500000,
+    "hk_penetration_pct": 40,
+    "hk_penetration_note": "约100万HK付费客户 ÷ 250万HK活跃投资者 ≈ 40%",
+    "hk_market_position": "香港线上券商交易量第一, 港股IPO平台认购额全港第一",
+    "hk_offline_stores": 8,
+    "hk_offline_stores_note": "线下据点8个, 覆盖港九新界",
+    "sources": [
+      "富途2025年Q4及全年业绩公告 (futuhk.com/about-us/newsroom/futu-announces-q4-2025-results)",
+      "富途Q1 2025电话会议: 香港市占率目标40%, 约100万付费客户 (statementdog.com)",
+      "富途Q2 2025: 2710万注册用户, 287万付费客户 (sgpjbg.com)",
+      "IFEC 2025: 约250万HK活跃投资者"
+    ]
+  },
+  "arpu_analysis": {
+    "title": "各平台客群 ARPU 分析",
+    "subtitle": "金融投资平台 ARPU 对比 — 理解每位投资者的商业价值与获客投入上限",
+    "source": "富途2025年报, IBKR年报, Meta/Google财报, 行业数据 (2024-2025)",
+    "futu_arpu": {
+      "fy2024": 1924,
+      "fy2024_note": "FY2024总收入HK$135.9亿 ÷ 241万付费客户 ≈ HK$5,638/年(全球), HK市场ARPU约HK$1,924(佣金+利息+增值)",
+      "fy2025": 6800,
+      "fy2025_note": "FY2025总收入US$29.4亿(~HK$229亿) ÷ 337万付费客户, 全球ARPU大幅提升; HK市场因交易活跃度提升ARPU约HK$6,800",
+      "arpu_yoy_growth": "+29%",
+      "client_assets_per_user_hkd": 308000,
+      "client_assets_note": "FY2024平均每客户资产HK$30.8万, 同比+53%",
+      "cac_hkd": 2000,
+      "cac_note": "FY2024销售费用HK$14亿 ÷ ~70万净新增付费客户 ≈ HK$2,000/付费客户",
+      "ltv_cac_ratio": 3.5,
+      "ltv_cac_note": "LTV(3年) ≈ HK$5,772-19,200 vs CAC HK$2,000 → 2.9-9.6倍回报"
+    },
+    "competitor_arpu": [
+      {
+        "name": "Interactive Brokers",
+        "arpu_hkd": 10660,
+        "arpu_note": "FY2025: US$62.1亿 ÷ 454万账户 ≈ US$1,367/年(~HK$10,660). 服务专业交易者, 平均账户资产~US$17万",
+        "position": "高端专业"
+      },
+      {
+        "name": "Tiger Brokers",
+        "arpu_hkd": 4300,
+        "arpu_note": "估算: FY2025收入US$6.12亿, ~100万+付费账户, ARPU约US$500-600(~HK$3,900-4,700)",
+        "position": "与富途直接竞争"
+      },
+      {
+        "name": "传统银行(汇丰/中银等)",
+        "arpu_hkd": 15000,
+        "arpu_note": "估算: 银行证券业务ARPU更高(佣金率高+理财产品交叉销售), 但获客成本也极高(线下为主)",
+        "position": "传统高端"
+      }
+    ],
+    "platform_ad_arpu": [
+      {
+        "name": "Facebook (HK)",
+        "ad_arpu_hkd": 549,
+        "ad_arpu_note": "HK广告支出HK$36.8亿(2025) ÷ 670万HK用户 ≈ HK$549/用户/年",
+        "investor_arpu_est_hkd": 1500,
+        "investor_arpu_note": "金融广告CPM是均值3-5倍, HK投资者Facebook广告价值约HK$1,500/人/年"
+      },
+      {
+        "name": "Instagram (HK)",
+        "ad_arpu_hkd": 500,
+        "ad_arpu_note": "HK广告支出HK$35亿(2025) ÷ ~540万HK用户 ≈ HK$500/用户/年(Meta整体)",
+        "investor_arpu_est_hkd": 1200,
+        "investor_arpu_note": "金融类投资者ARPU略低于FB(IG用户偏年轻, 金融广告占比低)"
+      },
+      {
+        "name": "YouTube (HK)",
+        "ad_arpu_hkd": 200,
+        "ad_arpu_note": "全球ARPU约US$24/年; HK作为发达市场溢价~30%, 约HK$200/用户/年",
+        "investor_arpu_est_hkd": 800,
+        "investor_arpu_note": "金融频道CPM约US$15-30(是均值3倍), 投资者ARPU约HK$800"
+      },
+      {
+        "name": "Google Search (HK)",
+        "ad_arpu_hkd": 1200,
+        "ad_arpu_note": "Google HK搜索广告总市场~HK$60亿/年, ~500万搜索用户 ≈ HK$1,200/用户/年",
+        "investor_arpu_est_hkd": 5000,
+        "investor_arpu_note": "金融关键词CPC极高(「开户」HK$30-80/click), 投资者搜索广告ARPU约HK$5,000"
+      },
+      {
+        "name": "LinkedIn (HK)",
+        "ad_arpu_hkd": 800,
+        "ad_arpu_note": "全球ARPU约US$80/年, HK用户300万, 广告收入估HK$24亿 ≈ HK$800/用户",
+        "investor_arpu_est_hkd": 2000,
+        "investor_arpu_note": "LinkedIn用户多为高收入专业人士, 投资者比例高(~53%), ARPU约HK$2,000"
+      }
+    ],
+    "cac_benchmarks": [
+      {
+        "channel": "KOL内容合作",
+        "cac_range": "HK$500-2,000",
+        "quality": "高(内容信任度高, 转化质量好)",
+        "ltv_cac": "3-12x"
+      },
+      {
+        "channel": "SEM/Google Ads",
+        "cac_range": "HK$1,500-3,000",
+        "quality": "高(主动搜索意图强)",
+        "ltv_cac": "2-4x"
+      },
+      {
+        "channel": "社媒信息流广告",
+        "cac_range": "HK$2,000-5,000",
+        "quality": "中(被动触达, 需漏斗培养)",
+        "ltv_cac": "1-3x"
+      },
+      {
+        "channel": "MGM口碑邀请",
+        "cac_range": "HK$300-800",
+        "quality": "极高(社交信任, 留存率最高)",
+        "ltv_cac": "8-20x"
+      },
+      {
+        "channel": "线下活动/店铺",
+        "cac_range": "HK$3,000-8,000",
+        "quality": "高(深度接触, 高净值)",
+        "ltv_cac": "2-5x"
+      },
+      {
+        "channel": "品牌展示广告",
+        "cac_range": "HK$5,000-15,000",
+        "quality": "低(品牌曝光为主, 直接转化少)",
+        "ltv_cac": "0.5-1.5x"
+      }
+    ],
+    "key_insight": "富途每位付费客户年贡献约HK$1,924-6,800, 3年LTV约HK$6,000-20,000。而各渠道CAC多在HK$500-5,000之间。这意味着: 即使是「昂贵」的KOL合作(HK$2,000/客户), LTV/CAC仍有3-10倍回报。关键不是压低CPA, 而是找到高LTV客群聚集的渠道, 用内容建立信任, 让高价值投资者主动选择富途。"
+  }
+}

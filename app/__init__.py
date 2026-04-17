@@ -45,7 +45,8 @@ def create_app() -> FastAPI:
     app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR / "static")), name="static")
 
     # Register routers
-    from app.api import dashboard, kols, scraping, campaigns, settings
+    from app.api import dashboard, kols, scraping, campaigns, settings, traffic_map
+    app.include_router(traffic_map.router)
     app.include_router(dashboard.router)
     app.include_router(kols.router)
     app.include_router(scraping.router)

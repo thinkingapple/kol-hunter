@@ -1,86 +1,89 @@
 {% extends "base.html" %}
-{% block title %}KOL List{% endblock %}
+{% block title %}KOL 列表{% endblock %}
 {% block content %}
 <div class="flex items-center justify-between mb-6">
     <div>
-        <h2 class="text-2xl font-bold text-gray-900">KOL List</h2>
-        <p class="text-gray-500 mt-1">{{ total }} KOLs found</p>
+        <h2 class="text-2xl font-bold text-gray-900">KOL 列表</h2>
+        <p class="text-gray-500 mt-1">共发现 {{ total }} 位 KOL</p>
     </div>
     <div class="flex gap-3">
-        <a href="/kols/export" class="btn btn-secondary">Export CSV</a>
-        <a href="/scans" class="btn btn-primary">Discover More</a>
+        <a href="/kols/export" class="btn btn-secondary">导出 CSV</a>
+        <a href="/scans" class="btn btn-primary">发现更多</a>
     </div>
 </div>
 
-<!-- Filters -->
+<!-- 筛选 -->
 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 mb-6">
     <form method="get" action="/kols" class="flex flex-wrap gap-4 items-end">
         <div>
-            <label class="block text-xs font-medium text-gray-500 mb-1">Search</label>
-            <input type="text" name="q" value="{{ filters.q or '' }}" placeholder="Search name..."
+            <label class="block text-xs font-medium text-gray-500 mb-1">搜索</label>
+            <input type="text" name="q" value="{{ filters.q or '' }}" placeholder="搜索名称..."
                    class="border border-gray-200 rounded-lg px-3 py-2 text-sm w-48 focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
         </div>
         <div>
-            <label class="block text-xs font-medium text-gray-500 mb-1">Tier</label>
+            <label class="block text-xs font-medium text-gray-500 mb-1">等级</label>
             <select name="tier" class="border border-gray-200 rounded-lg px-3 py-2 text-sm">
-                <option value="">All</option>
+                <option value="">全部</option>
                 {% for t in ['A', 'B', 'C', 'D'] %}
-                <option value="{{ t }}" {% if filters.tier == t %}selected{% endif %}>Tier {{ t }}</option>
+                <option value="{{ t }}" {% if filters.tier == t %}selected{% endif %}>{{ t }} 级</option>
                 {% endfor %}
             </select>
         </div>
         <div>
-            <label class="block text-xs font-medium text-gray-500 mb-1">Region</label>
+            <label class="block text-xs font-medium text-gray-500 mb-1">地域</label>
             <select name="region" class="border border-gray-200 rounded-lg px-3 py-2 text-sm">
-                <option value="">All</option>
+                <option value="">全部</option>
+                {% set region_labels = {'HK': '香港', 'GBA': '大湾区', 'TW': '台湾', 'SG': '新加坡', 'CN_other': '内地其他', 'unknown': '未知'} %}
                 {% for r in ['HK', 'GBA', 'TW', 'SG', 'CN_other', 'unknown'] %}
-                <option value="{{ r }}" {% if filters.region == r %}selected{% endif %}>{{ r }}</option>
+                <option value="{{ r }}" {% if filters.region == r %}selected{% endif %}>{{ region_labels[r] }}</option>
                 {% endfor %}
             </select>
         </div>
         <div>
-            <label class="block text-xs font-medium text-gray-500 mb-1">Status</label>
+            <label class="block text-xs font-medium text-gray-500 mb-1">状态</label>
             <select name="status" class="border border-gray-200 rounded-lg px-3 py-2 text-sm">
-                <option value="">All</option>
+                <option value="">全部</option>
+                {% set status_labels = {'discovered': '已发现', 'qualified': '已筛选', 'contacted': '已联系', 'negotiating': '洽谈中', 'contracted': '已签约', 'rejected': '已拒绝', 'blacklisted': '黑名单'} %}
                 {% for s in ['discovered', 'qualified', 'contacted', 'negotiating', 'contracted', 'rejected', 'blacklisted'] %}
-                <option value="{{ s }}" {% if filters.status == s %}selected{% endif %}>{{ s }}</option>
+                <option value="{{ s }}" {% if filters.status == s %}selected{% endif %}>{{ status_labels[s] }}</option>
                 {% endfor %}
             </select>
         </div>
         <div>
-            <label class="block text-xs font-medium text-gray-500 mb-1">Platform</label>
+            <label class="block text-xs font-medium text-gray-500 mb-1">平台</label>
             <select name="platform" class="border border-gray-200 rounded-lg px-3 py-2 text-sm">
-                <option value="">All</option>
+                <option value="">全部</option>
                 {% for p in platforms %}
                 <option value="{{ p.name }}" {% if filters.platform == p.name %}selected{% endif %}>{{ p.display_name }}</option>
                 {% endfor %}
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Filter</button>
-        <a href="/kols" class="btn btn-secondary">Reset</a>
+        <button type="submit" class="btn btn-primary">筛选</button>
+        <a href="/kols" class="btn btn-secondary">重置</a>
     </form>
 </div>
 
-<!-- KOL Table -->
+<!-- KOL 表格 -->
 <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
     <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
             <tr>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    <a href="/kols?sort=name&order={% if sort=='name' and order=='asc' %}desc{% else %}asc{% endif %}&{{ request.query_params }}" class="hover:text-gray-700">Name</a>
+                    <a href="/kols?sort=name&order={% if sort=='name' and order=='asc' %}desc{% else %}asc{% endif %}&{{ request.query_params }}" class="hover:text-gray-700">名称</a>
                 </th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Platform</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Followers</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">平台</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">粉丝数</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    <a href="/kols?sort=total_score&order={% if sort=='total_score' and order=='desc' %}asc{% else %}desc{% endif %}" class="hover:text-gray-700">Score</a>
+                    <a href="/kols?sort=total_score&order={% if sort=='total_score' and order=='desc' %}asc{% else %}desc{% endif %}" class="hover:text-gray-700">评分</a>
                 </th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tier</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Region</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">等级</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">地域</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">状态</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">邮箱</th>
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
+            {% set status_zh = {'discovered': '已发现', 'qualified': '已筛选', 'contacted': '已联系', 'negotiating': '洽谈中', 'contracted': '已签约', 'rejected': '已拒绝', 'blacklisted': '黑名单'} %}
             {% for kol in kols %}
             <tr class="hover:bg-gray-50 cursor-pointer" onclick="window.location='/kols/{{ kol.id }}'">
                 <td class="px-6 py-4 whitespace-nowrap">
@@ -101,13 +104,16 @@
                 <td class="px-6 py-4 whitespace-nowrap">
                     <span class="badge badge-{{ kol.tier|lower }}">{{ kol.tier }}</span>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ kol.region }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {% set region_zh = {'HK': '香港', 'GBA': '大湾区', 'TW': '台湾', 'SG': '新加坡', 'CN_other': '内地', 'unknown': '未知'} %}
+                    {{ region_zh.get(kol.region, kol.region) }}
+                </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="badge status-{{ kol.status }}">{{ kol.status }}</span>
+                    <span class="badge status-{{ kol.status }}">{{ status_zh.get(kol.status, kol.status) }}</span>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm">
                     {% if kol.email %}
-                    <span class="text-green-600" title="{{ kol.email }}">Yes</span>
+                    <span class="text-green-600" title="{{ kol.email }}">有</span>
                     {% else %}
                     <span class="text-gray-400">--</span>
                     {% endif %}
@@ -116,7 +122,7 @@
             {% else %}
             <tr>
                 <td colspan="8" class="px-6 py-12 text-center text-gray-400">
-                    No KOLs found. <a href="/scans" class="text-indigo-600">Run a scan</a> to discover KOLs.
+                    暂无 KOL 数据。<a href="/scans" class="text-indigo-600">运行扫描</a>来发现 KOL。
                 </td>
             </tr>
             {% endfor %}
@@ -124,18 +130,18 @@
     </table>
 </div>
 
-<!-- Pagination -->
+<!-- 分页 -->
 {% if total > per_page %}
 <div class="flex items-center justify-between mt-6">
     <div class="text-sm text-gray-500">
-        Showing {{ (page - 1) * per_page + 1 }}-{{ [page * per_page, total] | min }} of {{ total }}
+        显示第 {{ (page - 1) * per_page + 1 }}-{{ [page * per_page, total] | min }} 条，共 {{ total }} 条
     </div>
     <div class="flex gap-2">
         {% if page > 1 %}
-        <a href="/kols?page={{ page - 1 }}" class="btn btn-secondary text-xs">Previous</a>
+        <a href="/kols?page={{ page - 1 }}" class="btn btn-secondary text-xs">上一页</a>
         {% endif %}
         {% if page * per_page < total %}
-        <a href="/kols?page={{ page + 1 }}" class="btn btn-secondary text-xs">Next</a>
+        <a href="/kols?page={{ page + 1 }}" class="btn btn-secondary text-xs">下一页</a>
         {% endif %}
     </div>
 </div>

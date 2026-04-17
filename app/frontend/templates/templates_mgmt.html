@@ -1,83 +1,84 @@
 {% extends "base.html" %}
-{% block title %}Email Templates{% endblock %}
+{% block title %}邮件模板{% endblock %}
 {% block content %}
 <div class="mb-8">
-    <h2 class="text-2xl font-bold text-gray-900">Email Templates</h2>
-    <p class="text-gray-500 mt-1">Manage outreach email templates</p>
+    <h2 class="text-2xl font-bold text-gray-900">邮件模板</h2>
+    <p class="text-gray-500 mt-1">管理建联邮件模板</p>
 </div>
 
-<!-- Create Template -->
+<!-- 创建模板 -->
 <div class="stat-card mb-8">
-    <h3 class="text-lg font-semibold text-gray-900 mb-4">Create New Template</h3>
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">创建新模板</h3>
     <form method="post" action="/settings/templates/create" class="space-y-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-                <label class="block text-xs font-medium text-gray-500 mb-1">Template Name</label>
-                <input type="text" name="name" required placeholder="e.g. HK Finance KOL Outreach"
+                <label class="block text-xs font-medium text-gray-500 mb-1">模板名称</label>
+                <input type="text" name="name" required placeholder="例：港股金融KOL初次联系"
                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm">
             </div>
             <div>
-                <label class="block text-xs font-medium text-gray-500 mb-1">Language</label>
+                <label class="block text-xs font-medium text-gray-500 mb-1">语言</label>
                 <select name="language" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm">
-                    <option value="zh">Chinese</option>
-                    <option value="en">English</option>
+                    <option value="zh">中文</option>
+                    <option value="en">英文</option>
                 </select>
             </div>
             <div>
-                <label class="block text-xs font-medium text-gray-500 mb-1">Type</label>
+                <label class="block text-xs font-medium text-gray-500 mb-1">类型</label>
                 <select name="template_type" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm">
-                    <option value="initial_outreach">Initial Outreach</option>
-                    <option value="follow_up">Follow Up</option>
-                    <option value="partnership_proposal">Partnership Proposal</option>
+                    <option value="initial_outreach">初次联系</option>
+                    <option value="follow_up">跟进</option>
+                    <option value="partnership_proposal">合作方案</option>
                 </select>
             </div>
         </div>
         <div>
-            <label class="block text-xs font-medium text-gray-500 mb-1">Subject Template</label>
+            <label class="block text-xs font-medium text-gray-500 mb-1">邮件主题模板</label>
             <input type="text" name="subject_template" required
-                   placeholder="e.g. {{'{{ kol.name }}'}} - Partnership with Futu / moomoo"
+                   placeholder="例：{{'{{ kol.name }}'}} - 富途 moomoo 合作邀请"
                    class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm">
-            <p class="text-xs text-gray-400 mt-1">Variables: {{ '{{ kol.name }}' }}, {{ '{{ kol.platform }}' }}</p>
+            <p class="text-xs text-gray-400 mt-1">可用变量：{{ '{{ kol.name }}' }}、{{ '{{ kol.platform }}' }}</p>
         </div>
         <div>
-            <label class="block text-xs font-medium text-gray-500 mb-1">Body Template (HTML)</label>
+            <label class="block text-xs font-medium text-gray-500 mb-1">邮件正文模板（HTML）</label>
             <textarea name="body_template" required rows="10"
                       class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm font-mono"
-                      placeholder="Write your email template here..."></textarea>
-            <p class="text-xs text-gray-400 mt-1">Variables: {{ '{{ kol.name }}' }}, {{ '{{ kol.name_zh }}' }}, {{ '{{ kol.platform }}' }}, {{ '{{ sender.name }}' }}, {{ '{{ sender.title }}' }}</p>
+                      placeholder="在此编写邮件模板..."></textarea>
+            <p class="text-xs text-gray-400 mt-1">可用变量：{{ '{{ kol.name }}' }}、{{ '{{ kol.name_zh }}' }}、{{ '{{ kol.platform }}' }}、{{ '{{ sender.name }}' }}、{{ '{{ sender.title }}' }}</p>
         </div>
-        <button type="submit" class="btn btn-primary">Create Template</button>
+        <button type="submit" class="btn btn-primary">创建模板</button>
     </form>
 </div>
 
-<!-- Existing Templates -->
+<!-- 已有模板 -->
 <div class="stat-card">
-    <h3 class="text-lg font-semibold text-gray-900 mb-4">Existing Templates</h3>
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">已有模板</h3>
     {% if email_templates %}
+    {% set type_zh = {'initial_outreach': '初次联系', 'follow_up': '跟进', 'partnership_proposal': '合作方案'} %}
     <div class="space-y-4">
         {% for tmpl in email_templates %}
         <div class="border border-gray-100 rounded-lg p-4">
             <div class="flex items-center justify-between mb-2">
                 <div>
                     <span class="font-medium text-gray-900">{{ tmpl.name }}</span>
-                    <span class="badge bg-gray-100 text-gray-700 ml-2">{{ tmpl.language }}</span>
-                    <span class="badge bg-indigo-100 text-indigo-700 ml-1">{{ tmpl.template_type }}</span>
+                    <span class="badge bg-gray-100 text-gray-700 ml-2">{{ '中文' if tmpl.language == 'zh' else '英文' }}</span>
+                    <span class="badge bg-indigo-100 text-indigo-700 ml-1">{{ type_zh.get(tmpl.template_type, tmpl.template_type) }}</span>
                 </div>
                 <form method="post" action="/settings/templates/{{ tmpl.id }}/delete" class="inline">
                     <button type="submit" class="text-xs text-red-500 hover:text-red-700"
-                            onclick="return confirm('Delete this template?')">Delete</button>
+                            onclick="return confirm('确定删除此模板吗？')">删除</button>
                 </form>
             </div>
-            <div class="text-sm text-gray-600 mb-1"><strong>Subject:</strong> {{ tmpl.subject_template }}</div>
+            <div class="text-sm text-gray-600 mb-1"><strong>主题：</strong> {{ tmpl.subject_template }}</div>
             <details class="mt-2">
-                <summary class="text-xs text-indigo-600 cursor-pointer">View Body</summary>
+                <summary class="text-xs text-indigo-600 cursor-pointer">查看正文</summary>
                 <pre class="mt-2 bg-gray-50 rounded p-3 text-xs overflow-x-auto">{{ tmpl.body_template }}</pre>
             </details>
         </div>
         {% endfor %}
     </div>
     {% else %}
-    <p class="text-gray-400 text-sm">No templates yet. Create one above.</p>
+    <p class="text-gray-400 text-sm">暂无模板。在上方创建一个新模板。</p>
     {% endif %}
 </div>
 {% endblock %}

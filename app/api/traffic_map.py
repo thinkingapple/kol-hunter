@@ -1,0 +1,311 @@
+import json
+import re
+from pathlib import Path
+
+from fastapi import APIRouter, Request
+from app import templates
+
+router = APIRouter()
+
+DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"
+
+
+def _parse_age_tags(profile: dict) -> list[str]:
+    """Parse investor profile age range into filter tags."""
+    age_str = profile.get("age", "") if profile else ""
+    if not age_str or "全年龄" in age_str:
+        return ["young", "middle", "senior"]
+
+    nums = [int(x) for x in re.findall(r'\d+', age_str)]
+    if not nums:
+        return ["young", "middle", "senior"]
+
+    min_age = min(nums)
+    max_age = max(nums)
+
+    tags = []
+    if min_age < 35:
+        tags.append("young")
+    if max_age > 35:
+        tags.append("middle")
+    if max_age > 55:
+        tags.append("senior")
+
+    return tags or ["young", "middle", "senior"]
+
+
+def _parse_trading_tags(profile: dict) -> list[str]:
+    """Parse investor profile trading into filter tags."""
+    trading = profile.get("trading", "") if profile else ""
+    if not trading:
+        return []
+    if "全品类" in trading:
+        return ["hk_stock", "us_stock", "crypto", "fund_etf", "forex_deriv"]
+
+    tags = []
+    if "港股" in trading or "港美" in trading:
+        tags.append("hk_stock")
+    if "美股" in trading or "港美" in trading:
+        tags.append("us_stock")
+    if "加密" in trading or "crypto" in trading.lower():
+        tags.append("crypto")
+    if any(k in trading for k in ["基金", "ETF", "定投"]):
+        tags.append("fund_etf")
+    if any(k in trading for k in ["外汇", "期权", "期货", "窝轮", "牛熊", "量化"]):
+        tags.append("forex_deriv")
+
+    return tags
+
+
+def _generate_insights(all_channels: list) -> list:
+    """Generate actionable insights from channel coverage data.
+
+    IMPORTANT: all_channels mixes two different metrics:
+    - Social platforms: hk_total_users (unique users, from DataReportal ads audience)
+    - Other channels: hk_monthly_visits (page sessions, from SimilarWeb/Semrush)
+    These CANNOT be summed — one person visits many platforms and generates
+    multiple sessions. HK has ~7.4M people, ~2.5M investors total.
+    """
+    HK_INVESTORS = 2_500_000  # SFC/HKMA 2024 estimate
+
+    insights = []
+
+    # Separate channels with traffic data vs without
+    with_traffic = [ch for ch in all_channels if ch["users"] > 0]
+    n_total = len(all_channels)
+    n_with = len(with_traffic)
+
+    # Coverage distribution
+    low_cov = [ch for ch in with_traffic if ch["futu_coverage_pct"] <= 5]
+    mid_cov = [ch for ch in with_traffic if 5 < ch["futu_coverage_pct"] <= 15]
+    high_cov = [ch for ch in with_traffic if ch["futu_coverage_pct"] > 15]
+
+    # Median coverage
+    sorted_pcts = sorted(ch["futu_coverage_pct"] for ch in with_traffic)
+    median_pct = sorted_pcts[len(sorted_pcts) // 2] if sorted_pcts else 0
+
+    insights.append({
+        "type": "summary",
+        "title": f"覆盖率中位数: {median_pct}%  |  {n_total} 个渠道",
+        "body": (
+            f"香港约 250 万投资者分布在 {n_total} 个线上渠道中。"
+            f"富途在 {len(low_cov)} 个渠道覆盖率 ≤5%（薄弱），"
+            f"{len(mid_cov)} 个在 5-15%（中等），"
+            f"{len(high_cov)} 个 >15%（已有优势）。"
+            f"各渠道投资者人数为去重估算（平台用户 × 投资者渗透率），同一投资者平均使用 3-5 个渠道，不可跨渠道求和。"
+        ),
+        "color": "indigo",
+    })
+
+    # Top coverage gaps: high traffic + low coverage
+    gaps = [ch for ch in with_traffic if ch["futu_coverage_pct"] <= 5 and ch["users"] >= 1000000]
+    gaps.sort(key=lambda x: x["users"], reverse=True)
+    if gaps:
+        def _fmt_traffic(ch):
+            u = ch["users"]
+            label = f"{u // 10000}万" if u >= 10000 else f"{u:,}"
+            return f"{ch['display_name']}（{label}/月, 覆盖{ch['futu_coverage_pct']}%）"
+        insights.append({
+            "type": "gap",
+            "title": f"高流量低覆盖 — {len(gaps)} 个蓝海渠道",
+            "body": "以下渠道月流量均超百万但富途覆盖率 ≤5%，是最大的增量空间：",
+            "details": [_fmt_traffic(ch) for ch in gaps[:6]],
+            "color": "red",
+        })
+
+    # Quick wins: high relevance but low coverage
+    quick_wins = []
+    for ch in with_traffic:
+        rel = ch.get("futu_relevance", "")
+        if "极高" in rel and ch["futu_coverage_pct"] <= 10:
+            quick_wins.append(ch)
+    if quick_wins:
+        insights.append({
+            "type": "quickwin",
+            "title": f"高相关度低覆盖 — {len(quick_wins)} 个快速突破点",
+            "body": "与富途业务高度相关但覆盖不足，投入产出比最高的渠道：",
+            "details": [
+                f"{ch['display_name']}（覆盖{ch['futu_coverage_pct']}%）"
+                for ch in quick_wins[:5]
+            ],
+            "color": "amber",
+        })
+
+    # Category coverage analysis (use count-based average, not traffic-weighted)
+    cat_stats = {}
+    for ch in with_traffic:
+        cat = ch["type_zh"]
+        if cat not in cat_stats:
+            cat_stats[cat] = {"pcts": [], "count": 0}
+        cat_stats[cat]["pcts"].append(ch["futu_coverage_pct"])
+        cat_stats[cat]["count"] += 1
+    weakest = []
+    for cat, s in cat_stats.items():
+        avg = round(sum(s["pcts"]) / len(s["pcts"]), 1)
+        weakest.append({"name": cat, "pct": avg, "count": s["count"]})
+    weakest.sort(key=lambda x: x["pct"])
+    low_cats = [c for c in weakest if c["pct"] < 8][:4]
+    if low_cats:
+        insights.append({
+            "type": "category",
+            "title": "覆盖最薄弱的渠道类型",
+            "body": "以下类型渠道的平均覆盖率最低，建议优先制定策略：",
+            "details": [
+                f"{c['name']}：平均 {c['pct']}%（{c['count']} 个渠道）"
+                for c in low_cats
+            ],
+            "color": "orange",
+        })
+
+    # Strengths — top covered channels
+    top_covered = sorted(with_traffic, key=lambda x: x["futu_coverage_pct"], reverse=True)[:5]
+    if top_covered:
+        insights.append({
+            "type": "strength",
+            "title": "富途已有优势的阵地",
+            "body": "这些渠道覆盖率领先，建议巩固优势、提升转化效率：",
+            "details": [
+                f"{ch['display_name']}（覆盖{ch['futu_coverage_pct']}%）"
+                for ch in top_covered
+            ],
+            "color": "emerald",
+        })
+
+    return insights
+
+
+def _load_market_data() -> dict:
+    p = DATA_DIR / "platform_market_data.json"
+    if p.exists():
+        return json.loads(p.read_text(encoding="utf-8"))
+    return {"platforms": [], "other_channels": []}
+
+
+@router.get("/traffic-map")
+async def traffic_map(request: Request):
+    data = _load_market_data()
+    platforms = data.get("platforms", [])
+    other_channels = data.get("other_channels", [])
+    methodology = data.get("methodology", {})
+    updated_at = data.get("updated_at", "")
+    investor_behavior = data.get("investor_behavior", {})
+    analysis_frameworks = data.get("analysis_frameworks", {})
+    futu_hk_stats = data.get("futu_hk_stats", {})
+    arpu_analysis = data.get("arpu_analysis", {})
+
+    # Add filter tags
+    for p in platforms:
+        profile = p.get("hk_investor_profile", {})
+        p["age_tags"] = _parse_age_tags(profile)
+        p["trading_tags"] = _parse_trading_tags(profile)
+    for ch in other_channels:
+        profile = ch.get("hk_investor_profile", {})
+        ch["age_tags"] = _parse_age_tags(profile)
+        ch["trading_tags"] = _parse_trading_tags(profile)
+
+    # Group other_channels by category
+    channel_groups = {}
+    for ch in other_channels:
+        cat = ch.get("category_zh", "其他")
+        if cat not in channel_groups:
+            channel_groups[cat] = []
+        channel_groups[cat].append(ch)
+
+    # Build unified list — use hk_unique_investors as primary ranking metric
+    all_channels = []
+    for p in platforms:
+        all_channels.append({
+            "name": p["name"],
+            "display_name": p["display_name"],
+            "type": "social",
+            "type_zh": "社媒平台",
+            "users": p.get("hk_unique_investors", 0),
+            "users_note": p.get("hk_unique_investors_note", ""),
+            "raw_traffic": p.get("hk_total_users", 0),
+            "raw_traffic_label": "MAU",
+            "finance_users": p.get("hk_finance_users", 0),
+            "profile": p.get("hk_investor_profile", {}),
+            "futu_coverage_pct": p.get("futu_in_finance_pct", 0),
+            "futu_in_broker_pct": p.get("futu_in_broker_pct", 0),
+            "growth_trend": p.get("growth_trend", "stable"),
+            "coverage_note": p.get("futu_in_finance_note", ""),
+            "age_tags": p["age_tags"],
+            "trading_tags": p["trading_tags"],
+            "journey_stages": p.get("journey_stages", []),
+            "futu_investment": p.get("futu_investment", "none"),
+        })
+    for ch in other_channels:
+        raw = ch.get("hk_monthly_visits") or ch.get("hk_monthly_users") or 0
+        all_channels.append({
+            "name": ch["name"],
+            "display_name": ch["display_name"],
+            "type": ch.get("category", "other"),
+            "type_zh": ch.get("category_zh", "其他"),
+            "users": ch.get("hk_unique_investors", 0),
+            "users_note": ch.get("hk_unique_investors_note", ""),
+            "raw_traffic": raw,
+            "raw_traffic_label": "visits" if ch.get("hk_monthly_visits") else "MAU",
+            "finance_users": raw,
+            "profile": ch.get("hk_investor_profile", {}),
+            "futu_coverage_pct": ch.get("futu_coverage_pct", 0),
+            "futu_relevance": ch.get("futu_relevance", ""),
+            "acquisition_method": ch.get("acquisition_method", ""),
+            "coverage_note": ch.get("futu_coverage_note", ""),
+            "age_tags": ch["age_tags"],
+            "trading_tags": ch["trading_tags"],
+            "journey_stages": ch.get("journey_stages", []),
+            "futu_investment": ch.get("futu_investment", "none"),
+        })
+
+    # Sort by users descending
+    all_channels.sort(key=lambda x: x["users"], reverse=True)
+    max_users = all_channels[0]["users"] if all_channels else 1
+
+    # Compute priority scores (traffic × gap × relevance × investment discount)
+    rel_weights = {"极高": 1.0, "高": 0.7, "中高": 0.5, "中": 0.3, "中(竞品)": 0.1, "低": 0.1}
+    inv_discount = {"high": 0.2, "medium": 0.5, "low": 0.8, "none": 1.0}
+    inv_labels = {"high": "已重点投入", "medium": "有一定投入", "low": "少量投入", "none": "未投入"}
+    for ch in all_channels:
+        rel = ch.get("futu_relevance", "")
+        rel_w = 0.3
+        for key, w in rel_weights.items():
+            if key in rel:
+                rel_w = w
+                break
+        gap = 100 - ch["futu_coverage_pct"]
+        inv = ch.get("futu_investment", "none")
+        inv_w = inv_discount.get(inv, 1.0)
+        ch["priority_score"] = round(ch["users"] / 10000 * gap * rel_w * inv_w)
+        ch["investment_label"] = inv_labels.get(inv, "")
+
+    # Build journey stage grouping
+    stage_ids = ["awareness", "interest", "consideration", "conversion", "retention", "referral"]
+    journey_map = {s: [] for s in stage_ids}
+    for ch in all_channels:
+        for s in ch.get("journey_stages", []):
+            if s in journey_map:
+                journey_map[s].append({
+                    "name": ch["display_name"],
+                    "users": ch["users"],
+                    "coverage": ch["futu_coverage_pct"],
+                })
+
+    # Generate insights
+    insights = _generate_insights(all_channels)
+
+    return templates.TemplateResponse("traffic_map.html", {
+        "request": request,
+        "platforms": platforms,
+        "other_channels": other_channels,
+        "channel_groups": channel_groups,
+        "all_channels": all_channels,
+        "max_users": max_users,
+        "methodology": methodology,
+        "updated_at": updated_at,
+        "insights": insights,
+        "investor_behavior": investor_behavior,
+        "analysis_frameworks": analysis_frameworks,
+        "journey_map": journey_map,
+        "futu_hk_stats": futu_hk_stats,
+        "arpu_analysis": arpu_analysis,
+    })

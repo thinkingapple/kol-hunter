@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% block title %}Campaign: {{ campaign.name }}{% endblock %}
+{% block title %}活动：{{ campaign.name }}{% endblock %}
 {% block content %}
 <div class="mb-6">
-    <a href="/campaigns" class="text-sm text-indigo-600 hover:text-indigo-800">&larr; Back to Campaigns</a>
+    <a href="/campaigns" class="text-sm text-indigo-600 hover:text-indigo-800">&larr; 返回活动列表</a>
 </div>
 
 <div class="flex items-center justify-between mb-6">
@@ -11,44 +11,45 @@
         {% if campaign.description %}<p class="text-gray-500 mt-1">{{ campaign.description }}</p>{% endif %}
     </div>
     <div class="flex gap-3">
+        {% set campaign_status_zh = {'active': '进行中', 'completed': '已完成', 'draft': '草稿', 'paused': '已暂停'} %}
         <span class="badge {% if campaign.status == 'active' %}bg-green-100 text-green-700{% elif campaign.status == 'completed' %}bg-blue-100 text-blue-700{% else %}bg-gray-100 text-gray-700{% endif %} text-sm px-3 py-1">
-            {{ campaign.status }}
+            {{ campaign_status_zh.get(campaign.status, campaign.status) }}
         </span>
         {% if campaign.status == 'draft' %}
         <form method="post" action="/campaigns/{{ campaign.id }}/send">
             <button type="submit" class="btn btn-success"
-                    onclick="return confirm('Send all pending emails in this campaign?')">
-                Send Campaign
+                    onclick="return confirm('确定要发送此活动中所有待发邮件吗？')">
+                发送活动
             </button>
         </form>
         {% endif %}
     </div>
 </div>
 
-<!-- Stats -->
+<!-- 统计 -->
 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
     <div class="stat-card">
-        <div class="text-sm text-gray-500">Total Emails</div>
+        <div class="text-sm text-gray-500">邮件总数</div>
         <div class="text-2xl font-bold text-gray-900">{{ campaign.emails | length }}</div>
     </div>
     <div class="stat-card">
-        <div class="text-sm text-gray-500">Sent</div>
+        <div class="text-sm text-gray-500">已发送</div>
         <div class="text-2xl font-bold text-green-600">{{ campaign.total_sent }}</div>
     </div>
     <div class="stat-card">
-        <div class="text-sm text-gray-500">Replied</div>
+        <div class="text-sm text-gray-500">已回复</div>
         <div class="text-2xl font-bold text-indigo-600">{{ campaign.total_replied }}</div>
     </div>
     <div class="stat-card">
-        <div class="text-sm text-gray-500">Language</div>
-        <div class="text-2xl font-bold text-gray-900">{{ campaign.language }}</div>
+        <div class="text-sm text-gray-500">语言</div>
+        <div class="text-2xl font-bold text-gray-900">{{ '中文' if campaign.language == 'zh' else '英文' }}</div>
     </div>
 </div>
 
-<!-- Add KOLs -->
+<!-- 添加 KOL -->
 {% if campaign.status == 'draft' %}
 <div class="stat-card mb-8">
-    <h3 class="text-lg font-semibold text-gray-900 mb-4">Add KOLs to Campaign</h3>
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">添加 KOL 到活动</h3>
     {% if available_kols %}
     <form method="post" action="/campaigns/{{ campaign.id }}/add-kols">
         <div class="max-h-60 overflow-y-auto border border-gray-100 rounded-lg p-3 mb-4">
@@ -64,53 +65,54 @@
         </div>
         <input type="hidden" name="kol_ids" id="kol_ids_input">
         <button type="submit" class="btn btn-primary" onclick="document.getElementById('kol_ids_input').value = Array.from(document.querySelectorAll('input[name=kol_check]:checked')).map(c => c.value).join(',')">
-            Add Selected KOLs
+            添加所选 KOL
         </button>
     </form>
     {% else %}
-    <p class="text-gray-400 text-sm">No KOLs with email available. <a href="/scans" class="text-indigo-600">Discover KOLs</a> first.</p>
+    <p class="text-gray-400 text-sm">暂无有邮箱的 KOL。请先<a href="/scans" class="text-indigo-600">发现 KOL</a>。</p>
     {% endif %}
 </div>
 {% endif %}
 
-<!-- Email List -->
+<!-- 邮件列表 -->
 <div class="stat-card">
-    <h3 class="text-lg font-semibold text-gray-900 mb-4">Emails in Campaign</h3>
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">活动邮件</h3>
     <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">KOL</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">To</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Subject</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Sent At</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">收件人</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">主题</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">状态</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">发送时间</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
+                {% set email_status_zh = {'sent': '已发送', 'replied': '已回复', 'failed': '发送失败', 'pending': '待发送', 'draft': '草稿'} %}
                 {% for email in campaign.emails %}
                 <tr>
                     <td class="px-4 py-3 text-sm">
-                        <a href="/kols/{{ email.kol_id }}" class="text-indigo-600 hover:text-indigo-800">{{ email.kol.name if email.kol else 'Unknown' }}</a>
+                        <a href="/kols/{{ email.kol_id }}" class="text-indigo-600 hover:text-indigo-800">{{ email.kol.name if email.kol else '未知' }}</a>
                     </td>
                     <td class="px-4 py-3 text-sm text-gray-500">{{ email.to_email }}</td>
                     <td class="px-4 py-3 text-sm text-gray-900">{{ email.subject }}</td>
                     <td class="px-4 py-3">
                         {% if email.status == 'sent' %}
-                        <span class="badge bg-green-100 text-green-700">sent</span>
+                        <span class="badge bg-green-100 text-green-700">已发送</span>
                         {% elif email.status == 'replied' %}
-                        <span class="badge bg-indigo-100 text-indigo-700">replied</span>
+                        <span class="badge bg-indigo-100 text-indigo-700">已回复</span>
                         {% elif email.status == 'failed' %}
-                        <span class="badge bg-red-100 text-red-700">failed</span>
+                        <span class="badge bg-red-100 text-red-700">发送失败</span>
                         {% else %}
-                        <span class="badge bg-gray-100 text-gray-700">{{ email.status }}</span>
+                        <span class="badge bg-gray-100 text-gray-700">{{ email_status_zh.get(email.status, email.status) }}</span>
                         {% endif %}
                     </td>
                     <td class="px-4 py-3 text-sm text-gray-500">{{ email.sent_at.strftime('%Y-%m-%d %H:%M') if email.sent_at else '--' }}</td>
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="5" class="px-4 py-8 text-center text-gray-400">No emails in this campaign yet.</td>
+                    <td colspan="5" class="px-4 py-8 text-center text-gray-400">此活动暂无邮件。</td>
                 </tr>
                 {% endfor %}
             </tbody>

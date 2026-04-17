@@ -1,0 +1,888 @@
+{% extends "base.html" %}
+{% block title %}投资者流量地图{% endblock %}
+{% block content %}
+<div class="mb-6">
+    <h2 class="text-2xl font-bold text-gray-900">香港投资者流量地图</h2>
+    <p class="text-gray-500 mt-1">香港 750 万人口中约 250 万活跃投资者的线上渠道分布 | 更新于 {{ updated_at }}</p>
+</div>
+
+{% set type_colors = {
+    'social': {'bg': 'bg-indigo-50', 'border': 'border-indigo-200', 'text': 'text-indigo-700', 'dot': 'bg-indigo-500', 'bar': 'bg-indigo-500'},
+    'forum': {'bg': 'bg-amber-50', 'border': 'border-amber-200', 'text': 'text-amber-700', 'dot': 'bg-amber-500', 'bar': 'bg-amber-500'},
+    'finance_tool': {'bg': 'bg-emerald-50', 'border': 'border-emerald-200', 'text': 'text-emerald-700', 'dot': 'bg-emerald-500', 'bar': 'bg-emerald-500'},
+    'messaging': {'bg': 'bg-sky-50', 'border': 'border-sky-200', 'text': 'text-sky-700', 'dot': 'bg-sky-500', 'bar': 'bg-sky-500'},
+    'professional': {'bg': 'bg-violet-50', 'border': 'border-violet-200', 'text': 'text-violet-700', 'dot': 'bg-violet-500', 'bar': 'bg-violet-500'},
+    'search': {'bg': 'bg-rose-50', 'border': 'border-rose-200', 'text': 'text-rose-700', 'dot': 'bg-rose-500', 'bar': 'bg-rose-500'},
+    'media': {'bg': 'bg-orange-50', 'border': 'border-orange-200', 'text': 'text-orange-700', 'dot': 'bg-orange-500', 'bar': 'bg-orange-500'},
+    'podcast': {'bg': 'bg-pink-50', 'border': 'border-pink-200', 'text': 'text-pink-700', 'dot': 'bg-pink-500', 'bar': 'bg-pink-500'},
+    'offline': {'bg': 'bg-teal-50', 'border': 'border-teal-200', 'text': 'text-teal-700', 'dot': 'bg-teal-500', 'bar': 'bg-teal-500'},
+    'finance_compare': {'bg': 'bg-cyan-50', 'border': 'border-cyan-200', 'text': 'text-cyan-700', 'dot': 'bg-cyan-500', 'bar': 'bg-cyan-500'},
+    'cn_platform': {'bg': 'bg-red-50', 'border': 'border-red-200', 'text': 'text-red-700', 'dot': 'bg-red-500', 'bar': 'bg-red-500'},
+    'news_media': {'bg': 'bg-blue-50', 'border': 'border-blue-200', 'text': 'text-blue-700', 'dot': 'bg-blue-500', 'bar': 'bg-blue-500'},
+    'property': {'bg': 'bg-lime-50', 'border': 'border-lime-200', 'text': 'text-lime-700', 'dot': 'bg-lime-500', 'bar': 'bg-lime-500'},
+} %}
+{% set default_color = {'bg': 'bg-gray-50', 'border': 'border-gray-200', 'text': 'text-gray-700', 'dot': 'bg-gray-500', 'bar': 'bg-gray-500'} %}
+
+<!-- ===== 筛选栏 ===== -->
+<div class="stat-card mb-6">
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
+        <div class="flex items-center gap-2">
+            <span class="text-xs font-semibold text-gray-500 whitespace-nowrap">客群年龄:</span>
+            <div class="flex flex-wrap gap-1.5" id="age-filters">
+                <button class="px-3 py-1 text-xs rounded-full border cursor-pointer transition-colors bg-indigo-600 text-white border-indigo-600 filter-btn" data-filter="age" data-value="all">全部</button>
+                <button class="px-3 py-1 text-xs rounded-full border cursor-pointer transition-colors border-gray-200 text-gray-500 hover:border-indigo-300 hover:text-indigo-600 filter-btn" data-filter="age" data-value="young">年轻人 18-35岁</button>
+                <button class="px-3 py-1 text-xs rounded-full border cursor-pointer transition-colors border-gray-200 text-gray-500 hover:border-indigo-300 hover:text-indigo-600 filter-btn" data-filter="age" data-value="middle">中年人 35-55岁</button>
+                <button class="px-3 py-1 text-xs rounded-full border cursor-pointer transition-colors border-gray-200 text-gray-500 hover:border-indigo-300 hover:text-indigo-600 filter-btn" data-filter="age" data-value="senior">老年人 55岁以上</button>
+            </div>
+        </div>
+        <div class="hidden sm:block h-6 w-px bg-gray-200"></div>
+        <div class="flex items-center gap-2">
+            <span class="text-xs font-semibold text-gray-500 whitespace-nowrap">投资品类:</span>
+            <div class="flex flex-wrap gap-1.5" id="trading-filters">
+                <button class="px-3 py-1 text-xs rounded-full border cursor-pointer transition-colors bg-indigo-600 text-white border-indigo-600 filter-btn" data-filter="trading" data-value="all">全部</button>
+                <button class="px-3 py-1 text-xs rounded-full border cursor-pointer transition-colors border-gray-200 text-gray-500 hover:border-indigo-300 hover:text-indigo-600 filter-btn" data-filter="trading" data-value="hk_stock">港股</button>
+                <button class="px-3 py-1 text-xs rounded-full border cursor-pointer transition-colors border-gray-200 text-gray-500 hover:border-indigo-300 hover:text-indigo-600 filter-btn" data-filter="trading" data-value="us_stock">美股</button>
+                <button class="px-3 py-1 text-xs rounded-full border cursor-pointer transition-colors border-gray-200 text-gray-500 hover:border-indigo-300 hover:text-indigo-600 filter-btn" data-filter="trading" data-value="crypto">加密货币</button>
+                <button class="px-3 py-1 text-xs rounded-full border cursor-pointer transition-colors border-gray-200 text-gray-500 hover:border-indigo-300 hover:text-indigo-600 filter-btn" data-filter="trading" data-value="fund_etf">基金/ETF</button>
+                <button class="px-3 py-1 text-xs rounded-full border cursor-pointer transition-colors border-gray-200 text-gray-500 hover:border-indigo-300 hover:text-indigo-600 filter-btn" data-filter="trading" data-value="forex_deriv">外汇/衍生品</button>
+            </div>
+        </div>
+    </div>
+    <div class="mt-2 text-xs text-gray-400" id="filter-count"></div>
+</div>
+
+<!-- ===== 流量全景条 ===== -->
+<div class="stat-card mb-6">
+    <h3 class="text-sm font-semibold text-gray-700 mb-1">HK 投资者覆盖排行（去重人数）</h3>
+    <p class="text-xs text-gray-400 mb-3">基于各渠道 HK 用户量 × 投资者渗透率估算。香港约 250 万活跃投资者，同一投资者平均使用 3-5 个渠道，各渠道人数不可求和。</p>
+    <div class="space-y-2">
+        {% for ch in all_channels %}
+        {% if ch.users > 0 %}
+        {% set tc = type_colors.get(ch.type, default_color) %}
+        {% set pct = (ch.users / max_users * 100) | round %}
+        {% set futu_pct = ch.futu_coverage_pct | default(0) %}
+        {% set futu_bar_w = (pct * futu_pct / 100) | round(1) %}
+        <div class="flex items-center gap-3 channel-item"
+             data-age-tags="{{ ch.age_tags | join(',') }}" data-trading-tags="{{ ch.trading_tags | join(',') }}"
+             title="{{ ch.users_note }}">
+            <span class="w-36 text-xs font-medium {{ tc.text }} truncate flex items-center gap-1.5">
+                <span class="{{ tc.dot }} w-2 h-2 rounded-full inline-block flex-shrink-0"></span>
+                {{ ch.display_name }}
+            </span>
+            <div class="flex-1 bg-gray-100 rounded-full h-5 relative overflow-hidden">
+                <!-- 总流量条 -->
+                <div class="{{ tc.bar }} rounded-full h-5 flex items-center justify-end pr-2 transition-all opacity-40"
+                     style="width: {{ pct }}%; min-width: 2.5rem">
+                </div>
+                <!-- 富途已覆盖（橙色叠加） -->
+                {% if futu_bar_w > 0 %}
+                <div class="bg-orange-500 rounded-full h-5 absolute top-0 left-0 flex items-center justify-end pr-1 cursor-help"
+                     style="width: {{ futu_bar_w }}%; min-width: {% if futu_pct > 0 %}1.2rem{% else %}0{% endif %}"
+                     title="覆盖率 {{ futu_pct }}% — {{ ch.coverage_note[:80] if ch.coverage_note else '点击查看详情' }}">
+                    {% if futu_bar_w >= 3 %}
+                    <span class="text-xs text-white font-medium">{{ futu_pct }}%</span>
+                    {% endif %}
+                </div>
+                {% endif %}
+                <!-- 数字标签(总量) -->
+                <div class="absolute top-0 h-5 flex items-center justify-end pr-2"
+                     style="width: {{ pct }}%; min-width: 2.5rem">
+                    <span class="text-xs text-gray-700 font-medium" title="{{ ch.users_note }}">
+                        {% if ch.users >= 1000000 %}
+                            {{ "%.0f"|format(ch.users / 10000) }}万人
+                        {% elif ch.users >= 10000 %}
+                            {{ "%.1f"|format(ch.users / 10000) }}万人
+                        {% elif ch.users > 0 %}
+                            {{ "{:,}".format(ch.users) }}人
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            <span class="w-16 text-xs text-gray-400 text-right">{{ ch.type_zh }}</span>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <!-- 图例 -->
+    <div class="flex flex-wrap gap-3 mt-4 pt-3 border-t border-gray-100">
+        <span class="flex items-center gap-1.5 text-xs text-orange-600 font-medium">
+            <span class="bg-orange-500 w-2.5 h-2.5 rounded-full inline-block"></span>
+            富途已覆盖
+        </span>
+        <span class="text-xs text-gray-300">|</span>
+        {% set legend = [
+            ('social', '社媒平台'), ('forum', '论坛社区'), ('finance_tool', '财经工具'),
+            ('messaging', '即时通讯'), ('professional', '职业社交'), ('search', '搜索引擎'),
+            ('media', '财经媒体'), ('podcast', '播客/音频'), ('offline', '线下/O2O'),
+            ('finance_compare', '金融比价'), ('cn_platform', '内地平台'),
+            ('news_media', '新闻媒体'), ('property', '房产投资')
+        ] %}
+        {% for key, label in legend %}
+        {% set tc = type_colors.get(key, default_color) %}
+        <span class="flex items-center gap-1.5 text-xs text-gray-500">
+            <span class="{{ tc.dot }} w-2.5 h-2.5 rounded-full inline-block"></span>
+            {{ label }}
+        </span>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- ===== 洞察与机会 ===== -->
+{% if insights %}
+<div class="stat-card mb-6">
+    <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-gray-900">洞察与机会</h3>
+        <span class="text-xs text-gray-400">基于 {{ all_channels | length }} 个渠道数据自动生成</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for ins in insights %}
+        {% set colors = {
+            'indigo': {'bg': 'bg-indigo-50', 'border': 'border-indigo-200', 'title': 'text-indigo-700'},
+            'red': {'bg': 'bg-red-50', 'border': 'border-red-200', 'title': 'text-red-700'},
+            'amber': {'bg': 'bg-amber-50', 'border': 'border-amber-200', 'title': 'text-amber-700'},
+            'orange': {'bg': 'bg-orange-50', 'border': 'border-orange-200', 'title': 'text-orange-700'},
+            'emerald': {'bg': 'bg-emerald-50', 'border': 'border-emerald-200', 'title': 'text-emerald-700'},
+        } %}
+        {% set ic = colors.get(ins.color, colors.indigo) %}
+        <div class="{{ ic.bg }} {{ ic.border }} border rounded-xl p-4 {% if ins.type == 'summary' %}md:col-span-2 lg:col-span-3{% endif %}">
+            <h4 class="text-sm font-semibold {{ ic.title }} mb-1">{{ ins.title }}</h4>
+            <p class="text-xs text-gray-600 leading-relaxed">{{ ins.body }}</p>
+            {% if ins.details %}
+            <ul class="mt-2 space-y-0.5">
+                {% for item in ins.details %}
+                <li class="text-xs text-gray-500 flex items-start gap-1.5">
+                    <span class="mt-1 w-1.5 h-1.5 rounded-full {{ ic.border | replace('border-', 'bg-') }} flex-shrink-0"></span>
+                    {{ item }}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- ===== 投资者行为画像 (IFEC 2025) ===== -->
+{% if investor_behavior %}
+<div class="stat-card mb-6">
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h3 class="text-lg font-semibold text-gray-900">香港投资者行为画像</h3>
+            <p class="text-xs text-gray-400">{{ investor_behavior.source }} | {{ investor_behavior.methodology }}</p>
+        </div>
+        <a href="{{ investor_behavior.source_url }}" target="_blank" class="text-xs text-indigo-500 hover:text-indigo-700">查看原始报告 &rarr;</a>
+    </div>
+
+    <!-- 核心数据卡片 -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+        {% for stat in investor_behavior.headline_stats %}
+        <div class="bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-100 rounded-xl p-4 text-center">
+            <div class="text-2xl font-bold text-indigo-700">{{ stat.value }}</div>
+            <div class="text-xs font-medium text-gray-700 mt-1">{{ stat.label }}</div>
+            <div class="text-xs text-gray-400 mt-0.5">{{ stat.note }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- 信息来源 + 交易渠道 -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-5">
+        <!-- 信息来源 -->
+        <div>
+            <h4 class="text-sm font-semibold text-gray-700 mb-1">{{ investor_behavior.info_sources.title }}</h4>
+            <p class="text-xs text-gray-400 mb-3">{{ investor_behavior.info_sources.subtitle }}</p>
+            <div class="space-y-1.5">
+                {% for item in investor_behavior.info_sources.entries %}
+                <div class="flex items-center gap-2">
+                    <span class="w-24 text-xs text-gray-600 text-right flex-shrink-0">{{ item.name }}</span>
+                    <div class="flex-1 bg-gray-100 rounded-full h-5 relative overflow-hidden">
+                        {% if item.pct_2023 > 0 %}
+                        <div class="bg-gray-300 rounded-full h-5 absolute top-0 left-0" style="width: {{ item.pct_2023 }}%"></div>
+                        {% endif %}
+                        <div class="bg-indigo-500 rounded-full h-5 relative flex items-center justify-end pr-2" style="width: {{ item.pct_2025 }}%; min-width: 2rem">
+                            <span class="text-xs text-white font-medium">{{ item.pct_2025 }}%</span>
+                        </div>
+                    </div>
+                    <span class="w-12 text-xs text-gray-400 flex-shrink-0">
+                        {% if item.pct_2025 > item.pct_2023 and item.pct_2023 > 0 %}
+                        <span class="text-green-600">+{{ item.pct_2025 - item.pct_2023 }}</span>
+                        {% elif item.pct_2025 < item.pct_2023 %}
+                        <span class="text-red-500">{{ item.pct_2025 - item.pct_2023 }}</span>
+                        {% elif item.pct_2023 == 0 and item.pct_2025 > 0 %}
+                        <span class="text-green-600">NEW</span>
+                        {% endif %}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="flex items-center gap-3 mt-2 text-xs text-gray-400">
+                <span class="flex items-center gap-1"><span class="w-3 h-2 bg-gray-300 rounded inline-block"></span>2023</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-2 bg-indigo-500 rounded inline-block"></span>2025</span>
+            </div>
+        </div>
+
+        <!-- 交易渠道 + KOL影响力 -->
+        <div>
+            <h4 class="text-sm font-semibold text-gray-700 mb-1">{{ investor_behavior.trading_channels.title }}</h4>
+            <p class="text-xs text-gray-400 mb-3">{{ investor_behavior.trading_channels.subtitle }}</p>
+            <div class="space-y-1.5 mb-5">
+                {% for item in investor_behavior.trading_channels.entries %}
+                <div class="flex items-center gap-2">
+                    <span class="w-20 text-xs text-gray-600 text-right flex-shrink-0">{{ item.name }}</span>
+                    <div class="flex-1 bg-gray-100 rounded-full h-5 relative overflow-hidden">
+                        {% if item.pct_2023 > 0 %}
+                        <div class="bg-gray-300 rounded-full h-5 absolute top-0 left-0" style="width: {{ item.pct_2023 }}%"></div>
+                        {% endif %}
+                        <div class="bg-emerald-500 rounded-full h-5 relative flex items-center justify-end pr-2" style="width: {{ item.pct_2025 }}%; min-width: 2rem">
+                            <span class="text-xs text-white font-medium">{{ item.pct_2025 }}%</span>
+                        </div>
+                    </div>
+                    <span class="w-12 text-xs text-gray-400 flex-shrink-0">
+                        {% if item.pct_2025 > item.pct_2023 %}
+                        <span class="text-green-600">+{{ item.pct_2025 - item.pct_2023 }}</span>
+                        {% elif item.pct_2025 < item.pct_2023 %}
+                        <span class="text-red-500">{{ item.pct_2025 - item.pct_2023 }}</span>
+                        {% endif %}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- KOL影响力趋势 -->
+            <h4 class="text-sm font-semibold text-gray-700 mb-1">{{ investor_behavior.kol_influence.title }}</h4>
+            <p class="text-xs text-gray-400 mb-2">{{ investor_behavior.kol_influence.subtitle }}</p>
+            <div class="space-y-2">
+                {% for item in investor_behavior.kol_influence.entries %}
+                <div>
+                    <div class="flex items-center justify-between text-xs mb-0.5">
+                        <span class="text-gray-600">{{ item.metric }}</span>
+                        <span class="font-semibold text-orange-600">{{ item.pct_2025 }}%</span>
+                    </div>
+                    <div class="flex gap-1 h-3">
+                        <div class="bg-gray-200 rounded" style="width: {{ item.pct_2021 }}%" title="2021: {{ item.pct_2021 }}%"></div>
+                        <div class="bg-orange-300 rounded" style="width: {{ item.pct_2023 - item.pct_2021 }}%" title="2023: {{ item.pct_2023 }}%"></div>
+                        <div class="bg-orange-500 rounded" style="width: {{ item.pct_2025 - item.pct_2023 }}%" title="2025: {{ item.pct_2025 }}%"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="flex items-center gap-3 mt-2 text-xs text-gray-400">
+                <span class="flex items-center gap-1"><span class="w-3 h-2 bg-gray-200 rounded inline-block"></span>2021</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-2 bg-orange-300 rounded inline-block"></span>2023</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-2 bg-orange-500 rounded inline-block"></span>2025</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 年龄画像 -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {% set persona_colors = [
+            {'bg': 'bg-blue-50', 'border': 'border-blue-200', 'text': 'text-blue-700', 'badge': 'bg-blue-100 text-blue-700'},
+            {'bg': 'bg-purple-50', 'border': 'border-purple-200', 'text': 'text-purple-700', 'badge': 'bg-purple-100 text-purple-700'},
+            {'bg': 'bg-amber-50', 'border': 'border-amber-200', 'text': 'text-amber-700', 'badge': 'bg-amber-100 text-amber-700'},
+        ] %}
+        {% for persona in investor_behavior.age_personas %}
+        {% set pc = persona_colors[loop.index0] %}
+        <div class="{{ pc.bg }} {{ pc.border }} border rounded-xl p-4">
+            <div class="flex items-center justify-between mb-2">
+                <h5 class="text-sm font-semibold {{ pc.text }}">{{ persona.label }}</h5>
+                <span class="px-2 py-0.5 rounded-full text-xs {{ pc.badge }}">占{{ persona.pct_of_investors }}%</span>
+            </div>
+            <ul class="space-y-1">
+                {% for trait in persona.key_traits %}
+                <li class="text-xs text-gray-600 flex items-start gap-1.5">
+                    <span class="mt-1 w-1.5 h-1.5 rounded-full {{ pc.border | replace('border-', 'bg-') }} flex-shrink-0"></span>
+                    {{ trait }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- 美股趋势 -->
+    <div class="mt-4 p-3 bg-gradient-to-r from-rose-50 to-orange-50 border border-rose-100 rounded-lg">
+        <div class="flex items-center gap-4">
+            <div class="text-center">
+                <div class="text-2xl font-bold text-rose-600">56%</div>
+                <div class="text-xs text-gray-500">投资美股</div>
+            </div>
+            <div class="flex-1 text-xs text-gray-600">
+                <strong class="text-rose-700">美股投资翻倍增长：</strong>
+                2023年仅28%的HK投资者投资美股，2025年已达56%。18-29岁更高达75%。
+                <span class="text-gray-400">这意味着富途的美股交易功能是获客核心卖点，KOL内容应重点覆盖美股。</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- ===== 分析框架 (《好主意不是好营销》) ===== -->
+{% if analysis_frameworks %}
+<div class="stat-card mb-6">
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h3 class="text-lg font-semibold text-gray-900">营销分析框架</h3>
+            <p class="text-xs text-gray-400">基于《好主意不是好营销》(王泽蕴) 数据思维 — 3C定位法 + 用户旅程 + 渠道效率矩阵 + 借势机会</p>
+        </div>
+    </div>
+
+    <!-- 富途实际渗透率 vs 内容覆盖率 -->
+    {% if futu_hk_stats %}
+    <div class="mb-6 p-4 bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-xl">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="text-sm font-semibold text-orange-700">核心发现: 客户渗透率 vs 内容覆盖率的「声量断层」</span>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+            <div class="bg-white/70 rounded-lg p-3 text-center">
+                <div class="text-2xl font-bold text-orange-600">~{{ futu_hk_stats.hk_penetration_pct }}%</div>
+                <div class="text-xs text-gray-600 mt-1">HK投资者客户渗透率</div>
+                <div class="text-xs text-gray-400">~100万付费客户/250万投资者</div>
+            </div>
+            <div class="bg-white/70 rounded-lg p-3 text-center">
+                <div class="text-2xl font-bold text-red-500">1-5%</div>
+                <div class="text-xs text-gray-600 mt-1">主要社媒内容覆盖率</div>
+                <div class="text-xs text-gray-400">YouTube 4%, FB 2%, IG 1%</div>
+            </div>
+            <div class="bg-white/70 rounded-lg p-3 text-center">
+                <div class="text-2xl font-bold text-indigo-600">{{ futu_hk_stats.hk_offline_stores }}</div>
+                <div class="text-xs text-gray-600 mt-1">线下据点</div>
+                <div class="text-xs text-gray-400">覆盖港九新界</div>
+            </div>
+            <div class="bg-white/70 rounded-lg p-3 text-center">
+                <div class="text-2xl font-bold text-green-600">#1</div>
+                <div class="text-xs text-gray-600 mt-1">HK线上券商排名</div>
+                <div class="text-xs text-gray-400">交易量+IPO认购额第一</div>
+            </div>
+        </div>
+        <div class="text-xs text-gray-600 leading-relaxed">
+            <strong class="text-orange-700">解读:</strong>
+            富途拥有HK约40%投资者作为付费客户(Q1 2025电话会议), 但在YouTube/Facebook/Instagram等投资者最常用的信息渠道, 内容声量仅1-5%。
+            这意味着: <strong>富途的100万客户在刷YouTube/FB/IG获取投资信息时, 几乎看不到富途的内容 — 他们看到的是竞品和第三方KOL的内容。</strong>
+            这是留存风险, 也是内容投入的核心论据。
+        </div>
+        <div class="text-xs text-gray-400 mt-2">数据来源: {{ futu_hk_stats.source }}</div>
+    </div>
+    {% endif %}
+
+    <!-- 用户旅程渠道映射 -->
+    {% if analysis_frameworks.user_journey %}
+    <div class="mb-6">
+        <h4 class="text-sm font-semibold text-gray-700 mb-1">{{ analysis_frameworks.user_journey.title }}</h4>
+        <p class="text-xs text-gray-400 mb-3">{{ analysis_frameworks.user_journey.subtitle }}</p>
+        {% set stage_colors = {
+            'awareness': {'bg': 'bg-blue-50', 'border': 'border-blue-200', 'text': 'text-blue-700', 'dot': 'bg-blue-500'},
+            'interest': {'bg': 'bg-purple-50', 'border': 'border-purple-200', 'text': 'text-purple-700', 'dot': 'bg-purple-500'},
+            'consideration': {'bg': 'bg-amber-50', 'border': 'border-amber-200', 'text': 'text-amber-700', 'dot': 'bg-amber-500'},
+            'conversion': {'bg': 'bg-green-50', 'border': 'border-green-200', 'text': 'text-green-700', 'dot': 'bg-green-500'},
+            'retention': {'bg': 'bg-indigo-50', 'border': 'border-indigo-200', 'text': 'text-indigo-700', 'dot': 'bg-indigo-500'},
+            'referral': {'bg': 'bg-rose-50', 'border': 'border-rose-200', 'text': 'text-rose-700', 'dot': 'bg-rose-500'},
+        } %}
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+            {% for stage in analysis_frameworks.user_journey.stages %}
+            {% set sc = stage_colors.get(stage.id, stage_colors.awareness) %}
+            <div class="{{ sc.bg }} {{ sc.border }} border rounded-xl p-3">
+                <div class="flex items-center gap-1.5 mb-1.5">
+                    <span class="{{ sc.dot }} w-2.5 h-2.5 rounded-full"></span>
+                    <span class="text-sm font-semibold {{ sc.text }}">{{ stage.name }}</span>
+                    <span class="text-xs text-gray-400">{{ stage.name_en }}</span>
+                </div>
+                <p class="text-xs text-gray-500 mb-2">{{ stage.description }}</p>
+                {% if journey_map and journey_map[stage.id] %}
+                <div class="space-y-0.5">
+                    {% for ch in journey_map[stage.id][:6] %}
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-gray-600 truncate">{{ ch.name }}</span>
+                        <span class="{{ 'text-red-500' if ch.coverage <= 5 else ('text-amber-500' if ch.coverage <= 15 else 'text-green-600') }} font-medium">{{ ch.coverage }}%</span>
+                    </div>
+                    {% endfor %}
+                    {% if journey_map[stage.id] | length > 6 %}
+                    <div class="text-xs text-gray-400">+{{ journey_map[stage.id] | length - 6 }} 更多</div>
+                    {% endif %}
+                </div>
+                {% endif %}
+                <div class="mt-1.5 pt-1.5 border-t {{ sc.border }}">
+                    <span class="text-xs text-gray-400">关键指标:</span>
+                    <span class="text-xs text-gray-500">{{ stage.key_metrics }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- 3C定位分析 -->
+    {% if analysis_frameworks.three_c %}
+    <div class="mb-6">
+        <h4 class="text-sm font-semibold text-gray-700 mb-1">{{ analysis_frameworks.three_c.title }}</h4>
+        <p class="text-xs text-gray-400 mb-3">{{ analysis_frameworks.three_c.subtitle }}</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {% set c_colors = [
+                {'bg': 'bg-orange-50', 'border': 'border-orange-200', 'text': 'text-orange-700'},
+                {'bg': 'bg-blue-50', 'border': 'border-blue-200', 'text': 'text-blue-700'},
+                {'bg': 'bg-red-50', 'border': 'border-red-200', 'text': 'text-red-700'},
+            ] %}
+            {% for dim in analysis_frameworks.three_c.dimensions %}
+            {% set cc = c_colors[loop.index0] %}
+            <div class="{{ cc.bg }} {{ cc.border }} border rounded-xl p-4">
+                <h5 class="text-sm font-semibold {{ cc.text }} mb-1">{{ dim.name }}</h5>
+                <p class="text-xs text-gray-600 font-medium mb-2">{{ dim.question }}</p>
+                <p class="text-xs text-gray-500 leading-relaxed mb-2">{{ dim.insight }}</p>
+                <div class="pt-2 border-t {{ cc.border }}">
+                    <span class="text-xs font-medium {{ cc.text }}">行动建议:</span>
+                    <p class="text-xs text-gray-600 mt-0.5">{{ dim.action }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- 渠道优先级排行 -->
+    <div class="mb-6">
+        <h4 class="text-sm font-semibold text-gray-700 mb-1">{{ analysis_frameworks.efficiency_matrix.title }}</h4>
+        <p class="text-xs text-gray-400 mb-1">{{ analysis_frameworks.efficiency_matrix.subtitle }}</p>
+        <p class="text-xs text-gray-300 mb-3">公式: {{ analysis_frameworks.efficiency_matrix.formula }}</p>
+        {% set sorted_by_priority = all_channels | sort(attribute='priority_score', reverse=true) %}
+        {% set max_score = sorted_by_priority[0].priority_score if sorted_by_priority and sorted_by_priority[0].priority_score else 1 %}
+        <div class="space-y-1.5">
+            {% for ch in sorted_by_priority[:12] %}
+            {% if ch.priority_score > 0 %}
+            {% set tc = type_colors.get(ch.type, default_color) %}
+            {% set pct = (ch.priority_score / max_score * 100) | round %}
+            <div class="flex items-center gap-3">
+                <span class="w-5 text-xs font-bold text-gray-400 text-right">{{ loop.index }}</span>
+                <span class="w-32 text-xs font-medium {{ tc.text }} truncate flex items-center gap-1.5">
+                    <span class="{{ tc.dot }} w-2 h-2 rounded-full inline-block flex-shrink-0"></span>
+                    {{ ch.display_name }}
+                </span>
+                <div class="flex-1 bg-gray-100 rounded-full h-4 relative overflow-hidden">
+                    <div class="bg-gradient-to-r from-orange-400 to-red-500 rounded-full h-4 flex items-center justify-end pr-2"
+                         style="width: {{ pct }}%; min-width: 3rem">
+                        <span class="text-xs text-white font-medium">{{ ch.priority_score }}</span>
+                    </div>
+                </div>
+                <span class="w-16 text-xs text-gray-400 text-right">覆盖{{ ch.futu_coverage_pct }}%</span>
+                <span class="w-20 text-xs text-right {{ 'text-green-600' if ch.futu_investment == 'none' else ('text-blue-500' if ch.futu_investment == 'low' else ('text-amber-500' if ch.futu_investment == 'medium' else 'text-gray-400')) }}">{{ ch.investment_label }}</span>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <p class="text-xs text-gray-400 mt-2">得分越高 = 增量投入产出潜力越大（高流量 × 低覆盖 × 高相关度 × 增量空间）| <span class="text-green-600">未投入</span> &gt; <span class="text-blue-500">少量</span> &gt; <span class="text-amber-500">有一定投入</span> &gt; <span class="text-gray-400">已重点投入(降权)</span></p>
+    </div>
+
+    <!-- 借势机会 -->
+    {% if analysis_frameworks.leverage_trends %}
+    <div class="mb-6">
+        <h4 class="text-sm font-semibold text-gray-700 mb-1">{{ analysis_frameworks.leverage_trends.title }}</h4>
+        <p class="text-xs text-gray-400 mb-3">{{ analysis_frameworks.leverage_trends.subtitle }}</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {% for t in analysis_frameworks.leverage_trends.trends %}
+            <div class="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-4">
+                <h5 class="text-sm font-semibold text-amber-700 mb-1">{{ t.trend }}</h5>
+                <p class="text-xs text-gray-600 mb-2"><strong>数据:</strong> {{ t.data }}</p>
+                <p class="text-xs text-amber-800"><strong>行动:</strong> {{ t.action }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ===== 细节营销分析 (柏唯良) ===== -->
+    {% if analysis_frameworks.detail_marketing %}
+    {% set dm = analysis_frameworks.detail_marketing %}
+    <div class="mb-6">
+        <h4 class="text-sm font-semibold text-gray-700 mb-1">{{ dm.title }}</h4>
+        <p class="text-xs text-gray-400 mb-3">{{ dm.subtitle }}</p>
+        {% set dm_colors = {
+            'blue': {'bg': 'bg-blue-50', 'border': 'border-blue-200', 'text': 'text-blue-700', 'grad_from': 'from-blue-50', 'grad_to': 'to-indigo-50'},
+            'purple': {'bg': 'bg-purple-50', 'border': 'border-purple-200', 'text': 'text-purple-700', 'grad_from': 'from-purple-50', 'grad_to': 'to-violet-50'},
+            'amber': {'bg': 'bg-amber-50', 'border': 'border-amber-200', 'text': 'text-amber-700', 'grad_from': 'from-amber-50', 'grad_to': 'to-yellow-50'},
+            'red': {'bg': 'bg-red-50', 'border': 'border-red-200', 'text': 'text-red-700', 'grad_from': 'from-red-50', 'grad_to': 'to-rose-50'},
+            'green': {'bg': 'bg-green-50', 'border': 'border-green-200', 'text': 'text-green-700', 'grad_from': 'from-green-50', 'grad_to': 'to-emerald-50'},
+        } %}
+        <div class="space-y-3">
+            {% for dim in dm.dimensions %}
+            {% set dc = dm_colors.get(dim.color, dm_colors.blue) %}
+            <div class="bg-gradient-to-r {{ dc.grad_from }} {{ dc.grad_to }} {{ dc.border }} border rounded-xl p-4">
+                <div class="flex items-start gap-3">
+                    <span class="flex-shrink-0 w-7 h-7 rounded-full {{ dc.bg }} {{ dc.border }} border flex items-center justify-center text-xs font-bold {{ dc.text }}">{{ loop.index }}</span>
+                    <div class="flex-1 min-w-0">
+                        <h5 class="text-sm font-semibold {{ dc.text }} mb-1">{{ dim.name }}</h5>
+                        <p class="text-xs text-gray-500 italic mb-2">{{ dim.principle }}</p>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-2"><strong>富途场景:</strong> {{ dim.application }}</p>
+                        <div class="pt-2 border-t {{ dc.border }}">
+                            <span class="text-xs font-medium {{ dc.text }}">行动建议:</span>
+                            <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">{{ dim.action }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <p class="text-xs text-gray-400 mt-2">来源: {{ dm.source }}</p>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+<!-- ===== ARPU 分析 ===== -->
+{% if arpu_analysis %}
+<div class="stat-card mb-6">
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h3 class="text-lg font-semibold text-gray-900">{{ arpu_analysis.title }}</h3>
+            <p class="text-xs text-gray-400">{{ arpu_analysis.subtitle }}</p>
+        </div>
+    </div>
+
+    <!-- 核心洞察 -->
+    <div class="mb-6 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl">
+        <p class="text-xs text-gray-700 leading-relaxed">{{ arpu_analysis.key_insight }}</p>
+    </div>
+
+    <!-- 券商 ARPU 对比 -->
+    <div class="mb-6">
+        <h4 class="text-sm font-semibold text-gray-700 mb-3">券商平台 ARPU 对比</h4>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <!-- 富途 -->
+            <div class="bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-4 text-center">
+                <div class="text-sm font-semibold text-orange-700 mb-2">富途/moomoo</div>
+                <div class="text-2xl font-bold text-orange-600">HK${{ "{:,}".format(arpu_analysis.futu_arpu.fy2024) }}</div>
+                <div class="text-xs text-gray-500 mt-1">FY2024 ARPU/年</div>
+                <div class="text-lg font-bold text-green-600 mt-1">{{ arpu_analysis.futu_arpu.arpu_yoy_growth }}</div>
+                <div class="text-xs text-gray-400">同比增长</div>
+                <div class="mt-2 pt-2 border-t border-orange-200">
+                    <div class="text-xs text-gray-600">CAC: HK${{ "{:,}".format(arpu_analysis.futu_arpu.cac_hkd) }}</div>
+                    <div class="text-xs text-gray-600">LTV/CAC: {{ arpu_analysis.futu_arpu.ltv_cac_ratio }}x</div>
+                    <div class="text-xs text-gray-600">客均资产: HK${{ "{:,}".format(arpu_analysis.futu_arpu.client_assets_per_user_hkd // 1000) }}K</div>
+                </div>
+            </div>
+            <!-- 竞品 -->
+            {% for comp in arpu_analysis.competitor_arpu %}
+            {% set comp_colors = [
+                {'from': 'from-blue-50', 'to': 'to-indigo-50', 'border': 'border-blue-200', 'text': 'text-blue-700', 'num': 'text-blue-600'},
+                {'from': 'from-purple-50', 'to': 'to-violet-50', 'border': 'border-purple-200', 'text': 'text-purple-700', 'num': 'text-purple-600'},
+                {'from': 'from-gray-50', 'to': 'to-slate-50', 'border': 'border-gray-300', 'text': 'text-gray-700', 'num': 'text-gray-600'},
+            ] %}
+            {% set cc = comp_colors[loop.index0] %}
+            <div class="bg-gradient-to-br {{ cc.from }} {{ cc.to }} border {{ cc.border }} rounded-xl p-4 text-center">
+                <div class="text-sm font-semibold {{ cc.text }} mb-2">{{ comp.name }}</div>
+                <div class="text-2xl font-bold {{ cc.num }}">HK${{ "{:,}".format(comp.arpu_hkd) }}</div>
+                <div class="text-xs text-gray-500 mt-1">ARPU/年(估)</div>
+                <div class="mt-2 pt-2 border-t {{ cc.border }}">
+                    <div class="text-xs text-gray-500">{{ comp.position }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 广告平台 ARPU -->
+    <div class="mb-6">
+        <h4 class="text-sm font-semibold text-gray-700 mb-1">广告平台投资者 ARPU</h4>
+        <p class="text-xs text-gray-400 mb-3">每位HK投资者在各平台的广告商业价值 — 说明为何金融客户值得高价获取</p>
+        {% set max_inv_arpu = 5000 %}
+        <div class="space-y-2">
+            {% for pa in arpu_analysis.platform_ad_arpu %}
+            {% set pct = (pa.investor_arpu_est_hkd / max_inv_arpu * 100) | round %}
+            <div class="flex items-center gap-3">
+                <span class="w-28 text-xs font-medium text-gray-700 truncate">{{ pa.name }}</span>
+                <div class="flex-1">
+                    <div class="flex gap-0.5 h-5">
+                        <div class="bg-gray-200 rounded-l-full h-5 flex items-center justify-end pr-2 relative" style="width: {{ (pa.ad_arpu_hkd / max_inv_arpu * 100) | round }}%">
+                            <span class="text-xs text-gray-600 font-medium whitespace-nowrap">HK${{ "{:,}".format(pa.ad_arpu_hkd) }}</span>
+                        </div>
+                        <div class="bg-gradient-to-r from-emerald-400 to-teal-500 rounded-r-full h-5 flex items-center justify-end pr-2" style="width: {{ ((pa.investor_arpu_est_hkd - pa.ad_arpu_hkd) / max_inv_arpu * 100) | round }}%">
+                            <span class="text-xs text-white font-medium whitespace-nowrap">HK${{ "{:,}".format(pa.investor_arpu_est_hkd) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="flex items-center gap-4 mt-2 text-xs text-gray-400">
+            <span class="flex items-center gap-1"><span class="w-3 h-2 bg-gray-200 rounded"></span>平台整体ARPU</span>
+            <span class="flex items-center gap-1"><span class="w-3 h-2 bg-emerald-400 rounded"></span>投资者ARPU(金融广告溢价)</span>
+        </div>
+    </div>
+
+    <!-- 获客成本基准 -->
+    <div>
+        <h4 class="text-sm font-semibold text-gray-700 mb-3">各渠道获客成本(CAC)基准</h4>
+        <div class="overflow-x-auto">
+            <table class="w-full text-xs">
+                <thead>
+                    <tr class="border-b border-gray-200">
+                        <th class="text-left py-2 text-gray-500 font-medium">渠道</th>
+                        <th class="text-left py-2 text-gray-500 font-medium">CAC范围</th>
+                        <th class="text-left py-2 text-gray-500 font-medium">客户质量</th>
+                        <th class="text-right py-2 text-gray-500 font-medium">LTV/CAC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for b in arpu_analysis.cac_benchmarks %}
+                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                        <td class="py-2 font-medium text-gray-700">{{ b.channel }}</td>
+                        <td class="py-2 text-gray-600">{{ b.cac_range }}</td>
+                        <td class="py-2 text-gray-600">{{ b.quality }}</td>
+                        <td class="py-2 text-right font-semibold {{ 'text-green-600' if '8' in b.ltv_cac or '12' in b.ltv_cac or '20' in b.ltv_cac else ('text-amber-600' if '3' in b.ltv_cac or '4' in b.ltv_cac or '5' in b.ltv_cac else 'text-red-500') }}">{{ b.ltv_cac }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p class="text-xs text-gray-400 mt-2">来源: {{ arpu_analysis.source }} | LTV按3年计算, CAC基于HK市场数据</p>
+    </div>
+</div>
+{% endif %}
+
+<!-- ===== 社媒平台 ===== -->
+<div class="stat-card mb-6 channel-group">
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h3 class="text-lg font-semibold text-gray-900">社媒平台</h3>
+            <p class="text-xs text-gray-400">8 个主要社媒平台的 HK 投资者分布、富途渗透率与客群画像</p>
+        </div>
+        <a href="/" class="text-sm text-indigo-600 hover:text-indigo-800">详细看板 &rarr;</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {% for p in platforms %}
+        {% set tc = type_colors.get('social', default_color) %}
+        <div class="{{ tc.bg }} {{ tc.border }} border rounded-xl p-4 hover:shadow-md transition-shadow channel-item"
+             data-age-tags="{{ p.age_tags | join(',') }}" data-trading-tags="{{ p.trading_tags | join(',') }}">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-semibold {{ tc.text }}">{{ p.display_name }}</span>
+                <span class="text-xs text-gray-400" title="{{ p.hk_unique_investors_note }}">
+                    {% if p.hk_unique_investors >= 10000 %}
+                        {{ "%.0f"|format(p.hk_unique_investors / 10000) }}万投资者
+                    {% elif p.hk_unique_investors > 0 %}
+                        {{ "{:,}".format(p.hk_unique_investors) }}投资者
+                    {% else %}
+                        {{ "%.0f"|format(p.hk_total_users / 10000) }}万用户
+                    {% endif %}
+                </span>
+            </div>
+            <div class="space-y-1.5 text-xs">
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <span class="text-gray-400">金融用户</span>
+                        <div class="font-semibold text-gray-700">
+                            {% if p.hk_finance_users >= 10000 %}
+                                {{ "%.1f"|format(p.hk_finance_users / 10000) }}万
+                            {% else %}
+                                {{ "{:,}".format(p.hk_finance_users) }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-gray-400">互动率</span>
+                        <div class="font-semibold text-gray-700">{{ p.avg_engagement_pct }}%</div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <span class="text-gray-400">富途/投资</span>
+                        <div class="font-semibold text-orange-600">{{ p.futu_in_finance_pct }}%</div>
+                    </div>
+                    <div>
+                        <span class="text-gray-400">富途/券商</span>
+                        <div class="font-semibold text-orange-700">{{ p.futu_in_broker_pct }}%</div>
+                    </div>
+                </div>
+                {% if p.hk_investor_profile %}
+                <div class="pt-1.5 border-t border-indigo-200/50 space-y-0.5">
+                    <div><span class="text-gray-400">客群:</span> {{ p.hk_investor_profile.age }} | {{ p.hk_investor_profile.gender }}</div>
+                    <div><span class="text-gray-400">交易:</span> {{ p.hk_investor_profile.trading }}</div>
+                    <div class="text-gray-500 italic leading-snug">{{ p.hk_investor_profile.trait }}</div>
+                </div>
+                {% endif %}
+                {% if p.coverage_methods %}
+                <div class="pt-1.5 border-t border-indigo-200/50">
+                    <span class="text-gray-400">覆盖手段:</span>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                        {% for m in p.coverage_methods %}
+                        <span class="px-1.5 py-0.5 rounded text-xs bg-indigo-100 text-indigo-700">{{ m }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- ===== 其他获客渠道（按类别分组）===== -->
+{% for cat_name, channels in channel_groups.items() %}
+{% set first_ch = channels[0] %}
+{% set cat_type = first_ch.get('category', 'other') %}
+{% set tc = type_colors.get(cat_type, default_color) %}
+<div class="stat-card mb-6 channel-group">
+    <div class="flex items-center gap-2 mb-4">
+        <span class="{{ tc.dot }} w-3 h-3 rounded-full inline-block"></span>
+        <h3 class="text-lg font-semibold text-gray-900">{{ cat_name }}</h3>
+        <span class="text-xs text-gray-400">{{ channels | length }} 个渠道</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for ch in channels %}
+        <div class="{{ tc.bg }} {{ tc.border }} border rounded-xl p-4 hover:shadow-md transition-shadow channel-item"
+             data-age-tags="{{ ch.age_tags | join(',') }}" data-trading-tags="{{ ch.trading_tags | join(',') }}">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-semibold {{ tc.text }}">{{ ch.display_name }}</span>
+                <span class="text-xs text-gray-400" title="{{ ch.hk_unique_investors_note }}">
+                    {% if ch.hk_unique_investors >= 10000 %}
+                        {{ "%.0f"|format(ch.hk_unique_investors / 10000) }}万投资者
+                    {% elif ch.hk_unique_investors > 0 %}
+                        {{ "{:,}".format(ch.hk_unique_investors) }}投资者
+                    {% else %}
+                        —
+                    {% endif %}
+                </span>
+            </div>
+            <div class="space-y-1.5 text-xs">
+                {% if ch.hk_investor_profile %}
+                <div class="space-y-0.5">
+                    <div><span class="text-gray-400">客群:</span> {{ ch.hk_investor_profile.age }} | {{ ch.hk_investor_profile.gender }}</div>
+                    <div><span class="text-gray-400">交易品类:</span> {{ ch.hk_investor_profile.trading }}</div>
+                    <div><span class="text-gray-400">内容偏好:</span> {{ ch.hk_investor_profile.content_pref }}</div>
+                    <div class="text-gray-500 italic leading-snug mt-1">{{ ch.hk_investor_profile.trait }}</div>
+                </div>
+                {% endif %}
+                {% if ch.futu_relevance %}
+                <div class="pt-1.5 border-t {{ tc.border }}">
+                    <span class="text-gray-400">富途相关度:</span>
+                    <span class="text-gray-700">{{ ch.futu_relevance }}</span>
+                </div>
+                {% endif %}
+                {% if ch.coverage_methods %}
+                <div class="pt-1.5 border-t {{ tc.border }}">
+                    <span class="text-gray-400">覆盖手段:</span>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                        {% for m in ch.coverage_methods %}
+                        <span class="px-1.5 py-0.5 rounded text-xs {{ tc.bg }} {{ tc.text }}">{{ m }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% elif ch.acquisition_method %}
+                <div>
+                    <span class="text-gray-400">获客方式:</span>
+                    <span class="text-gray-600">{{ ch.acquisition_method }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+
+<!-- ===== 覆盖率测算方法 ===== -->
+<details class="stat-card mb-6">
+    <summary class="text-xs text-indigo-600 cursor-pointer hover:text-indigo-800 font-medium">覆盖率测算方法与改进方向</summary>
+    <div class="mt-3 text-xs text-gray-600 space-y-3">
+        <div>
+            <p class="font-semibold text-gray-700 mb-1">当前测算方法（Tier 1: 估算）</p>
+            <ul class="list-disc list-inside space-y-0.5">
+                <li><strong>社媒平台:</strong> 覆盖率 = 券商内容占金融内容比例 × 富途在券商内容中份额。例: YouTube 18%(券商/金融) × 50%(富途/券商) ≈ 4%</li>
+                <li><strong>其他渠道:</strong> 基于广告投放观察 + 品牌提及频率 + 官方运营活跃度的综合估算</li>
+                <li><strong>校准数据:</strong> YouTube 频道订阅数对比、Truescope 社交监听、IAB HK 小红书报告等已知锚点</li>
+            </ul>
+        </div>
+        <div>
+            <p class="font-semibold text-gray-700 mb-1">更科学的测算方法（建议升级路径）</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+                <div class="bg-gray-50 rounded-lg p-3">
+                    <p class="font-semibold text-gray-700">Tier 2: 社交监听工具</p>
+                    <p class="mt-1">Meltwater / Truescope / Brandwatch — 按品牌关键词(富途/moomoo/futu)监听各平台提及量, 与竞品(老虎/长桥/IBKR)对比, 计算 Share of Voice</p>
+                    <p class="text-gray-400 mt-1">成本: $500-2,000/月 | 精度: 中高</p>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-3">
+                    <p class="font-semibold text-gray-700">Tier 3: SEM/SEO 工具</p>
+                    <p class="mt-1">SEMrush / Ahrefs — 追踪品牌词+品类词在 Google HK 的搜索量、广告投放份额、自然排名占位, 计算搜索声量份额</p>
+                    <p class="text-gray-400 mt-1">成本: $200-500/月 | 精度: 中高(仅限搜索渠道)</p>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-3">
+                    <p class="font-semibold text-gray-700">Tier 4: 平台付费工具</p>
+                    <p class="mt-1">千瓜/新红(小红书) + 火烧云(B站) — 获取品牌笔记/视频精确数量, 与品类总量对比; 各平台广告后台的 Audience Overlap 数据</p>
+                    <p class="text-gray-400 mt-1">成本: ¥500-3,000/月/平台 | 精度: 高</p>
+                </div>
+                <div class="bg-gray-50 rounded-lg p-3">
+                    <p class="font-semibold text-gray-700">Tier 5: 调研 + API</p>
+                    <p class="mt-1">品牌认知度调研(1,000份HK样本, 问「你在XX平台见过富途内容吗」); 各平台 API 或爬虫获取精确帖子数/曝光量</p>
+                    <p class="text-gray-400 mt-1">成本: HK$30,000-80,000/次 | 精度: 最高</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</details>
+
+<!-- ===== 数据来源 ===== -->
+{% if methodology %}
+<details class="stat-card mb-6">
+    <summary class="text-xs text-indigo-600 cursor-pointer hover:text-indigo-800 font-medium">查看数据来源与方法论</summary>
+    <div class="mt-3 text-xs text-gray-600 space-y-2">
+        <p><strong>地域限定：</strong>{{ methodology.geo_filtering }}</p>
+        <p class="mt-2"><strong>数据来源：</strong></p>
+        <ul class="list-disc list-inside space-y-0.5">
+            {% for src in methodology.data_sources %}
+            <li>{{ src }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</details>
+{% endif %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let activeAge = 'all';
+    let activeTrading = 'all';
+    const activeCls = ['bg-indigo-600', 'text-white', 'border-indigo-600'];
+    const inactiveCls = ['border-gray-200', 'text-gray-500'];
+
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var filterType = this.dataset.filter;
+            var value = this.dataset.value;
+            this.parentElement.querySelectorAll('.filter-btn').forEach(function(b) {
+                activeCls.forEach(function(c) { b.classList.remove(c); });
+                inactiveCls.forEach(function(c) { b.classList.add(c); });
+            });
+            activeCls.forEach(function(c) { btn.classList.add(c); });
+            inactiveCls.forEach(function(c) { btn.classList.remove(c); });
+            if (filterType === 'age') activeAge = value;
+            if (filterType === 'trading') activeTrading = value;
+            applyFilters();
+        });
+    });
+
+    function applyFilters() {
+        var total = 0, visible = 0;
+        document.querySelectorAll('.channel-item').forEach(function(item) {
+            total++;
+            var ageTags = (item.dataset.ageTags || '').split(',');
+            var tradingTags = (item.dataset.tradingTags || '').split(',');
+            var ageOk = activeAge === 'all' || ageTags.indexOf(activeAge) !== -1;
+            var tradingOk = activeTrading === 'all' || tradingTags.indexOf(activeTrading) !== -1;
+            var show = ageOk && tradingOk;
+            item.style.display = show ? '' : 'none';
+            if (show) visible++;
+        });
+        // Hide empty channel-group sections
+        document.querySelectorAll('.channel-group').forEach(function(group) {
+            var hasVisible = group.querySelector('.channel-item:not([style*="display: none"])');
+            group.style.display = hasVisible ? '' : 'none';
+        });
+        // Update count (divide by 2 because items appear in both ranking + detail sections)
+        var unique = Math.round(visible / 2);
+        var uniqueTotal = Math.round(total / 2);
+        var countEl = document.getElementById('filter-count');
+        if (activeAge === 'all' && activeTrading === 'all') {
+            countEl.textContent = '';
+        } else {
+            countEl.textContent = '显示 ' + unique + ' / ' + uniqueTotal + ' 个渠道';
+        }
+    }
+});
+</script>
+{% endblock %}

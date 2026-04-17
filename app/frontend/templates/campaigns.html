@@ -1,55 +1,56 @@
 {% extends "base.html" %}
-{% block title %}Campaigns{% endblock %}
+{% block title %}邮件活动{% endblock %}
 {% block content %}
 <div class="flex items-center justify-between mb-8">
     <div>
-        <h2 class="text-2xl font-bold text-gray-900">Outreach Campaigns</h2>
-        <p class="text-gray-500 mt-1">Manage email outreach to KOLs</p>
+        <h2 class="text-2xl font-bold text-gray-900">邮件活动</h2>
+        <p class="text-gray-500 mt-1">管理 KOL 建联邮件活动</p>
     </div>
 </div>
 
-<!-- Create Campaign -->
+<!-- 创建活动 -->
 <div class="stat-card mb-8">
-    <h3 class="text-lg font-semibold text-gray-900 mb-4">Create New Campaign</h3>
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">创建新活动</h3>
     <form method="post" action="/campaigns/create" class="flex flex-wrap gap-4 items-end">
         <div>
-            <label class="block text-xs font-medium text-gray-500 mb-1">Campaign Name</label>
-            <input type="text" name="name" required placeholder="e.g. Q2 2026 HK Finance KOLs"
+            <label class="block text-xs font-medium text-gray-500 mb-1">活动名称</label>
+            <input type="text" name="name" required placeholder="例：2026 Q2 港股金融KOL建联"
                    class="border border-gray-200 rounded-lg px-3 py-2 text-sm w-64">
         </div>
         <div>
-            <label class="block text-xs font-medium text-gray-500 mb-1">Description</label>
-            <input type="text" name="description" placeholder="Optional description"
+            <label class="block text-xs font-medium text-gray-500 mb-1">描述</label>
+            <input type="text" name="description" placeholder="可选描述"
                    class="border border-gray-200 rounded-lg px-3 py-2 text-sm w-64">
         </div>
         <div>
-            <label class="block text-xs font-medium text-gray-500 mb-1">Language</label>
+            <label class="block text-xs font-medium text-gray-500 mb-1">语言</label>
             <select name="language" class="border border-gray-200 rounded-lg px-3 py-2 text-sm">
-                <option value="zh">Chinese</option>
-                <option value="en">English</option>
+                <option value="zh">中文</option>
+                <option value="en">英文</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">创建</button>
     </form>
 </div>
 
-<!-- Campaign List -->
+<!-- 活动列表 -->
 <div class="stat-card">
-    <h3 class="text-lg font-semibold text-gray-900 mb-4">All Campaigns</h3>
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">全部活动</h3>
     <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Language</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Sent</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Replied</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Created</th>
-                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">名称</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">状态</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">语言</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">已发送</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">已回复</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">创建时间</th>
+                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">操作</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
+                {% set campaign_status_zh = {'active': '进行中', 'completed': '已完成', 'draft': '草稿', 'paused': '已暂停'} %}
                 {% for c in campaigns %}
                 <tr>
                     <td class="px-4 py-3">
@@ -58,26 +59,26 @@
                     </td>
                     <td class="px-4 py-3">
                         {% if c.status == 'active' %}
-                        <span class="badge bg-green-100 text-green-700">active</span>
+                        <span class="badge bg-green-100 text-green-700">进行中</span>
                         {% elif c.status == 'completed' %}
-                        <span class="badge bg-blue-100 text-blue-700">completed</span>
+                        <span class="badge bg-blue-100 text-blue-700">已完成</span>
                         {% elif c.status == 'draft' %}
-                        <span class="badge bg-gray-100 text-gray-700">draft</span>
+                        <span class="badge bg-gray-100 text-gray-700">草稿</span>
                         {% else %}
-                        <span class="badge bg-yellow-100 text-yellow-700">{{ c.status }}</span>
+                        <span class="badge bg-yellow-100 text-yellow-700">{{ campaign_status_zh.get(c.status, c.status) }}</span>
                         {% endif %}
                     </td>
-                    <td class="px-4 py-3 text-sm text-gray-500">{{ c.language }}</td>
+                    <td class="px-4 py-3 text-sm text-gray-500">{{ '中文' if c.language == 'zh' else '英文' }}</td>
                     <td class="px-4 py-3 text-sm font-medium text-gray-900">{{ c.total_sent }}</td>
                     <td class="px-4 py-3 text-sm font-medium text-gray-900">{{ c.total_replied }}</td>
                     <td class="px-4 py-3 text-sm text-gray-500">{{ c.created_at.strftime('%Y-%m-%d') if c.created_at else '' }}</td>
                     <td class="px-4 py-3">
-                        <a href="/campaigns/{{ c.id }}" class="text-sm text-indigo-600 hover:text-indigo-800">View</a>
+                        <a href="/campaigns/{{ c.id }}" class="text-sm text-indigo-600 hover:text-indigo-800">查看</a>
                     </td>
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="7" class="px-4 py-8 text-center text-gray-400">No campaigns yet. Create one above.</td>
+                    <td colspan="7" class="px-4 py-8 text-center text-gray-400">暂无活动。在上方创建一个新活动。</td>
                 </tr>
                 {% endfor %}
             </tbody>

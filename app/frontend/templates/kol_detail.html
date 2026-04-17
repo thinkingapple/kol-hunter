@@ -2,13 +2,13 @@
 {% block title %}{{ kol.name }}{% endblock %}
 {% block content %}
 <div class="mb-6">
-    <a href="/kols" class="text-sm text-indigo-600 hover:text-indigo-800">&larr; Back to KOL List</a>
+    <a href="/kols" class="text-sm text-indigo-600 hover:text-indigo-800">&larr; 返回 KOL 列表</a>
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-    <!-- Main Info -->
+    <!-- 主要信息 -->
     <div class="lg:col-span-2 space-y-6">
-        <!-- Profile Header -->
+        <!-- 基本资料 -->
         <div class="stat-card">
             <div class="flex items-start justify-between">
                 <div>
@@ -17,14 +17,15 @@
                     {% if kol.bio_summary %}<p class="text-sm text-gray-600 mt-2">{{ kol.bio_summary }}</p>{% endif %}
                 </div>
                 <div class="flex items-center gap-2">
-                    <span class="badge badge-{{ kol.tier|lower }} text-lg px-3 py-1">Tier {{ kol.tier }}</span>
+                    <span class="badge badge-{{ kol.tier|lower }} text-lg px-3 py-1">{{ kol.tier }} 级</span>
                     <span class="text-2xl font-bold text-gray-900">{{ "%.1f"|format(kol.total_score) }}</span>
                 </div>
             </div>
             <div class="flex gap-4 mt-4 text-sm text-gray-500">
-                <span>Region: <strong class="text-gray-700">{{ kol.region }}</strong></span>
-                <span>Language: <strong class="text-gray-700">{{ kol.language }}</strong></span>
-                <span>Total Followers: <strong class="text-gray-700">{{ "{:,}".format(kol.total_followers) }}</strong></span>
+                {% set region_zh = {'HK': '香港', 'GBA': '大湾区', 'TW': '台湾', 'SG': '新加坡', 'CN_other': '内地', 'unknown': '未知'} %}
+                <span>地域：<strong class="text-gray-700">{{ region_zh.get(kol.region, kol.region) }}</strong></span>
+                <span>语言：<strong class="text-gray-700">{{ kol.language }}</strong></span>
+                <span>总粉丝：<strong class="text-gray-700">{{ "{:,}".format(kol.total_followers) }}</strong></span>
             </div>
             {% if kol.tags_list %}
             <div class="flex gap-2 mt-3">
@@ -35,20 +36,20 @@
             {% endif %}
         </div>
 
-        <!-- Platform Profiles -->
+        <!-- 平台账号 -->
         <div class="stat-card">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Platform Profiles</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">平台账号</h3>
             {% for profile in kol.profiles %}
             <div class="border border-gray-100 rounded-lg p-4 mb-3 last:mb-0">
                 <div class="flex items-center justify-between mb-2">
                     <div class="flex items-center gap-2">
                         <span class="font-medium text-gray-900">{{ profile.platform.display_name }}</span>
                         {% if profile.is_verified %}
-                        <span class="text-blue-500 text-xs">Verified</span>
+                        <span class="text-blue-500 text-xs">已认证</span>
                         {% endif %}
                     </div>
                     {% if profile.profile_url %}
-                    <a href="{{ profile.profile_url }}" target="_blank" class="text-sm text-indigo-600 hover:text-indigo-800">View Profile</a>
+                    <a href="{{ profile.profile_url }}" target="_blank" class="text-sm text-indigo-600 hover:text-indigo-800">查看主页</a>
                     {% endif %}
                 </div>
                 {% if profile.platform_username %}
@@ -56,22 +57,22 @@
                 {% endif %}
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
                     {% if profile.follower_count is not none %}
-                    <div><span class="text-gray-400">Followers</span><br><strong>{{ "{:,}".format(profile.follower_count) }}</strong></div>
+                    <div><span class="text-gray-400">粉丝</span><br><strong>{{ "{:,}".format(profile.follower_count) }}</strong></div>
                     {% endif %}
                     {% if profile.avg_views is not none %}
-                    <div><span class="text-gray-400">Avg Views</span><br><strong>{{ "{:,}".format(profile.avg_views) }}</strong></div>
+                    <div><span class="text-gray-400">平均播放</span><br><strong>{{ "{:,}".format(profile.avg_views) }}</strong></div>
                     {% endif %}
                     {% if profile.avg_likes is not none %}
-                    <div><span class="text-gray-400">Avg Likes</span><br><strong>{{ "{:,.0f}".format(profile.avg_likes) }}</strong></div>
+                    <div><span class="text-gray-400">平均点赞</span><br><strong>{{ "{:,.0f}".format(profile.avg_likes) }}</strong></div>
                     {% endif %}
                     {% if profile.engagement_rate is not none %}
-                    <div><span class="text-gray-400">Engagement</span><br><strong>{{ "%.2f"|format(profile.engagement_rate) }}%</strong></div>
+                    <div><span class="text-gray-400">互动率</span><br><strong>{{ "%.2f"|format(profile.engagement_rate) }}%</strong></div>
                     {% endif %}
                     {% if profile.post_count is not none %}
-                    <div><span class="text-gray-400">Posts</span><br><strong>{{ "{:,}".format(profile.post_count) }}</strong></div>
+                    <div><span class="text-gray-400">作品数</span><br><strong>{{ "{:,}".format(profile.post_count) }}</strong></div>
                     {% endif %}
                     {% if profile.content_relevance_score %}
-                    <div><span class="text-gray-400">Relevance</span><br><strong>{{ "%.0f"|format(profile.content_relevance_score * 100) }}%</strong></div>
+                    <div><span class="text-gray-400">内容相关度</span><br><strong>{{ "%.0f"|format(profile.content_relevance_score * 100) }}%</strong></div>
                     {% endif %}
                 </div>
                 {% if profile.bio_text %}
@@ -79,20 +80,20 @@
                 {% endif %}
             </div>
             {% else %}
-            <p class="text-gray-400 text-sm">No profiles linked yet.</p>
+            <p class="text-gray-400 text-sm">暂无关联平台账号。</p>
             {% endfor %}
         </div>
 
-        <!-- Competitor History -->
+        <!-- 竞品合作记录 -->
         {% if kol.competitor_history_list %}
         <div class="stat-card">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Competitor Collaboration History</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">竞品合作记录</h3>
             <div class="space-y-2">
                 {% for record in kol.competitor_history_list %}
                 <div class="flex items-center justify-between text-sm py-2 border-b border-gray-50">
                     <span class="font-medium text-gray-700">{{ record.brand }}</span>
                     {% if record.evidence_url %}
-                    <a href="{{ record.evidence_url }}" target="_blank" class="text-indigo-600 text-xs">Evidence</a>
+                    <a href="{{ record.evidence_url }}" target="_blank" class="text-indigo-600 text-xs">查看证据</a>
                     {% endif %}
                 </div>
                 {% endfor %}
@@ -100,10 +101,11 @@
         </div>
         {% endif %}
 
-        <!-- Outreach History -->
+        <!-- 建联记录 -->
         {% if kol.outreach_emails %}
         <div class="stat-card">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Outreach History</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">建联记录</h3>
+            {% set email_status_zh = {'sent': '已发送', 'replied': '已回复', 'failed': '发送失败', 'pending': '待发送', 'draft': '草稿'} %}
             <div class="space-y-2">
                 {% for email in kol.outreach_emails %}
                 <div class="flex items-center justify-between text-sm py-2 border-b border-gray-50">
@@ -112,7 +114,7 @@
                         <span class="text-xs text-gray-400 ml-2">{{ email.created_at.strftime('%Y-%m-%d') if email.created_at else '' }}</span>
                     </div>
                     <span class="badge {% if email.status == 'sent' %}bg-green-100 text-green-700{% elif email.status == 'replied' %}bg-indigo-100 text-indigo-700{% elif email.status == 'failed' %}bg-red-100 text-red-700{% else %}bg-gray-100 text-gray-700{% endif %}">
-                        {{ email.status }}
+                        {{ email_status_zh.get(email.status, email.status) }}
                     </span>
                 </div>
                 {% endfor %}
@@ -121,64 +123,65 @@
         {% endif %}
     </div>
 
-    <!-- Sidebar -->
+    <!-- 侧边栏 -->
     <div class="space-y-6">
-        <!-- Status & Actions -->
+        <!-- 状态与操作 -->
         <div class="stat-card">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Status & Actions</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">状态与操作</h3>
             <form method="post" action="/kols/{{ kol.id }}/update">
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-xs font-medium text-gray-500 mb-1">Status</label>
+                        <label class="block text-xs font-medium text-gray-500 mb-1">状态</label>
+                        {% set status_labels = {'discovered': '已发现', 'qualified': '已筛选', 'contacted': '已联系', 'negotiating': '洽谈中', 'contracted': '已签约', 'rejected': '已拒绝', 'blacklisted': '黑名单'} %}
                         <select name="status" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm">
                             {% for s in ['discovered', 'qualified', 'contacted', 'negotiating', 'contracted', 'rejected', 'blacklisted'] %}
-                            <option value="{{ s }}" {% if kol.status == s %}selected{% endif %}>{{ s }}</option>
+                            <option value="{{ s }}" {% if kol.status == s %}selected{% endif %}>{{ status_labels[s] }}</option>
                             {% endfor %}
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-gray-500 mb-1">Email</label>
+                        <label class="block text-xs font-medium text-gray-500 mb-1">邮箱</label>
                         <input type="email" name="email" value="{{ kol.email or '' }}"
                                class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" placeholder="contact@example.com">
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-gray-500 mb-1">Tags (JSON array)</label>
+                        <label class="block text-xs font-medium text-gray-500 mb-1">标签（JSON 数组）</label>
                         <input type="text" name="tags" value="{{ kol.tags or '[]' }}"
                                class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" placeholder='["港股", "ETF"]'>
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-gray-500 mb-1">Notes</label>
+                        <label class="block text-xs font-medium text-gray-500 mb-1">备注</label>
                         <textarea name="notes" rows="4"
-                                  class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" placeholder="Internal notes...">{{ kol.notes or '' }}</textarea>
+                                  class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" placeholder="内部备注...">{{ kol.notes or '' }}</textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary w-full">Save Changes</button>
+                    <button type="submit" class="btn btn-primary w-full">保存修改</button>
                 </div>
             </form>
         </div>
 
-        <!-- Contact Info -->
+        <!-- 联系方式 -->
         <div class="stat-card">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Contact Info</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">联系方式</h3>
             <div class="space-y-2 text-sm">
-                <div><span class="text-gray-400">Email:</span> <span class="text-gray-700">{{ kol.email or 'Not found' }}</span></div>
-                <div><span class="text-gray-400">Phone:</span> <span class="text-gray-700">{{ kol.phone or 'Not found' }}</span></div>
-                <div><span class="text-gray-400">Website:</span>
+                <div><span class="text-gray-400">邮箱：</span> <span class="text-gray-700">{{ kol.email or '未找到' }}</span></div>
+                <div><span class="text-gray-400">电话：</span> <span class="text-gray-700">{{ kol.phone or '未找到' }}</span></div>
+                <div><span class="text-gray-400">网站：</span>
                     {% if kol.website %}
                     <a href="{{ kol.website }}" target="_blank" class="text-indigo-600">{{ kol.website }}</a>
                     {% else %}
-                    <span class="text-gray-700">Not found</span>
+                    <span class="text-gray-700">未找到</span>
                     {% endif %}
                 </div>
             </div>
         </div>
 
-        <!-- Metadata -->
+        <!-- 元数据 -->
         <div class="stat-card">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Metadata</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">元数据</h3>
             <div class="space-y-2 text-sm text-gray-500">
-                <div>First Discovered: {{ kol.created_at.strftime('%Y-%m-%d') if kol.created_at else 'N/A' }}</div>
-                <div>Last Updated: {{ kol.updated_at.strftime('%Y-%m-%d') if kol.updated_at else 'N/A' }}</div>
-                <div>Last Scanned: {{ kol.last_scanned_at.strftime('%Y-%m-%d') if kol.last_scanned_at else 'Never' }}</div>
+                <div>首次发现：{{ kol.created_at.strftime('%Y-%m-%d') if kol.created_at else '无' }}</div>
+                <div>最后更新：{{ kol.updated_at.strftime('%Y-%m-%d') if kol.updated_at else '无' }}</div>
+                <div>最后扫描：{{ kol.last_scanned_at.strftime('%Y-%m-%d') if kol.last_scanned_at else '从未' }}</div>
             </div>
         </div>
     </div>
