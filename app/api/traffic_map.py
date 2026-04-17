@@ -290,6 +290,69 @@ async def traffic_map(request: Request):
                     "coverage": ch["futu_coverage_pct"],
                 })
 
+    # Build coverage method × platform heatmap
+    METHOD_CATEGORIES = [
+        ("KOL/达人", ["KOL合作", "KOL种草", "KOL短视频", "KOL频道合作", "KOL公众号", "KOL投放", "KOL问答", "大V合作", "主播口播", "嘉宾访谈", "嘉宾演讲"]),
+        ("付费广告", ["信息流广告", "展示广告", "Reels广告", "贴片广告", "LinkedIn Ads", "Google Ads", "SEM竞价", "SEM截流", "搜索广告", "朋友圈广告", "财经频道广告", "限时动态"]),
+        ("内容/SEO", ["SEO优化", "SEO截流", "SEO合作", "SEO内容", "笔记SEO", "知识图谱", "软文植入", "原生广告", "内容赞助", "赞助内容", "赞助专栏", "品牌内容", "内容植入", "PR新闻稿", "PR报道", "财经版赞助", "赞助专区", "Markets频道赞助", "经济日历赞助"]),
+        ("官方运营", ["官方频道", "官方主页", "官方账号", "官方号运营", "公众号运营", "机构号运营", "群组运营", "客户服务群"]),
+        ("社区/口碑", ["口碑营销", "口碑传播", "口碑/自然讨论", "MGM裂变", "用户讨论引导", "社区赞助", "社区话题", "话题营销", "热搜话题"]),
+        ("活动/联名", ["直播活动", "直播", "联名活动", "活动联名", "联名优惠", "赞助冠名", "展位参展", "现场开户", "挑战赛/话题", "品牌贴纸", "弹幕互动"]),
+        ("数据/产品", ["数据合作", "Broker集成", "Bot集成", "图表工具联动", "CPA合作", "小程序引流", "企微私域", "Marketplace", "频道赞助"]),
+        ("比较/开户", ["Broker评测", "产品比较页", "开户优惠专区", "开户Banner", "开户优惠", "好物推荐", "跨品类推荐", "跨品类内容", "组合赞助", "资产配置推广", "品牌差异化", "竞品监控"]),
+    ]
+
+    def _categorize_methods(methods):
+        cats = {}
+        for cat_name, keywords in METHOD_CATEGORIES:
+            matched = [m for m in methods if m in keywords]
+            if matched:
+                cats[cat_name] = matched
+        return cats
+
+    # Top 20 channels by users for heatmap
+    top_channels = sorted(all_channels, key=lambda x: x["users"], reverse=True)[:20]
+    heatmap_categories = [cat for cat, _ in METHOD_CATEGORIES]
+    heatmap_data = []
+    for ch in top_channels:
+        methods = []
+        # Find original methods from platforms or other_channels
+        for p in platforms:
+            if p["name"] == ch["name"]:
+                methods = p.get("coverage_methods", [])
+                break
+        else:
+            for oc in other_channels:
+                if oc["name"] == ch["name"]:
+                    methods = oc.get("coverage_methods", [])
+                    break
+        cats = _categorize_methods(methods)
+        # Value score: users / 10000 for each available category
+        row = {
+            "name": ch["display_name"],
+            "users": ch["users"],
+            "cells": {},
+        }
+        for cat_name in heatmap_categories:
+            if cat_name in cats:
+                # Score = investors(万) × method_count, capped
+                score = ch["users"] / 10000 * len(cats[cat_name])
+                row["cells"][cat_name] = {
+                    "available": True,
+                    "score": round(score),
+                    "methods": cats[cat_name],
+                    "count": len(cats[cat_name]),
+                }
+            else:
+                row["cells"][cat_name] = {"available": False, "score": 0, "methods": [], "count": 0}
+        heatmap_data.append(row)
+
+    # Compute max score for color scaling
+    heatmap_max = max(
+        (cell["score"] for row in heatmap_data for cell in row["cells"].values() if cell["available"]),
+        default=1
+    )
+
     # Generate insights
     insights = _generate_insights(all_channels)
 
@@ -308,4 +371,7 @@ async def traffic_map(request: Request):
         "journey_map": journey_map,
         "futu_hk_stats": futu_hk_stats,
         "arpu_analysis": arpu_analysis,
+        "heatmap_data": heatmap_data,
+        "heatmap_categories": heatmap_categories,
+        "heatmap_max": heatmap_max,
     })
