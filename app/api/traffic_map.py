@@ -192,6 +192,7 @@ async def traffic_map(request: Request):
     analysis_frameworks = data.get("analysis_frameworks", {})
     futu_hk_stats = data.get("futu_hk_stats", {})
     arpu_analysis = data.get("arpu_analysis", {})
+    conversion_analysis = data.get("conversion_analysis", {})
 
     # Add filter tags
     for p in platforms:
@@ -374,4 +375,5 @@ async def traffic_map(request: Request):
         "heatmap_data": heatmap_data,
         "heatmap_categories": heatmap_categories,
         "heatmap_max": heatmap_max,
+        "conversion_analysis": conversion_analysis,
     })

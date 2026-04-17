@@ -1813,5 +1813,270 @@
       }
     ],
     "key_insight": "富途每位付费客户年贡献约HK$1,924-6,800, 3年LTV约HK$6,000-20,000。而各渠道CAC多在HK$500-5,000之间。这意味着: 即使是「昂贵」的KOL合作(HK$2,000/客户), LTV/CAC仍有3-10倍回报。关键不是压低CPA, 而是找到高LTV客群聚集的渠道, 用内容建立信任, 让高价值投资者主动选择富途。"
+  },
+  "conversion_analysis": {
+    "title": "渠道执行难度 × 转化难度 矩阵",
+    "subtitle": "「难做」和「难转化」是两回事 — 有些渠道执行简单但转化差(如展示广告)，有些执行难但转化极好(如社区口碑)",
+    "saturation_note": "富途HK经营多年，已有~100万付费客户(40%渗透率)。容易转化的用户大部分已转化，剩余150万未转化投资者属于「较难转化人群」: 满意现有券商(银行系)、交易不频繁、年龄偏大、品类不匹配。但每年仍有~5万新投资者进入市场(年轻人开始投资)，且竞品挖角风险使防守性营销不可或缺。",
+    "dimensions": {
+      "execution": {
+        "label": "执行难度",
+        "factors": "内容制作成本、平台规则/限制、专业技能门槛、监管约束(SFC)、竞争强度、见效周期",
+        "scale": "1=极易执行, 10=极难执行"
+      },
+      "conversion": {
+        "label": "转化难度",
+        "factors": "用户意图强度、市场饱和度(易转化用户已被转化?)、人群匹配度、信任机制、漏斗深度、归因难度",
+        "scale": "1=极易转化, 10=极难转化"
+      }
+    },
+    "channels": [
+      {
+        "name": "YouTube",
+        "execution": 6,
+        "execution_note": "长视频制作成本高, KOL价格贵(HK$5-20万/条), 但官方频道已有基础(107K subs)",
+        "conversion": 5,
+        "conversion_note": "内容建立信任, 但从观看到开户链路长; KOL评测类转化率0.3-1%, 品牌视频0.05-0.1%",
+        "saturation": "中",
+        "saturation_note": "富途声量仅4%, 大量用户看其他KOL内容, 仍有增量空间",
+        "est_conversion_rate": 0.005,
+        "conversion_label": "0.5%",
+        "new_user_potential": "高",
+        "new_user_note": "年轻人入市首选学习渠道, 每年新增投资者多从YouTube入门",
+        "quadrant": "中等执行-中等转化"
+      },
+      {
+        "name": "Google Search",
+        "execution": 2,
+        "execution_note": "SEM/SEO执行成熟, 富途已在做, 只需优化出价和landing page",
+        "conversion": 3,
+        "conversion_note": "搜索「开户」「券商比较」意图极强, 但竞价激烈CPC高(HK$30-80); 品牌词转化率5-15%, 品类词1-3%",
+        "saturation": "高",
+        "saturation_note": "富途已重点投入SEM, 搜索「富途」的人大部分已转化; 品类词竞争饱和",
+        "est_conversion_rate": 0.03,
+        "conversion_label": "3%",
+        "new_user_potential": "中",
+        "new_user_note": "新投资者会搜索「如何买美股」「开户推荐」, 但总搜索量增长有限",
+        "quadrant": "容易执行-容易转化(但饱和)"
+      },
+      {
+        "name": "Facebook",
+        "execution": 3,
+        "execution_note": "广告投放成熟, 素材制作简单, 但有机触达率极低(<2%), 需持续付费",
+        "conversion": 7,
+        "conversion_note": "用户以社交/新闻为目的, 投资意图弱; 信息流广告CTR~0.5%, 到开户~0.05%; 用户群偏大, 满意现有券商概率高",
+        "saturation": "高",
+        "saturation_note": "FB上35-55岁投资者大部分已有券商, 转化剩余用户需要更强的switching动机",
+        "est_conversion_rate": 0.0005,
+        "conversion_label": "0.05%",
+        "new_user_potential": "低",
+        "new_user_note": "FB年轻用户持续流失, 新投资者不在这里",
+        "quadrant": "容易执行-难转化"
+      },
+      {
+        "name": "Instagram",
+        "execution": 4,
+        "execution_note": "需要高质量视觉内容(Reels/Stories), 金融内容在IG天然弱势",
+        "conversion": 7,
+        "conversion_note": "用户以娱乐/时尚/美食为目的, 金融内容存在感极低; 即使看到也很难从IG跳转到开户",
+        "saturation": "低",
+        "saturation_note": "富途在IG声量仅1%, 但IG上投资者本来就少(年轻但投资比例低)",
+        "est_conversion_rate": 0.0003,
+        "conversion_label": "0.03%",
+        "new_user_potential": "中",
+        "new_user_note": "IG用户年轻, 未来几年会进入投资市场, 品牌认知有长期价值",
+        "quadrant": "中等执行-难转化"
+      },
+      {
+        "name": "TikTok",
+        "execution": 5,
+        "execution_note": "短视频制作需要专门技能, 算法驱动不稳定, 金融内容受平台限制",
+        "conversion": 8,
+        "conversion_note": "用户注意力极短(15-60秒), 从刷视频到开户心理距离极远; 年轻用户投资经验少, 转化周期长",
+        "saturation": "极低",
+        "saturation_note": "富途在TikTok声量仅1%, 且平台用户群年轻, 大部分尚未开始投资",
+        "est_conversion_rate": 0.0002,
+        "conversion_label": "0.02%",
+        "new_user_potential": "极高",
+        "new_user_note": "3-5年后这批用户将成为主力投资群体, 现在建立品牌认知=未来收割",
+        "quadrant": "较难执行-极难转化(但长期价值高)"
+      },
+      {
+        "name": "小红书",
+        "execution": 4,
+        "execution_note": "种草模式成熟, 但金融内容监管严(证券广告需合规), 笔记SEO竞争加剧",
+        "conversion": 6,
+        "conversion_note": "用户有「做功课」心态, 搜索「港股开户」笔记会仔细看; 但从种草到行动有时间差, 归因困难",
+        "saturation": "低",
+        "saturation_note": "小红书HK金融内容占比仅8%(IAB报告), 富途声量极低, 存在蓝海",
+        "est_conversion_rate": 0.002,
+        "conversion_label": "0.2%",
+        "new_user_potential": "高",
+        "new_user_note": "25-35岁女性投资者增长最快群体, 小红书是其首选信息渠道",
+        "quadrant": "中等执行-中等转化"
+      },
+      {
+        "name": "LIHKG",
+        "execution": 8,
+        "execution_note": "用户极度排斥商业内容, 品牌发帖会被「负皮」; 只能通过真实用户口碑或极隐蔽的软文",
+        "conversion": 3,
+        "conversion_note": "论坛用户信任peer recommendation, 一个真实好评=10个广告; 用户投资活跃度高, 转化意愿强",
+        "saturation": "中",
+        "saturation_note": "LIHKG核心用户约20-35万投资者, 其中可能40-50%已用富途, 但口碑效应影响周边人群",
+        "est_conversion_rate": 0.008,
+        "conversion_label": "0.8%",
+        "new_user_potential": "中",
+        "new_user_note": "LIHKG用户基数稳定, 但每个新帖子影响范围大, 性价比极高",
+        "quadrant": "极难执行-容易转化"
+      },
+      {
+        "name": "WhatsApp",
+        "execution": 3,
+        "execution_note": "MGM/邀请链接分享简单, 客服群运营成本低; 但spam风险高, 需谨慎",
+        "conversion": 2,
+        "conversion_note": "朋友推荐=最高信任度, MGM转化率通常5-15%; 但需要现有用户主动推荐",
+        "saturation": "中",
+        "saturation_note": "MGM是富途核心获客渠道之一, 但随着渗透率提高, 愿意推荐的用户社交圈中未开户者越来越少",
+        "est_conversion_rate": 0.08,
+        "conversion_label": "8%",
+        "new_user_potential": "中",
+        "new_user_note": "依赖现有用户社交网络扩展, 增量取决于用户满意度和激励机制",
+        "quadrant": "容易执行-极易转化(但量有限)"
+      },
+      {
+        "name": "Yahoo Finance HK",
+        "execution": 3,
+        "execution_note": "展示广告/原生广告投放简单, 赞助专栏需内容制作但门槛不高",
+        "conversion": 4,
+        "conversion_note": "用户正在查看行情/财经新闻, 投资意图强; 展示广告转化率~0.1-0.3%, 原生内容~0.5-1%",
+        "saturation": "中",
+        "saturation_note": "Yahoo Finance用户偏成熟(35-55岁), 多已有券商, 但可能被功能/费率优势吸引switching",
+        "est_conversion_rate": 0.003,
+        "conversion_label": "0.3%",
+        "new_user_potential": "低",
+        "new_user_note": "存量市场为主, 用户增长有限, 但单用户价值高(活跃交易者)",
+        "quadrant": "容易执行-较易转化"
+      },
+      {
+        "name": "MoneySmart / MoneyHero",
+        "execution": 2,
+        "execution_note": "CPA合作模式成熟, 提供开户优惠即可上架, 执行极简单",
+        "conversion": 2,
+        "conversion_note": "用户就是来比较开户的! 意图最强, 转化率3-8%(点击到注册), 1-3%(到入金)",
+        "saturation": "高",
+        "saturation_note": "比较平台上的用户大多已看过富途, 新增转化边际递减; 但平台持续有新用户搜索进入",
+        "est_conversion_rate": 0.02,
+        "conversion_label": "2%",
+        "new_user_potential": "中",
+        "new_user_note": "每月仍有新用户搜索「香港券商比较」进入, 但总量有限",
+        "quadrant": "极易执行-极易转化(但量小)"
+      },
+      {
+        "name": "LinkedIn",
+        "execution": 4,
+        "execution_note": "LinkedIn Ads成本高(CPC HK$30-60), InMail精准但扰人, 需要专业内容",
+        "conversion": 5,
+        "conversion_note": "用户为专业人士(高收入), 但LinkedIn上不是投资场景; 需要品牌+内容长期培养",
+        "saturation": "低",
+        "saturation_note": "富途在LinkedIn存在感极低, 高净值专业人士中渗透率可能<30%",
+        "est_conversion_rate": 0.002,
+        "conversion_label": "0.2%",
+        "new_user_potential": "中",
+        "new_user_note": "每年有新的年轻专业人士加入, 收入增长后开始投资",
+        "quadrant": "中等执行-中等转化(高LTV)"
+      },
+      {
+        "name": "Telegram",
+        "execution": 5,
+        "execution_note": "需要建立/运营高质量频道, 内容要求持续且有价值; 或赞助现有财经频道",
+        "conversion": 4,
+        "conversion_note": "Telegram用户偏crypto/活跃交易者, 投资意图强; 频道推荐信任度高",
+        "saturation": "低",
+        "saturation_note": "富途在Telegram存在感弱, crypto社群与传统券商用户重叠度低, 是增量市场",
+        "est_conversion_rate": 0.005,
+        "conversion_label": "0.5%",
+        "new_user_potential": "高",
+        "new_user_note": "crypto用户跨品类到美股/港股是增长趋势, Telegram是触达入口",
+        "quadrant": "中等执行-较易转化"
+      },
+      {
+        "name": "Podcast",
+        "execution": 7,
+        "execution_note": "HK财经播客生态小, 优质播客少; 需要长期赞助建立关系, 内容制作周期长",
+        "conversion": 3,
+        "conversion_note": "听众粘性极高, 主播推荐=强背书, promo code追踪转化率0.5-2%; 听众多为深度投资者",
+        "saturation": "极低",
+        "saturation_note": "富途几乎没有播客投入, 是完全的空白市场",
+        "est_conversion_rate": 0.01,
+        "conversion_label": "1%",
+        "new_user_potential": "中",
+        "new_user_note": "播客用户增长稳定, 虽然基数小但用户质量极高(高收入/高活跃)",
+        "quadrant": "较难执行-容易转化(小众高质)"
+      },
+      {
+        "name": "Bilibili",
+        "execution": 5,
+        "execution_note": "需要中文长视频内容, 针对内地来港人群; B站金融区竞争激烈",
+        "conversion": 6,
+        "conversion_note": "用户以内地来港学生/打工者为主, 投资经验有限; 从B站到HK券商开户有额外门槛(身份证明等)",
+        "saturation": "极低",
+        "saturation_note": "内地来港人群是全新市场, 富途在B站基本无存在",
+        "est_conversion_rate": 0.001,
+        "conversion_label": "0.1%",
+        "new_user_potential": "高",
+        "new_user_note": "每年~5万内地学生/人才来港, 是净新增投资者来源",
+        "quadrant": "中等执行-较难转化(但纯增量)"
+      },
+      {
+        "name": "财经新闻(SCMP/HKET/经济日报)",
+        "execution": 3,
+        "execution_note": "品牌广告/赞助内容购买简单, 但成本高(版面广告HK$5-20万)",
+        "conversion": 7,
+        "conversion_note": "读者以获取资讯为目的, 非寻找券商; 品牌广告曝光转化率极低(<0.01%), 主要价值在品牌建设",
+        "saturation": "高",
+        "saturation_note": "传统财经媒体读者以40-60岁为主, 大部分已有长期使用的券商, 极难switching",
+        "est_conversion_rate": 0.0001,
+        "conversion_label": "0.01%",
+        "new_user_potential": "极低",
+        "new_user_note": "传统媒体读者老化, 新增投资者不在这里获取信息",
+        "quadrant": "容易执行-极难转化(品牌价值)"
+      },
+      {
+        "name": "Investing.com / TradingView",
+        "execution": 3,
+        "execution_note": "展示广告/Broker集成合作模式成熟, 开户Banner转化链路短",
+        "conversion": 3,
+        "conversion_note": "用户是活跃交易者, 已有投资习惯; 如果工具体验好可直接转化; CPA合作转化率1-3%",
+        "saturation": "中",
+        "saturation_note": "使用这些工具的活跃交易者可能已有券商, 但对工具/费率敏感, 愿意尝试新平台",
+        "est_conversion_rate": 0.01,
+        "conversion_label": "1%",
+        "new_user_potential": "中",
+        "new_user_note": "随着散户交易活跃度提升, 工具平台用户缓慢增长",
+        "quadrant": "容易执行-较易转化"
+      }
+    ],
+    "key_insights": [
+      {
+        "title": "饱和效应: 容易转化的用户确实已大部分转化",
+        "body": "富途HK运营10年, 40%渗透率意味着「搜索开户→比较→注册」这条路径上的高意图用户已被充分转化。Google SEM、比较平台(MoneySmart)、口碑(MGM)这些高转化渠道的边际收益正在递减。",
+        "color": "red"
+      },
+      {
+        "title": "剩余150万未转化投资者的画像",
+        "body": "他们不是「没听过富途」, 而是: ①满意现有银行系券商(习惯+信任)的35-55岁群体 ②交易不频繁(<年4次)不需要低佣金 ③投资品类不匹配(只买基金/保险, 非股票) ④新来港人士(内地/海外, 不熟悉本地券商)。转化这批人需要不同策略。",
+        "color": "amber"
+      },
+      {
+        "title": "「难做」≠「难转化」— 反直觉的高ROI渠道",
+        "body": "LIHKG(执行难度8/转化难度3): 用户排斥广告但极信赖peer recommendation, 一条真实好评胜过100条广告。Podcast(执行难度7/转化难度3): 听众少但极精准, promo code转化率1%远超社媒0.05%。这些渠道「难做」但一旦做好, 转化效率碾压「容易做」的展示广告。",
+        "color": "green"
+      },
+      {
+        "title": "真正的增量来源: 新入市投资者 + 跨品类迁移",
+        "body": "每年~5万HK新增投资者(年轻人首次投资) + 内地来港人才~5万/年 + crypto用户跨品类到传统证券。这些人没有「已有券商」的switching成本, 是纯增量。他们在: TikTok/小红书(年轻人)、B站(内地来港)、Telegram(crypto)。这些渠道转化率虽低, 但面对的是「零饱和」市场。",
+        "color": "blue"
+      }
+    ]
   }
 }
