@@ -3058,6 +3058,192 @@
           }
         ]
       }
+    },
+    "account_switching": {
+      "title": "加开账户流向分析",
+      "subtitle": "香港投资者平均持有2.0-2.5个证券/投资账户，以下为主要的账户迁移和加开路径",
+      "flows": [
+        {
+          "from": "银行零售证券",
+          "to": "互联网券商",
+          "volume_label": "最大流量",
+          "volume_score": 100,
+          "triggers": [
+            "佣金低80-90%",
+            "美股交易需求",
+            "App体验更好",
+            "IPO认购便捷",
+            "社交/朋友推荐"
+          ],
+          "evidence": "HKEX市场份额数据显示前14大参与者(含互联网券商)占57.4%成交，2024年手机App体验已超越价格成为首要选择因素",
+          "source": "Investment Trends 2024 + HKEX",
+          "color": "emerald"
+        },
+        {
+          "from": "传统券商",
+          "to": "互联网券商/银行",
+          "volume_label": "加速中",
+          "volume_score": 70,
+          "triggers": [
+            "券商关闭被迫转户",
+            "费用高服务跟不上",
+            "缺少美股/加密货币",
+            "系统老旧"
+          ],
+          "evidence": "2020年以来197家小型券商关闭，2024年近40家退出，2025上半年又关23家。1300+家C类券商市占率仅12.5%",
+          "source": "SFC + Bloomberg",
+          "color": "amber"
+        },
+        {
+          "from": "银行零售",
+          "to": "私人银行",
+          "volume_label": "稳定增长",
+          "volume_score": 50,
+          "triggers": [
+            "资产达到门槛(HK$800万+)",
+            "需要另类投资准入",
+            "税务/传承规划需求",
+            "更优融资利率"
+          ],
+          "evidence": "私行AUM同比+15%达HK$10.4万亿，净流入HK$3840亿。59%私行机构报告客户更倾向在港管理资产",
+          "source": "KPMG/PWMA 2025",
+          "color": "indigo"
+        },
+        {
+          "from": "互联网券商A",
+          "to": "互联网券商B",
+          "volume_label": "频繁",
+          "volume_score": 45,
+          "triggers": [
+            "特定市场覆盖(美股/港股/A股)",
+            "交易执行质量",
+            "闲置资金利率",
+            "开户奖励"
+          ],
+          "evidence": "Investment Trends 2023报告\"前所未有的券商间切换\"，>20%在线投资者使用多家专业券商",
+          "source": "Investment Trends 2023-2024",
+          "color": "teal"
+        },
+        {
+          "from": "各类机构",
+          "to": "虚拟资产交易所",
+          "volume_label": "新兴",
+          "volume_score": 25,
+          "triggers": [
+            "加密货币投资需求",
+            "SFC持牌合规化",
+            "虚拟资产ETF推出",
+            "52%私行计划3年内布局"
+          ],
+          "evidence": "虚拟资产持有率从2023年8%升至2025年10%，盈透证券成为首家提供加密交易的SFC持牌券商",
+          "source": "IFEC 2025 + SFC",
+          "color": "orange"
+        }
+      ],
+      "trigger_ranking": {
+        "title": "加开账户触发因素排名",
+        "items": [
+          {
+            "rank": 1,
+            "trigger": "更好的手机App体验",
+            "source": "Investment Trends 2024: App已超越价格成为首要选择因素"
+          },
+          {
+            "rank": 2,
+            "trigger": "更低的佣金/费用",
+            "source": "互联网券商佣金比银行低80-90%"
+          },
+          {
+            "rank": 3,
+            "trigger": "美股交易需求",
+            "source": ">20%在线投资者为美股专门开户"
+          },
+          {
+            "rank": 4,
+            "trigger": "IPO认购机会",
+            "source": "2025年116家新上市，IPO市场回暖"
+          },
+          {
+            "rank": 5,
+            "trigger": "交易执行质量",
+            "source": "2023年\"前所未有的切换\"的主要驱动因素"
+          },
+          {
+            "rank": 6,
+            "trigger": "社交推荐/开户奖励",
+            "source": "Investment Trends: 个人推荐和奖励在开户中的地位上升"
+          },
+          {
+            "rank": 7,
+            "trigger": "闲置资金利率",
+            "source": "高息环境下券商间比拼现金利率"
+          },
+          {
+            "rank": 8,
+            "trigger": "AI工具和研究功能",
+            "source": "17%在线投资者已使用AI工具"
+          }
+        ]
+      },
+      "market_structure_shift": {
+        "title": "市场结构变迁",
+        "items": [
+          {
+            "year": "2019",
+            "small_brokers": 606,
+            "note": "小型券商数量峰值"
+          },
+          {
+            "year": "2020",
+            "small_brokers": 580,
+            "note": "疫情加速线上化"
+          },
+          {
+            "year": "2021",
+            "small_brokers": 550,
+            "note": "互联网券商快速增长"
+          },
+          {
+            "year": "2022",
+            "small_brokers": 520,
+            "note": "市场低迷加速淘汰"
+          },
+          {
+            "year": "2023",
+            "small_brokers": 510,
+            "note": "前所未有的券商间切换"
+          },
+          {
+            "year": "2024",
+            "small_brokers": 470,
+            "note": "近40家退出"
+          },
+          {
+            "year": "2025H1",
+            "small_brokers": 498,
+            "note": "23家退出，总数498家(含所有类别)"
+          }
+        ],
+        "source": "SFC + Bloomberg"
+      },
+      "key_sources": [
+        {
+          "name": "Investment Trends 2024 HK Report",
+          "url": "https://investmenttrends.com/resource/2024-hong-kong-online-investing-report/"
+        },
+        {
+          "name": "KPMG/PWMA私人财富管理报告2025",
+          "url": "https://assets.kpmg.com/content/dam/kpmg/cn/pdf/en/2025/11/hong-kong-private-wealth-management-report-2025.pdf"
+        },
+        {
+          "name": "SFC Financial Review 2024",
+          "url": "https://www.sfc.hk/-/media/EN/files/COM/Reports-and-surveys/ENG-Financial-Review-of-the-Securities-Industry-for-the-year-ended-31-Dec-2024-20250326final.pdf"
+        },
+        {
+          "name": "Bloomberg: 小型券商持续退出",
+          "url": "https://www.bloomberg.com/news/articles/2024-12-17/hong-kong-loses-almost-40-brokers-in-another-grim-year"
+        }
+      ]
     }
   },
   "ai_acquisition": {
@@ -4429,6 +4615,93 @@
         {
           "name": "Insurance Authority 2024统计",
           "url": "https://www.ia.org.hk/en/infocenter/statistics/market_5_2024.html"
+        }
+      ]
+    },
+    "institution_investor_distribution": {
+      "title": "297万投资者的机构分布",
+      "subtitle": "同一投资者通常使用2-2.5个机构，总和超过297万",
+      "items": [
+        {
+          "name": "银行财富管理/银行证券",
+          "holders_low": 1500000,
+          "holders_high": 2000000,
+          "holders_label": "150-200万",
+          "pct_label": "50-67%",
+          "detail": "最大渠道。几乎所有投资者首次接触投资产品都通过银行，包括银行代销基金、结构性存款、银行证券交易",
+          "source": "SFC AWMAS 2024",
+          "color": "blue",
+          "examples": "HSBC/恒生/中银/渣打零售证券"
+        },
+        {
+          "name": "互联网券商",
+          "holders_low": 800000,
+          "holders_high": 1000000,
+          "holders_label": "80-100万",
+          "pct_label": "27-34%",
+          "detail": "增长最快。>20%在线投资者使用专业互联网券商做美股交易，手机App体验已超越价格成为首要选择因素",
+          "source": "Investment Trends 2024",
+          "color": "emerald",
+          "examples": "富途/老虎/盈透/Webull/Saxo"
+        },
+        {
+          "name": "保险投资产品",
+          "holders_low": 400000,
+          "holders_high": 700000,
+          "holders_label": "40-70万",
+          "pct_label": "13-24%",
+          "detail": "投连险(ILAS)持有人约40-70万，储蓄分红险持有人更多但IFEC不计入\"投资产品\"",
+          "source": "Insurance Authority 2024",
+          "color": "violet",
+          "examples": "AIA/保诚/宏利/友邦储蓄险"
+        },
+        {
+          "name": "传统券商(本地证券行)",
+          "holders_low": 300000,
+          "holders_high": 500000,
+          "holders_label": "30-50万",
+          "pct_label": "10-17%",
+          "detail": "结构性衰退中。2020年以来197家小型券商关闭，1300+家C类券商仅占总成交12.5%",
+          "source": "SFC Financial Review 2024",
+          "color": "amber",
+          "examples": "耀才/辉立/信诚等本地券商"
+        },
+        {
+          "name": "持牌虚拟资产交易所",
+          "holders_low": 100000,
+          "holders_high": 200000,
+          "holders_label": "10-20万",
+          "pct_label": "3-7%",
+          "detail": "11家SFC持牌VATP，渗透率从2023年8%升至2025年10%",
+          "source": "IFEC 2025 + SFC",
+          "color": "orange",
+          "examples": "HashKey/OSL/HKVAX"
+        },
+        {
+          "name": "基金平台/智能投顾",
+          "holders_low": 50000,
+          "holders_high": 100000,
+          "holders_label": "5-10万",
+          "pct_label": "2-3%",
+          "detail": "新兴但规模尚小，主打低费率被动配置和MPF优化",
+          "source": "各平台披露",
+          "color": "cyan",
+          "examples": "Endowus/StashAway/Syfe/AQUMON"
+        }
+      ],
+      "note": "私人银行(46家机构，AUM HK$10.4万亿)服务约10-15万高净值客户，多数从银行零售部升级而来",
+      "key_sources": [
+        {
+          "name": "SFC AWMAS 2024",
+          "url": "https://www.sfc.hk/-/media/EN/files/COM/Reports-and-surveys/EN_AWMAS-2024.pdf"
+        },
+        {
+          "name": "Investment Trends 2024",
+          "url": "https://investmenttrends.com/resource/2024-hong-kong-online-investing-report/"
+        },
+        {
+          "name": "SFC Financial Review 2024",
+          "url": "https://www.sfc.hk/-/media/EN/files/COM/Reports-and-surveys/ENG-Financial-Review-of-the-Securities-Industry-for-the-year-ended-31-Dec-2024-20250326final.pdf"
         }
       ]
     }

@@ -154,33 +154,42 @@
         {% endfor %}
     </div>
 
-    <!-- 机构分布 - 横向条 -->
-    <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ wealth_panorama.institution_distribution.title }}</h3>
-    <p class="text-[10px] text-gray-400 mb-3">{{ wealth_panorama.institution_distribution.note }}</p>
-    <div class="space-y-3 mb-6">
-        {% for cat in wealth_panorama.institution_distribution.categories %}
-        {% set inst_colors = {"blue": "from-blue-400 to-blue-500", "violet": "from-violet-400 to-violet-500", "amber": "from-amber-400 to-amber-500", "emerald": "from-emerald-400 to-emerald-500", "sky": "from-sky-400 to-sky-500", "indigo": "from-indigo-400 to-indigo-500"} %}
-        <div>
-            <div class="flex items-center gap-3 mb-1">
-                <div class="w-36 text-sm text-right text-gray-700 font-medium shrink-0">{{ cat.name }}</div>
-                <div class="flex-1 bg-gray-100 rounded-full h-7 relative overflow-hidden">
-                    <div class="h-full rounded-full bg-gradient-to-r {{ inst_colors.get(cat.color, 'from-gray-400 to-gray-500') }} flex items-center justify-end pr-2.5"
-                         style="width: {{ (cat.pct / 55 * 100) | round }}%">
-                        <span class="text-xs font-bold text-white">~{{ cat.pct }}%</span>
+    <!-- 投资者机构分布 -->
+    {% if wealth_panorama.institution_investor_distribution %}
+    {% set iid = wealth_panorama.institution_investor_distribution %}
+    <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ iid.title }}</h3>
+    <p class="text-[10px] text-gray-400 mb-4">{{ iid.subtitle }}</p>
+    {% set iid_colors = {"blue": "bg-blue-500", "emerald": "bg-emerald-500", "violet": "bg-violet-500", "amber": "bg-amber-500", "orange": "bg-orange-500", "cyan": "bg-cyan-500"} %}
+    {% set iid_bg = {"blue": "bg-blue-50 border-blue-200", "emerald": "bg-emerald-50 border-emerald-200", "violet": "bg-violet-50 border-violet-200", "amber": "bg-amber-50 border-amber-200", "orange": "bg-orange-50 border-orange-200", "cyan": "bg-cyan-50 border-cyan-200"} %}
+    <div class="space-y-2.5 mb-3">
+        {% for item in iid.items %}
+        <div class="flex items-start gap-3">
+            <div class="w-40 sm:w-48 text-right shrink-0 pt-0.5">
+                <div class="text-xs font-semibold text-gray-700">{{ item.name }}</div>
+                <div class="text-[10px] text-gray-400">{{ item.examples }}</div>
+            </div>
+            <div class="flex-1">
+                <div class="flex items-center gap-2 mb-0.5">
+                    <div class="flex-1 bg-gray-100 rounded-full h-6 relative overflow-hidden">
+                        <div class="{{ iid_colors.get(item.color, 'bg-gray-500') }} h-6 rounded-full flex items-center justify-end pr-2 transition-all"
+                             style="width: {{ (item.holders_high / 2000000 * 100) | round | int }}%; min-width: 60px">
+                            <span class="text-[10px] font-bold text-white">{{ item.holders_label }}</span>
+                        </div>
                     </div>
+                    <span class="text-[10px] text-gray-400 w-12 shrink-0">{{ item.pct_label }}</span>
                 </div>
+                <div class="text-[10px] text-gray-500 leading-snug">{{ item.detail }}</div>
             </div>
-            <div class="ml-39 pl-1 text-xs text-gray-400">{{ cat.detail }}</div>
-            {% if cat.sub %}
-            <div class="ml-39 pl-1 flex flex-wrap gap-1.5 mt-1">
-                {% for s in cat.sub %}
-                <span class="text-[10px] px-1.5 py-0.5 bg-gray-100 text-gray-500 rounded">{{ s.name }}{% if s.share %} {{ s.share }}{% endif %}</span>
-                {% endfor %}
-            </div>
-            {% endif %}
         </div>
         {% endfor %}
     </div>
+    <div class="text-[10px] text-gray-400 mb-1">{{ iid.note }}</div>
+    <div class="flex flex-wrap gap-2 mb-6">
+        {% for src in iid.key_sources %}
+        <a href="{{ src.url }}" target="_blank" class="text-[10px] text-indigo-400 hover:text-indigo-600 underline">{{ src.name }}</a>
+        {% endfor %}
+    </div>
+    {% endif %}
 
     <!-- MPF + 私人银行配置并排 -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
@@ -1258,6 +1267,82 @@
     </div>
 
     <p class="text-xs text-gray-400 mt-3">来源: {{ new_investor_analysis.data_sources }}</p>
+
+    <!-- 加开账户流向分析 -->
+    {% if new_investor_analysis.account_switching %}
+    {% set asw = new_investor_analysis.account_switching %}
+    <div class="mt-6 pt-6 border-t border-gray-200">
+        <h4 class="text-lg font-semibold text-gray-900 mb-1">{{ asw.title }}</h4>
+        <p class="text-xs text-gray-400 mb-4">{{ asw.subtitle }}</p>
+
+        <!-- 流向卡片 -->
+        {% set flow_colors = {"emerald": "border-l-emerald-500 bg-emerald-50", "amber": "border-l-amber-500 bg-amber-50", "indigo": "border-l-indigo-500 bg-indigo-50", "teal": "border-l-teal-500 bg-teal-50", "orange": "border-l-orange-500 bg-orange-50"} %}
+        {% set flow_text = {"emerald": "text-emerald-700", "amber": "text-amber-700", "indigo": "text-indigo-700", "teal": "text-teal-700", "orange": "text-orange-700"} %}
+        {% set flow_bar = {"emerald": "bg-emerald-500", "amber": "bg-amber-500", "indigo": "bg-indigo-500", "teal": "bg-teal-500", "orange": "bg-orange-500"} %}
+        <div class="space-y-3 mb-5">
+            {% for flow in asw.flows %}
+            <div class="border-l-4 {{ flow_colors.get(flow.color, 'border-l-gray-400 bg-gray-50') }} rounded-r-xl p-3">
+                <div class="flex items-center gap-2 mb-1.5">
+                    <span class="text-sm font-bold text-gray-800">{{ flow['from'] }}</span>
+                    <span class="text-gray-400">→</span>
+                    <span class="text-sm font-bold text-gray-800">{{ flow.to }}</span>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full {{ flow_text.get(flow.color, 'text-gray-600') }} bg-white border font-medium ml-auto">{{ flow.volume_label }}</span>
+                </div>
+                <!-- 流量条 -->
+                <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                    <div class="{{ flow_bar.get(flow.color, 'bg-gray-500') }} h-1.5 rounded-full" style="width: {{ flow.volume_score }}%"></div>
+                </div>
+                <div class="text-xs text-gray-600 mb-1.5">{{ flow.evidence }}</div>
+                <div class="flex flex-wrap gap-1.5">
+                    {% for t in flow.triggers %}
+                    <span class="text-[10px] px-1.5 py-0.5 bg-white border border-gray-200 text-gray-500 rounded">{{ t }}</span>
+                    {% endfor %}
+                </div>
+                <div class="text-[10px] text-gray-300 mt-1">{{ flow.source }}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- 触发因素排名 -->
+        {% if asw.trigger_ranking %}
+        <h5 class="text-sm font-semibold text-gray-700 mb-2">{{ asw.trigger_ranking.title }}</h5>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 mb-5">
+            {% for item in asw.trigger_ranking.items %}
+            <div class="flex items-start gap-2 text-xs">
+                <span class="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center shrink-0 text-[10px]">{{ item.rank }}</span>
+                <div>
+                    <span class="font-medium text-gray-700">{{ item.trigger }}</span>
+                    <span class="text-gray-400 ml-1">{{ item.source }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- 市场结构变迁 -->
+        {% if asw.market_structure_shift %}
+        {% set mss = asw.market_structure_shift %}
+        <h5 class="text-sm font-semibold text-gray-700 mb-2">{{ mss.title }} — 小型券商持续退出</h5>
+        <div class="flex items-end gap-1 h-28 mb-2">
+            {% set max_brokers = 606 %}
+            {% for item in mss.items %}
+            <div class="flex-1 flex flex-col items-center">
+                <span class="text-[10px] text-gray-500 font-medium mb-1">{{ item.small_brokers }}</span>
+                <div class="w-full bg-amber-400 rounded-t transition-all" style="height: {{ (item.small_brokers / max_brokers * 100) | round }}%"></div>
+                <span class="text-[10px] text-gray-400 mt-1">{{ item.year }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-[10px] text-gray-300 mb-3">{{ mss.source }}</div>
+        {% endif %}
+
+        <div class="flex flex-wrap gap-2">
+            {% for src in asw.key_sources %}
+            <a href="{{ src.url }}" target="_blank" class="text-[10px] text-indigo-400 hover:text-indigo-600 underline">{{ src.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 </div>
 {% endif %}
 
