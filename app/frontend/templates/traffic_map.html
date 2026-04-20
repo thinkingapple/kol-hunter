@@ -1279,6 +1279,13 @@
         {% set flow_colors = {"emerald": "border-l-emerald-500 bg-emerald-50", "amber": "border-l-amber-500 bg-amber-50", "indigo": "border-l-indigo-500 bg-indigo-50", "teal": "border-l-teal-500 bg-teal-50", "orange": "border-l-orange-500 bg-orange-50"} %}
         {% set flow_text = {"emerald": "text-emerald-700", "amber": "text-amber-700", "indigo": "text-indigo-700", "teal": "text-teal-700", "orange": "text-orange-700"} %}
         {% set flow_bar = {"emerald": "bg-emerald-500", "amber": "bg-amber-500", "indigo": "bg-indigo-500", "teal": "bg-teal-500", "orange": "bg-orange-500"} %}
+        {% set dq_badge = {"hard": "bg-green-100 text-green-700 border-green-300", "partial": "bg-amber-100 text-amber-700 border-amber-300", "inferred": "bg-red-100 text-red-700 border-red-300"} %}
+        {% set dq_label = {"hard": "有硬数据", "partial": "部分数据", "inferred": "推断"} %}
+        <div class="flex flex-wrap gap-3 mb-3 text-[10px] text-gray-400">
+            <span class="flex items-center gap-1"><span class="px-1.5 py-0.5 bg-green-100 text-green-700 border border-green-300 rounded">有硬数据</span>来源可查证</span>
+            <span class="flex items-center gap-1"><span class="px-1.5 py-0.5 bg-amber-100 text-amber-700 border border-amber-300 rounded">部分数据</span>付费报告摘要/仅AUM</span>
+            <span class="flex items-center gap-1"><span class="px-1.5 py-0.5 bg-red-100 text-red-700 border border-red-300 rounded">推断</span>基于市场数据推断</span>
+        </div>
         <div class="space-y-3 mb-5">
             {% for flow in asw.flows %}
             <div class="border-l-4 {{ flow_colors.get(flow.color, 'border-l-gray-400 bg-gray-50') }} rounded-r-xl p-3">
@@ -1286,11 +1293,7 @@
                     <span class="text-sm font-bold text-gray-800">{{ flow['from'] }}</span>
                     <span class="text-gray-400">→</span>
                     <span class="text-sm font-bold text-gray-800">{{ flow.to }}</span>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full {{ flow_text.get(flow.color, 'text-gray-600') }} bg-white border font-medium ml-auto">{{ flow.volume_label }}</span>
-                </div>
-                <!-- 流量条 -->
-                <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
-                    <div class="{{ flow_bar.get(flow.color, 'bg-gray-500') }} h-1.5 rounded-full" style="width: {{ flow.volume_score }}%"></div>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded border font-medium ml-auto {{ dq_badge.get(flow.data_quality, 'bg-gray-100 text-gray-600 border-gray-300') }}">{{ flow.volume_label }}</span>
                 </div>
                 <div class="text-xs text-gray-600 mb-1.5">{{ flow.evidence }}</div>
                 <div class="flex flex-wrap gap-1.5">
@@ -1306,12 +1309,14 @@
         <!-- 触发因素排名 -->
         {% if asw.trigger_ranking %}
         <h5 class="text-sm font-semibold text-gray-700 mb-2">{{ asw.trigger_ranking.title }}</h5>
+        <div class="text-[10px] text-amber-500 mb-2">{{ asw.trigger_ranking.note }}</div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 mb-5">
             {% for item in asw.trigger_ranking["items"] %}
             <div class="flex items-start gap-2 text-xs">
                 <span class="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center shrink-0 text-[10px]">{{ item.rank }}</span>
                 <div>
                     <span class="font-medium text-gray-700">{{ item.trigger }}</span>
+                    <span class="text-[10px] px-1 py-0.5 rounded border ml-1 {{ dq_badge.get(item.data_quality, 'bg-gray-100 text-gray-500 border-gray-200') }}">{{ dq_label.get(item.data_quality, '') }}</span>
                     <span class="text-gray-400 ml-1">{{ item.source }}</span>
                 </div>
             </div>
