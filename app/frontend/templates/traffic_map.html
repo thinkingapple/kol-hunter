@@ -1327,17 +1327,29 @@
         <!-- 市场结构变迁 -->
         {% if asw.market_structure_shift %}
         {% set mss = asw.market_structure_shift %}
-        <h5 class="text-sm font-semibold text-gray-700 mb-2">{{ mss.title }} — 小型券商持续退出</h5>
-        <div class="flex items-end gap-1 h-28 mb-2">
-            {% set max_brokers = 606 %}
+        <h5 class="text-sm font-semibold text-gray-700 mb-1">{{ mss.title }}</h5>
+        <p class="text-[10px] text-gray-400 mb-3">{{ mss.subtitle }}</p>
+        <!-- 持牌数条形图 -->
+        <div class="flex items-end gap-2 h-32 mb-2">
             {% for item in mss["items"] %}
             <div class="flex-1 flex flex-col items-center">
-                <span class="text-[10px] text-gray-500 font-medium mb-1">{{ item.small_brokers }}</span>
-                <div class="w-full bg-amber-400 rounded-t transition-all" style="height: {{ (item.small_brokers / max_brokers * 100) | round }}%"></div>
+                <span class="text-[10px] text-gray-600 font-bold mb-1">{{ item.count }}</span>
+                <div class="w-full bg-indigo-400 rounded-t transition-all" style="height: {{ ((item.count - 1380) / 50 * 100) | round | int }}%"></div>
                 <span class="text-[10px] text-gray-400 mt-1">{{ item.year }}</span>
             </div>
             {% endfor %}
         </div>
+        <!-- 关闭数据 -->
+        <div class="flex flex-wrap gap-3 mb-2">
+            {% for c in mss.closures %}
+            <div class="text-xs"><span class="font-medium text-amber-600">{{ c.period }}:</span> <span class="text-gray-600">关闭{{ c.closed }}</span> <span class="text-[10px] text-gray-300">({{ c.source }})</span></div>
+            {% endfor %}
+        </div>
+        <!-- 集中度 -->
+        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-2.5 mb-2 text-xs text-gray-600">
+            <span class="font-semibold text-indigo-700">成交集中度:</span> {{ mss.concentration }}
+        </div>
+        <div class="text-[10px] text-gray-400 mb-3">{{ mss.note }}</div>
         <div class="text-[10px] text-gray-300 mb-3">{{ mss.source }}</div>
         {% endif %}
 

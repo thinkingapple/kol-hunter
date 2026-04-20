@@ -3185,45 +3185,50 @@
         "note": "排名顺序基于多个来源的定性判断，非单一调查的精确排序。香港目前没有公开调查同时比较所有加开触发因素。"
       },
       "market_structure_shift": {
-        "title": "市场结构变迁",
+        "title": "SFC持牌证券交易商数量变化",
+        "subtitle": "证监会持牌法团中从事证券交易(Type 1)的公司总数",
         "items": [
           {
-            "year": "2019",
-            "small_brokers": 606,
-            "note": "小型券商数量峰值"
+            "year": "2020.3",
+            "count": 1413,
+            "source": "SFC Annual Report 2019-20"
           },
           {
-            "year": "2020",
-            "small_brokers": 580,
-            "note": "疫情加速线上化"
+            "year": "2021.3",
+            "count": 1421,
+            "source": "SFC Annual Report 2020-21"
           },
           {
-            "year": "2021",
-            "small_brokers": 550,
-            "note": "互联网券商快速增长"
+            "year": "2022.3",
+            "count": 1411,
+            "source": "SFC Annual Report 2021-22"
           },
           {
-            "year": "2022",
-            "small_brokers": 520,
-            "note": "市场低迷加速淘汰"
+            "year": "2023.3",
+            "count": 1406,
+            "source": "SFC Annual Report 2022-23"
           },
           {
-            "year": "2023",
-            "small_brokers": 510,
-            "note": "前所未有的券商间切换"
-          },
-          {
-            "year": "2024",
-            "small_brokers": 470,
-            "note": "近40家退出"
-          },
-          {
-            "year": "2025H1",
-            "small_brokers": 498,
-            "note": "23家退出，总数498家(含所有类别)"
+            "year": "2024.12",
+            "count": 1397,
+            "source": "SFC Financial Review 2024"
           }
         ],
-        "source": "SFC + Bloomberg"
+        "closures": [
+          {
+            "period": "2024全年",
+            "closed": "近40家",
+            "source": "Bloomberg 2024.12"
+          },
+          {
+            "period": "2025上半年",
+            "closed": "23家",
+            "source": "SCMP 2025"
+          }
+        ],
+        "note": "总持牌数下降较慢(从1413降至1397)，因为有新持牌进入。但小型券商(C类，排名65以后)市占率从约20%降至12.5%，客户和成交持续向头部集中。",
+        "concentration": "前14大参与者(A类)占57.4%成交，中型(B类,15-65名)占30.1%，1300+家C类仅占12.5%",
+        "source": "SFC Annual Reports + Financial Review 2024"
       },
       "key_sources": [
         {
