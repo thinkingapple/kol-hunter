@@ -23,8 +23,159 @@
 } %}
 {% set default_color = {'bg': 'bg-gray-50', 'border': 'border-gray-200', 'text': 'text-gray-700', 'dot': 'bg-gray-500', 'bar': 'bg-gray-500'} %}
 
+<!-- ===== 子Tab导航 ===== -->
+<div class="mb-5 border-b border-gray-200 sticky top-0 bg-white z-50 -mx-6 px-6 pt-1">
+    <nav class="flex gap-1 overflow-x-auto" id="sub-tabs">
+        <button class="sub-tab active px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-indigo-500 text-indigo-700 bg-indigo-50 whitespace-nowrap" data-tab="tab-market">市场全景</button>
+        <button class="sub-tab px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50 whitespace-nowrap" data-tab="tab-investor">投资者画像</button>
+        <button class="sub-tab px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50 whitespace-nowrap" data-tab="tab-channels">渠道分析</button>
+        <button class="sub-tab px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50 whitespace-nowrap" data-tab="tab-acquisition">获客策略</button>
+        <button class="sub-tab px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50 whitespace-nowrap" data-tab="tab-methodology">方法论</button>
+    </nav>
+</div>
+
+<!-- ===== 香港个人财富全景图 ===== -->
+{% if wealth_panorama %}
+<div class="stat-card mb-6" data-tab="tab-market" id="sec-wealth">
+    <div class="flex items-center justify-between mb-1">
+        <h2 class="text-xl font-bold text-gray-900">{{ wealth_panorama.title }}</h2>
+        <span class="text-xs text-gray-400">{{ wealth_panorama.updated_at }}</span>
+    </div>
+    <p class="text-sm text-gray-500 mb-5">{{ wealth_panorama.subtitle }}</p>
+
+    <!-- 核心人数卡片 -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+        {% for kn in wealth_panorama.key_numbers %}
+        <div class="bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 rounded-xl p-3 text-center">
+            <div class="text-[10px] text-gray-400 mb-1">{{ kn.label }}</div>
+            <div class="text-lg font-bold text-gray-900">{{ kn.value }}</div>
+            {% if kn.detail %}<div class="text-[10px] text-gray-500 leading-snug mt-0.5">{{ kn.detail }}</div>{% endif %}
+            <div class="text-[10px] text-gray-300 mt-0.5">{{ kn.source }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- 资产类别分布 - 横向堆叠条 + 详情 -->
+    <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ wealth_panorama.asset_allocation.title }}</h3>
+    <p class="text-[10px] text-gray-400 mb-3">{{ wealth_panorama.asset_allocation.note }}</p>
+    <!-- 堆叠条 -->
+    <div class="w-full h-10 rounded-lg overflow-hidden flex mb-4">
+        {% set alloc_colors = {"slate": "bg-slate-500", "blue": "bg-blue-500", "emerald": "bg-emerald-500", "violet": "bg-violet-500", "amber": "bg-amber-500", "indigo": "bg-indigo-500", "teal": "bg-teal-500", "orange": "bg-orange-500", "gray": "bg-gray-400"} %}
+        {% for item in wealth_panorama.asset_allocation["items"] %}
+        <div class="{{ alloc_colors.get(item.color, 'bg-gray-400') }} h-full flex items-center justify-center text-[10px] text-white font-bold relative group cursor-pointer"
+             style="width: {{ item.pct }}%"
+             title="{{ item.name }} {{ item.pct }}%">
+            {% if item.pct >= 5 %}{{ item.name }} {{ item.pct }}%{% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <!-- 详情网格 -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
+        {% set alloc_border = {"slate": "border-l-slate-500", "blue": "border-l-blue-500", "emerald": "border-l-emerald-500", "violet": "border-l-violet-500", "amber": "border-l-amber-500", "indigo": "border-l-indigo-500", "teal": "border-l-teal-500", "orange": "border-l-orange-500", "gray": "border-l-gray-400"} %}
+        {% set alloc_text = {"slate": "text-slate-700", "blue": "text-blue-700", "emerald": "text-emerald-700", "violet": "text-violet-700", "amber": "text-amber-700", "indigo": "text-indigo-700", "teal": "text-teal-700", "orange": "text-orange-700", "gray": "text-gray-600"} %}
+        {% for item in wealth_panorama.asset_allocation["items"] %}
+        <div class="border-l-4 {{ alloc_border.get(item.color, 'border-l-gray-400') }} bg-white rounded-r-lg p-3 shadow-sm">
+            <div class="flex items-center justify-between mb-1">
+                <span class="font-semibold text-sm {{ alloc_text.get(item.color, 'text-gray-700') }}">{{ item.name }}</span>
+                <span class="text-xs font-bold {{ alloc_text.get(item.color, 'text-gray-600') }}">{{ item.pct }}%</span>
+            </div>
+            {% if item.amount %}<div class="text-xs text-gray-500 mb-1">{{ item.amount }}</div>{% endif %}
+            <div class="text-[10px] text-gray-400 leading-snug">{{ item.detail }}</div>
+            {% if item.source %}<div class="text-[10px] text-gray-300 mt-1">{{ item.source }}</div>{% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- 机构分布 - 横向条 -->
+    <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ wealth_panorama.institution_distribution.title }}</h3>
+    <p class="text-[10px] text-gray-400 mb-3">{{ wealth_panorama.institution_distribution.note }}</p>
+    <div class="space-y-3 mb-6">
+        {% for cat in wealth_panorama.institution_distribution.categories %}
+        {% set inst_colors = {"blue": "from-blue-400 to-blue-500", "violet": "from-violet-400 to-violet-500", "amber": "from-amber-400 to-amber-500", "emerald": "from-emerald-400 to-emerald-500", "sky": "from-sky-400 to-sky-500", "indigo": "from-indigo-400 to-indigo-500"} %}
+        <div>
+            <div class="flex items-center gap-3 mb-1">
+                <div class="w-36 text-sm text-right text-gray-700 font-medium shrink-0">{{ cat.name }}</div>
+                <div class="flex-1 bg-gray-100 rounded-full h-7 relative overflow-hidden">
+                    <div class="h-full rounded-full bg-gradient-to-r {{ inst_colors.get(cat.color, 'from-gray-400 to-gray-500') }} flex items-center justify-end pr-2.5"
+                         style="width: {{ (cat.pct / 55 * 100) | round }}%">
+                        <span class="text-xs font-bold text-white">~{{ cat.pct }}%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-39 pl-1 text-xs text-gray-400">{{ cat.detail }}</div>
+            {% if cat.sub %}
+            <div class="ml-39 pl-1 flex flex-wrap gap-1.5 mt-1">
+                {% for s in cat.sub %}
+                <span class="text-[10px] px-1.5 py-0.5 bg-gray-100 text-gray-500 rounded">{{ s.name }}{% if s.share %} {{ s.share }}{% endif %}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- MPF + 私人银行配置并排 -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+        {% if wealth_panorama.mpf_allocation %}
+        {% set mpf = wealth_panorama.mpf_allocation %}
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+            <div class="flex items-center justify-between mb-2">
+                <h4 class="text-sm font-semibold text-amber-800">{{ mpf.title }}</h4>
+                <span class="text-[10px] text-amber-500">{{ mpf.total }} ({{ mpf.date }})</span>
+            </div>
+            <div class="space-y-1.5">
+                {% set mpf_colors = {"emerald": "bg-emerald-400", "blue": "bg-blue-400", "gray": "bg-gray-400", "amber": "bg-amber-400", "teal": "bg-teal-400", "slate": "bg-slate-400"} %}
+                {% for item in mpf["items"] %}
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] w-20 text-right text-gray-500 shrink-0">{{ item.name }}</span>
+                    <div class="flex-1 bg-amber-100 rounded-full h-4 overflow-hidden">
+                        <div class="{{ mpf_colors.get(item.color, 'bg-gray-400') }} h-full rounded-full" style="width: {{ item.pct }}%"></div>
+                    </div>
+                    <span class="text-[10px] font-semibold text-gray-600 w-10">{{ item.pct }}%</span>
+                </div>
+                {% endfor %}
+            </div>
+            <a href="{{ mpf.source_url }}" target="_blank" class="text-[10px] text-blue-400 hover:underline mt-2 block">{{ mpf.source }}</a>
+        </div>
+        {% endif %}
+        {% if wealth_panorama.private_banking_allocation %}
+        {% set pb = wealth_panorama.private_banking_allocation %}
+        <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4">
+            <div class="flex items-center justify-between mb-2">
+                <h4 class="text-sm font-semibold text-indigo-800">{{ pb.title }}</h4>
+                <span class="text-[10px] text-indigo-500">{{ pb.total_aum }}</span>
+            </div>
+            <div class="space-y-1.5">
+                {% set pb_colors = {"emerald": "bg-emerald-400", "blue": "bg-blue-400", "violet": "bg-violet-400", "teal": "bg-teal-400", "indigo": "bg-indigo-400", "gray": "bg-gray-400"} %}
+                {% for item in pb["items"] %}
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] w-20 text-right text-gray-500 shrink-0">{{ item.name }}</span>
+                    <div class="flex-1 bg-indigo-100 rounded-full h-4 overflow-hidden">
+                        <div class="{{ pb_colors.get(item.color, 'bg-gray-400') }} h-full rounded-full" style="width: {{ item.pct }}%"></div>
+                    </div>
+                    <span class="text-[10px] font-semibold text-gray-600 w-10">{{ item.pct }}%</span>
+                </div>
+                {% endfor %}
+            </div>
+            <a href="{{ pb.source_url }}" target="_blank" class="text-[10px] text-blue-400 hover:underline mt-2 block">{{ pb.source }}</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- 数据来源 -->
+    <div class="border-t border-gray-200 pt-3">
+        <div class="text-xs font-semibold text-gray-500 mb-1.5">数据来源</div>
+        <div class="flex flex-wrap gap-3">
+            {% for src in wealth_panorama.key_sources %}
+            <a href="{{ src.url }}" target="_blank" class="text-[10px] text-blue-400 hover:underline">{{ src.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <!-- ===== 筛选栏 ===== -->
-<div class="stat-card mb-6">
+<div class="stat-card mb-6" data-tab="tab-channels" id="sec-filter">
     <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
         <div class="flex items-center gap-2">
             <span class="text-xs font-semibold text-gray-500 whitespace-nowrap">客群年龄:</span>
@@ -52,7 +203,7 @@
 </div>
 
 <!-- ===== 流量全景条 ===== -->
-<div class="stat-card mb-6">
+<div class="stat-card mb-6" data-tab="tab-channels" id="sec-traffic-bar">
     <h3 class="text-sm font-semibold text-gray-700 mb-1">HK 投资者覆盖排行（去重人数）</h3>
     <p class="text-xs text-gray-400 mb-3">基于各渠道 HK 用户量 × 投资者渗透率估算。香港约 250 万活跃投资者，同一投资者平均使用 3-5 个渠道，各渠道人数不可求和。</p>
     <div class="space-y-2">
@@ -129,7 +280,7 @@
 
 <!-- ===== 洞察与机会 ===== -->
 {% if insights %}
-<div class="stat-card mb-6">
+<div class="stat-card mb-6" data-tab="tab-channels" id="sec-insights">
     <div class="flex items-center justify-between mb-4">
         <h3 class="text-lg font-semibold text-gray-900">洞察与机会</h3>
         <span class="text-xs text-gray-400">基于 {{ all_channels | length }} 个渠道数据自动生成</span>
@@ -165,7 +316,7 @@
 
 <!-- ===== 投资者行为画像 (IFEC 2025) ===== -->
 {% if investor_behavior %}
-<div class="stat-card mb-6">
+<div class="stat-card mb-6" data-tab="tab-investor" id="sec-investor-profile">
     <div class="flex items-center justify-between mb-4">
         <div>
             <h3 class="text-lg font-semibold text-gray-900">香港投资者行为画像</h3>
@@ -319,7 +470,7 @@
 
 <!-- ===== 分析框架 (《好主意不是好营销》) ===== -->
 {% if analysis_frameworks %}
-<div class="stat-card mb-6">
+<div class="stat-card mb-6" data-tab="tab-acquisition" id="sec-framework">
     <div class="flex items-center justify-between mb-4">
         <div>
             <h3 class="text-lg font-semibold text-gray-900">营销分析框架</h3>
@@ -528,7 +679,7 @@
 
 <!-- ===== ARPU 分析 ===== -->
 {% if arpu_analysis %}
-<div class="stat-card mb-6">
+<div class="stat-card mb-6" data-tab="tab-acquisition" id="sec-arpu">
     <div class="flex items-center justify-between mb-4">
         <div>
             <h3 class="text-lg font-semibold text-gray-900">{{ arpu_analysis.title }}</h3>
@@ -639,7 +790,7 @@
 
 <!-- ===== 转化率分析 ===== -->
 {% if conversion_analysis %}
-<div class="stat-card mb-6">
+<div class="stat-card mb-6" data-tab="tab-channels" id="sec-conversion">
     <div class="flex items-center justify-between mb-4">
         <div>
             <h3 class="text-lg font-semibold text-gray-900">{{ conversion_analysis.title }}</h3>
@@ -656,8 +807,8 @@
     {% if conversion_analysis.full_scatter %}
     <div class="mb-6">
         <h4 class="text-sm font-semibold text-gray-700 mb-1">全渠道可转化用户潜力图 ({{ conversion_analysis.full_scatter | length }} 个渠道)</h4>
-        <p class="text-xs text-gray-400 mb-3">圆圈面积 = 估算可转化人数 (剩余未转化用户 × 转化率) | 颜色 = 饱和度 | X=执行难度 Y=转化难度 | 悬停查看详情</p>
-        <div id="scatter-container" class="relative bg-gray-50 border border-gray-200 rounded-xl" style="height: 700px; padding: 40px 50px 50px 50px">
+        <p class="text-xs text-gray-400 mb-3">圆圈面积 = 可转化人数 (剩余未转化投资者 × 可转化比例) | 颜色 = 饱和度 | X=执行难度 Y=转化难度 | 悬停查看详情</p>
+        <div id="scatter-container" class="relative bg-gray-50 border border-gray-200 rounded-xl" style="height: 780px; padding: 40px 50px 50px 50px">
             <!-- 四象限标签 -->
             <div class="absolute top-3 left-14 text-xs font-semibold text-red-300">难转化 · 易执行 (低效渠道)</div>
             <div class="absolute top-3 right-14 text-xs font-semibold text-gray-300">难转化 · 难执行 (长期品牌)</div>
@@ -676,31 +827,35 @@
             {% set max_converts = conversion_analysis.full_scatter[0].est_actual_converts if conversion_analysis.full_scatter else 1 %}
             {% for ch in conversion_analysis.full_scatter %}
             {% if ch.est_actual_converts > 0 %}
-            {% set x_pct = (ch.execution - 0.5) / 10 * 82 + 7 %}
-            {% set y_pct = 93 - (ch.conversion - 0.5) / 10 * 82 %}
-            {# Circle size by est_actual_converts: sqrt scale, min 8px, max 90px #}
+            {% set x_raw = (ch.execution + ch.get('x_jitter', 0) - 0.5) / 10 * 78 + 9 %}
+            {% set y_raw = 91 - (ch.conversion + ch.get('y_jitter', 0) - 0.5) / 10 * 78 %}
+            {% set x_pct = [[5, x_raw] | max, 95] | min %}
+            {% set y_pct = [[5, y_raw] | max, 95] | min %}
+            {# Sqrt scale for circle area (standard bubble chart) — min 16px, max 90px #}
             {% set ratio = ch.est_actual_converts / max_converts %}
-            {% set size = (ratio ** 0.5 * 82 + 8) | round | int %}
+            {% set size = (ratio ** 0.5 * 78 + 16) | round | int %}
             {% set sat_color = '#f87171' if ch.saturation == '高' else ('#fbbf24' if ch.saturation == '中' else ('#4ade80' if ch.saturation == '低' else '#60a5fa')) %}
             {% set sat_color_bg = 'bg-red-400' if ch.saturation == '高' else ('bg-amber-400' if ch.saturation == '中' else ('bg-green-400' if ch.saturation == '低' else 'bg-blue-400')) %}
             {% set sat_border = 'border-red-500' if ch.saturation == '高' else ('border-amber-500' if ch.saturation == '中' else ('border-green-500' if ch.saturation == '低' else 'border-blue-500')) %}
+            {# Small circles on top (higher z-index) so they're not hidden behind big ones #}
             <div class="scatter-dot absolute group cursor-default"
                  data-name="{{ ch.name }}"
                  data-x="{{ x_pct }}" data-y="{{ y_pct }}" data-size="{{ size }}"
                  data-color="{{ sat_color }}"
-                 style="left: {{ x_pct }}%; top: {{ y_pct }}%; transform: translate(-50%, -50%); z-index: {{ 10 + (40 - loop.index0) }}">
-                <div class="{{ sat_color_bg }} rounded-full opacity-60 hover:opacity-95 transition-all border {{ sat_border }} shadow-sm hover:shadow-lg"
+                 data-converts="{{ ch.est_actual_converts }}"
+                 style="left: {{ x_pct }}%; top: {{ y_pct }}%; transform: translate(-50%, -50%); z-index: {{ 10 + loop.index0 }}">
+                <div class="{{ sat_color_bg }} rounded-full opacity-50 hover:opacity-90 transition-all border {{ sat_border }} shadow-sm hover:shadow-lg"
                      style="width: {{ size }}px; height: {{ size }}px"></div>
                 <!-- 悬浮详情 -->
-                <div class="hidden group-hover:block absolute z-50 w-72 bg-white border border-gray-200 rounded-lg shadow-xl p-3 text-xs pointer-events-none"
-                     style="{% if x_pct > 60 %}right: 0{% else %}left: 0{% endif %}; {% if y_pct < 30 %}top: 100%; margin-top: 4px{% else %}bottom: 100%; margin-bottom: 4px{% endif %}">
+                <div class="hidden group-hover:block absolute w-72 bg-white border border-gray-200 rounded-lg shadow-xl p-3 text-xs pointer-events-none"
+                     style="z-index: 1000; {% if x_pct > 60 %}right: 0{% else %}left: 0{% endif %}; {% if y_pct < 30 %}top: 100%; margin-top: 4px{% else %}bottom: 100%; margin-bottom: 4px{% endif %}">
                     <div class="font-bold text-gray-800 mb-1.5 text-sm">{{ ch.name }}</div>
                     <div class="grid grid-cols-2 gap-x-3 gap-y-1 text-gray-600">
                         <div><span class="text-gray-400">去重投资者:</span> {{ "{:,}".format(ch.investors) }}</div>
                         <div><span class="text-gray-400">富途渗透率:</span> {{ ch.futu_penetration_pct }}%</div>
                         <div><span class="text-gray-400">富途已转化:</span> {{ "{:,}".format(ch.futu_clients) }}</div>
                         <div><span class="text-gray-400">剩余可争取:</span> {{ "{:,}".format(ch.remaining_convertible) }}</div>
-                        <div><span class="text-gray-400">转化率:</span> {{ ch.est_conversion_label }}</div>
+                        <div><span class="text-gray-400">可转化比例:</span> {{ ch.est_conversion_label }}</div>
                         <div class="font-bold text-orange-600"><span class="text-gray-400">可转化:</span> {{ "{:,}".format(ch.est_actual_converts) }}人</div>
                         <div><span class="text-gray-400">执行难度:</span> {{ ch.execution }}/10</div>
                         <div><span class="text-gray-400">转化难度:</span> {{ ch.conversion }}/10</div>
@@ -722,12 +877,19 @@
             <span class="flex items-center gap-1"><span class="w-3 h-3 bg-blue-400 rounded-full opacity-60 border border-blue-500"></span>极低(蓝海)</span>
             <span class="mx-1">|</span>
             <span class="font-medium text-gray-500">圆圈面积 =</span>
-            <span>(平台去重投资者 − 富途已转化客户) × 转化率</span>
+            <span>(平台去重投资者 − 富途已转化客户) × 可转化比例</span>
         </div>
     </div>
     {% endif %}
 
     <script>
+    // Raise hovered scatter dot to top so tooltip isn't covered by other dots
+    document.querySelectorAll('.scatter-dot').forEach(function(dot) {
+        var origZ = dot.style.zIndex;
+        dot.addEventListener('mouseenter', function() { dot.style.zIndex = 999; });
+        dot.addEventListener('mouseleave', function() { dot.style.zIndex = origZ; });
+    });
+
     // Draw leader lines from labels to scatter dots
     document.addEventListener('DOMContentLoaded', function() {
         var container = document.getElementById('scatter-container');
@@ -736,63 +898,92 @@
         var dots = container.querySelectorAll('.scatter-dot');
         var cw = container.offsetWidth, ch = container.offsetHeight;
 
-        // Collect dot positions and sizes
         var items = [];
         dots.forEach(function(dot) {
             var x = parseFloat(dot.dataset.x) / 100 * cw;
             var y = parseFloat(dot.dataset.y) / 100 * ch;
             var size = parseInt(dot.dataset.size);
             var name = dot.dataset.name;
-            var color = dot.dataset.color;
-            items.push({x: x, y: y, size: size, name: name, color: color, el: dot});
+            var converts = parseInt(dot.dataset.converts || '0');
+            items.push({x: x, y: y, size: size, name: name, converts: converts, el: dot});
         });
 
-        // Place labels with leader lines, offset to avoid overlap
-        var placed = [];
-        items.forEach(function(item, idx) {
+        // Sort by converts desc — place big labels first (they matter most)
+        items.sort(function(a, b) { return b.converts - a.converts; });
+
+        var placed = [];  // placed label rects
+        var dotRects = items.map(function(it) {
+            return {x: it.x - it.size/2, y: it.y - it.size/2, w: it.size, h: it.size};
+        });
+
+        items.forEach(function(item) {
             var labelW = item.name.length * 7 + 4;
-            var labelH = 14;
-            // Try offsets: right, left, top-right, bottom-right, top-left, bottom-left
+            var labelH = 13;
+            var r = item.size / 2;
+            var gap = 8;
+            // 12 offset directions: 4 cardinal + 4 diagonal close + 4 diagonal far
             var offsets = [
-                {dx: item.size/2 + 6, dy: -2},
-                {dx: -(item.size/2 + labelW + 6), dy: -2},
-                {dx: item.size/2 + 4, dy: -(item.size/2 + 4)},
-                {dx: item.size/2 + 4, dy: item.size/2 + 12},
-                {dx: -(item.size/2 + labelW + 4), dy: -(item.size/2 + 4)},
-                {dx: -(item.size/2 + labelW + 4), dy: item.size/2 + 12},
+                {dx: r + gap, dy: -labelH/2},                          // right
+                {dx: -(r + gap + labelW), dy: -labelH/2},              // left
+                {dx: -labelW/2, dy: -(r + gap + labelH)},              // top
+                {dx: -labelW/2, dy: r + gap},                          // bottom
+                {dx: r + gap, dy: -(r + gap)},                         // top-right
+                {dx: r + gap, dy: r + gap/2},                          // bottom-right
+                {dx: -(r + gap + labelW), dy: -(r + gap)},             // top-left
+                {dx: -(r + gap + labelW), dy: r + gap/2},              // bottom-left
+                {dx: r + gap + 20, dy: -(r + gap + 15)},               // far top-right
+                {dx: -(r + gap + labelW + 20), dy: -(r + gap + 15)},   // far top-left
+                {dx: r + gap + 20, dy: r + gap + 10},                  // far bottom-right
+                {dx: -(r + gap + labelW + 20), dy: r + gap + 10},      // far bottom-left
             ];
+
             var best = offsets[0];
-            var minOverlap = Infinity;
+            var minScore = Infinity;
             offsets.forEach(function(off) {
                 var lx = item.x + off.dx, ly = item.y + off.dy;
-                if (lx < 0 || lx + labelW > cw || ly < 0 || ly + labelH > ch) { return; }
-                var overlap = 0;
+                // Penalize out-of-bounds
+                if (lx < 2 || lx + labelW > cw - 2 || ly < 2 || ly + labelH > ch - 2) return;
+                var score = 0;
+                // Overlap with other labels
                 placed.forEach(function(p) {
                     var ox = Math.max(0, Math.min(lx + labelW, p.x + p.w) - Math.max(lx, p.x));
                     var oy = Math.max(0, Math.min(ly + labelH, p.y + p.h) - Math.max(ly, p.y));
-                    overlap += ox * oy;
+                    score += ox * oy * 3;
                 });
-                if (overlap < minOverlap) { minOverlap = overlap; best = off; }
+                // Overlap with dot circles
+                dotRects.forEach(function(d) {
+                    var ox = Math.max(0, Math.min(lx + labelW, d.x + d.w) - Math.max(lx, d.x));
+                    var oy = Math.max(0, Math.min(ly + labelH, d.y + d.h) - Math.max(ly, d.y));
+                    score += ox * oy;
+                });
+                // Slight preference for shorter leader lines
+                var dist = Math.sqrt(off.dx * off.dx + off.dy * off.dy);
+                score += dist * 0.05;
+                if (score < minScore) { minScore = score; best = off; }
             });
 
             var lx = item.x + best.dx;
             var ly = item.y + best.dy;
+            // Clamp to container
+            lx = Math.max(2, Math.min(lx, cw - labelW - 2));
+            ly = Math.max(2, Math.min(ly, ch - labelH - 2));
             placed.push({x: lx, y: ly, w: labelW, h: labelH});
 
-            // Draw leader line
+            // Leader line endpoint: nearest edge of label to dot center
+            var lineEndX = lx + (best.dx > 0 ? 0 : labelW);
+            var lineEndY = ly + labelH / 2;
             var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
             line.setAttribute('x1', item.x);
             line.setAttribute('y1', item.y);
-            line.setAttribute('x2', lx + (best.dx > 0 ? 0 : labelW));
-            line.setAttribute('y2', ly + labelH / 2);
+            line.setAttribute('x2', lineEndX);
+            line.setAttribute('y2', lineEndY);
             line.setAttribute('stroke', '#d1d5db');
             line.setAttribute('stroke-width', '0.8');
             svg.appendChild(line);
 
-            // Place label
             var label = document.createElement('div');
             label.className = 'absolute whitespace-nowrap pointer-events-none';
-            label.style.cssText = 'left:' + lx + 'px;top:' + ly + 'px;font-size:10px;color:#4b5563;z-index:6;line-height:14px;';
+            label.style.cssText = 'left:' + lx + 'px;top:' + ly + 'px;font-size:10px;color:#4b5563;z-index:6;line-height:13px;';
             label.textContent = item.name;
             container.appendChild(label);
         });
@@ -818,8 +1009,766 @@
 </div>
 {% endif %}
 
+<!-- ===== 新增投资者分析 ===== -->
+{% if new_investor_analysis %}
+<div class="stat-card mb-6" data-tab="tab-market" id="sec-new-investors">
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h3 class="text-lg font-semibold text-gray-900">{{ new_investor_analysis.title }}</h3>
+            <p class="text-xs text-gray-400">{{ new_investor_analysis.subtitle }}</p>
+        </div>
+        <div class="text-right">
+            <div class="text-2xl font-bold text-indigo-600">{{ new_investor_analysis.total_range }}</div>
+            <div class="text-xs text-gray-400">年度纯新增(去重)</div>
+        </div>
+    </div>
+
+    <!-- 来源拆解条形图 -->
+    <div class="mb-5">
+        <div class="flex rounded-full overflow-hidden h-8 bg-gray-100 mb-3">
+            {% set src_colors = {'indigo': 'bg-indigo-500', 'sky': 'bg-sky-500', 'amber': 'bg-amber-500', 'emerald': 'bg-emerald-500'} %}
+            {% for src in new_investor_analysis.sources %}
+            <div class="{{ src_colors.get(src.color, 'bg-gray-400') }} relative group cursor-default flex items-center justify-center text-white text-xs font-medium"
+                 style="width: {{ src.pct }}%; min-width: 2rem">
+                {{ src.pct }}%
+                <div class="hidden group-hover:block absolute z-50 top-full mt-2 left-0 w-72 bg-white border border-gray-200 rounded-lg shadow-xl p-3 text-xs text-gray-700 pointer-events-none">
+                    <div class="font-bold text-sm mb-1">{{ src.name }} ({{ src.range }})</div>
+                    <p>{{ src.detail }}</p>
+                    <p class="mt-1 text-indigo-600"><strong>富途优势:</strong> {{ src.futu_advantage }}</p>
+                    <p class="mt-1 text-gray-400"><strong>关键渠道:</strong> {{ src.channels | join(', ') }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="flex flex-wrap gap-x-5 gap-y-1 text-xs">
+            {% set dot_colors = {'indigo': 'bg-indigo-500', 'sky': 'bg-sky-500', 'amber': 'bg-amber-500', 'emerald': 'bg-emerald-500'} %}
+            {% for src in new_investor_analysis.sources %}
+            <span class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full {{ dot_colors.get(src.color, 'bg-gray-400') }}"></span>
+                <span class="text-gray-600">{{ src.name }}</span>
+                <span class="font-semibold text-gray-800">{{ src.range }}</span>
+            </span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 四个来源详情卡片 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
+        {% set card_styles = {
+            'indigo': {'bg': 'bg-indigo-50', 'border': 'border-indigo-200', 'text': 'text-indigo-700', 'badge': 'bg-indigo-100 text-indigo-700'},
+            'sky': {'bg': 'bg-sky-50', 'border': 'border-sky-200', 'text': 'text-sky-700', 'badge': 'bg-sky-100 text-sky-700'},
+            'amber': {'bg': 'bg-amber-50', 'border': 'border-amber-200', 'text': 'text-amber-700', 'badge': 'bg-amber-100 text-amber-700'},
+            'emerald': {'bg': 'bg-emerald-50', 'border': 'border-emerald-200', 'text': 'text-emerald-700', 'badge': 'bg-emerald-100 text-emerald-700'}
+        } %}
+        {% for src in new_investor_analysis.sources %}
+        {% set cs = card_styles.get(src.color, card_styles.indigo) %}
+        <div class="{{ cs.bg }} {{ cs.border }} border rounded-xl p-4">
+            <div class="flex items-center justify-between mb-2">
+                <h5 class="text-sm font-semibold {{ cs.text }}">{{ src.name }}</h5>
+                <span class="text-lg font-bold {{ cs.text }}">{{ src.range }}</span>
+            </div>
+            <p class="text-xs text-gray-600 leading-relaxed mb-2">{{ src.detail }}</p>
+            <p class="text-xs text-gray-500 mb-2"><strong class="{{ cs.text }}">富途优势:</strong> {{ src.futu_advantage }}</p>
+            <div class="flex flex-wrap gap-1">
+                {% for ch in src.channels %}
+                <span class="px-1.5 py-0.5 rounded text-xs {{ cs.badge }}">{{ ch }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- 季节性分布 -->
+    {% if new_investor_analysis.seasonality %}
+    <div class="mb-5">
+        <h4 class="text-sm font-semibold text-gray-700 mb-2">{{ new_investor_analysis.seasonality.title }}</h4>
+        <p class="text-xs text-gray-400 mb-1">{{ new_investor_analysis.seasonality.note }}</p>
+        {% if new_investor_analysis.seasonality.data_caveat %}
+        <p class="text-[10px] text-amber-500 mb-3">{{ new_investor_analysis.seasonality.data_caveat }}</p>
+        {% endif %}
+        <div class="grid grid-cols-4 gap-3 mb-4">
+            {% set q_colors = {'red': {'bg': 'bg-red-50', 'bar': 'bg-red-400', 'text': 'text-red-700'},
+                               'orange': {'bg': 'bg-orange-50', 'bar': 'bg-orange-400', 'text': 'text-orange-700'},
+                               'amber': {'bg': 'bg-amber-50', 'bar': 'bg-amber-400', 'text': 'text-amber-700'},
+                               'gray': {'bg': 'bg-gray-50', 'bar': 'bg-gray-400', 'text': 'text-gray-600'}} %}
+            {% for q in new_investor_analysis.seasonality.quarters %}
+            {% set qc = q_colors.get(q.color, q_colors.gray) %}
+            <div class="{{ qc.bg }} rounded-xl p-3">
+                <div class="text-center">
+                    <div class="text-sm font-bold {{ qc.text }}">{{ q.q }}</div>
+                    <div class="text-xs text-gray-400 mb-2">{{ q.months }}</div>
+                    <div class="mx-auto w-10 bg-gray-200 rounded-full overflow-hidden" style="height: 80px">
+                        <div class="{{ qc.bar }} rounded-full w-full transition-all" style="height: {{ q.intensity }}%; margin-top: {{ 100 - q.intensity }}%"></div>
+                    </div>
+                    <div class="text-xs font-semibold {{ qc.text }} mt-1.5">{{ q.label }}</div>
+                </div>
+                <div class="text-xs text-gray-500 mt-2 leading-snug">{{ q.drivers }}</div>
+                {% if q.structural_factors %}
+                <ul class="mt-1.5 space-y-0.5">
+                    {% for sf in q.structural_factors %}
+                    <li class="text-[10px] text-gray-400 leading-snug flex items-start gap-1">
+                        <span class="shrink-0 mt-0.5 w-1 h-1 rounded-full bg-gray-300"></span>
+                        {{ sf }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- SFC官方数据: 活跃客户账户数 -->
+        {% if new_investor_analysis.seasonality.sfc_data %}
+        {% set sfc = new_investor_analysis.seasonality.sfc_data %}
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-4">
+            <div class="flex items-center justify-between mb-2">
+                <h5 class="text-xs font-semibold text-slate-700">{{ sfc.title }}</h5>
+                <a href="{{ sfc.source_url }}" target="_blank" class="text-[10px] text-blue-400 hover:underline">{{ sfc.source }}</a>
+            </div>
+            <p class="text-[10px] text-slate-400 mb-2">{{ sfc.note }}</p>
+            <!-- 柱状图 -->
+            <div class="flex items-end gap-2 justify-center mb-3" style="height: 140px">
+                {% set max_total = 4870000 %}
+                {% for yr in sfc.years %}
+                {% set h = (yr.total / max_total * 120) | round | int %}
+                {% set is_peak = yr.total == max_total %}
+                <div class="flex flex-col items-center gap-0.5">
+                    <span class="text-[10px] font-bold {{ 'text-green-600' if is_peak else 'text-slate-600' }}">{{ "%.0f" | format(yr.total / 10000) }}万</span>
+                    <div class="w-10 rounded-t-md transition-all {{ 'bg-green-400' if is_peak else ('bg-red-300' if yr.total < 3000000 else 'bg-indigo-400') }}" style="height: {{ h }}px"></div>
+                    <span class="text-[9px] text-slate-400">{{ yr.year }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="p-2.5 bg-indigo-50 border border-indigo-200 rounded-lg text-xs text-indigo-700">
+                {{ sfc.key_insight }}
+            </div>
+            <!-- 来源PDF -->
+            <div class="flex flex-wrap gap-3 mt-2">
+                {% for pdf in sfc.source_pdfs %}
+                <a href="{{ pdf.url }}" target="_blank" class="text-[10px] text-blue-400 hover:underline">{{ pdf.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 脉冲事件 -->
+        <div class="flex flex-wrap gap-2">
+            {% for spike in new_investor_analysis.seasonality.spikes %}
+            <div class="flex-1 min-w-48 bg-red-50 border border-red-200 rounded-lg p-2.5 text-xs">
+                <div><span class="font-semibold text-red-700">{{ spike.trigger }}:</span>
+                <span class="text-gray-600">{{ spike.impact }}</span></div>
+                {% if spike.source %}
+                <div class="text-[10px] text-gray-300 mt-0.5">{{ spike.source }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- 关键洞察 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {% set ni_colors = {
+            'green': {'bg': 'bg-green-50', 'border': 'border-green-200', 'text': 'text-green-700'},
+            'indigo': {'bg': 'bg-indigo-50', 'border': 'border-indigo-200', 'text': 'text-indigo-700'},
+            'sky': {'bg': 'bg-sky-50', 'border': 'border-sky-200', 'text': 'text-sky-700'},
+            'gray': {'bg': 'bg-gray-50', 'border': 'border-gray-200', 'text': 'text-gray-600'}
+        } %}
+        {% for ins in new_investor_analysis.key_insights %}
+        {% set nic = ni_colors.get(ins.color, ni_colors.gray) %}
+        <div class="{{ nic.bg }} {{ nic.border }} border rounded-xl p-4">
+            <h5 class="text-sm font-semibold {{ nic.text }} mb-1">{{ ins.title }}</h5>
+            <p class="text-xs text-gray-600 leading-relaxed">{{ ins.body }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <p class="text-xs text-gray-400 mt-3">来源: {{ new_investor_analysis.data_sources }}</p>
+</div>
+{% endif %}
+
+<!-- ===== Q2获客方案 ===== -->
+{% if acquisition_plan %}
+<div class="stat-card mb-6" data-tab="tab-acquisition" id="sec-q2-plan">
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h3 class="text-lg font-semibold text-gray-900">{{ acquisition_plan.title }}</h3>
+            <p class="text-xs text-gray-400">{{ acquisition_plan.subtitle }}</p>
+        </div>
+        <div class="text-right">
+            <div class="text-2xl font-bold text-orange-600">{{ "{:,}".format(acquisition_plan.target) }}</div>
+            <div class="text-xs text-gray-400">目标开户数</div>
+        </div>
+    </div>
+
+    <!-- 预算摘要 -->
+    <div class="grid grid-cols-3 gap-3 mb-5">
+        <div class="bg-orange-50 border border-orange-200 rounded-xl p-3 text-center">
+            <div class="text-xs text-gray-400">总预算</div>
+            <div class="text-lg font-bold text-orange-700">{{ acquisition_plan.total_budget }}</div>
+        </div>
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-3 text-center">
+            <div class="text-xs text-gray-400">月均</div>
+            <div class="text-lg font-bold text-blue-700">{{ acquisition_plan.monthly_budget }}</div>
+        </div>
+        <div class="bg-green-50 border border-green-200 rounded-xl p-3 text-center">
+            <div class="text-xs text-gray-400">混合CAC</div>
+            <div class="text-lg font-bold text-green-700">HK${{ (acquisition_plan.risk_buffer.total_budget_hk / acquisition_plan.risk_buffer.total_accounts) | round | int }}</div>
+        </div>
+    </div>
+
+    <!-- 渠道分配表 -->
+    <div class="overflow-x-auto mb-4">
+        <table class="w-full text-xs">
+            <thead>
+                <tr class="text-left text-gray-400 border-b border-gray-200">
+                    <th class="py-2 pr-2">渠道</th>
+                    <th class="py-2 text-right">月均</th>
+                    <th class="py-2 text-right">3月总计</th>
+                    <th class="py-2 text-right">CAC</th>
+                    <th class="py-2 text-right">预算</th>
+                    <th class="py-2 text-center">AI%</th>
+                    <th class="py-2 pl-2">执行方式</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ch in acquisition_plan.channels %}
+                <tr class="border-b border-gray-50 hover:bg-gray-50">
+                    <td class="py-2 pr-2 font-medium text-gray-700 whitespace-nowrap">{{ ch.name }}</td>
+                    <td class="py-2 text-right text-gray-600">{{ "{:,}".format(ch.monthly) }}</td>
+                    <td class="py-2 text-right font-semibold text-gray-800">{{ "{:,}".format(ch.total) }}</td>
+                    <td class="py-2 text-right text-gray-600">${{ "{:,}".format(ch.cac) }}</td>
+                    <td class="py-2 text-right text-orange-600 font-medium">
+                        {% if ch.budget_3m >= 1000000 %}${{ "%.1f"|format(ch.budget_3m / 1000000) }}M
+                        {% else %}${{ "{:,}".format(ch.budget_3m) }}{% endif %}
+                    </td>
+                    <td class="py-2 text-center">
+                        <div class="inline-flex items-center gap-1">
+                            <div class="w-10 bg-gray-200 rounded-full h-1.5">
+                                <div class="bg-green-500 h-1.5 rounded-full" style="width: {{ ch.ai_pct }}%"></div>
+                            </div>
+                            <span class="text-gray-400">{{ ch.ai_pct }}%</span>
+                        </div>
+                    </td>
+                    <td class="py-2 pl-2 text-gray-500 text-xs leading-snug max-w-xs">{{ ch.tactic }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr class="border-t-2 border-gray-300 font-bold">
+                    <td class="py-2 text-gray-800">合计(含buffer)</td>
+                    <td class="py-2 text-right">~{{ "{:,}".format((acquisition_plan.risk_buffer.total_accounts / 3) | round | int) }}</td>
+                    <td class="py-2 text-right text-gray-800">{{ "{:,}".format(acquisition_plan.risk_buffer.total_accounts) }}</td>
+                    <td class="py-2 text-right">${{ (acquisition_plan.risk_buffer.total_budget_hk / acquisition_plan.risk_buffer.total_accounts) | round | int }}</td>
+                    <td class="py-2 text-right text-orange-700">${{ "%.1f"|format(acquisition_plan.risk_buffer.total_budget_hk / 1000000) }}M</td>
+                    <td colspan="2"></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <!-- 占比条形图 -->
+    <div class="flex rounded-full overflow-hidden h-6 bg-gray-100 mb-3">
+        {% set plan_colors = ['bg-blue-500', 'bg-indigo-500', 'bg-sky-500', 'bg-amber-500', 'bg-red-400', 'bg-violet-500', 'bg-pink-500', 'bg-cyan-500', 'bg-emerald-500', 'bg-orange-400', 'bg-lime-500', 'bg-teal-500', 'bg-rose-400'] %}
+        {% for ch in acquisition_plan.channels %}
+        {% set pct = (ch.total / acquisition_plan.risk_buffer.total_accounts * 100) | round | int %}
+        {% if pct >= 3 %}
+        <div class="{{ plan_colors[loop.index0 % plan_colors | length] }} flex items-center justify-center text-white text-xs font-medium opacity-80"
+             style="width: {{ pct }}%" title="{{ ch.name }}: {{ "{:,}".format(ch.total) }}">
+            {% if pct >= 5 %}{{ pct }}%{% endif %}
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="text-xs text-gray-400 space-y-0.5 mt-3">
+        {% for a in acquisition_plan.key_assumptions %}
+        <div>• {{ a }}</div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- ===== AI获客矩阵 ===== -->
+{% if ai_acquisition %}
+<div class="stat-card mb-6" data-tab="tab-acquisition" id="sec-ai-matrix">
+    <div class="mb-4">
+        <h3 class="text-lg font-semibold text-gray-900">{{ ai_acquisition.title }}</h3>
+        <p class="text-xs text-gray-400">{{ ai_acquisition.subtitle }}</p>
+    </div>
+
+    {% set tier_styles = {'green': {'bg': 'bg-green-50', 'border': 'border-green-200', 'text': 'text-green-700', 'badge': 'bg-green-100 text-green-700'},
+                          'amber': {'bg': 'bg-amber-50', 'border': 'border-amber-200', 'text': 'text-amber-700', 'badge': 'bg-amber-100 text-amber-700'},
+                          'gray': {'bg': 'bg-gray-50', 'border': 'border-gray-200', 'text': 'text-gray-600', 'badge': 'bg-gray-100 text-gray-600'}} %}
+
+    {% for tier in ai_acquisition.tiers %}
+    {% set ts = tier_styles.get(tier.color, tier_styles.gray) %}
+    <div class="mb-4">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="px-2 py-0.5 rounded text-xs font-bold {{ ts.badge }}">{{ tier.name }}</span>
+            <span class="text-xs text-gray-400">{{ tier.description }}</span>
+        </div>
+
+        {% if tier.channels[0] is mapping and tier.channels[0].ai_role is defined %}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {% for ch in tier.channels %}
+            <div class="{{ ts.bg }} {{ ts.border }} border rounded-xl p-3">
+                <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-sm font-semibold {{ ts.text }}">{{ ch.name }}</span>
+                    <div class="flex items-center gap-1 text-xs text-gray-400">
+                        <div class="w-12 bg-gray-200 rounded-full h-1.5">
+                            <div class="bg-green-500 h-1.5 rounded-full" style="width: {{ ch.automation_pct }}%"></div>
+                        </div>
+                        AI {{ ch.automation_pct }}%
+                    </div>
+                </div>
+                <p class="text-xs text-gray-600 mb-1.5"><strong>AI:</strong> {{ ch.ai_role }}</p>
+                <div class="grid grid-cols-2 gap-x-3 text-xs text-gray-500">
+                    <div><span class="text-gray-400">预算:</span> {{ ch.budget_model }}</div>
+                    <div><span class="text-gray-400">月获客:</span> <span class="font-semibold text-gray-700">{{ ch.est_monthly_leads }}</span></div>
+                    <div><span class="text-gray-400">CAC:</span> {{ ch.est_cac }}</div>
+                    <div><span class="text-gray-400">启动:</span> {{ ch.speed }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="flex flex-wrap gap-2">
+            {% for ch in tier.channels %}
+            <div class="{{ ts.bg }} {{ ts.border }} border rounded-lg px-3 py-2 text-xs">
+                <span class="font-medium {{ ts.text }}">{{ ch.name }}</span>
+                <span class="text-gray-400 ml-1">— {{ ch.reason }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <!-- Quick wins -->
+    {% if ai_acquisition.quick_wins %}
+    <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4 mt-4">
+        <h5 class="text-sm font-bold text-green-700 mb-2">{{ ai_acquisition.quick_wins.title }}</h5>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs mb-3">
+            <div class="bg-white rounded-lg p-2 border border-green-100">
+                <div class="font-semibold text-green-600">Week 1</div>
+                <div class="text-gray-600">{{ ai_acquisition.quick_wins.week1 }}</div>
+            </div>
+            <div class="bg-white rounded-lg p-2 border border-green-100">
+                <div class="font-semibold text-green-600">Week 2</div>
+                <div class="text-gray-600">{{ ai_acquisition.quick_wins.week2 }}</div>
+            </div>
+            <div class="bg-white rounded-lg p-2 border border-green-100">
+                <div class="font-semibold text-green-600">Week 3</div>
+                <div class="text-gray-600">{{ ai_acquisition.quick_wins.week3 }}</div>
+            </div>
+            <div class="bg-white rounded-lg p-2 border border-green-100">
+                <div class="font-semibold text-green-600">Week 4</div>
+                <div class="text-gray-600">{{ ai_acquisition.quick_wins.week4 }}</div>
+            </div>
+        </div>
+        <div class="flex gap-4 text-xs">
+            <span class="text-gray-500">月预算: <strong class="text-green-700">{{ ai_acquisition.quick_wins.est_monthly_budget }}</strong></span>
+            <span class="text-gray-500">月获客: <strong class="text-green-700">{{ ai_acquisition.quick_wins.est_monthly_new_accounts }}</strong></span>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+<!-- ===== 各渠道可转化用户瀑布图 ===== -->
+{% if waterfall_data %}
+<div class="stat-card mb-6" data-tab="tab-channels" id="sec-waterfall">
+    <div class="mb-4">
+        <h3 class="text-lg font-semibold text-gray-900">各渠道可转化用户拆解</h3>
+        <p class="text-xs text-gray-400">平台总用户 → 投资者 → 去除富途已转化 → 富途可转化 | Top 20 渠道</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {% for wf in waterfall_data[:20] %}
+        {% set max_val = [wf.total_users, wf.investors] | max %}
+        {% if max_val > 0 %}
+        <div class="bg-gray-50 border border-gray-200 rounded-xl p-3">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-semibold text-gray-800">{{ wf.name }}</span>
+                <span class="text-xs font-bold text-orange-600">可转化 {{ "{:,}".format(wf.convertible) }}人</span>
+            </div>
+            <!-- 瀑布条 -->
+            <div class="space-y-1.5 text-xs">
+                {% if wf.total_users > wf.investors %}
+                <div>
+                    <div class="flex items-center justify-between mb-0.5">
+                        <span class="text-gray-400">平台用户</span>
+                        <span class="text-gray-600">
+                            {% if wf.total_users >= 10000 %}{{ "%.0f"|format(wf.total_users / 10000) }}万
+                            {% else %}{{ "{:,}".format(wf.total_users) }}{% endif %}
+                        </span>
+                    </div>
+                    <div class="bg-gray-200 rounded-full h-4 overflow-hidden">
+                        <div class="bg-gray-400 h-full rounded-full" style="width: 100%"></div>
+                    </div>
+                </div>
+                {% endif %}
+                <div>
+                    <div class="flex items-center justify-between mb-0.5">
+                        <span class="text-gray-400">去重投资者</span>
+                        <span class="text-gray-600">
+                            {% if wf.investors >= 10000 %}{{ "%.0f"|format(wf.investors / 10000) }}万
+                            {% else %}{{ "{:,}".format(wf.investors) }}{% endif %}
+                        </span>
+                    </div>
+                    <div class="bg-gray-200 rounded-full h-4 overflow-hidden">
+                        <div class="bg-blue-400 h-full rounded-full" style="width: {{ (wf.investors / max_val * 100) | round }}%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center justify-between mb-0.5">
+                        <span class="text-gray-400">减去富途已转化</span>
+                        <span class="text-red-500">-{% if wf.futu_clients >= 10000 %}{{ "%.0f"|format(wf.futu_clients / 10000) }}万{% else %}{{ "{:,}".format(wf.futu_clients) }}{% endif %}</span>
+                    </div>
+                    <div class="bg-gray-200 rounded-full h-4 overflow-hidden">
+                        <div class="bg-amber-400 h-full rounded-full" style="width: {{ (wf.remaining / max_val * 100) | round }}%"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center justify-between mb-0.5">
+                        <span class="text-gray-400">富途可转化 ({{ wf.rate_label }})</span>
+                        <span class="font-bold text-orange-600">
+                            {% if wf.convertible >= 10000 %}{{ "%.1f"|format(wf.convertible / 10000) }}万
+                            {% else %}{{ "{:,}".format(wf.convertible) }}{% endif %}
+                        </span>
+                    </div>
+                    <div class="bg-gray-200 rounded-full h-4 overflow-hidden">
+                        <div class="bg-orange-500 h-full rounded-full" style="width: {{ [[(wf.convertible / max_val * 100) | round, 2] | max, 100] | min }}%"></div>
+                    </div>
+                </div>
+                {% if wf.conversion_note %}
+                <div class="text-gray-400 italic pt-0.5">{{ wf.conversion_note }}</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- ===== 投资者开户动机与学习路径 ===== -->
+{% if investor_motivations %}
+<div class="stat-card mb-6" data-tab="tab-investor" id="sec-motivations">
+    <div class="flex items-center gap-3 mb-1">
+        <h2 class="text-xl font-bold text-gray-900">{{ investor_motivations.title }}</h2>
+    </div>
+    <p class="text-sm text-gray-500 mb-6">{{ investor_motivations.subtitle }}</p>
+
+    <!-- 学习路径分布（环形图 + 卡片）-->
+    {% set lp = investor_motivations.learning_paths %}
+    <div class="mb-8">
+        <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ lp.title }}</h3>
+        <p class="text-xs text-gray-400 mb-4">{{ lp.subtitle }}</p>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- 环形图 -->
+            <div class="flex items-center justify-center">
+                <svg viewBox="0 0 200 200" class="w-56 h-56">
+                    {% set ns = namespace(offset=0) %}
+                    {% set path_colors = {"rose": "#f43f5e", "amber": "#f59e0b", "blue": "#3b82f6", "emerald": "#10b981", "slate": "#64748b"} %}
+                    {% for p in lp.paths %}
+                    {% set dash = p.pct * 3.14159 * 2 * 70 / 100 %}
+                    {% set gap = 3.14159 * 2 * 70 - dash %}
+                    <circle cx="100" cy="100" r="70" fill="none"
+                        stroke="{{ path_colors.get(p.color, '#6b7280') }}" stroke-width="28"
+                        stroke-dasharray="{{ dash }} {{ gap }}"
+                        stroke-dashoffset="{{ -ns.offset }}"
+                        transform="rotate(-90 100 100)"
+                        class="transition-all duration-500" />
+                    {% set ns.offset = ns.offset + dash %}
+                    {% endfor %}
+                    <text x="100" y="94" text-anchor="middle" class="text-2xl font-bold" fill="#111827" style="font-size:22px;font-weight:700">5种</text>
+                    <text x="100" y="116" text-anchor="middle" fill="#6b7280" style="font-size:12px">典型路径</text>
+                </svg>
+            </div>
+            <!-- 路径卡片 -->
+            <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {% for p in lp.paths %}
+                {% set bg_map = {"rose": "bg-rose-50 border-rose-200", "amber": "bg-amber-50 border-amber-200", "blue": "bg-blue-50 border-blue-200", "emerald": "bg-emerald-50 border-emerald-200", "slate": "bg-slate-50 border-slate-200"} %}
+                {% set text_map = {"rose": "text-rose-700", "amber": "text-amber-700", "blue": "text-blue-700", "emerald": "text-emerald-700", "slate": "text-slate-700"} %}
+                {% set badge_map = {"rose": "bg-rose-100 text-rose-800", "amber": "bg-amber-100 text-amber-800", "blue": "bg-blue-100 text-blue-800", "emerald": "bg-emerald-100 text-emerald-800", "slate": "bg-slate-100 text-slate-800"} %}
+                <div class="rounded-xl border p-4 {{ bg_map.get(p.color, 'bg-gray-50 border-gray-200') }}">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-bold {{ text_map.get(p.color, 'text-gray-700') }}">{{ p.name }}</span>
+                        <span class="text-xs px-2 py-0.5 rounded-full font-semibold {{ badge_map.get(p.color, 'bg-gray-100 text-gray-800') }}">~{{ p.pct }}%</span>
+                    </div>
+                    <div class="text-xs text-gray-600 mb-1">{{ p.profile }}</div>
+                    <div class="text-xs text-gray-500 mb-2">{{ p.behavior }}</div>
+                    <div class="text-xs font-medium {{ text_map.get(p.color, 'text-gray-700') }} bg-white/60 rounded px-2 py-1 mb-2">
+                        {{ p.data_point }}
+                    </div>
+                    <div class="text-xs text-gray-400 flex items-start gap-1">
+                        <span class="shrink-0">富途启示：</span>
+                        <span>{{ p.futu_implication }}</span>
+                    </div>
+                    <div class="text-[10px] text-gray-300 mt-1">来源: {{ p.source }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- 投资目标与动机 (HK数据) -->
+    {% if investor_motivations.psych_triggers %}
+    {% set pt = investor_motivations.psych_triggers %}
+    <div class="mb-8">
+        <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ pt.title }}</h3>
+        <p class="text-sm text-gray-500 mb-1">{{ pt.subtitle }}</p>
+        <div class="text-[10px] text-amber-500 bg-amber-50 border border-amber-200 rounded px-2 py-1 mb-4">{{ pt.note }}</div>
+
+        <!-- 多份调查对比 -->
+        {% if pt.investment_objectives %}
+        {% set bar_colors = {"emerald": "from-emerald-400 to-emerald-500", "blue": "from-blue-400 to-blue-500", "rose": "from-rose-400 to-rose-500", "indigo": "from-indigo-400 to-indigo-500", "amber": "from-amber-400 to-amber-500", "violet": "from-violet-400 to-violet-500"} %}
+        <div class="space-y-5 mb-6">
+            {% for ds in pt.investment_objectives.datasets %}
+            <div class="bg-gray-50 rounded-xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <a href="{{ ds.source_url }}" target="_blank" class="text-sm font-semibold text-gray-800 hover:text-blue-600">{{ ds.source }}</a>
+                    <span class="text-[10px] text-gray-400">{{ ds.sample }}</span>
+                </div>
+                <div class="space-y-2">
+                    {% for item in ds["items"] %}
+                    <div class="flex items-center gap-3">
+                        <div class="w-36 text-xs text-right text-gray-600 shrink-0">{{ item.name }}</div>
+                        <div class="flex-1 bg-gray-200 rounded-full h-6 overflow-hidden">
+                            <div class="h-full rounded-full bg-gradient-to-r {{ bar_colors.get(item.color, 'from-gray-400 to-gray-500') }} flex items-center justify-end pr-2"
+                                 style="width: {{ item.pct }}%">
+                                <span class="text-[10px] font-bold text-white">{{ item.pct }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if ds.age_note %}
+                <div class="text-[10px] text-rose-500 mt-2">{{ ds.age_note }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- 社媒影响 -->
+        {% if pt.social_media_influence %}
+        <div class="mb-6">
+            <h4 class="text-sm font-semibold text-gray-700 mb-3">{{ pt.social_media_influence.title }}</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+                {% for item in pt.social_media_influence["items"] %}
+                <div class="bg-rose-50 border border-rose-200 rounded-lg p-3">
+                    <div class="text-2xl font-bold text-rose-600 mb-1">{{ item.stat }}</div>
+                    <div class="text-xs text-gray-600 mb-1">{{ item.detail }}</div>
+                    <a href="{{ item.source_url }}" target="_blank" class="text-[10px] text-gray-400 hover:text-blue-400">{{ item.source }}</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 决策影响因素 + 增加配置驱动 并排 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+            {% if pt.decision_drivers %}
+            <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4">
+                <h4 class="text-sm font-semibold text-indigo-800 mb-2">{{ pt.decision_drivers.title }}</h4>
+                <div class="space-y-2">
+                    {% for item in pt.decision_drivers["items"] %}
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs w-24 text-right text-gray-500 shrink-0">{{ item.name }}</span>
+                        <div class="flex-1 bg-indigo-100 rounded-full h-5 overflow-hidden">
+                            <div class="bg-indigo-400 h-full rounded-full" style="width: {{ item.pct }}%"></div>
+                        </div>
+                        <span class="text-xs font-semibold text-indigo-700 w-8">{{ item.pct }}%</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a href="{{ pt.decision_drivers.source_url }}" target="_blank" class="text-[10px] text-blue-400 hover:underline mt-2 block">{{ pt.decision_drivers.source }}</a>
+            </div>
+            {% endif %}
+            {% if pt.increase_drivers %}
+            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+                <h4 class="text-sm font-semibold text-emerald-800 mb-2">{{ pt.increase_drivers.title }}</h4>
+                <div class="space-y-2">
+                    {% for item in pt.increase_drivers["items"] %}
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs w-24 text-right text-gray-500 shrink-0">{{ item.name }}</span>
+                        <div class="flex-1 bg-emerald-100 rounded-full h-5 overflow-hidden">
+                            <div class="bg-emerald-400 h-full rounded-full" style="width: {{ item.pct }}%"></div>
+                        </div>
+                        <span class="text-xs font-semibold text-emerald-700 w-8">{{ item.pct }}%</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="text-[10px] text-emerald-600 mt-2">{{ pt.increase_drivers.context }}</div>
+                <a href="{{ pt.increase_drivers.source_url }}" target="_blank" class="text-[10px] text-blue-400 hover:underline mt-1 block">{{ pt.increase_drivers.source }}</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- 信息来源排名 横向条 -->
+    {% set info = investor_motivations.info_sources %}
+    <div class="mb-8">
+        <div class="flex items-center justify-between mb-3">
+            <h3 class="text-lg font-semibold text-gray-900">{{ info.title }}</h3>
+            <span class="text-[10px] text-gray-400">来源: {{ info.source }}</span>
+        </div>
+        <div class="space-y-2.5">
+            {% for item in info["items"] %}
+            <div class="flex items-center gap-3">
+                <div class="w-32 text-sm text-gray-700 text-right shrink-0">{{ item.name }}</div>
+                <div class="flex-1 bg-gray-100 rounded-full h-7 relative overflow-hidden">
+                    <div class="h-full rounded-full bg-gradient-to-r from-indigo-400 to-indigo-500 flex items-center justify-end pr-2.5 transition-all duration-700"
+                         style="width: {{ item.pct }}%">
+                        <span class="text-xs font-bold text-white">{{ item.pct }}%</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 纯新开 vs 加开 双栏 -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <!-- 纯新开 -->
+        {% set fto = investor_motivations.first_time_opening %}
+        <div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ fto.title }}</h3>
+            <div class="space-y-3">
+                {% for f in fto.factors %}
+                {% set factor_colors = {"blue": "border-l-blue-500 bg-blue-50", "green": "border-l-emerald-500 bg-emerald-50", "purple": "border-l-purple-500 bg-purple-50", "red": "border-l-red-500 bg-red-50", "amber": "border-l-amber-500 bg-amber-50", "teal": "border-l-teal-500 bg-teal-50"} %}
+                {% set num_colors = {"blue": "text-blue-600 bg-blue-100", "green": "text-emerald-600 bg-emerald-100", "purple": "text-purple-600 bg-purple-100", "red": "text-red-600 bg-red-100", "amber": "text-amber-600 bg-amber-100", "teal": "text-teal-600 bg-teal-100"} %}
+                <div class="rounded-lg border-l-4 p-3 {{ factor_colors.get(f.color, 'border-l-gray-400 bg-gray-50') }}">
+                    <div class="flex items-center justify-between mb-1">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold px-1.5 py-0.5 rounded {{ num_colors.get(f.color, 'text-gray-600 bg-gray-100') }}">#{{ f.rank }}</span>
+                            <span class="font-semibold text-sm text-gray-900">{{ f.name }}</span>
+                        </div>
+                        <span class="text-xs font-bold px-2 py-0.5 rounded-full {{ num_colors.get(f.color, 'text-gray-600 bg-gray-100') }}">{{ f.pct_label }}</span>
+                    </div>
+                    <div class="text-xs text-gray-600">{{ f.detail }}</div>
+                    <div class="text-[10px] text-gray-400 mt-1">{{ f.source }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- 加开 -->
+        {% set aa = investor_motivations.add_account %}
+        <div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ aa.title }}</h3>
+            <div class="space-y-3">
+                {% set icon_map = {"puzzle": "M11.4 1.0C10.9 1.0 10.3 1.3 9.9 1.9L8.0 4.8H6.0C4.3 4.8 3.0 6.1 3.0 7.8V18C3.0 19.7 4.3 21 6.0 21H18C19.7 21 21 19.7 21 18V7.8C21 6.1 19.7 4.8 18 4.8H16L14.1 1.9C13.7 1.3 13.1 1.0 12.6 1.0H11.4Z", "tickets": "M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z", "globe": "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9", "calculator": "M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z", "chip": "M9 3v2m6-2v2M9 19v2m6-2v2M3 9h2m-2 6h2m14-6h2m-2 6h2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"} %}
+                {% set aa_colors = ["border-l-violet-500 bg-violet-50", "border-l-pink-500 bg-pink-50", "border-l-cyan-500 bg-cyan-50", "border-l-lime-500 bg-lime-50", "border-l-sky-500 bg-sky-50"] %}
+                {% set aa_badge_colors = ["text-violet-700 bg-violet-100", "text-pink-700 bg-pink-100", "text-cyan-700 bg-cyan-100", "text-lime-700 bg-lime-100", "text-sky-700 bg-sky-100"] %}
+                {% for f in aa.factors %}
+                <div class="rounded-lg border-l-4 p-3 {{ aa_colors[loop.index0 % 5] }}">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="font-semibold text-sm text-gray-900">{{ f.name }}</span>
+                        <span class="text-xs font-bold px-2 py-0.5 rounded-full {{ aa_badge_colors[loop.index0 % 5] }}">{{ f.pct_label }}</span>
+                    </div>
+                    <div class="text-xs text-gray-600">{{ f.detail }}</div>
+                    <div class="text-[10px] text-gray-400 mt-1">{{ f.source }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- 代际信任差异 热力图 -->
+    {% set gt = investor_motivations.generational_trust %}
+    <div class="mb-8">
+        <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ gt.title }}</h3>
+        <p class="text-xs text-gray-400 mb-4">{{ gt.subtitle }}</p>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b-2 border-gray-200">
+                        <th class="text-left py-2 px-3 text-gray-600 font-medium">平台</th>
+                        <th class="text-center py-2 px-3 text-gray-600 font-medium">Gen Z</th>
+                        <th class="text-center py-2 px-3 text-gray-600 font-medium">Millennials</th>
+                        <th class="text-center py-2 px-3 text-gray-600 font-medium">Gen X</th>
+                        <th class="text-center py-2 px-3 text-gray-600 font-medium">Boomers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in gt.data %}
+                    <tr class="border-b border-gray-100">
+                        <td class="py-2.5 px-3 font-medium text-gray-800">{{ row.platform }}</td>
+                        {% for gen in [row.gen_z, row.millennials, row.gen_x, row.boomers] %}
+                        <td class="text-center py-2.5 px-3">
+                            {% if gen >= 30 %}
+                            <span class="inline-block w-14 py-0.5 rounded-full text-xs font-bold bg-rose-100 text-rose-700">{{ gen }}%</span>
+                            {% elif gen >= 20 %}
+                            <span class="inline-block w-14 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-700">{{ gen }}%</span>
+                            {% elif gen >= 10 %}
+                            <span class="inline-block w-14 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-700">{{ gen }}%</span>
+                            {% else %}
+                            <span class="inline-block w-14 py-0.5 rounded-full text-xs font-bold bg-gray-100 text-gray-500">{{ gen }}%</span>
+                            {% endif %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+            <div class="text-sm font-semibold text-amber-800 mb-1">信任悖论</div>
+            <div class="text-xs text-amber-700">{{ gt.trust_paradox }}</div>
+        </div>
+        <div class="text-[10px] text-gray-400 mt-2">来源: {{ gt.source }}</div>
+    </div>
+
+    <!-- 香港投资者产品渗透率 -->
+    {% set hp = investor_motivations.hk_product_progression %}
+    <div class="mb-6">
+        <div class="flex items-center justify-between mb-3">
+            <h3 class="text-lg font-semibold text-gray-900">{{ hp.title }}</h3>
+            <span class="text-[10px] text-gray-400">{{ hp.source }}</span>
+        </div>
+        <div class="flex items-end gap-4 justify-center mb-4" style="height:180px">
+            {% set bar_colors = ["bg-indigo-500", "bg-blue-400", "bg-teal-400", "bg-amber-400", "bg-rose-400"] %}
+            {% for prod in hp.products %}
+            <div class="flex flex-col items-center gap-1">
+                <span class="text-xs font-bold text-gray-700">{{ prod.penetration }}%</span>
+                <div class="w-16 rounded-t-lg {{ bar_colors[loop.index0 % 5] }} transition-all duration-700" style="height: {{ prod.penetration * 1.6 }}px"></div>
+                <span class="text-xs text-gray-600 mt-1">{{ prod.name }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+                <div class="text-xs font-semibold text-indigo-800 mb-0.5">年龄洞察</div>
+                <div class="text-xs text-indigo-700">{{ hp.age_insight }}</div>
+            </div>
+            <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
+                <div class="text-xs font-semibold text-emerald-800 mb-0.5">关键发现</div>
+                <div class="text-xs text-emerald-700">{{ hp.key_finding }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 数据来源列表 -->
+    <div class="border-t border-gray-200 pt-4">
+        <div class="text-xs font-semibold text-gray-500 mb-2">研究数据来源</div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5">
+            {% for src in investor_motivations.key_sources %}
+            <div class="text-[10px] text-gray-400">
+                {% if src.url %}<a href="{{ src.url }}" target="_blank" class="text-blue-400 hover:text-blue-600 hover:underline">{{ src.name }}</a>{% else %}{{ src.name }}{% endif %}
+                <span class="text-gray-300">({{ src.sample }})</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <!-- ===== 社媒平台 ===== -->
-<div class="stat-card mb-6 channel-group">
+<div class="stat-card mb-6 channel-group" data-tab="tab-channels" id="sec-social">
     <div class="flex items-center justify-between mb-4">
         <div>
             <h3 class="text-lg font-semibold text-gray-900">社媒平台</h3>
@@ -899,7 +1848,7 @@
 {% set first_ch = channels[0] %}
 {% set cat_type = first_ch.get('category', 'other') %}
 {% set tc = type_colors.get(cat_type, default_color) %}
-<div class="stat-card mb-6 channel-group">
+<div class="stat-card mb-6 channel-group" data-tab="tab-channels" id="sec-other-channels">
     <div class="flex items-center gap-2 mb-4">
         <span class="{{ tc.dot }} w-3 h-3 rounded-full inline-block"></span>
         <h3 class="text-lg font-semibold text-gray-900">{{ cat_name }}</h3>
@@ -961,7 +1910,7 @@
 <!-- ===== 覆盖率测算方法 ===== -->
 <details class="stat-card mb-6">
     <summary class="text-xs text-indigo-600 cursor-pointer hover:text-indigo-800 font-medium">覆盖率测算方法与改进方向</summary>
-    <div class="mt-3 text-xs text-gray-600 space-y-3">
+    <div class="mt-3 text-xs text-gray-600 space-y-3" data-tab="tab-methodology" id="sec-methodology">
         <div>
             <p class="font-semibold text-gray-700 mb-1">当前测算方法（Tier 1: 估算）</p>
             <ul class="list-disc list-inside space-y-0.5">
@@ -1002,7 +1951,7 @@
 {% if methodology %}
 <details class="stat-card mb-6">
     <summary class="text-xs text-indigo-600 cursor-pointer hover:text-indigo-800 font-medium">查看数据来源与方法论</summary>
-    <div class="mt-3 text-xs text-gray-600 space-y-2">
+    <div class="mt-3 text-xs text-gray-600 space-y-2" data-tab="tab-methodology" id="sec-sources">
         <p><strong>地域限定：</strong>{{ methodology.geo_filtering }}</p>
         <p class="mt-2"><strong>数据来源：</strong></p>
         <ul class="list-disc list-inside space-y-0.5">
@@ -1065,5 +2014,36 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+// ===== Sub-Tab Switching =====
+(function() {
+    var tabs = document.querySelectorAll('#sub-tabs .sub-tab');
+    var sections = document.querySelectorAll('[data-tab]:not(.sub-tab)');
+    var activeTab = 'tab-market';
+
+    function switchTab(tabId) {
+        activeTab = tabId;
+        tabs.forEach(function(btn) {
+            if (btn.dataset.tab === tabId) {
+                btn.className = 'sub-tab active px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-indigo-500 text-indigo-700 bg-indigo-50 whitespace-nowrap';
+            } else {
+                btn.className = 'sub-tab px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50 whitespace-nowrap';
+            }
+        });
+        sections.forEach(function(sec) {
+            sec.style.display = sec.dataset.tab === tabId ? '' : 'none';
+        });
+    }
+
+    tabs.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            switchTab(this.dataset.tab);
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+    });
+
+    // Initialize: show only market tab
+    switchTab(activeTab);
+})();
 </script>
 {% endblock %}

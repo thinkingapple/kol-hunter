@@ -1,4 +1,5 @@
 import json
+import math
 import re
 from pathlib import Path
 
@@ -193,6 +194,74 @@ async def traffic_map(request: Request):
     futu_hk_stats = data.get("futu_hk_stats", {})
     arpu_analysis = data.get("arpu_analysis", {})
     conversion_analysis = data.get("conversion_analysis", {})
+    new_investor_analysis = data.get("new_investor_analysis", {})
+    ai_acquisition = data.get("ai_acquisition", {})
+    acquisition_plan = data.get("acquisition_plan", {})
+    investor_motivations = data.get("investor_motivations", {})
+    wealth_panorama = data.get("wealth_panorama", {})
+
+    # Build waterfall data: merge platform/channel total users with scatter conversion data
+    waterfall_data = []
+    scatter_map = {ch["name"]: ch for ch in conversion_analysis.get("full_scatter", [])}
+    # Map display_name -> platform total users
+    plat_users = {p["display_name"]: p.get("hk_total_users", 0) for p in platforms}
+    chan_users = {}
+    for ch in other_channels:
+        raw = ch.get("hk_monthly_visits") or ch.get("hk_monthly_users") or 0
+        chan_users[ch["display_name"]] = raw
+    # Name mapping from scatter names to display names
+    name_map = {
+        "WhatsApp 群组": "WhatsApp", "Google 搜索(HK)": "Google 搜索(HK)",
+        "YouTube": "YouTube", "Facebook": "Facebook", "Instagram": "Instagram",
+        "TikTok": "TikTok", "Threads": "Threads", "Bilibili": "Bilibili",
+        "LinkedIn": "LinkedIn", "X / Twitter": "X / Twitter",
+        "小红书": "小红书", "微博": "微博",
+    }
+    for sc in conversion_analysis.get("full_scatter", []):
+        display = name_map.get(sc["name"], sc["name"])
+        total = plat_users.get(display, 0) or chan_users.get(display, 0)
+        if total == 0:
+            total = sc.get("investors", 0)  # fallback
+        investors = sc.get("investors", 0)
+        futu_clients = sc.get("futu_clients", 0)
+        remaining = sc.get("remaining_convertible", 0)
+        convertible = sc.get("est_actual_converts", 0)
+        rate_label = sc.get("est_conversion_label", "")
+        if investors > 0:
+            waterfall_data.append({
+                "name": sc["name"],
+                "total_users": total,
+                "investors": investors,
+                "futu_clients": futu_clients,
+                "remaining": remaining,
+                "convertible": convertible,
+                "rate_label": rate_label,
+                "conversion_note": sc.get("conversion_note", ""),
+            })
+    waterfall_data.sort(key=lambda x: x["convertible"], reverse=True)
+
+    # Add jitter to scatter points that share the same (execution, conversion) position
+    full_scatter = conversion_analysis.get("full_scatter", [])
+    if full_scatter:
+        # Group by (execution, conversion)
+        pos_groups: dict[tuple, list] = {}
+        for ch in full_scatter:
+            key = (ch.get("execution", 5), ch.get("conversion", 5))
+            pos_groups.setdefault(key, []).append(ch)
+        # Apply circular jitter to clusters of 2+
+        for (ex, cv), group in pos_groups.items():
+            if len(group) == 1:
+                group[0]["x_jitter"] = 0
+                group[0]["y_jitter"] = 0
+            else:
+                n = len(group)
+                # Sort by est_actual_converts desc so biggest is in center-ish
+                group.sort(key=lambda c: c.get("est_actual_converts", 0), reverse=True)
+                radius = min(0.6 + n * 0.08, 1.2)  # scale with cluster size
+                for i, ch in enumerate(group):
+                    angle = 2 * math.pi * i / n
+                    ch["x_jitter"] = round(radius * math.cos(angle), 2)
+                    ch["y_jitter"] = round(radius * math.sin(angle), 2)
 
     # Add filter tags
     for p in platforms:
@@ -376,4 +445,10 @@ async def traffic_map(request: Request):
         "heatmap_categories": heatmap_categories,
         "heatmap_max": heatmap_max,
         "conversion_analysis": conversion_analysis,
+        "new_investor_analysis": new_investor_analysis,
+        "ai_acquisition": ai_acquisition,
+        "acquisition_plan": acquisition_plan,
+        "waterfall_data": waterfall_data,
+        "investor_motivations": investor_motivations,
+        "wealth_panorama": wealth_panorama,
     })

@@ -2059,22 +2059,22 @@
     "key_insights": [
       {
         "title": "饱和效应: 容易转化的用户确实已大部分转化",
-        "body": "富途HK运营10年, 40%渗透率意味着「搜索开户→比较→注册」这条路径上的高意图用户已被充分转化。Google SEM、比较平台(MoneySmart)、口碑(MGM)这些高转化渠道的边际收益正在递减。",
+        "body": "富途HK运营超10年。假设当前渗透率约35-40%(基于富途财报客户数与SFC投资者总数估算), 意味着高意图转化路径(搜索开户→比较→注册)的用户已被大量覆盖。Google SEM、比较平台、口碑等渠道的边际获客成本可能在上升(需对比历年CAC数据验证)。",
         "color": "red"
       },
       {
         "title": "剩余150万未转化投资者的画像",
-        "body": "他们不是「没听过富途」, 而是: ①满意现有银行系券商(习惯+信任)的35-55岁群体 ②交易不频繁(<年4次)不需要低佣金 ③投资品类不匹配(只买基金/保险, 非股票) ④新来港人士(内地/海外, 不熟悉本地券商)。转化这批人需要不同策略。",
+        "body": "未转化投资者的可能画像(需调研验证): ①满意现有银行系券商的中年群体 ②交易不频繁但未锁定券商的被动投资者 ③投资品类与富途产品不匹配者(基金/保险为主) ④新来港人士。不同画像需要不同的转化策略。",
         "color": "amber"
       },
       {
         "title": "「难做」≠「难转化」— 反直觉的高ROI渠道",
-        "body": "LIHKG(执行难度8/转化难度3): 用户排斥广告但极信赖peer recommendation, 一条真实好评胜过100条广告。Podcast(执行难度7/转化难度3): 听众少但极精准, promo code转化率1%远超社媒0.05%。这些渠道「难做」但一旦做好, 转化效率碾压「容易做」的展示广告。",
+        "body": "LIHKG(执行难度8/转化难度3): 社区用户排斥商业内容但信赖真实用户推荐。Podcast(执行难度7/转化难度3): 听众规模小但粘性高。这些渠道执行门槛高但转化效率可能优于展示广告(具体转化率需投放测试验证, 各渠道数据差异大)。",
         "color": "green"
       },
       {
         "title": "真正的增量来源: 新入市投资者 + 跨品类迁移",
-        "body": "每年~5万HK新增投资者(年轻人首次投资) + 内地来港人才~5万/年 + crypto用户跨品类到传统证券。这些人没有「已有券商」的switching成本, 是纯增量。他们在: TikTok/小红书(年轻人)、B站(内地来港)、Telegram(crypto)。这些渠道转化率虽低, 但面对的是「零饱和」市场。",
+        "body": "增量来源估算: 每年约8-12万HK新增投资者(基于入境处+人口统计交叉估算), 包括年轻人首次投资、内地来港人才、crypto跨品类用户。这些人没有switching成本, 是各券商争夺的核心增量。",
         "color": "blue"
       }
     ],
@@ -2091,41 +2091,25 @@
         "futu_clients": 832000,
         "remaining_convertible": 1248000,
         "type": "messaging",
-        "est_conversion_rate": 0.08,
-        "est_conversion_label": "8.0%",
-        "est_actual_converts": 99840
+        "est_conversion_rate": 0.3,
+        "est_conversion_label": "30%",
+        "est_actual_converts": 374400
       },
       {
         "name": "Google 搜索(HK)",
         "execution": 5,
         "conversion": 5,
-        "execution_note": "",
-        "conversion_note": "",
+        "execution_note": "SEM竞价成熟但CPC高(HK$15-40/click), SEO需长期投入",
+        "conversion_note": "搜索「开户」「券商比较」意图极强, 但品牌词已饱和",
         "saturation": "中",
         "investors": 2200000,
         "futu_penetration_pct": 40,
         "futu_clients": 880000,
         "remaining_convertible": 1320000,
         "type": "search",
-        "est_conversion_rate": 0.03,
-        "est_conversion_label": "3.0%",
-        "est_actual_converts": 39600
-      },
-      {
-        "name": "MoneyHero",
-        "execution": 2,
-        "conversion": 2,
-        "execution_note": "同MoneySmart, CPA模式",
-        "conversion_note": "比较平台用户意图极强",
-        "saturation": "高",
-        "investors": 950000,
-        "futu_penetration_pct": 50,
-        "futu_clients": 475000,
-        "remaining_convertible": 475000,
-        "type": "finance_compare",
-        "est_conversion_rate": 0.02,
-        "est_conversion_label": "2.0%",
-        "est_actual_converts": 9500
+        "est_conversion_rate": 0.25,
+        "est_conversion_label": "25%",
+        "est_actual_converts": 330000
       },
       {
         "name": "YouTube",
@@ -2139,185 +2123,41 @@
         "futu_clients": 798000,
         "remaining_convertible": 1302000,
         "type": "social",
-        "est_conversion_rate": 0.005,
-        "est_conversion_label": "0.50%",
-        "est_actual_converts": 6510
+        "est_conversion_rate": 0.2,
+        "est_conversion_label": "20%",
+        "est_actual_converts": 260400
       },
       {
-        "name": "LIHKG 连登",
-        "execution": 8,
-        "conversion": 3,
-        "execution_note": "用户极排斥商业内容, 只能靠真实口碑",
-        "conversion_note": "peer推荐信任度极高, 活跃投资者多",
-        "saturation": "中",
-        "investors": 800000,
-        "futu_penetration_pct": 45,
-        "futu_clients": 360000,
-        "remaining_convertible": 440000,
-        "type": "forum",
-        "est_conversion_rate": 0.008,
-        "est_conversion_label": "0.80%",
-        "est_actual_converts": 3520
-      },
-      {
-        "name": "微信公众号/小程序",
-        "execution": 5,
-        "conversion": 5,
-        "execution_note": "",
-        "conversion_note": "",
-        "saturation": "中",
-        "investors": 1480000,
-        "futu_penetration_pct": 40,
-        "futu_clients": 592000,
-        "remaining_convertible": 888000,
-        "type": "cn_platform",
-        "est_conversion_rate": 0.002,
-        "est_conversion_label": "0.20%",
-        "est_actual_converts": 1776
-      },
-      {
-        "name": "AAStocks",
-        "execution": 3,
-        "conversion": 4,
-        "execution_note": "本地老牌财经, 广告合作简单",
-        "conversion_note": "港股为主的成熟投资者, 多已有券商",
-        "saturation": "高",
-        "investors": 735000,
-        "futu_penetration_pct": 52,
-        "futu_clients": 382200,
-        "remaining_convertible": 352800,
-        "type": "finance_tool",
-        "est_conversion_rate": 0.005,
-        "est_conversion_label": "0.50%",
-        "est_actual_converts": 1764
-      },
-      {
-        "name": "Telegram 频道",
-        "execution": 5,
-        "conversion": 4,
-        "execution_note": "需运营高质量频道或赞助现有频道",
-        "conversion_note": "用户偏crypto/活跃交易者, 意图强",
-        "saturation": "低",
-        "investors": 440000,
-        "futu_penetration_pct": 20,
-        "futu_clients": 88000,
-        "remaining_convertible": 352000,
-        "type": "messaging",
-        "est_conversion_rate": 0.005,
-        "est_conversion_label": "0.50%",
-        "est_actual_converts": 1760
-      },
-      {
-        "name": "TradingView",
-        "execution": 3,
-        "conversion": 3,
-        "execution_note": "图表工具联动, 开户引导清晰",
-        "conversion_note": "专业交易者, 看重执行质量",
-        "saturation": "中",
-        "investors": 300000,
-        "futu_penetration_pct": 45,
-        "futu_clients": 135000,
-        "remaining_convertible": 165000,
-        "type": "finance_tool",
-        "est_conversion_rate": 0.01,
-        "est_conversion_label": "1.0%",
-        "est_actual_converts": 1650
-      },
-      {
-        "name": "Yahoo Finance HK",
-        "execution": 3,
-        "conversion": 4,
-        "execution_note": "展示广告/赞助投放简单",
-        "conversion_note": "用户正看行情, 投资意图强",
-        "saturation": "中",
-        "investors": 1050000,
-        "futu_penetration_pct": 50,
-        "futu_clients": 525000,
-        "remaining_convertible": 525000,
-        "type": "finance_tool",
-        "est_conversion_rate": 0.003,
-        "est_conversion_label": "0.30%",
-        "est_actual_converts": 1575
-      },
-      {
-        "name": "LinkedIn",
+        "name": "App Store / Google Play",
         "execution": 4,
-        "conversion": 5,
-        "execution_note": "LinkedIn Ads成本高, 需专业内容",
-        "conversion_note": "高收入专业人士, 但非投资场景",
-        "saturation": "低",
-        "investors": 850000,
-        "futu_penetration_pct": 35,
-        "futu_clients": 297500,
-        "remaining_convertible": 552500,
-        "type": "professional",
-        "est_conversion_rate": 0.002,
-        "est_conversion_label": "0.20%",
-        "est_actual_converts": 1105
-      },
-      {
-        "name": "Investing.com",
-        "execution": 3,
-        "conversion": 3,
-        "execution_note": "Broker集成/CPA合作模式成熟",
-        "conversion_note": "活跃交易者, 对工具/费率敏感",
+        "conversion": 2,
+        "execution_note": "ASO优化+Apple Search Ads, 需持续优化关键词和截图",
+        "conversion_note": "搜索「股票app」「trading」= 极高意图, 下载→注册转化率高",
         "saturation": "中",
-        "investors": 200000,
-        "futu_penetration_pct": 48,
-        "futu_clients": 96000,
-        "remaining_convertible": 104000,
-        "type": "finance_tool",
-        "est_conversion_rate": 0.01,
-        "est_conversion_label": "1.0%",
-        "est_actual_converts": 1040
+        "investors": 1200000,
+        "futu_penetration_pct": 45,
+        "futu_clients": 540000,
+        "remaining_convertible": 660000,
+        "type": "search",
+        "est_conversion_rate": 0.35,
+        "est_conversion_label": "35%",
+        "est_actual_converts": 231000
       },
       {
-        "name": "HK01 香港01",
-        "execution": 5,
-        "conversion": 5,
-        "execution_note": "",
-        "conversion_note": "",
-        "saturation": "中",
-        "investors": 840000,
-        "futu_penetration_pct": 40,
-        "futu_clients": 336000,
-        "remaining_convertible": 504000,
-        "type": "news_media",
-        "est_conversion_rate": 0.002,
-        "est_conversion_label": "0.20%",
-        "est_actual_converts": 1008
-      },
-      {
-        "name": "ETNet 经济通",
-        "execution": 3,
-        "conversion": 5,
-        "execution_note": "展示广告购买简单",
-        "conversion_note": "偏传统投资者, switching意愿较低",
+        "name": "MoneyHero",
+        "execution": 2,
+        "conversion": 2,
+        "execution_note": "同MoneySmart, CPA模式",
+        "conversion_note": "比较平台用户意图极强",
         "saturation": "高",
-        "investors": 650000,
-        "futu_penetration_pct": 48,
-        "futu_clients": 312000,
-        "remaining_convertible": 338000,
-        "type": "finance_tool",
-        "est_conversion_rate": 0.002,
-        "est_conversion_label": "0.20%",
-        "est_actual_converts": 676
-      },
-      {
-        "name": "X / Twitter",
-        "execution": 5,
-        "conversion": 5,
-        "execution_note": "",
-        "conversion_note": "",
-        "saturation": "中",
-        "investors": 550000,
-        "futu_penetration_pct": 40,
-        "futu_clients": 220000,
-        "remaining_convertible": 330000,
-        "type": "social",
-        "est_conversion_rate": 0.002,
-        "est_conversion_label": "0.20%",
-        "est_actual_converts": 660
+        "investors": 950000,
+        "futu_penetration_pct": 50,
+        "futu_clients": 475000,
+        "remaining_convertible": 475000,
+        "type": "finance_compare",
+        "est_conversion_rate": 0.4,
+        "est_conversion_label": "40%",
+        "est_actual_converts": 190000
       },
       {
         "name": "Facebook",
@@ -2331,121 +2171,41 @@
         "futu_clients": 827400,
         "remaining_convertible": 1142600,
         "type": "social",
-        "est_conversion_rate": 0.0005,
-        "est_conversion_label": "0.05%",
-        "est_actual_converts": 571
+        "est_conversion_rate": 0.1,
+        "est_conversion_label": "10%",
+        "est_actual_converts": 114260
       },
       {
-        "name": "MoneySmart",
-        "execution": 2,
-        "conversion": 2,
-        "execution_note": "CPA合作, 提供优惠即可上架",
-        "conversion_note": "用户就是来比较开户的, 意图最强",
-        "saturation": "高",
-        "investors": 55000,
-        "futu_penetration_pct": 50,
-        "futu_clients": 27500,
-        "remaining_convertible": 27500,
-        "type": "finance_compare",
-        "est_conversion_rate": 0.02,
-        "est_conversion_label": "2.0%",
-        "est_actual_converts": 550
-      },
-      {
-        "name": "中原/美联/28Hse",
-        "execution": 5,
-        "conversion": 5,
-        "execution_note": "",
-        "conversion_note": "",
-        "saturation": "中",
-        "investors": 440000,
-        "futu_penetration_pct": 40,
-        "futu_clients": 176000,
-        "remaining_convertible": 264000,
-        "type": "property",
-        "est_conversion_rate": 0.002,
-        "est_conversion_label": "0.20%",
-        "est_actual_converts": 528
-      },
-      {
-        "name": "财经媒体(HKET/HKEJ/Finet)",
-        "execution": 5,
-        "conversion": 5,
-        "execution_note": "",
-        "conversion_note": "",
-        "saturation": "中",
-        "investors": 375000,
-        "futu_penetration_pct": 40,
-        "futu_clients": 150000,
-        "remaining_convertible": 225000,
-        "type": "media",
-        "est_conversion_rate": 0.002,
-        "est_conversion_label": "0.20%",
-        "est_actual_converts": 450
-      },
-      {
-        "name": "高登 HKGolden",
-        "execution": 7,
-        "conversion": 4,
-        "execution_note": "类似LIHKG但用户群更杂, 软文更易被识破",
-        "conversion_note": "论坛用户对券商有一定认知, 部分可转化",
-        "saturation": "中",
-        "investors": 150000,
-        "futu_penetration_pct": 40,
-        "futu_clients": 60000,
-        "remaining_convertible": 90000,
-        "type": "forum",
-        "est_conversion_rate": 0.005,
-        "est_conversion_label": "0.50%",
-        "est_actual_converts": 450
-      },
-      {
-        "name": "小红书",
-        "execution": 4,
-        "conversion": 6,
-        "execution_note": "种草模式成熟, 但金融监管严",
-        "conversion_note": "用户有做功课心态, 但从种草到行动有时间差",
-        "saturation": "低",
-        "investors": 300000,
-        "futu_penetration_pct": 28,
-        "futu_clients": 84000,
-        "remaining_convertible": 216000,
-        "type": "social",
-        "est_conversion_rate": 0.002,
-        "est_conversion_label": "0.20%",
-        "est_actual_converts": 432
-      },
-      {
-        "name": "财经播客",
-        "execution": 7,
+        "name": "LIHKG 连登",
+        "execution": 8,
         "conversion": 3,
-        "execution_note": "HK播客生态小, 需长期赞助",
-        "conversion_note": "听众粘性极高, 主播推荐=强背书",
-        "saturation": "极低",
-        "investors": 50000,
-        "futu_penetration_pct": 30,
-        "futu_clients": 15000,
-        "remaining_convertible": 35000,
-        "type": "podcast",
-        "est_conversion_rate": 0.01,
-        "est_conversion_label": "1.0%",
-        "est_actual_converts": 350
+        "execution_note": "用户极排斥商业内容, 只能靠真实口碑",
+        "conversion_note": "peer推荐信任度极高, 活跃投资者多",
+        "saturation": "中",
+        "investors": 800000,
+        "futu_penetration_pct": 45,
+        "futu_clients": 360000,
+        "remaining_convertible": 440000,
+        "type": "forum",
+        "est_conversion_rate": 0.25,
+        "est_conversion_label": "25%",
+        "est_actual_converts": 110000
       },
       {
-        "name": "香港讨论区",
+        "name": "微信公众号/小程序",
         "execution": 5,
         "conversion": 5,
-        "execution_note": "",
-        "conversion_note": "",
+        "execution_note": "公众号+小程序生态完整, 需中文内容团队持续运营",
+        "conversion_note": "内地来港人群主要信息渠道, 但微信生态封闭导流难",
         "saturation": "中",
-        "investors": 260000,
+        "investors": 1480000,
         "futu_penetration_pct": 40,
-        "futu_clients": 104000,
-        "remaining_convertible": 156000,
-        "type": "forum",
-        "est_conversion_rate": 0.002,
-        "est_conversion_label": "0.20%",
-        "est_actual_converts": 312
+        "futu_clients": 592000,
+        "remaining_convertible": 888000,
+        "type": "cn_platform",
+        "est_conversion_rate": 0.12,
+        "est_conversion_label": "12%",
+        "est_actual_converts": 106560
       },
       {
         "name": "Instagram",
@@ -2459,105 +2219,345 @@
         "futu_clients": 426000,
         "remaining_convertible": 994000,
         "type": "social",
-        "est_conversion_rate": 0.0003,
-        "est_conversion_label": "0.03%",
-        "est_actual_converts": 298
+        "est_conversion_rate": 0.08,
+        "est_conversion_label": "8%",
+        "est_actual_converts": 79520
       },
       {
-        "name": "雪球",
+        "name": "Yahoo Finance HK",
+        "execution": 3,
+        "conversion": 4,
+        "execution_note": "展示广告/赞助投放简单",
+        "conversion_note": "用户正看行情, 投资意图强",
+        "saturation": "中",
+        "investors": 1050000,
+        "futu_penetration_pct": 50,
+        "futu_clients": 525000,
+        "remaining_convertible": 525000,
+        "type": "finance_tool",
+        "est_conversion_rate": 0.15,
+        "est_conversion_label": "15%",
+        "est_actual_converts": 78750
+      },
+      {
+        "name": "LinkedIn",
         "execution": 4,
         "conversion": 5,
-        "execution_note": "雪球社区运营, 需中文内容团队",
-        "conversion_note": "投资社区用户活跃, 但平台封闭",
+        "execution_note": "LinkedIn Ads成本高, 需专业内容",
+        "conversion_note": "高收入专业人士, 但非投资场景",
         "saturation": "低",
-        "investors": 180000,
+        "investors": 850000,
         "futu_penetration_pct": 35,
-        "futu_clients": 63000,
-        "remaining_convertible": 117000,
-        "type": "cn_platform",
-        "est_conversion_rate": 0.002,
-        "est_conversion_label": "0.20%",
-        "est_actual_converts": 234
+        "futu_clients": 297500,
+        "remaining_convertible": 552500,
+        "type": "professional",
+        "est_conversion_rate": 0.12,
+        "est_conversion_label": "12%",
+        "est_actual_converts": 66300
       },
       {
-        "name": "HongKongCard",
-        "execution": 2,
+        "name": "虚拟银行(ZA/Mox/WeLab/天星)",
+        "execution": 7,
         "conversion": 3,
-        "execution_note": "CPA合作模式",
-        "conversion_note": "用户在比较金融产品, 有转化意图",
-        "saturation": "中",
-        "investors": 38000,
-        "futu_penetration_pct": 40,
-        "futu_clients": 15200,
-        "remaining_convertible": 22800,
-        "type": "finance_compare",
-        "est_conversion_rate": 0.01,
-        "est_conversion_label": "1.0%",
-        "est_actual_converts": 228
+        "execution_note": "需B2B商务合作, 产品联动(如ZA Bank→证券引流), 谈判周期长",
+        "conversion_note": "fintech用户天然接受线上券商, switching成本低, 对利率/费率敏感",
+        "saturation": "低",
+        "investors": 500000,
+        "futu_penetration_pct": 35,
+        "futu_clients": 175000,
+        "remaining_convertible": 325000,
+        "type": "fintech",
+        "est_conversion_rate": 0.2,
+        "est_conversion_label": "20%",
+        "est_actual_converts": 65000
       },
       {
-        "name": "东方财富",
+        "name": "AAStocks",
+        "execution": 3,
+        "conversion": 4,
+        "execution_note": "本地老牌财经, 广告合作简单",
+        "conversion_note": "港股为主的成熟投资者, 多已有券商",
+        "saturation": "高",
+        "investors": 735000,
+        "futu_penetration_pct": 52,
+        "futu_clients": 382200,
+        "remaining_convertible": 352800,
+        "type": "finance_tool",
+        "est_conversion_rate": 0.18,
+        "est_conversion_label": "18%",
+        "est_actual_converts": 63504
+      },
+      {
+        "name": "HK01 香港01",
         "execution": 5,
         "conversion": 5,
-        "execution_note": "",
-        "conversion_note": "",
+        "execution_note": "本地头部新闻App, 原生广告/赞助内容合作门槛中等",
+        "conversion_note": "综合新闻用户, 投资意图不集中, 需精准定向财经版块",
         "saturation": "中",
-        "investors": 175000,
+        "investors": 840000,
         "futu_penetration_pct": 40,
-        "futu_clients": 70000,
-        "remaining_convertible": 105000,
-        "type": "cn_platform",
-        "est_conversion_rate": 0.002,
-        "est_conversion_label": "0.20%",
-        "est_actual_converts": 210
+        "futu_clients": 336000,
+        "remaining_convertible": 504000,
+        "type": "news_media",
+        "est_conversion_rate": 0.12,
+        "est_conversion_label": "12%",
+        "est_actual_converts": 60480
       },
       {
-        "name": "微博",
+        "name": "TradingView",
         "execution": 3,
+        "conversion": 3,
+        "execution_note": "图表工具联动, 开户引导清晰",
+        "conversion_note": "专业交易者, 看重执行质量",
+        "saturation": "中",
+        "investors": 300000,
+        "futu_penetration_pct": 45,
+        "futu_clients": 135000,
+        "remaining_convertible": 165000,
+        "type": "finance_tool",
+        "est_conversion_rate": 0.35,
+        "est_conversion_label": "35%",
+        "est_actual_converts": 57750
+      },
+      {
+        "name": "TVB/ViuTV/Now TV",
+        "execution": 6,
         "conversion": 7,
-        "execution_note": "官方号运营简单",
-        "conversion_note": "HK投资者几乎不用微博获取投资信息",
-        "saturation": "极低",
-        "investors": 225000,
-        "futu_penetration_pct": 20,
-        "futu_clients": 45000,
-        "remaining_convertible": 180000,
-        "type": "cn_platform",
-        "est_conversion_rate": 0.0005,
-        "est_conversion_label": "0.05%",
-        "est_actual_converts": 90
+        "execution_note": "电视广告成本高(30秒HK$5-20万), 但触达率无可替代, 适合品牌campaign",
+        "conversion_note": "被动观看, 无法直接行动, 仅建立品牌认知, 需配合数字渠道收割",
+        "saturation": "中",
+        "investors": 1800000,
+        "futu_penetration_pct": 40,
+        "futu_clients": 720000,
+        "remaining_convertible": 1080000,
+        "type": "mass_media",
+        "est_conversion_rate": 0.05,
+        "est_conversion_label": "5%",
+        "est_actual_converts": 54000
       },
       {
-        "name": "Bilibili",
+        "name": "Telegram 频道",
         "execution": 5,
-        "conversion": 6,
-        "execution_note": "需中文长视频, B站金融区竞争激烈",
-        "conversion_note": "内地来港人群为主, 开户有额外门槛",
-        "saturation": "极低",
-        "investors": 100000,
-        "futu_penetration_pct": 15,
-        "futu_clients": 15000,
-        "remaining_convertible": 85000,
-        "type": "social",
-        "est_conversion_rate": 0.001,
-        "est_conversion_label": "0.10%",
-        "est_actual_converts": 85
+        "conversion": 4,
+        "execution_note": "需运营高质量频道或赞助现有频道",
+        "conversion_note": "用户偏crypto/活跃交易者, 意图强",
+        "saturation": "低",
+        "investors": 440000,
+        "futu_penetration_pct": 20,
+        "futu_clients": 88000,
+        "remaining_convertible": 352000,
+        "type": "messaging",
+        "est_conversion_rate": 0.15,
+        "est_conversion_label": "15%",
+        "est_actual_converts": 52800
       },
       {
-        "name": "Threads",
+        "name": "ETNet 经济通",
         "execution": 3,
-        "conversion": 8,
-        "execution_note": "文字轻量, 但平台尚新, 生态未成熟",
-        "conversion_note": "用户极少, 金融内容几乎不存在",
-        "saturation": "极低",
-        "investors": 510000,
+        "conversion": 5,
+        "execution_note": "展示广告购买简单",
+        "conversion_note": "偏传统投资者, switching意愿较低",
+        "saturation": "高",
+        "investors": 650000,
+        "futu_penetration_pct": 48,
+        "futu_clients": 312000,
+        "remaining_convertible": 338000,
+        "type": "finance_tool",
+        "est_conversion_rate": 0.15,
+        "est_conversion_label": "15%",
+        "est_actual_converts": 50700
+      },
+      {
+        "name": "Shopback/Cashback平台",
+        "execution": 3,
+        "conversion": 2,
+        "execution_note": "CPA合作模式, 提供开户奖励即可上架, 执行简单",
+        "conversion_note": "用户就是为了奖励而开户, 转化意图极强, 但用户质量偏低(薅完即走)",
+        "saturation": "低",
+        "investors": 250000,
         "futu_penetration_pct": 30,
-        "futu_clients": 153000,
-        "remaining_convertible": 357000,
+        "futu_clients": 75000,
+        "remaining_convertible": 175000,
+        "type": "finance_compare",
+        "est_conversion_rate": 0.25,
+        "est_conversion_label": "25%",
+        "est_actual_converts": 43750
+      },
+      {
+        "name": "MTR/巴士/户外广告",
+        "execution": 4,
+        "conversion": 8,
+        "execution_note": "JCDecaux/德高等户外媒体购买成熟, MTR灯箱月租HK$3-8万",
+        "conversion_note": "纯曝光无互动, 转化路径极长, 只适合品牌认知和活动提醒",
+        "saturation": "中",
+        "investors": 2200000,
+        "futu_penetration_pct": 40,
+        "futu_clients": 880000,
+        "remaining_convertible": 1320000,
+        "type": "mass_media",
+        "est_conversion_rate": 0.03,
+        "est_conversion_label": "3%",
+        "est_actual_converts": 39600
+      },
+      {
+        "name": "Wise/跨境汇款平台",
+        "execution": 6,
+        "conversion": 3,
+        "execution_note": "B2B合作或在Wise平台投广告, 需对接跨境金融场景",
+        "conversion_note": "跨境汇款用户=有海外资产需求, 自然延伸到港美股投资",
+        "saturation": "极低",
+        "investors": 280000,
+        "futu_penetration_pct": 25,
+        "futu_clients": 70000,
+        "remaining_convertible": 210000,
+        "type": "fintech",
+        "est_conversion_rate": 0.18,
+        "est_conversion_label": "18%",
+        "est_actual_converts": 37800
+      },
+      {
+        "name": "星岛头条+东网",
+        "execution": 5,
+        "conversion": 5,
+        "execution_note": "传统媒体数字化, 广告投放流程标准化",
+        "conversion_note": "读者偏年长(40+), 多已有银行系券商, switching意愿低",
+        "saturation": "中",
+        "investors": 570000,
+        "futu_penetration_pct": 40,
+        "futu_clients": 228000,
+        "remaining_convertible": 342000,
+        "type": "news_media",
+        "est_conversion_rate": 0.1,
+        "est_conversion_label": "10%",
+        "est_actual_converts": 34200
+      },
+      {
+        "name": "财经媒体(HKET/HKEJ/Finet)",
+        "execution": 5,
+        "conversion": 5,
+        "execution_note": "专业财经媒体, 赞助专栏/Banner合作成熟",
+        "conversion_note": "读者是活跃投资者, 但偏传统港股, 多数已有券商账户",
+        "saturation": "中",
+        "investors": 375000,
+        "futu_penetration_pct": 40,
+        "futu_clients": 150000,
+        "remaining_convertible": 225000,
+        "type": "media",
+        "est_conversion_rate": 0.15,
+        "est_conversion_label": "15%",
+        "est_actual_converts": 33750
+      },
+      {
+        "name": "X / Twitter",
+        "execution": 5,
+        "conversion": 5,
+        "execution_note": "HK用户基数小, 官方号运营成本低但触达有限",
+        "conversion_note": "英文为主, 偏crypto/美股圈, 与富途用户有部分重合",
+        "saturation": "中",
+        "investors": 550000,
+        "futu_penetration_pct": 40,
+        "futu_clients": 220000,
+        "remaining_convertible": 330000,
         "type": "social",
-        "est_conversion_rate": 0.0002,
-        "est_conversion_label": "0.02%",
-        "est_actual_converts": 71
+        "est_conversion_rate": 0.1,
+        "est_conversion_label": "10%",
+        "est_actual_converts": 33000
+      },
+      {
+        "name": "小红书",
+        "execution": 4,
+        "conversion": 6,
+        "execution_note": "种草模式成熟, 但金融监管严",
+        "conversion_note": "用户有做功课心态, 但从种草到行动有时间差",
+        "saturation": "低",
+        "investors": 300000,
+        "futu_penetration_pct": 28,
+        "futu_clients": 84000,
+        "remaining_convertible": 216000,
+        "type": "social",
+        "est_conversion_rate": 0.15,
+        "est_conversion_label": "15%",
+        "est_actual_converts": 32400
+      },
+      {
+        "name": "财经Newsletter/Email",
+        "execution": 4,
+        "conversion": 3,
+        "execution_note": "赞助StockViva/经济一周等newsletter, 或自建EDM, CPA模式",
+        "conversion_note": "主动订阅=投资兴趣明确, 可嵌入开户CTA, 打开率15-25%",
+        "saturation": "低",
+        "investors": 350000,
+        "futu_penetration_pct": 40,
+        "futu_clients": 140000,
+        "remaining_convertible": 210000,
+        "type": "media",
+        "est_conversion_rate": 0.15,
+        "est_conversion_label": "15%",
+        "est_actual_converts": 31500
+      },
+      {
+        "name": "Investing.com",
+        "execution": 3,
+        "conversion": 3,
+        "execution_note": "Broker集成/CPA合作模式成熟",
+        "conversion_note": "活跃交易者, 对工具/费率敏感",
+        "saturation": "中",
+        "investors": 200000,
+        "futu_penetration_pct": 48,
+        "futu_clients": 96000,
+        "remaining_convertible": 104000,
+        "type": "finance_tool",
+        "est_conversion_rate": 0.3,
+        "est_conversion_label": "30%",
+        "est_actual_converts": 31200
+      },
+      {
+        "name": "Discord",
+        "execution": 6,
+        "conversion": 4,
+        "execution_note": "需运营投资/crypto server或赞助现有社区, 需真实参与否则被排斥",
+        "conversion_note": "crypto/游戏社区年轻活跃, 对新工具开放, 部分想从crypto扩展到港美股",
+        "saturation": "极低",
+        "investors": 180000,
+        "futu_penetration_pct": 20,
+        "futu_clients": 36000,
+        "remaining_convertible": 144000,
+        "type": "messaging",
+        "est_conversion_rate": 0.15,
+        "est_conversion_label": "15%",
+        "est_actual_converts": 21600
+      },
+      {
+        "name": "中原/美联/28Hse",
+        "execution": 5,
+        "conversion": 5,
+        "execution_note": "房产平台跨界合作, 需联名活动/按揭相关内容切入",
+        "conversion_note": "有房产=有资产, 但投资习惯偏保守(定存/保险为主)",
+        "saturation": "中",
+        "investors": 440000,
+        "futu_penetration_pct": 40,
+        "futu_clients": 176000,
+        "remaining_convertible": 264000,
+        "type": "property",
+        "est_conversion_rate": 0.08,
+        "est_conversion_label": "8%",
+        "est_actual_converts": 21120
+      },
+      {
+        "name": "親子王國/Baby Kingdom",
+        "execution": 4,
+        "conversion": 5,
+        "execution_note": "论坛广告/赞助帖合作, HK最大家长社区, 广告位便宜",
+        "conversion_note": "有房有孩=有资产, 但多数人投资习惯已固定, 需家庭理财角度切入",
+        "saturation": "极低",
+        "investors": 300000,
+        "futu_penetration_pct": 30,
+        "futu_clients": 90000,
+        "remaining_convertible": 210000,
+        "type": "forum",
+        "est_conversion_rate": 0.1,
+        "est_conversion_label": "10%",
+        "est_actual_converts": 21000
       },
       {
         "name": "TikTok",
@@ -2571,41 +2571,57 @@
         "futu_clients": 99000,
         "remaining_convertible": 351000,
         "type": "social",
-        "est_conversion_rate": 0.0002,
-        "est_conversion_label": "0.02%",
-        "est_actual_converts": 70
+        "est_conversion_rate": 0.05,
+        "est_conversion_label": "5%",
+        "est_actual_converts": 17550
       },
       {
-        "name": "星岛头条+东网",
-        "execution": 5,
-        "conversion": 5,
-        "execution_note": "",
-        "conversion_note": "",
-        "saturation": "中",
-        "investors": 570000,
-        "futu_penetration_pct": 40,
-        "futu_clients": 228000,
-        "remaining_convertible": 342000,
-        "type": "news_media",
-        "est_conversion_rate": 0.0001,
-        "est_conversion_label": "0.01%",
-        "est_actual_converts": 34
-      },
-      {
-        "name": "知乎",
+        "name": "雪球",
         "execution": 4,
-        "conversion": 6,
-        "execution_note": "知乎问答+机构号, 长内容制作",
-        "conversion_note": "内地来港用户参考, 但HK用户少",
-        "saturation": "极低",
-        "investors": 44000,
-        "futu_penetration_pct": 25,
-        "futu_clients": 11000,
-        "remaining_convertible": 33000,
+        "conversion": 5,
+        "execution_note": "雪球社区运营, 需中文内容团队",
+        "conversion_note": "投资社区用户活跃, 但平台封闭",
+        "saturation": "低",
+        "investors": 180000,
+        "futu_penetration_pct": 35,
+        "futu_clients": 63000,
+        "remaining_convertible": 117000,
         "type": "cn_platform",
-        "est_conversion_rate": 0.001,
-        "est_conversion_label": "0.10%",
-        "est_actual_converts": 33
+        "est_conversion_rate": 0.12,
+        "est_conversion_label": "12%",
+        "est_actual_converts": 14040
+      },
+      {
+        "name": "MoneySmart",
+        "execution": 2,
+        "conversion": 2,
+        "execution_note": "CPA合作, 提供优惠即可上架",
+        "conversion_note": "用户就是来比较开户的, 意图最强",
+        "saturation": "高",
+        "investors": 55000,
+        "futu_penetration_pct": 50,
+        "futu_clients": 27500,
+        "remaining_convertible": 27500,
+        "type": "finance_compare",
+        "est_conversion_rate": 0.5,
+        "est_conversion_label": "50%",
+        "est_actual_converts": 13750
+      },
+      {
+        "name": "高登 HKGolden",
+        "execution": 7,
+        "conversion": 4,
+        "execution_note": "类似LIHKG但用户群更杂, 软文更易被识破",
+        "conversion_note": "论坛用户对券商有一定认知, 部分可转化",
+        "saturation": "中",
+        "investors": 150000,
+        "futu_penetration_pct": 40,
+        "futu_clients": 60000,
+        "remaining_convertible": 90000,
+        "type": "forum",
+        "est_conversion_rate": 0.15,
+        "est_conversion_label": "15%",
+        "est_actual_converts": 13500
       },
       {
         "name": "SCMP 南华早报",
@@ -2619,25 +2635,1659 @@
         "futu_clients": 87500,
         "remaining_convertible": 162500,
         "type": "news_media",
-        "est_conversion_rate": 0.0001,
-        "est_conversion_label": "0.01%",
-        "est_actual_converts": 16
+        "est_conversion_rate": 0.08,
+        "est_conversion_label": "8%",
+        "est_actual_converts": 13000
+      },
+      {
+        "name": "香港讨论区",
+        "execution": 5,
+        "conversion": 5,
+        "execution_note": "老牌论坛, 用户活跃度下降, 广告位便宜",
+        "conversion_note": "用户偏大众, 投资者浓度低于LIHKG和高登",
+        "saturation": "中",
+        "investors": 260000,
+        "futu_penetration_pct": 40,
+        "futu_clients": 104000,
+        "remaining_convertible": 156000,
+        "type": "forum",
+        "est_conversion_rate": 0.08,
+        "est_conversion_label": "8%",
+        "est_actual_converts": 12480
+      },
+      {
+        "name": "Reddit",
+        "execution": 7,
+        "conversion": 4,
+        "execution_note": "有机内容为主, r/HongKong r/investing, 广告定向HK效果差",
+        "conversion_note": "英文为主的科技/投资人群, 偏好IBKR但对低费率敏感",
+        "saturation": "极低",
+        "investors": 120000,
+        "futu_penetration_pct": 25,
+        "futu_clients": 30000,
+        "remaining_convertible": 90000,
+        "type": "forum",
+        "est_conversion_rate": 0.12,
+        "est_conversion_label": "12%",
+        "est_actual_converts": 10800
+      },
+      {
+        "name": "Threads",
+        "execution": 3,
+        "conversion": 8,
+        "execution_note": "文字轻量, 但平台尚新, 生态未成熟",
+        "conversion_note": "用户极少, 金融内容几乎不存在",
+        "saturation": "极低",
+        "investors": 510000,
+        "futu_penetration_pct": 30,
+        "futu_clients": 153000,
+        "remaining_convertible": 357000,
+        "type": "social",
+        "est_conversion_rate": 0.03,
+        "est_conversion_label": "3%",
+        "est_actual_converts": 10710
+      },
+      {
+        "name": "HongKongCard",
+        "execution": 2,
+        "conversion": 3,
+        "execution_note": "CPA合作模式",
+        "conversion_note": "用户在比较金融产品, 有转化意图",
+        "saturation": "中",
+        "investors": 38000,
+        "futu_penetration_pct": 40,
+        "futu_clients": 15200,
+        "remaining_convertible": 22800,
+        "type": "finance_compare",
+        "est_conversion_rate": 0.4,
+        "est_conversion_label": "40%",
+        "est_actual_converts": 9120
+      },
+      {
+        "name": "财经播客",
+        "execution": 7,
+        "conversion": 3,
+        "execution_note": "HK播客生态小, 需长期赞助",
+        "conversion_note": "听众粘性极高, 主播推荐=强背书",
+        "saturation": "极低",
+        "investors": 50000,
+        "futu_penetration_pct": 30,
+        "futu_clients": 15000,
+        "remaining_convertible": 35000,
+        "type": "podcast",
+        "est_conversion_rate": 0.25,
+        "est_conversion_label": "25%",
+        "est_actual_converts": 8750
+      },
+      {
+        "name": "东方财富",
+        "execution": 5,
+        "conversion": 5,
+        "execution_note": "内地头部财经平台, 需与东财港股通业务差异化",
+        "conversion_note": "内地投资者为主, 部分有港股需求但面临跨境KYC门槛",
+        "saturation": "中",
+        "investors": 175000,
+        "futu_penetration_pct": 40,
+        "futu_clients": 70000,
+        "remaining_convertible": 105000,
+        "type": "cn_platform",
+        "est_conversion_rate": 0.08,
+        "est_conversion_label": "8%",
+        "est_actual_converts": 8400
+      },
+      {
+        "name": "Bilibili",
+        "execution": 5,
+        "conversion": 6,
+        "execution_note": "需中文长视频, B站金融区竞争激烈",
+        "conversion_note": "内地来港人群为主, 开户有额外门槛",
+        "saturation": "极低",
+        "investors": 100000,
+        "futu_penetration_pct": 15,
+        "futu_clients": 15000,
+        "remaining_convertible": 85000,
+        "type": "social",
+        "est_conversion_rate": 0.08,
+        "est_conversion_label": "8%",
+        "est_actual_converts": 6800
+      },
+      {
+        "name": "微博",
+        "execution": 3,
+        "conversion": 7,
+        "execution_note": "官方号运营简单",
+        "conversion_note": "HK投资者几乎不用微博获取投资信息",
+        "saturation": "极低",
+        "investors": 225000,
+        "futu_penetration_pct": 20,
+        "futu_clients": 45000,
+        "remaining_convertible": 180000,
+        "type": "cn_platform",
+        "est_conversion_rate": 0.03,
+        "est_conversion_label": "3%",
+        "est_actual_converts": 5400
+      },
+      {
+        "name": "知乎",
+        "execution": 4,
+        "conversion": 6,
+        "execution_note": "知乎问答+机构号, 长内容制作",
+        "conversion_note": "内地来港用户参考, 但HK用户少",
+        "saturation": "极低",
+        "investors": 44000,
+        "futu_penetration_pct": 25,
+        "futu_clients": 11000,
+        "remaining_convertible": 33000,
+        "type": "cn_platform",
+        "est_conversion_rate": 0.08,
+        "est_conversion_label": "8%",
+        "est_actual_converts": 2640
       },
       {
         "name": "线下投资活动",
         "execution": 5,
         "conversion": 5,
-        "execution_note": "",
-        "conversion_note": "",
+        "execution_note": "展位参展+现场开户, 人力成本高但面对面信任强",
+        "conversion_note": "参会者都是活跃投资者, 现场开户转化率极高(5-15%)",
         "saturation": "中",
         "investors": 5000,
         "futu_penetration_pct": 40,
         "futu_clients": 2000,
         "remaining_convertible": 3000,
         "type": "offline",
-        "est_conversion_rate": 0.002,
-        "est_conversion_label": "0.20%",
-        "est_actual_converts": 6
+        "est_conversion_rate": 0.2,
+        "est_conversion_label": "20%",
+        "est_actual_converts": 600
+      }
+    ]
+  },
+  "new_investor_analysis": {
+    "title": "香港每年纯新增投资者分析",
+    "subtitle": "首次开户的去重新投资者 — 富途最有价值的零switching成本增量",
+    "total_range": "8-12万/年",
+    "total_mid": 100000,
+    "sources": [
+      {
+        "name": "来港新人才",
+        "range": "3-5万",
+        "mid": 40000,
+        "pct": 40,
+        "color": "indigo",
+        "detail": "高才通/专才/优才/IANG等人才计划, 2024年获批14万份, 实际抵港~8-10万/年, 投资参与率30-50%",
+        "futu_advantage": "内地来港人群可能对富途/moomoo品牌有一定认知(富途在内地有较大用户基数), 具体认知度需调研验证",
+        "channels": [
+          "微信公众号/小程序",
+          "小红书",
+          "Bilibili",
+          "知乎",
+          "雪球"
+        ]
+      },
+      {
+        "name": "本地首次入市年轻人",
+        "range": "1.5-2万",
+        "mid": 18000,
+        "pct": 18,
+        "color": "sky",
+        "detail": "每年5-6万人满18岁, 20-30%在头几年开始投资, 受社媒KOL和同学影响",
+        "futu_advantage": "年轻用户通常偏好移动端体验好的产品; 开户奖励对学生群体有吸引力(需A/B测试验证具体效果)",
+        "channels": [
+          "TikTok",
+          "Instagram",
+          "YouTube",
+          "App Store / Google Play"
+        ]
+      },
+      {
+        "name": "既有居民首次投资",
+        "range": "2-4万",
+        "mid": 30000,
+        "pct": 30,
+        "color": "amber",
+        "detail": "从未投资过的HK居民, 因市场环境/退休规划/朋友推荐开始投资; SFC数据显示投资者总数年增~5万",
+        "futu_advantage": "首次投资者需要简单易懂的入门体验, 富途的模拟交易功能可能是差异化点(需与竞品对比验证)",
+        "channels": [
+          "WhatsApp 群组",
+          "Facebook",
+          "MoneySmart",
+          "MoneyHero",
+          "财经播客"
+        ]
+      },
+      {
+        "name": "其他(回流/外籍/投资移民)",
+        "range": "0.5-1万",
+        "mid": 12000,
+        "pct": 12,
+        "color": "emerald",
+        "detail": "回流港人、外籍驻港人士、新资本投资者入境计划(3000万门槛)等",
+        "futu_advantage": "外籍人士在HK常用IBKR等国际券商; 富途的多语言支持和港美股覆盖可作为竞争点(需调研验证偏好)",
+        "channels": [
+          "LinkedIn",
+          "SCMP 南华早报",
+          "Google 搜索(HK)",
+          "Reddit"
+        ]
+      }
+    ],
+    "key_insights": [
+      {
+        "title": "零Switching成本 = 最高ROI获客",
+        "body": "纯新投资者没有既有券商, 不需要说服他们「换」, 只需要成为他们的「第一选择」。通常获客成本低于存量转化(无需覆盖switching成本), 具体差距需根据富途实际投放数据验证。",
+        "color": "green"
+      },
+      {
+        "title": "来港人才是最大金矿",
+        "body": "根据入境处数据, 2024年各人才计划获批14万份, 高才通约95%来自内地(来源: HK01/入境处)。来港人群中熟悉富途/moomoo品牌的比例需通过调研验证, 但内地互联网券商用户基数大, 品牌认知度预期较高。触达渠道: 微信生态+小红书+B站。",
+        "color": "indigo"
+      },
+      {
+        "title": "年轻人首次开户: App Store是关键入口",
+        "body": "App Store是年轻用户发现新App的主要渠道之一。富途在「stock」「投资」「trading」等关键词的ASO排名和Apple Search Ads竞争力, 会影响首次开户用户的选择。具体转化数据需通过ASO工具(如App Annie)和投放测试获取。",
+        "color": "sky"
+      },
+      {
+        "title": "数据来源与局限",
+        "body": "基于入境处人才计划获批数据(2024年14万份)、SFC投资者调查(260万投资者)、人口统计(年出生5-6万)交叉估算。实际数字可能因市场周期波动±30%。",
+        "color": "gray"
+      }
+    ],
+    "data_sources": "入境处人才签证数据(2024), SFC零售投资者调查(2023), 统计处人口数据",
+    "seasonality": {
+      "title": "2026年新投资者入市时间预估",
+      "note": "基于结构性因素(人才入境节奏、IPO日历、毕业季、促销周期)预估，非依赖具体行情走势",
+      "data_caveat": "以下为结构性预估，实际会受行情波动影响。SFC不发布季度新开户数据，无法事后精确验证。",
+      "quarters": [
+        {
+          "q": "Q1",
+          "months": "1-3月",
+          "intensity": 75,
+          "label": "较高",
+          "color": "orange",
+          "drivers": "新年理财规划需求、券商新春开户优惠集中期、年终奖到手后配置需求",
+          "structural_factors": [
+            "春节后券商密集推开户优惠(行业惯例)",
+            "年终奖/花红到手寻找投资出口",
+            "新年=新开始的心理触发"
+          ]
+        },
+        {
+          "q": "Q2",
+          "months": "4-6月",
+          "intensity": 55,
+          "label": "中等",
+          "color": "amber",
+          "drivers": "毕业季年轻人入场、人才计划续签/新批集中期(4-5月为TTPS首批到期续签)",
+          "structural_factors": [
+            "6月大学毕业→首份工作→首次开户",
+            "4-5月TTPS首批24个月到期续签潮",
+            "报税季(5月)引发理财意识"
+          ]
+        },
+        {
+          "q": "Q3",
+          "months": "7-9月",
+          "intensity": 80,
+          "label": "高峰",
+          "color": "red",
+          "drivers": "人才来港高峰(9月入职/开学)、暑期实习生开户、下半年IPO启动",
+          "structural_factors": [
+            "9月开学季: 高才通/留学生集中抵港",
+            "大学毕业后3个月(7-9月)是首次开户窗口",
+            "下半年IPO pipeline启动(H2历史上占全年IPO 60%+)"
+          ]
+        },
+        {
+          "q": "Q4",
+          "months": "10-12月",
+          "intensity": 85,
+          "label": "最高",
+          "color": "red",
+          "drivers": "IPO旺季(全年数量最多)、双十一/圣诞券商促销、年末资产配置窗口",
+          "structural_factors": [
+            "Q4 IPO数量通常全年最多(KPMG: 2024年Q4占37%, 2025年Q4占41%)",
+            "双十一/Black Friday/圣诞券商开户促销密集",
+            "年末=明年规划的资产配置窗口",
+            "来港人才Q3抵港后约1-2个月完成开户(落在Q4)"
+          ]
+        }
+      ],
+      "ipo_seasonality": {
+        "title": "HKEX IPO季度分布",
+        "source": "KPMG HK IPO Quarterly Reviews",
+        "source_url": "https://kpmg.com/cn/en/insights/2025/10/china-hk-ipo-2025-q3-review.html",
+        "data": {
+          "2024": {
+            "total": 71,
+            "Q4_est": 26,
+            "note": "Q4占比约37%，为全年最多"
+          },
+          "2025": {
+            "total": 114,
+            "Q4_est": 47,
+            "note": "Q4占比约41%，为全年最多"
+          }
+        }
+      },
+      "spikes": [
+        {
+          "trigger": "大型IPO",
+          "impact": "2026年A+H上市潮持续(Q1已有40只新上市, 募资$1099亿, 同比6倍)",
+          "source": "KPMG Q1 2026 IPO Review"
+        },
+        {
+          "trigger": "人才计划扩容",
+          "impact": "2024年获批14万份, 预计2026年持续高位, Q3集中抵港",
+          "source": "入境处公开数据"
+        },
+        {
+          "trigger": "券商促销竞争",
+          "impact": "富途/Tiger/Webull持续加码开户奖励(送股票、购物卡、免佣), 促销节点集中在Q1和Q4",
+          "source": "各券商公开活动页"
+        }
+      ],
+      "sfc_data": {
+        "title": "SFC证监会: 证券业活跃客户账户数",
+        "note": "来源: SFC《证券业财务概况》年度报告。活跃客户 = 持牌法团需发送月结单的客户(现金+孖展账户)",
+        "source": "SFC Financial Review of the Securities Industry",
+        "source_url": "https://www.sfc.hk/en/Regulatory-functions/Intermediaries/Supervision/Publications-and-statistics/Financial-review-of-the-securities-industry",
+        "years": [
+          {
+            "year": "2019",
+            "total": 2024849,
+            "cash": null,
+            "margin": null,
+            "source_detail": "SFC Annual Report 2021-22"
+          },
+          {
+            "year": "2020",
+            "total": 3207677,
+            "cash": 1737281,
+            "margin": 1470396,
+            "source_detail": "SFC Financial Review 2021"
+          },
+          {
+            "year": "2021",
+            "total": 4159100,
+            "cash": 1939379,
+            "margin": 2219721,
+            "source_detail": "SFC Financial Review 2021"
+          },
+          {
+            "year": "2022",
+            "total": 4600000,
+            "cash": 2203172,
+            "margin": 2400000,
+            "source_detail": "SFC Financial Review 2022"
+          },
+          {
+            "year": "2023",
+            "total": 4700000,
+            "cash": null,
+            "margin": 2500000,
+            "source_detail": "SFC Annual Report 2023-24"
+          },
+          {
+            "year": "H1 2024",
+            "total": 4870000,
+            "cash": null,
+            "margin": null,
+            "source_detail": "SFC Financial Review H1 2024 (历史最高)"
+          },
+          {
+            "year": "2024",
+            "total": 4390000,
+            "cash": 1850000,
+            "margin": 2540000,
+            "source_detail": "SFC Financial Review 2024 (年末因某持牌法团关闭账户导致下降)"
+          }
+        ],
+        "key_insight": "2019→2021疫情期间活跃账户翻倍(202万→416万)，之后稳步增长至2024年中487万(历史最高)，2024年末因个别券商批量关户降至439万",
+        "source_pdfs": [
+          {
+            "name": "SFC Financial Review 2024",
+            "url": "https://www.sfc.hk/-/media/EN/files/COM/Reports-and-surveys/ENG-Financial-Review-of-the-Securities-Industry-for-the-year-ended-31-Dec-2024-20250326final.pdf"
+          },
+          {
+            "name": "SFC Financial Review 2022",
+            "url": "https://www.sfc.hk/-/media/EN/files/COM/Reports/Financial-Review-of-the-Securities-Industry-for-the-year-ended-31-December-2022.pdf"
+          },
+          {
+            "name": "SFC Financial Review 2021",
+            "url": "https://www.sfc.hk/-/media/EN/files/COM/Reports/Financial-Review-of-the-Securities-Industry_2021_EN.pdf"
+          }
+        ]
+      }
+    }
+  },
+  "ai_acquisition": {
+    "title": "AI自动化获客矩阵",
+    "subtitle": "哪些渠道可以用 AI+预算 快速跑通获客闭环",
+    "tiers": [
+      {
+        "name": "T1: AI全自动+付费放量",
+        "description": "本周就能启动, AI生成内容/管理投放, 预算决定规模",
+        "color": "green",
+        "channels": [
+          {
+            "name": "Google Ads (SEM)",
+            "ai_role": "AI生成广告文案变体、智能出价、自动A/B测试、Landing Page优化",
+            "budget_model": "CPC HK$15-40/click, 完全可控",
+            "est_monthly_leads": "2,000-8,000 (估算)",
+            "est_cac": "HK$1,500-3,000 (估算)",
+            "speed": "当天上线",
+            "volume_cap": "中(搜索量有天花板)",
+            "automation_pct": 90
+          },
+          {
+            "name": "Facebook/Instagram Ads",
+            "ai_role": "AI生成广告素材(图片+文案)、Lookalike受众扩展、自动优化转化",
+            "budget_model": "CPM竞价, 可大规模放量",
+            "est_monthly_leads": "3,000-15,000 (估算)",
+            "est_cac": "HK$800-2,500 (估算)",
+            "speed": "1-2天上线",
+            "volume_cap": "高(197万+142万投资者)",
+            "automation_pct": 85
+          },
+          {
+            "name": "Apple Search Ads / ASO",
+            "ai_role": "AI优化关键词、截图A/B测试、评论回复、竞品监控",
+            "budget_model": "CPT竞价, 按下载付费",
+            "est_monthly_leads": "1,000-5,000 (估算)",
+            "est_cac": "HK$500-1,500 (估算)",
+            "speed": "2-3天上线",
+            "volume_cap": "中(App Store搜索量有限)",
+            "automation_pct": 80
+          },
+          {
+            "name": "YouTube Ads + AI视频",
+            "ai_role": "AI生成脚本+数字人出镜视频、自动投放前贴片/信息流广告",
+            "budget_model": "CPV HK$0.5-2/view, 可大规模放量",
+            "est_monthly_leads": "2,000-10,000 (估算)",
+            "est_cac": "HK$1,000-3,000 (估算)",
+            "speed": "1周(含视频制作)",
+            "volume_cap": "高(210万投资者)",
+            "automation_pct": 75
+          },
+          {
+            "name": "小红书 AI种草+信息流",
+            "ai_role": "AI批量生成种草笔记(50+条/天)、SEO优化标题、信息流广告投放",
+            "budget_model": "CPM信息流 + 免费种草内容",
+            "est_monthly_leads": "500-3,000 (估算)",
+            "est_cac": "HK$600-2,000 (估算)",
+            "speed": "3-5天(养号+投放)",
+            "volume_cap": "中(30万投资者, 但增长快)",
+            "automation_pct": 85
+          },
+          {
+            "name": "TikTok AI短视频+广告",
+            "ai_role": "AI数字人生成投资知识短视频、自动投放In-feed广告、热点追踪",
+            "budget_model": "CPM In-feed, 可放量",
+            "est_monthly_leads": "1,000-5,000 (估算)",
+            "est_cac": "HK$800-2,500 (估算)",
+            "speed": "1周",
+            "volume_cap": "中高(45万投资者, 年轻增量)",
+            "automation_pct": 80
+          }
+        ]
+      },
+      {
+        "name": "T2: AI半自动+低成本运营",
+        "description": "AI负责内容生产和分发, 人工负责质量把控和社区维护",
+        "color": "amber",
+        "channels": [
+          {
+            "name": "SEO内容矩阵(官网/博客)",
+            "ai_role": "AI批量生成100+篇比较文章(「富途vs老虎」「香港开户攻略」), 自动发布+内链优化",
+            "budget_model": "几乎零成本(域名+托管)",
+            "est_monthly_leads": "500-3,000 (估算)",
+            "est_cac": "HK$100-500 (估算)",
+            "speed": "2-4周见效(SEO需时间)",
+            "volume_cap": "高(长尾搜索无上限)",
+            "automation_pct": 90
+          },
+          {
+            "name": "KOL自动建联(现有系统)",
+            "ai_role": "AI扫描发现KOL、评级打分、自动发送合作邀请邮件、跟进管理",
+            "budget_model": "KOL费用 HK$5,000-200,000/位",
+            "est_monthly_leads": "视KOL量级, 1,000-20,000 (估算)",
+            "est_cac": "HK$500-2,000(含KOL费用) (估算)",
+            "speed": "已有系统, 持续扩展",
+            "volume_cap": "中(受KOL数量限制)",
+            "automation_pct": 70
+          },
+          {
+            "name": "微信公众号+朋友圈广告",
+            "ai_role": "AI写公众号文章(开户攻略/市场分析)、朋友圈广告素材生成、用户标签管理",
+            "budget_model": "朋友圈广告CPM + 公众号零成本",
+            "est_monthly_leads": "1,000-5,000 (估算)",
+            "est_cac": "HK$800-2,000 (估算)",
+            "speed": "1-2周",
+            "volume_cap": "高(148万内地来港投资者)",
+            "automation_pct": 75
+          },
+          {
+            "name": "Telegram Bot + 频道",
+            "ai_role": "AI驱动投资Bot(行情提醒/问答/分析), 自动发送频道内容, 嵌入开户引导",
+            "budget_model": "极低(Bot托管+频道运营)",
+            "est_monthly_leads": "200-1,000 (估算)",
+            "est_cac": "HK$300-1,000 (估算)",
+            "speed": "1-2周开发",
+            "volume_cap": "低(44万, 但用户质量高)",
+            "automation_pct": 80
+          },
+          {
+            "name": "Email/Newsletter自动化",
+            "ai_role": "AI写个性化邮件序列、自动分群推送、开户引导drip campaign",
+            "budget_model": "极低(邮件发送成本)",
+            "est_monthly_leads": "300-1,500 (估算)",
+            "est_cac": "HK$200-800 (估算)",
+            "speed": "1周搭建",
+            "volume_cap": "受列表大小限制",
+            "automation_pct": 90
+          },
+          {
+            "name": "LinkedIn内容+InMail",
+            "ai_role": "AI生成专业投资内容、自动发送InMail给高收入人群",
+            "budget_model": "LinkedIn Ads CPC高(HK$30-80)",
+            "est_monthly_leads": "200-1,000 (估算)",
+            "est_cac": "HK$2,000-5,000 (估算)",
+            "speed": "1周",
+            "volume_cap": "中(85万, 但高净值)",
+            "automation_pct": 70
+          }
+        ]
+      },
+      {
+        "name": "T3: 需人工主导(AI辅助)",
+        "description": "社区性强或需B2B谈判, AI只能辅助内容生成, 人工执行为主",
+        "color": "gray",
+        "channels": [
+          {
+            "name": "WhatsApp MGM",
+            "reason": "需真实用户推荐, 无法AI伪造信任关系"
+          },
+          {
+            "name": "LIHKG/高登/香港讨论区",
+            "reason": "社区极排斥商业内容, 机器人会被秒封"
+          },
+          {
+            "name": "MoneySmart/MoneyHero",
+            "reason": "B2B商务合作, 需人工谈CPA条款"
+          },
+          {
+            "name": "Discord/Reddit",
+            "reason": "社区反垃圾严格, 需真人长期参与建立信任"
+          },
+          {
+            "name": "TVB/MTR/户外广告",
+            "reason": "传统媒体采购, 需人工谈判和创意制作"
+          },
+          {
+            "name": "财经播客",
+            "reason": "需真人录制, AI数字人在播客场景不成熟"
+          },
+          {
+            "name": "虚拟银行合作",
+            "reason": "B2B产品对接, 需商务团队推进"
+          },
+          {
+            "name": "Shopback/Cashback",
+            "reason": "CPA平台对接, 需商务谈判"
+          }
+        ]
+      }
+    ],
+    "quick_wins": {
+      "title": "最快ROI组合: 4周内跑通获客",
+      "week1": "Google Ads + App Store Ads 上线 → 立即获得高意图流量",
+      "week2": "Facebook/IG广告 + AI生成素材 → 大规模曝光+再营销",
+      "week3": "小红书AI种草 + TikTok AI短视频 → 覆盖内地来港+年轻人",
+      "week4": "SEO内容矩阵上线 + KOL建联扩展 → 长尾流量+信任背书",
+      "est_monthly_budget": "HK$500,000-1,500,000 (估算)",
+      "est_monthly_new_accounts": "5,000-15,000 (估算, 需投放测试验证)"
+    }
+  },
+  "acquisition_plan": {
+    "title": "26年Q2获客方案: 3个月50,000新开户",
+    "subtitle": "2026年4-6月 | 模型估算, 所有数字需通过投放测试验证",
+    "target": 50000,
+    "period": "2026年4月-6月",
+    "seasonality_factor": "Q2平淡期(强度45/100), 需比Q1/Q4多投15-20%预算",
+    "total_budget": "HK$30-42M",
+    "monthly_budget": "HK$10-14M/月",
+    "channels": [
+      {
+        "name": "Facebook/Instagram Ads",
+        "monthly": 4000,
+        "total": 12000,
+        "cac": 600,
+        "budget_3m": 7200000,
+        "ai_pct": 85,
+        "tactic": "AI生成广告素材+Lookalike扩展+再营销漏斗, 定向30-50岁HK投资者"
+      },
+      {
+        "name": "Google Ads (SEM)",
+        "monthly": 3500,
+        "total": 10500,
+        "cac": 800,
+        "budget_3m": 8400000,
+        "ai_pct": 90,
+        "tactic": "品牌词防守+品类词(「开户」「券商比较」)进攻, AI智能出价"
+      },
+      {
+        "name": "App Store / ASO",
+        "monthly": 2500,
+        "total": 7500,
+        "cac": 500,
+        "budget_3m": 3750000,
+        "ai_pct": 80,
+        "tactic": "Apple Search Ads + ASO关键词优化, 抢占「stock app」「投资」搜索"
+      },
+      {
+        "name": "WhatsApp MGM裂变",
+        "monthly": 2000,
+        "total": 6000,
+        "cac": 400,
+        "budget_3m": 2400000,
+        "ai_pct": 30,
+        "tactic": "「推荐好友各得HK$500」, 现有客户分享链接, 低CAC高信任"
+      },
+      {
+        "name": "YouTube Ads+AI视频",
+        "monthly": 1500,
+        "total": 4500,
+        "cac": 1200,
+        "budget_3m": 5400000,
+        "ai_pct": 75,
+        "tactic": "AI数字人制作评测视频+前贴片广告, 配合KOL合作"
+      },
+      {
+        "name": "KOL合作(多平台)",
+        "monthly": 1200,
+        "total": 3600,
+        "cac": 1500,
+        "budget_3m": 5400000,
+        "ai_pct": 70,
+        "tactic": "AI系统批量建联+筛选, 覆盖YouTube/小红书/B站KOL, 每月签约10-15位"
+      },
+      {
+        "name": "小红书AI种草+广告",
+        "monthly": 1000,
+        "total": 3000,
+        "cac": 700,
+        "budget_3m": 2100000,
+        "ai_pct": 85,
+        "tactic": "AI日产50+种草笔记+信息流广告, 定向内地来港人群"
+      },
+      {
+        "name": "TikTok AI短视频",
+        "monthly": 800,
+        "total": 2400,
+        "cac": 800,
+        "budget_3m": 1920000,
+        "ai_pct": 80,
+        "tactic": "AI数字人日产10+投资知识短视频+In-feed广告"
+      },
+      {
+        "name": "MoneySmart/MoneyHero",
+        "monthly": 600,
+        "total": 1800,
+        "cac": 600,
+        "budget_3m": 1080000,
+        "ai_pct": 10,
+        "tactic": "CPA合作, 开户优惠上架, 用户比较后直接转化"
+      },
+      {
+        "name": "微信公众号+朋友圈",
+        "monthly": 500,
+        "total": 1500,
+        "cac": 800,
+        "budget_3m": 1200000,
+        "ai_pct": 75,
+        "tactic": "AI写公众号攻略+朋友圈广告, 精准定向内地来港人才"
+      },
+      {
+        "name": "SEO内容矩阵",
+        "monthly": 400,
+        "total": 1200,
+        "cac": 300,
+        "budget_3m": 360000,
+        "ai_pct": 90,
+        "tactic": "AI生成100+篇「香港开户攻略」「富途vs XX」长尾SEO文章"
+      },
+      {
+        "name": "Telegram Bot",
+        "monthly": 200,
+        "total": 600,
+        "cac": 500,
+        "budget_3m": 300000,
+        "ai_pct": 80,
+        "tactic": "AI投资助手Bot + 频道运营, crypto用户跨品类引导"
+      },
+      {
+        "name": "Email自动化",
+        "monthly": 150,
+        "total": 450,
+        "cac": 300,
+        "budget_3m": 135000,
+        "ai_pct": 90,
+        "tactic": "AI个性化邮件序列, 对已注册未入金用户做Drip Campaign"
+      }
+    ],
+    "risk_buffer": {
+      "note": "以上合计~55,050, 含10%buffer应对Q2季节性波动",
+      "total_accounts": 55050,
+      "total_budget_hk": 39645000
+    },
+    "key_assumptions": [
+      "所有CAC和获客量为模型估算, 需通过实际投放测试校准",
+      "开户CAC(非入金CAC), 入金CAC通常更高(具体倍数因渠道而异)",
+      "Q2季节性假设: 相对Q1/Q4较平淡, CAC可能偏高(基于行业一般规律, 非富途特定数据)",
+      "AI自动化降本幅度为行业参考值, 实际效果取决于工具成熟度和内容质量",
+      "MGM裂变效果依赖现有客户基数和奖励力度, 假设基于行业平均水平"
+    ]
+  },
+  "investor_motivations": {
+    "title": "投资者开户动机与学习路径",
+    "subtitle": "基于多份大规模调查的综合分析",
+    "first_time_opening": {
+      "title": "纯新开：首次开户决策因素",
+      "factors": [
+        {
+          "name": "App体验与平台功能",
+          "rank": 1,
+          "pct_label": "#1因素",
+          "source": "Investment Trends 2024 HK (n=1,322)",
+          "source_url": "https://investmenttrends.com/resource/2024-hong-kong-online-investing-report/",
+          "detail": "移动端功能已超越价格成为选择券商的首要考量",
+          "color": "blue"
+        },
+        {
+          "name": "佣金与费率",
+          "rank": 2,
+          "pct_label": "5-10x差距",
+          "source": "MoneyHero券商对比数据",
+          "source_url": "https://www.moneyhero.com.hk/zh/investment/comparison/best-investment-account",
+          "detail": "银行(汇丰0.25%最低$100) vs 在线券商(富途0.03%+$15)，费率差5-10倍",
+          "color": "green"
+        },
+        {
+          "name": "产品覆盖范围",
+          "rank": 3,
+          "pct_label": "50万+人",
+          "source": "Investment Trends 2024",
+          "source_url": "https://investmenttrends.com/resource/2024-hong-kong-online-investing-report/",
+          "detail": "50万+港投资者交易国际股票，20%+用专门券商做美股",
+          "color": "purple"
+        },
+        {
+          "name": "IPO打新机会",
+          "rank": 4,
+          "pct_label": "81.7%",
+          "source": "SFC Stock Investor Survey 2006",
+          "source_url": "https://www.sfc.hk/sfc/doc/EN/speeches/public/surveys/06/stock_investor_survey_060602.pdf",
+          "detail": "81.7%认购者看重公司前景，IPO热度直接驱动开户",
+          "color": "red"
+        },
+        {
+          "name": "开户优惠活动",
+          "rank": 5,
+          "pct_label": "~$2000+",
+          "source": "各券商公开活动页",
+          "source_url": "",
+          "detail": "富途送$2000苹果卡+股票、Tiger零佣、Webull送$2800购物券",
+          "color": "amber"
+        },
+        {
+          "name": "同辈推荐/口碑",
+          "rank": 6,
+          "pct_label": "43%",
+          "source": "Gallup 2025 (n=2,036)",
+          "source_url": "https://news.gallup.com/poll/660467/americans-financial-advice-rooted-people.aspx",
+          "detail": "43%投资者从朋友/家人获取投资建议，口碑是重要开户触发因素",
+          "color": "teal"
+        }
+      ]
+    },
+    "add_account": {
+      "title": "加开：已有账户再开新券商",
+      "factors": [
+        {
+          "name": "产品缺口",
+          "pct_label": "仅覆盖20%",
+          "detail": "港股通仅覆盖~540只(约20%港股)，不能打新，次新股未纳入",
+          "source": "中国证券报调查",
+          "source_url": "https://jnzstatic.cs.com.cn/zzb/htmlInfo/81c7c62cd7c70d40c7d8d8edfd4fd2c8.html",
+          "icon": "puzzle"
+        },
+        {
+          "name": "打新多账户策略",
+          "pct_label": "中签率<1%",
+          "detail": "2025改革后甲组中签率降至个位数甚至<1%，多账户是直接竞争优势",
+          "source": "Topworker IPO分析",
+          "source_url": "https://www.topworker.cn/3259.html",
+          "icon": "tickets"
+        },
+        {
+          "name": "美股准入",
+          "pct_label": "20%+用专门券商",
+          "detail": "50万+港投资者交易国际股票，20%+另开专门券商降低美股成本",
+          "source": "Investment Trends 2024",
+          "source_url": "https://investmenttrends.com/resource/2024-hong-kong-online-investing-report/",
+          "icon": "globe"
+        },
+        {
+          "name": "佣金套利",
+          "pct_label": "差5-10x",
+          "detail": "银行佣金 vs 在线券商差5-10倍，驱动投资者加开低费率账户",
+          "source": "各券商费率对比",
+          "source_url": "https://www.topworker.cn/3194.html",
+          "icon": "calculator"
+        },
+        {
+          "name": "平台功能差异",
+          "pct_label": "17%已用AI",
+          "detail": "Level 2行情免费 vs 收费、AI工具(17%已用/43%想用)、加密货币(+246% YoY)",
+          "source": "Investment Trends 2024 + 富途2026报告",
+          "source_url": "https://www.futuhk.com/en/about-us/newsroom/futu-releases-2026-hong-kong-retail-investor-report",
+          "icon": "chip"
+        }
+      ]
+    },
+    "learning_paths": {
+      "title": "投资者学习路径分布",
+      "subtitle": "基于Oliver Wyman(n=300K)、Betterment(2025)、Gallup(n=2,036)、CFA Institute(n=2,400)综合分析",
+      "paths": [
+        {
+          "name": "社媒驱动型",
+          "name_en": "Social-Media-First",
+          "pct": 32,
+          "color": "rose",
+          "profile": "18-30岁，TikTok/YouTube/小红书入门",
+          "behavior": "先买crypto/meme股再扩展到主流股票",
+          "data_point": "55% Gen Z说社媒是开始投资的#1原因",
+          "source": "Oliver Wyman Forum (n=300,000, 5年追踪)",
+          "source_url": "https://fortune.com/2026/01/16/gen-z-richtok-social-media-stock-market-investing/",
+          "futu_implication": "需要在社媒平台有强存在感，KOL合作是关键触达手段"
+        },
+        {
+          "name": "朋友带路型",
+          "name_en": "Peer-Influenced",
+          "pct": 23,
+          "color": "amber",
+          "profile": "各年龄段，朋友赚钱后跟着开户",
+          "behavior": "模仿朋友策略，高度信任口碑推荐",
+          "data_point": "43%从朋友/家人获取投资建议",
+          "source": "Gallup 2025 (n=2,036)",
+          "source_url": "https://news.gallup.com/poll/660467/americans-financial-advice-rooted-people.aspx",
+          "futu_implication": "MGM裂变和转介绍激励是最直接的获客杠杆"
+        },
+        {
+          "name": "银行/顾问引导型",
+          "name_en": "Advisor-Led",
+          "pct": 22,
+          "color": "blue",
+          "profile": "30-50岁，从银行理财经理推荐开始",
+          "behavior": "先买基金，逐步自主交易，多持保守策略",
+          "data_point": "90%+富裕年轻投资者使用付费顾问",
+          "source": "CFA Institute 2026 (n=2,400)",
+          "source_url": "https://www.cfainstitute.org/about/press-room/2026/next-gen-investors-report-march-2026",
+          "futu_implication": "需要展示专业度和研究能力，与银行差异化竞争"
+        },
+        {
+          "name": "自学研究型",
+          "name_en": "Self-Directed Researcher",
+          "pct": 15,
+          "color": "emerald",
+          "profile": "分析驱动，看财经网站/书/课程",
+          "behavior": "重视数据工具、图表分析、基本面研究",
+          "data_point": "47%通过在线媒体/财经网站学习投资",
+          "source": "Betterment 2025 Survey",
+          "source_url": "https://www.betterment.com/hubfs/PDFs/b4c/Betterment%20Retail%20Survey%202025.pdf",
+          "futu_implication": "SEO内容、专业工具(Level 2、AI分析)是关键吸引力"
+        },
+        {
+          "name": "被动/Robo理财型",
+          "name_en": "Passive/Robo-Advised",
+          "pct": 8,
+          "color": "slate",
+          "profile": "偏好自动管理，不愿花时间研究",
+          "behavior": "App广告进入，定投ETF/基金为主",
+          "data_point": "43% Gen Z只用robo-advice",
+          "source": "CFA Institute 2026 (n=2,400)",
+          "source_url": "https://www.cfainstitute.org/about/press-room/2026/next-gen-investors-report-march-2026",
+          "futu_implication": "智能组合、一键跟投等产品功能可覆盖此人群"
+        }
+      ]
+    },
+    "info_sources": {
+      "title": "投资信息来源排名",
+      "source": "Betterment 2025 Survey",
+      "source_url": "https://www.betterment.com/hubfs/PDFs/b4c/Betterment%20Retail%20Survey%202025.pdf",
+      "items": [
+        {
+          "name": "在线媒体/财经网站",
+          "pct": 47
+        },
+        {
+          "name": "电视",
+          "pct": 37
+        },
+        {
+          "name": "朋友/家人",
+          "pct": 37
+        },
+        {
+          "name": "社交媒体",
+          "pct": 36
+        },
+        {
+          "name": "理财顾问",
+          "pct": 31
+        },
+        {
+          "name": "Podcast",
+          "pct": 19
+        }
+      ]
+    },
+    "generational_trust": {
+      "title": "代际信任差异",
+      "subtitle": "年轻人说信任顾问，但实际被社媒驱动 — 信任悖论",
+      "source": "Schwab Modern Wealth Survey 2024 (n=1,200)",
+      "source_url": "https://content.schwab.com/web/retail/public/about-schwab/schwab_modern_wealth_survey_2024_findings.pdf",
+      "data": [
+        {
+          "platform": "Reddit",
+          "gen_z": 32,
+          "millennials": 22,
+          "gen_x": 11,
+          "boomers": 7
+        },
+        {
+          "platform": "TikTok",
+          "gen_z": 32,
+          "millennials": 21,
+          "gen_x": 9,
+          "boomers": 3
+        },
+        {
+          "platform": "YouTube",
+          "gen_z": 44,
+          "millennials": 38,
+          "gen_x": 25,
+          "boomers": 14
+        },
+        {
+          "platform": "Instagram",
+          "gen_z": 33,
+          "millennials": 25,
+          "gen_x": 11,
+          "boomers": 4
+        }
+      ],
+      "trust_paradox": "76% Gen Z声称最信任专业顾问，但55%实际因社媒开始投资(Oliver Wyman)"
+    },
+    "hk_product_progression": {
+      "title": "香港投资者产品渗透率",
+      "source": "IFEC Retail Investor Study 2025 (n=1,000)",
+      "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+      "products": [
+        {
+          "name": "股票",
+          "penetration": 91
+        },
+        {
+          "name": "基金",
+          "penetration": 24
+        },
+        {
+          "name": "债券",
+          "penetration": 11
+        },
+        {
+          "name": "虚拟资产",
+          "penetration": 10
+        },
+        {
+          "name": "期货/期权",
+          "penetration": 6
+        }
+      ],
+      "age_insight": "18-29岁年轻投资者平均持有4.69种产品，多于50-69岁的2.96种",
+      "key_finding": "年轻人并非只买简单产品，反而更多元化"
+    },
+    "key_sources": [
+      {
+        "name": "Oliver Wyman Forum",
+        "sample": "n=300,000 (5年追踪)",
+        "url": "https://fortune.com/2026/01/16/gen-z-richtok-social-media-stock-market-investing/"
+      },
+      {
+        "name": "Investment Trends 2024 HK",
+        "sample": "n=1,322",
+        "url": "https://investmenttrends.com/resource/2024-hong-kong-online-investing-report/"
+      },
+      {
+        "name": "IFEC Retail Investor Study 2025",
+        "sample": "n=1,000",
+        "url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf"
+      },
+      {
+        "name": "BCG-WEF Global Retail Investor Outlook",
+        "sample": "n=13,036",
+        "url": "https://reports.weforum.org/docs/WEF_2024_Global_Retail_Investor_Outlook_2025.pdf"
+      },
+      {
+        "name": "Gallup 2025",
+        "sample": "n=2,036",
+        "url": "https://news.gallup.com/poll/660467/americans-financial-advice-rooted-people.aspx"
+      },
+      {
+        "name": "Schwab Modern Wealth 2024",
+        "sample": "n=1,200",
+        "url": "https://content.schwab.com/web/retail/public/about-schwab/schwab_modern_wealth_survey_2024_findings.pdf"
+      },
+      {
+        "name": "CFA Institute 2026",
+        "sample": "n=2,400",
+        "url": "https://www.cfainstitute.org/about/press-room/2026/next-gen-investors-report-march-2026"
+      },
+      {
+        "name": "FINRA 2024 Investor Survey",
+        "sample": "大规模",
+        "url": "https://www.finrafoundation.org/sites/finrafoundation/files/2025-11/NFCS_Investor_Survey_Report_White_Paper.pdf"
+      },
+      {
+        "name": "Betterment 2025 Survey",
+        "sample": "大规模",
+        "url": "https://www.betterment.com/hubfs/PDFs/b4c/Betterment%20Retail%20Survey%202025.pdf"
+      },
+      {
+        "name": "SFC Stock Investor Survey 2006",
+        "sample": "大规模",
+        "url": "https://www.sfc.hk/sfc/doc/EN/speeches/public/surveys/06/stock_investor_survey_060602.pdf"
+      },
+      {
+        "name": "富途2026 HK投资者报告",
+        "sample": "n=2,000+",
+        "url": "https://www.futuhk.com/en/about-us/newsroom/futu-releases-2026-hong-kong-retail-investor-report"
+      }
+    ],
+    "psych_triggers": {
+      "title": "香港投资者的投资目标与动机",
+      "subtitle": "基于香港本地调查数据",
+      "note": "注意：以下是「投资目标」(为什么投资)，非「首次开户触发因素」(为什么开户)。目前没有公开的港调查直接研究首次开户触发原因。",
+      "investment_objectives": {
+        "title": "投资目标分布 (多选)",
+        "datasets": [
+          {
+            "source": "IFEC零售投资者研究2021",
+            "sample": "n=1,004, 面对面访谈, 18-69岁港居民",
+            "source_url": "https://www.ifec.org.hk/web/en/about-ifec/press-release/pr-20211004.page",
+            "items": [
+              {
+                "name": "长期资本增长",
+                "pct": 67,
+                "color": "emerald"
+              },
+              {
+                "name": "赚取股息/利息收入",
+                "pct": 64,
+                "color": "blue"
+              },
+              {
+                "name": "保值/跑赢通胀",
+                "pct": 45,
+                "color": "amber"
+              },
+              {
+                "name": "短线交易赚快钱",
+                "pct": 40,
+                "color": "rose"
+              },
+              {
+                "name": "享受投资的刺激感",
+                "pct": 20,
+                "color": "violet"
+              }
+            ],
+            "age_note": "18-29岁: 55%选择短线交易(显著高于平均40%)"
+          },
+          {
+            "source": "HKIFA投资者调查2024",
+            "sample": "香港投资者",
+            "source_url": "https://hkifa.org.hk/hkifa-investor-survey-2024-hong-kong-investors-show-cautious-optimism-keen-interest-in-ai-and-healthcare-sectors/",
+            "items": [
+              {
+                "name": "定期收息(利息/股息)",
+                "pct": 52,
+                "color": "blue"
+              },
+              {
+                "name": "资本增长",
+                "pct": 49,
+                "color": "emerald"
+              },
+              {
+                "name": "跑赢通胀",
+                "pct": 43,
+                "color": "amber"
+              }
+            ],
+            "age_note": ""
+          },
+          {
+            "source": "富途2025香港投资者报告",
+            "sample": "n=2,000+, 富途客户",
+            "source_url": "https://www.futuhk.com/en/about-us/newsroom/futu-2025-hk-retail-investor-report",
+            "items": [
+              {
+                "name": "增强财务安全/被动收入",
+                "pct": 55,
+                "color": "emerald"
+              },
+              {
+                "name": "分散投资应对不确定性",
+                "pct": 87,
+                "color": "indigo"
+              },
+              {
+                "name": "多资产配置分散风险",
+                "pct": 41,
+                "color": "blue"
+              }
+            ],
+            "age_note": "Gen Z视加密货币比房产首付更能提供财务安全感"
+          },
+          {
+            "source": "Endowus Wealth Insights 2025",
+            "sample": "港新两地投资者",
+            "source_url": "https://cdn.endowus.com/static-files/pdf/Endowus%20Wealth%20Insights%20Report%202025%20(EN).pdf",
+            "items": [
+              {
+                "name": "创造额外收入来源",
+                "pct": 57,
+                "color": "blue"
+              },
+              {
+                "name": "退休准备",
+                "pct": 56,
+                "color": "amber"
+              }
+            ],
+            "age_note": ""
+          }
+        ]
+      },
+      "decision_drivers": {
+        "title": "投资决策影响因素",
+        "source": "HKIFA投资者调查2024",
+        "source_url": "https://hkifa.org.hk/hkifa-investor-survey-2024-hong-kong-investors-show-cautious-optimism-keen-interest-in-ai-and-healthcare-sectors/",
+        "items": [
+          {
+            "name": "全球经济前景",
+            "pct": 67,
+            "color": "indigo"
+          },
+          {
+            "name": "利率走向",
+            "pct": 59,
+            "color": "blue"
+          },
+          {
+            "name": "香港经济前景",
+            "pct": 57,
+            "color": "amber"
+          }
+        ]
+      },
+      "social_media_influence": {
+        "title": "社媒对投资决策的影响 (港数据)",
+        "items": [
+          {
+            "stat": "33%",
+            "detail": "港投资者过去12个月因社媒信息做出投资决策",
+            "source": "IFEC 2021 (n=1,004)",
+            "source_url": "https://www.ifec.org.hk/web/en/about-ifec/press-release/pr-20211004.page"
+          },
+          {
+            "stat": "48%",
+            "detail": "18-29岁港投资者因社媒信息投资(显著高于平均)",
+            "source": "IFEC 2021",
+            "source_url": ""
+          },
+          {
+            "stat": "49%",
+            "detail": "港投资者使用社交媒体作为投资信息来源",
+            "source": "IFEC 2021",
+            "source_url": ""
+          },
+          {
+            "stat": "67%",
+            "detail": "港投资者使用财经网站作为信息来源(排名第一)",
+            "source": "IFEC 2021",
+            "source_url": ""
+          },
+          {
+            "stat": "21%",
+            "detail": "香港年轻人一参加工作就开始投资",
+            "source": "Yahoo Finance HK 2024 (n=1,500+)",
+            "source_url": "https://www.marketing-interactive.com/gen-z-and-the-future-of-investing-what-financial-institutions-need-to-know"
+          }
+        ]
+      },
+      "increase_drivers": {
+        "title": "驱动增加投资配置的因素",
+        "source": "富途2026香港投资者报告 (n=2,000+)",
+        "source_url": "https://www.futuhk.com/en/about-us/newsroom/futu-releases-2026-hong-kong-retail-investor-report",
+        "items": [
+          {
+            "name": "盈利/利润前景预期",
+            "pct": 48,
+            "color": "emerald"
+          },
+          {
+            "name": "利率环境/走向",
+            "pct": 35,
+            "color": "blue"
+          },
+          {
+            "name": "利好政策支持",
+            "pct": 26,
+            "color": "indigo"
+          }
+        ],
+        "context": "70%投资者在2025年主动增加了金融资产配置; 63%认为股市走势领先实体经济"
+      }
+    }
+  },
+  "wealth_panorama": {
+    "title": "香港个人财富全景图",
+    "subtitle": "香港居民的钱分布在哪些资产类别、托管在什么机构",
+    "updated_at": "2025年数据",
+    "overview": {
+      "avg_wealth_per_adult": {
+        "value": "HK$470万",
+        "value_usd": "USD 601,195",
+        "rank": "全球第3",
+        "source": "UBS Global Wealth Report 2025"
+      },
+      "median_wealth_per_adult": {
+        "value": "USD 222,000",
+        "rank": "全球第4",
+        "source": "UBS Global Wealth Report 2025"
+      },
+      "adult_population": "630万",
+      "total_household_wealth_est": "~HK$30万亿",
+      "millionaires": {
+        "count": "39.5万人",
+        "pct": "占总人口约5%(Citi报告原文称7%，可能按经济活动人口计算)",
+        "threshold": "净资产≥HK$1,000万(约USD 130万)",
+        "median_net_asset": "HK$2050万",
+        "source": "Citi Hong Kong Affluent Study 2025",
+        "source_url": "https://www.citibank.com.hk/pdf/english/2025-citi-hong-kong-affluent-study-eng.pdf"
+      }
+    },
+    "asset_allocation": {
+      "title": "个人资产类别分布",
+      "note": "综合估算，基于UBS、HKMA、SFC、MPFA、Insurance Authority等多个权威来源交叉推算",
+      "items": [
+        {
+          "name": "房地产",
+          "pct": 60,
+          "amount": "~HK$18万亿",
+          "color": "slate",
+          "detail": "住宅自有率50.9%; 未偿还按揭贷款HK$1.87万亿; 香港房价全球最高(收入比15-16倍)",
+          "source": "Trading Economics(自有率); HKMA按揭调查2024年12月",
+          "source_url": "https://www.hkma.gov.hk/eng/news-and-media/press-releases/2025/01/20250128-6/"
+        },
+        {
+          "name": "银行存款",
+          "pct": 17,
+          "amount": "~HK$7-8.5万亿(家庭部分估算)",
+          "color": "blue",
+          "detail": "认可机构总存款HK$17.3万亿(含企业/机构)，HKMA不拆分家庭vs企业。行业估算家庭占约40-50%。港元定存HK$4.43万亿、储蓄HK$2.43万亿、活期HK$0.97万亿(均为总额含企业)",
+          "source": "HKMA Monetary Statistics 2024年12月",
+          "source_url": "https://www.hkma.gov.hk/media/eng/doc/key-information/press-release/2025/20250128e8a1.pdf"
+        },
+        {
+          "name": "股票/证券",
+          "pct": 10,
+          "amount": "~HK$3万亿",
+          "color": "emerald",
+          "detail": "~25%成年人参与股市; SFC活跃客户439万账户; 私人银行39%配置为上市股票",
+          "source": "SFC AWMAS 2024; IFEC",
+          "source_url": "https://www.sfc.hk/-/media/EN/files/COM/Reports-and-surveys/EN_AWMAS-2024.pdf"
+        },
+        {
+          "name": "保险(储蓄/人寿)",
+          "pct": 6,
+          "amount": "~HK$1.8万亿(估算)",
+          "color": "violet",
+          "detail": "2024年总保费HK$6352亿; 长期在保保费HK$5374亿; 内地访客新单占个人新业务28.6%",
+          "source": "Insurance Authority 2024年度统计",
+          "source_url": "https://www.ia.org.hk/en/infocenter/press_releases/20251205.html"
+        },
+        {
+          "name": "强积金",
+          "pct": 5,
+          "amount": "HK$1.55万亿",
+          "color": "amber",
+          "detail": "479万成员; 2025年增长20%; 自成立年化回报3.0%; 平均FER 1.38%",
+          "source": "MPFA 2025年10月",
+          "source_url": "https://www.mpfa.org.hk/en/info-centre/press-releases/20251006"
+        },
+        {
+          "name": "基金/ETF",
+          "pct": 3,
+          "amount": "HK$1.64万亿(SFC认可基金NAV)",
+          "color": "indigo",
+          "detail": "954只SFC认可基金; 2024年净流入HK$1630亿; 2025年5月NAV升至HK$1.99万亿(+21%)",
+          "source": "SFC AWMAS 2024",
+          "source_url": "https://www.sfc.hk/-/media/EN/files/COM/Reports-and-surveys/EN_AWMAS-2024.pdf"
+        },
+        {
+          "name": "债券",
+          "pct": 1.5,
+          "amount": "",
+          "color": "teal",
+          "detail": "零售参与较少; 私人银行仅7%配债券; 政府iBond/Silver Bond每期HK$100-200亿",
+          "source": "SFC AWMAS 2024",
+          "source_url": ""
+        },
+        {
+          "name": "加密货币/虚拟资产",
+          "pct": 0.5,
+          "amount": "",
+          "color": "orange",
+          "detail": "约8%零售投资者参与(IFEC 2023); 11家已获牌VA交易平台; BTC/ETH现货ETF已在港交所上市",
+          "source": "IFEC 2023; LegCo研究报告2025年6月",
+          "source_url": "https://app7.legco.gov.hk/rpdb/en/uploads/2025/ISSH/ISSH16_2025_20250617_en.pdf"
+        },
+        {
+          "name": "现金及其他",
+          "pct": 2,
+          "amount": "HK$5850亿(公众持有现金)",
+          "color": "gray",
+          "detail": "含实物现金、黄金、另类投资等; 44%私人财富客户另类配置<5%",
+          "source": "HKMA; KPMG Private Wealth 2025",
+          "source_url": ""
+        }
+      ]
+    },
+    "institution_distribution": {
+      "title": "资产托管机构类型分布",
+      "note": "证监会资产及财富管理活动调查2024: 香港资产及财富管理业AUM HK$35.1万亿(含63%非本地投资者资金)",
+      "source": "SFC AWMAS 2024",
+      "source_url": "https://www.sfc.hk/-/media/EN/files/COM/Reports-and-surveys/EN_AWMAS-2024.pdf",
+      "categories": [
+        {
+          "name": "银行(存款+理财)",
+          "pct": 55,
+          "color": "blue",
+          "detail": "HSBC(~30%零售存款份额)、中银香港(~15-20%)、恒生(~10%)、渣打(~5-8%); 8家虚拟银行(<1%存款)",
+          "sub": [
+            {
+              "name": "HSBC",
+              "role": "最大零售银行",
+              "share": "~30%"
+            },
+            {
+              "name": "中银香港",
+              "role": "第二大",
+              "share": "~15-20%"
+            },
+            {
+              "name": "恒生银行",
+              "role": "HSBC子公司",
+              "share": "~10%"
+            },
+            {
+              "name": "渣打",
+              "role": "主要零售",
+              "share": "~5-8%"
+            },
+            {
+              "name": "虚拟银行(ZA/Mox等)",
+              "role": "8家持牌",
+              "share": "<1%"
+            }
+          ]
+        },
+        {
+          "name": "保险公司",
+          "pct": 18,
+          "color": "violet",
+          "detail": "AIA(最大)、保诚、宏利、AXA、中国太平、FWD; 储蓄保单占保险负债约3/4",
+          "sub": [
+            {
+              "name": "AIA",
+              "role": "最大寿险公司",
+              "share": "领先"
+            },
+            {
+              "name": "保诚/Prudential",
+              "role": "主要玩家",
+              "share": ""
+            },
+            {
+              "name": "宏利/Manulife",
+              "role": "强势地位",
+              "share": ""
+            },
+            {
+              "name": "FWD",
+              "role": "快速增长(+93%新业务)",
+              "share": ""
+            }
+          ]
+        },
+        {
+          "name": "强积金受托人",
+          "pct": 8,
+          "color": "amber",
+          "detail": "12家核准受托人管理HK$1.55万亿; HSBC信托、宏利、永明/AXA、中银保诚、AIA",
+          "sub": []
+        },
+        {
+          "name": "在线券商",
+          "pct": 5,
+          "color": "emerald",
+          "detail": "富途(全球2816万注册/561万经纪账户, 理财AUM HK$1632亿); Tiger; IBKR; Saxo; 长桥",
+          "sub": [
+            {
+              "name": "富途/moomoo",
+              "role": "港科技券商#1(客户资产)",
+              "share": "领先"
+            },
+            {
+              "name": "Tiger Brokers",
+              "role": "零佣金港股",
+              "share": ""
+            },
+            {
+              "name": "Interactive Brokers",
+              "role": "全球领先/机构级",
+              "share": ""
+            },
+            {
+              "name": "盛宝/Saxo",
+              "role": "全品类",
+              "share": ""
+            }
+          ]
+        },
+        {
+          "name": "传统券商",
+          "pct": 7,
+          "color": "sky",
+          "detail": "~1400家持牌证券/孖展公司; 中小型为主, 正在被在线券商侵蚀份额",
+          "sub": []
+        },
+        {
+          "name": "基金/资产管理公司",
+          "pct": 7,
+          "color": "indigo",
+          "detail": "2212家Type 9持牌公司; BlackRock、JPMorgan AM、Fidelity、施罗德、PIMCO等",
+          "sub": []
+        }
+      ]
+    },
+    "mpf_allocation": {
+      "title": "强积金资产配置",
+      "total": "HK$1.34万亿",
+      "date": "2024年12月",
+      "source": "PwC Hong Kong MPF System Report (Jun 2025)",
+      "source_url": "https://www.pwchk.com/en/asset-management/hongkong-mandatory-provident-fund-system-jun2025.pdf",
+      "items": [
+        {
+          "name": "股票基金",
+          "pct": 44.7,
+          "amount": 597957,
+          "color": "emerald"
+        },
+        {
+          "name": "混合资产基金",
+          "pct": 33.4,
+          "amount": 447348,
+          "color": "blue"
+        },
+        {
+          "name": "保守基金(货币)",
+          "pct": 11.8,
+          "amount": 157826,
+          "color": "gray"
+        },
+        {
+          "name": "保证基金",
+          "pct": 5.9,
+          "amount": 78360,
+          "color": "amber"
+        },
+        {
+          "name": "债券基金",
+          "pct": 3.8,
+          "amount": 50264,
+          "color": "teal"
+        },
+        {
+          "name": "其他货币基金",
+          "pct": 0.4,
+          "amount": 5751,
+          "color": "slate"
+        }
+      ]
+    },
+    "private_banking_allocation": {
+      "title": "私人银行客户资产配置",
+      "total_aum": "HK$10.4万亿",
+      "source": "SFC AWMAS 2024",
+      "source_url": "https://www.sfc.hk/-/media/EN/files/COM/Reports-and-surveys/EN_AWMAS-2024.pdf",
+      "items": [
+        {
+          "name": "上市股票",
+          "pct": 39,
+          "color": "emerald"
+        },
+        {
+          "name": "现金与存款",
+          "pct": 19,
+          "color": "blue"
+        },
+        {
+          "name": "私募基金",
+          "pct": 15,
+          "color": "violet"
+        },
+        {
+          "name": "债券",
+          "pct": 7,
+          "color": "teal"
+        },
+        {
+          "name": "公募基金",
+          "pct": 5,
+          "color": "indigo"
+        },
+        {
+          "name": "结构性产品等",
+          "pct": 15,
+          "color": "gray"
+        }
+      ]
+    },
+    "key_numbers": [
+      {
+        "label": "常住人口",
+        "value": "750万",
+        "detail": "2024年年中人口估算",
+        "source": "统计处2024"
+      },
+      {
+        "label": "银行账户持有人",
+        "value": "~700万+",
+        "detail": "几乎全民覆盖，8家虚拟银行加速渗透",
+        "source": "HKMA"
+      },
+      {
+        "label": "成年人口(可开户基数)",
+        "value": "~550万",
+        "detail": "18岁以上常住人口，即证券账户可开户的人口基数",
+        "source": "统计处2024人口年龄分布"
+      },
+      {
+        "label": "持有金融产品人数",
+        "value": "~297万人",
+        "detail": "54%的成年人持有股票、基金、债券、结构性产品、外汇/期货等金融投资产品(不含纯储蓄和保险)",
+        "source": "IFEC 2025散户投资者调查"
+      },
+      {
+        "label": "过去12个月有交易",
+        "value": "~200-250万人",
+        "detail": "持有金融产品的人中，过去12个月内有实际买卖操作的活跃投资者(去重个人)",
+        "source": "IFEC 2025调查 + SFC综合估算"
+      },
+      {
+        "label": "证券账户(活跃)",
+        "value": "439万户",
+        "detail": "持牌法团需发月结单的账户数(现金185万+孖展254万)，同一人多券商开户重复计算，去重个人估计~150-200万",
+        "source": "SFC Financial Review 2024"
+      }
+    ],
+    "key_sources": [
+      {
+        "name": "UBS Global Wealth Report 2025",
+        "url": "https://www.ubs.com/global/en/wealthmanagement/insights/global-wealth-report.html"
+      },
+      {
+        "name": "Citi Hong Kong Affluent Study 2025",
+        "url": "https://www.citibank.com.hk/pdf/english/2025-citi-hong-kong-affluent-study-eng.pdf"
+      },
+      {
+        "name": "SFC AWMAS 2024",
+        "url": "https://www.sfc.hk/-/media/EN/files/COM/Reports-and-surveys/EN_AWMAS-2024.pdf"
+      },
+      {
+        "name": "HKMA Monetary Statistics",
+        "url": "https://www.hkma.gov.hk/eng/data-publications-and-research/data-and-statistics/monthly-statistical-bulletin/"
+      },
+      {
+        "name": "MPFA Statistics",
+        "url": "https://www.mpfa.org.hk/en/info-centre/press-releases/20251006"
+      },
+      {
+        "name": "Insurance Authority 2024",
+        "url": "https://www.ia.org.hk/en/infocenter/press_releases/20251205.html"
+      },
+      {
+        "name": "PwC MPF System Report",
+        "url": "https://www.pwchk.com/en/asset-management/hongkong-mandatory-provident-fund-system-jun2025.pdf"
+      },
+      {
+        "name": "HKMA Residential Mortgage Survey",
+        "url": "https://www.hkma.gov.hk/eng/news-and-media/press-releases/2025/01/20250128-6/"
       }
     ]
   }
