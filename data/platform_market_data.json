@@ -4297,10 +4297,10 @@
       "universal": [
         {
           "name": "银行存款",
-          "holders": 4700000,
-          "holders_label": "~470万",
-          "pct_of_adults": 85,
-          "detail": "几乎全民持有，包括活期/定期/储蓄，HKDPS覆盖~450万存户",
+          "holders": 7000000,
+          "holders_label": "700万+",
+          "pct_of_adults": 95,
+          "detail": "几乎全民持有，包括活期/定期/储蓄，8家虚拟银行加速渗透",
           "market_size": "HK万亿+总存款",
           "source": "HKMA 2024",
           "color": "blue"
