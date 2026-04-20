@@ -54,6 +54,17 @@
         </div>
         {% endfor %}
     </div>
+    <!-- 差额说明 -->
+    <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-6 text-xs text-gray-600 leading-relaxed">
+        <span class="font-semibold text-amber-700">银行账户 vs 持有金融产品的差额（~400万人）：</span>
+        这部分人有银行账户但不持有投资产品，主要构成——
+        <span class="font-medium">纯储蓄存款</span>（最大头，尤其长者群体，IFEC调查显示65岁以上有46%从不投资）、
+        <span class="font-medium">纯保险</span>（有人寿/医疗保险但不买股票基金，保险渗透率极高）、
+        <span class="font-medium">纯强积金被动持有</span>（479万人强制参与但IFEC不计为"主动持有金融产品"）、
+        <span class="font-medium">未成年人/学生账户</span>、
+        <span class="font-medium">外佣等低收入群体</span>（~37万人有工资账户但基本不投资）。
+        <span class="text-amber-600 font-medium">这~400万人是券商获客的潜在增量空间，但转化门槛较高。</span>
+    </div>
 
     <!-- 资产类别分布 - 横向堆叠条 + 详情 -->
     <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ wealth_panorama.asset_allocation.title }}</h3>
