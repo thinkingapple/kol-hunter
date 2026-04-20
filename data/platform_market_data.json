@@ -4289,6 +4289,148 @@
         "name": "HKMA Residential Mortgage Survey",
         "url": "https://www.hkma.gov.hk/eng/news-and-media/press-releases/2025/01/20250128-6/"
       }
-    ]
+    ],
+    "product_penetration": {
+      "title": "香港零售金融产品渗透率",
+      "subtitle": "按持有人数排序，基于~297万投资者(IFEC 2025)及~550万成年人口",
+      "note": "银行存款、强积金、储蓄保险为近乎全民级产品，单独展示；其余为IFEC 2025散户投资者调查中「过去12个月持有」的比例",
+      "universal": [
+        {
+          "name": "银行存款",
+          "holders": 4700000,
+          "holders_label": "~470万",
+          "pct_of_adults": 85,
+          "detail": "几乎全民持有，包括活期/定期/储蓄，HKDPS覆盖~450万存户",
+          "market_size": "HK万亿+总存款",
+          "source": "HKMA 2024",
+          "color": "blue"
+        },
+        {
+          "name": "强积金",
+          "holders": 4790000,
+          "holders_label": "479万",
+          "pct_of_adults": 87,
+          "detail": "18-65岁雇员强制参与，总资产HK.34万亿",
+          "market_size": "HK.34万亿",
+          "source": "MPFA 2024",
+          "color": "violet"
+        },
+        {
+          "name": "储蓄/分红保险",
+          "holders": 3250000,
+          "holders_label": "~325万",
+          "pct_of_adults": 59,
+          "detail": "含人寿/储蓄分红/危疾险，香港保险渗透率全球最高之一",
+          "market_size": "HK亿保费/年",
+          "source": "Insurance Authority 2024",
+          "color": "teal"
+        }
+      ],
+      "investment": [
+        {
+          "name": "股票(港股/美股/A股)",
+          "holders": 2700000,
+          "holders_label": "~270万",
+          "pct_of_investors": 91,
+          "detail": "最主流投资品类，91%投资者持有。港交所总市值HK万亿，2025年ADT达HK亿创新高",
+          "source": "IFEC 2025 + HKEX",
+          "color": "emerald"
+        },
+        {
+          "name": "基金(不含强积金/投连险)",
+          "holders": 710000,
+          "holders_label": "~71万",
+          "pct_of_investors": 24,
+          "detail": "SFC认可基金954只，资产及财富管理业务AUM达HK万亿",
+          "source": "IFEC 2025 + SFC",
+          "color": "indigo"
+        },
+        {
+          "name": "窝轮/牛熊证",
+          "holders": 560000,
+          "holders_label": "~56万",
+          "pct_of_investors": 19,
+          "detail": "香港特色衍生品，全球成交量第一。ADT约HK亿",
+          "source": "IFEC 2025 + HKEX",
+          "color": "amber"
+        },
+        {
+          "name": "债券(iBond/绿债等)",
+          "holders": 330000,
+          "holders_label": "~33万",
+          "pct_of_investors": 11,
+          "detail": "以政府零售债券为主，2024年基建债券获12.8万份申请",
+          "source": "IFEC 2025",
+          "color": "sky"
+        },
+        {
+          "name": "加密货币/虚拟资产",
+          "holders": 300000,
+          "holders_label": "~30万",
+          "pct_of_investors": 10,
+          "detail": "从2023年8%升至10%，SFC持牌交易所OSL和HashKey，2024年推出亚洲首批虚拟资产ETF",
+          "source": "IFEC 2025",
+          "color": "orange"
+        },
+        {
+          "name": "ETF",
+          "holders": 270000,
+          "holders_label": "~27万",
+          "pct_of_investors": 9,
+          "detail": "全球成交周转率第一，AUM达HK亿，186只上市ETF",
+          "source": "IFEC 2025 + HKEX",
+          "color": "cyan"
+        },
+        {
+          "name": "期货/期权",
+          "holders": 180000,
+          "holders_label": "~18万",
+          "pct_of_investors": 6,
+          "detail": "以恒指/科指期货为主，2024年总成交3.84亿张合约",
+          "source": "IFEC 2025 + HKEX",
+          "color": "rose"
+        },
+        {
+          "name": "非上市结构性产品/投连险",
+          "holders": 120000,
+          "holders_label": "~12万",
+          "pct_of_investors": 4,
+          "detail": "含ELN、累计期权、ILAS投连险等，2024年起IA加强监管",
+          "source": "IFEC 2025",
+          "color": "slate"
+        },
+        {
+          "name": "REITs",
+          "holders": 90000,
+          "holders_label": "~9万",
+          "pct_of_investors": 3,
+          "detail": "11只上市REITs，AUM约HK亿，领头羊领展为亚太最大",
+          "source": "IFEC 2025 + SFC",
+          "color": "lime"
+        }
+      ],
+      "key_sources": [
+        {
+          "name": "IFEC散户投资者调查2025",
+          "url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf"
+        },
+        {
+          "name": "HKEX 2024年市场统计",
+          "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Market-Data/Statistics/Consolidated-Reports/Annual-Market-Statistics/2024FY-Ann-Mkt-Stat_eng.pdf"
+        },
+        {
+          "name": "SFC资产及财富管理活动调查2024",
+          "url": "https://www.sfc.hk/-/media/EN/files/COM/Reports-and-surveys/EN_AWMAS-2024.pdf"
+        },
+        {
+          "name": "MPFA强积金季度报告",
+          "url": "https://www.mpfa.org.hk/en/info-centre/research-reports/quarterly-reports/mpf-schemes"
+        },
+        {
+          "name": "Insurance Authority 2024统计",
+          "url": "https://www.ia.org.hk/en/infocenter/statistics/market_5_2024.html"
+        }
+      ]
+    }
   }
 }
