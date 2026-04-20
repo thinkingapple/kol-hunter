@@ -891,12 +891,16 @@
     });
 
     // Draw leader lines from labels to scatter dots
-    document.addEventListener('DOMContentLoaded', function() {
+    // Must run when tab-channels is visible (not display:none), otherwise container size is 0
+    window._layoutScatterLabels = function() {
         var container = document.getElementById('scatter-container');
-        if (!container) return;
+        if (!container || container._labelsPlaced) return;
+        var cw = container.offsetWidth, ch = container.offsetHeight;
+        if (cw === 0 || ch === 0) return;  // still hidden
+        container._labelsPlaced = true;
+
         var svg = container.querySelector('svg');
         var dots = container.querySelectorAll('.scatter-dot');
-        var cw = container.offsetWidth, ch = container.offsetHeight;
 
         var items = [];
         dots.forEach(function(dot) {
@@ -987,7 +991,9 @@
             label.textContent = item.name;
             container.appendChild(label);
         });
-    });
+    };
+    // Try on DOMContentLoaded in case tab-channels is already visible
+    document.addEventListener('DOMContentLoaded', function() { window._layoutScatterLabels(); });
     </script>
 
     <!-- 关键洞察 -->
@@ -2033,6 +2039,10 @@ document.addEventListener('DOMContentLoaded', function() {
         sections.forEach(function(sec) {
             sec.style.display = sec.dataset.tab === tabId ? '' : 'none';
         });
+        // Layout scatter labels when channels tab becomes visible
+        if (tabId === 'tab-channels' && window._layoutScatterLabels) {
+            setTimeout(window._layoutScatterLabels, 50);
+        }
     }
 
     tabs.forEach(function(btn) {
