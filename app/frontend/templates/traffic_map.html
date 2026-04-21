@@ -1245,7 +1245,10 @@
         <h4 class="text-sm font-semibold text-gray-700 mb-2">{{ new_investor_analysis.seasonality.title }}</h4>
         <p class="text-xs text-gray-400 mb-1">{{ new_investor_analysis.seasonality.note }}</p>
         {% if new_investor_analysis.seasonality.data_caveat %}
-        <p class="text-[10px] text-amber-500 mb-3">{{ new_investor_analysis.seasonality.data_caveat }}</p>
+        <p class="text-[10px] text-amber-500 mb-1">{{ new_investor_analysis.seasonality.data_caveat }}</p>
+        {% endif %}
+        {% if new_investor_analysis.seasonality.talent_arrival_note %}
+        <p class="text-[10px] text-indigo-400 mb-3">{{ new_investor_analysis.seasonality.talent_arrival_note }}</p>
         {% endif %}
         <div class="grid grid-cols-4 gap-3 mb-4">
             {% set q_colors = {'red': {'bg': 'bg-red-50', 'bar': 'bg-red-400', 'text': 'text-red-700'},
@@ -1257,17 +1260,32 @@
             <div class="{{ qc.bg }} rounded-xl p-3">
                 <div class="text-center">
                     <div class="text-sm font-bold {{ qc.text }}">{{ q.q }}</div>
-                    <div class="text-xs text-gray-400 mb-2">{{ q.months }}</div>
+                    <div class="text-xs text-gray-400 mb-1">{{ q.months }}</div>
                     <div class="mx-auto w-10 bg-gray-200 rounded-full overflow-hidden" style="height: 80px">
                         <div class="{{ qc.bar }} rounded-full w-full transition-all" style="height: {{ q.intensity }}%; margin-top: {{ 100 - q.intensity }}%"></div>
                     </div>
-                    <div class="text-xs font-semibold {{ qc.text }} mt-1.5">{{ q.label }}</div>
+                    <div class="text-xs font-semibold {{ qc.text }} mt-1">{{ q.label }}</div>
                 </div>
-                <div class="text-xs text-gray-500 mt-2 leading-snug">{{ q.drivers }}</div>
+                <!-- 具体数字 -->
+                {% if q.talent_arrivals_est %}
+                <div class="mt-2 p-2 bg-white/60 rounded-lg border border-gray-100">
+                    <div class="flex justify-between items-baseline">
+                        <span class="text-[10px] text-gray-400">人才抵港</span>
+                        <span class="text-xs font-bold text-indigo-600">{{ q.talent_arrivals_est }}</span>
+                    </div>
+                    <div class="text-[9px] text-gray-400 mt-0.5">{{ q.talent_arrivals_detail }}</div>
+                    <div class="flex justify-between items-baseline mt-1.5 pt-1.5 border-t border-gray-100">
+                        <span class="text-[10px] text-gray-400">预估新开户</span>
+                        <span class="text-xs font-bold {{ qc.text }}">{{ q.new_investor_est }}</span>
+                    </div>
+                    <div class="text-[9px] text-gray-400 mt-0.5">{{ q.new_investor_detail }}</div>
+                </div>
+                {% endif %}
+                <div class="text-[10px] text-gray-500 mt-2 leading-snug">{{ q.drivers }}</div>
                 {% if q.structural_factors %}
-                <ul class="mt-1.5 space-y-0.5">
+                <ul class="mt-1 space-y-0.5">
                     {% for sf in q.structural_factors %}
-                    <li class="text-[10px] text-gray-400 leading-snug flex items-start gap-1">
+                    <li class="text-[9px] text-gray-400 leading-snug flex items-start gap-1">
                         <span class="shrink-0 mt-0.5 w-1 h-1 rounded-full bg-gray-300"></span>
                         {{ sf }}
                     </li>
