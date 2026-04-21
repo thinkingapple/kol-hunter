@@ -3228,7 +3228,27 @@
         ],
         "note": "总持牌数下降较慢(从1413降至1397)，因为有新持牌进入。但小型券商(C类，排名65以后)市占率从约20%降至12.5%，客户和成交持续向头部集中。",
         "concentration": "前14大参与者(A类)占57.4%成交，中型(B类,15-65名)占30.1%，1300+家C类仅占12.5%",
-        "source": "SFC Annual Reports + Financial Review 2024"
+        "source": "SFC Annual Reports + Financial Review 2024",
+        "active_clients": {
+          "title": "SFC活跃客户账户数变化",
+          "note": "活跃=报告期内有至少一笔交易的账户，同一人多券商开户重复计算",
+          "data": [
+            {
+              "year": "2023",
+              "cash": 2193229,
+              "margin": 2563883,
+              "source": "SFC Financial Review 2023"
+            },
+            {
+              "year": "2024",
+              "cash": 1857740,
+              "margin": 2546405,
+              "source": "SFC Financial Review 2024"
+            }
+          ],
+          "caveat": "2024年活跃现金客户降幅(-34万)主要由某一家持牌法团批量关闭客户账户导致。SFC备注: 剔除该法团后，现金客户实际仅下降2%(约-4万)，孖展客户反而增长16%。即2024年真实市场趋势是增长的，大幅下降为一次性异常事件。",
+          "caveat_source": "SFC Financial Review 2024 备注1c"
+        }
       },
       "key_sources": [
         {

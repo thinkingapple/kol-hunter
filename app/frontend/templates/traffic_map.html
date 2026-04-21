@@ -1351,6 +1351,27 @@
         </div>
         <div class="text-[10px] text-gray-400 mb-3">{{ mss.note }}</div>
         <div class="text-[10px] text-gray-300 mb-3">{{ mss.source }}</div>
+
+        <!-- 活跃客户账户数 -->
+        {% if mss.active_clients %}
+        {% set ac = mss.active_clients %}
+        <h5 class="text-sm font-semibold text-gray-700 mb-1 mt-4">{{ ac.title }}</h5>
+        <p class="text-[10px] text-gray-400 mb-2">{{ ac.note }}</p>
+        <div class="grid grid-cols-2 gap-3 mb-2">
+            {% for d in ac.data %}
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-center">
+                <div class="text-xs text-gray-400 mb-1">{{ d.year }}年末</div>
+                <div class="text-sm font-bold text-gray-800">现金账户 {{ "{:,}".format(d.cash) }}</div>
+                <div class="text-sm font-bold text-gray-800">保证金账户 {{ "{:,}".format(d.margin) }}</div>
+                <div class="text-[10px] text-gray-300 mt-1">{{ d.source }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="bg-amber-50 border border-amber-200 rounded-lg p-2.5 mb-2 text-xs text-gray-600 leading-relaxed">
+            <span class="font-semibold text-amber-700">重要说明:</span> {{ ac.caveat }}
+            <span class="text-[10px] text-gray-400 ml-1">({{ ac.caveat_source }})</span>
+        </div>
+        {% endif %}
         {% endif %}
 
         <div class="flex flex-wrap gap-2">
