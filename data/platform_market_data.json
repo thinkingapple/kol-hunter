@@ -3268,6 +3268,123 @@
           "url": "https://www.bloomberg.com/news/articles/2024-12-17/hong-kong-loses-almost-40-brokers-in-another-grim-year"
         }
       ]
+    },
+    "population_pipeline": {
+      "title": "人口结构 — 未来5年满18岁人口预测",
+      "subtitle": "基于统计处出生数据推算可开户人口基数，需扣除双非婴儿（多数不在港居住）",
+      "source": "统计处活产婴儿统计 (Table 115-01011)、双非婴儿数据 (Table 115-01012)",
+      "note": "2008-2012年为双非婴儿高峰期（2013年零配额政策后骤降）。估计在港人数 = 总出生 - 双非×80%（约20%双非儿童后来回港就学）。单非婴儿（父亲为港人）几乎全部在港。",
+      "years": [
+        {
+          "birth_year": 2008,
+          "turn_18_year": 2026,
+          "total_births": 78822,
+          "type2_births": 25269,
+          "est_hk_residents_low": 55000,
+          "est_hk_residents_high": 59000,
+          "est_hk_residents_mid": 57000,
+          "note": "双非占32%"
+        },
+        {
+          "birth_year": 2009,
+          "turn_18_year": 2027,
+          "total_births": 82095,
+          "type2_births": 29766,
+          "est_hk_residents_low": 54000,
+          "est_hk_residents_high": 58000,
+          "est_hk_residents_mid": 56000,
+          "note": "双非占36%"
+        },
+        {
+          "birth_year": 2010,
+          "turn_18_year": 2028,
+          "total_births": 88584,
+          "type2_births": 32653,
+          "est_hk_residents_low": 58000,
+          "est_hk_residents_high": 62000,
+          "est_hk_residents_mid": 60000,
+          "note": "双非占37%"
+        },
+        {
+          "birth_year": 2011,
+          "turn_18_year": 2029,
+          "total_births": 95451,
+          "type2_births": 35736,
+          "est_hk_residents_low": 61000,
+          "est_hk_residents_high": 67000,
+          "est_hk_residents_mid": 64000,
+          "note": "双非占37%, 出生总数45年新高"
+        },
+        {
+          "birth_year": 2012,
+          "turn_18_year": 2030,
+          "total_births": 91558,
+          "type2_births": 26715,
+          "est_hk_residents_low": 66000,
+          "est_hk_residents_high": 70000,
+          "est_hk_residents_mid": 68000,
+          "note": "零配额政策前最后一年"
+        }
+      ],
+      "context_years": [
+        {
+          "birth_year": 2013,
+          "turn_18_year": 2031,
+          "total_births": 57084,
+          "type2_births": 790,
+          "est_hk_residents_mid": 56000,
+          "note": "零配额政策生效, 双非骤降"
+        },
+        {
+          "birth_year": 2019,
+          "turn_18_year": 2037,
+          "total_births": 53200,
+          "type2_births": 0,
+          "est_hk_residents_mid": 53000,
+          "note": "社运影响"
+        },
+        {
+          "birth_year": 2022,
+          "turn_18_year": 2040,
+          "total_births": 33000,
+          "type2_births": 0,
+          "est_hk_residents_mid": 33000,
+          "note": "历史新低"
+        },
+        {
+          "birth_year": 2023,
+          "turn_18_year": 2041,
+          "total_births": 33800,
+          "type2_births": 0,
+          "est_hk_residents_mid": 33800,
+          "note": "小幅回升"
+        },
+        {
+          "birth_year": 2024,
+          "turn_18_year": 2042,
+          "total_births": 36300,
+          "type2_births": 0,
+          "est_hk_residents_mid": 36300,
+          "note": "连续两年回升"
+        }
+      ],
+      "insights": [
+        {
+          "title": "2026-2030年: 满18岁人口窗口期",
+          "body": "未来5年每年约5.5-6.8万人满18岁（扣除双非后），是历史相对高位。这批人出生于2008-2012年双非潮，虽然双非婴儿多数不在港，但本地出生（含单非）人数仍处于较高水平。",
+          "color": "blue"
+        },
+        {
+          "title": "2031年后断崖式下降",
+          "body": "2013年零配额政策后出生数回落至5.7万，此后持续下滑至2022年的3.3万（历史新低）。2037年后每年仅~3.3-3.6万人满18岁，新增年轻投资者基数将减半。",
+          "color": "red"
+        },
+        {
+          "title": "对富途的启示",
+          "body": "当前是抢占年轻首次投资者的黄金窗口——5年后满18岁人口将大幅萎缩。应在2026-2030年加大年轻用户获取投入（TikTok/Instagram/App Store ASO），建立品牌心智。",
+          "color": "green"
+        }
+      ]
     }
   },
   "ai_acquisition": {
@@ -4729,5 +4846,155 @@
         }
       ]
     }
+  },
+  "competitor_landscape": {
+    "title": "香港金融App竞品格局",
+    "subtitle": "data.ai数据 | 2026.1.20-4.19 | HK双平台(iOS+Android)汇总",
+    "period": "2026-01-20 至 2026-04-19",
+    "source": "data.ai (原App Annie)",
+    "apps": [
+      {
+        "name": "HSBC",
+        "downloads": 231284,
+        "dau": 166902,
+        "type": "银行",
+        "color": "red",
+        "is_futu": false
+      },
+      {
+        "name": "富途牛牛",
+        "downloads": 120351,
+        "dau": 221022,
+        "type": "互联网券商",
+        "color": "orange",
+        "is_futu": true
+      },
+      {
+        "name": "BOCHK中银香港",
+        "downloads": 94723,
+        "dau": 278508,
+        "type": "银行",
+        "color": "red",
+        "is_futu": false
+      },
+      {
+        "name": "恒生银行",
+        "downloads": 74513,
+        "dau": 146060,
+        "type": "银行",
+        "color": "red",
+        "is_futu": false
+      },
+      {
+        "name": "AIA+",
+        "downloads": 47972,
+        "dau": 11321,
+        "type": "保险",
+        "color": "violet",
+        "is_futu": false
+      },
+      {
+        "name": "IBKR盈透",
+        "downloads": 31443,
+        "dau": 14562,
+        "type": "互联网券商",
+        "color": "emerald",
+        "is_futu": false
+      },
+      {
+        "name": "盈立uSMART",
+        "downloads": 26182,
+        "dau": null,
+        "type": "互联网券商",
+        "color": "emerald",
+        "is_futu": false
+      },
+      {
+        "name": "Tiger老虎",
+        "downloads": 22517,
+        "dau": 12979,
+        "type": "互联网券商",
+        "color": "emerald",
+        "is_futu": false
+      },
+      {
+        "name": "Webull微牛",
+        "downloads": 22492,
+        "dau": 3260,
+        "type": "互联网券商",
+        "color": "emerald",
+        "is_futu": false
+      },
+      {
+        "name": "Investing.com",
+        "downloads": 22388,
+        "dau": 7824,
+        "type": "资讯工具",
+        "color": "sky",
+        "is_futu": false
+      },
+      {
+        "name": "etnet经济通",
+        "downloads": 8595,
+        "dau": 2214,
+        "type": "资讯工具",
+        "color": "sky",
+        "is_futu": false
+      },
+      {
+        "name": "耀才证券",
+        "downloads": 6826,
+        "dau": 2237,
+        "type": "传统券商",
+        "color": "amber",
+        "is_futu": false
+      },
+      {
+        "name": "Yahoo Finance",
+        "downloads": 6641,
+        "dau": 5557,
+        "type": "资讯工具",
+        "color": "sky",
+        "is_futu": false
+      },
+      {
+        "name": "长桥Longbridge",
+        "downloads": 6226,
+        "dau": 10836,
+        "type": "互联网券商",
+        "color": "emerald",
+        "is_futu": false
+      },
+      {
+        "name": "雪球Snowball",
+        "downloads": 5989,
+        "dau": 774,
+        "type": "社区",
+        "color": "cyan",
+        "is_futu": false
+      }
+    ],
+    "insights": [
+      {
+        "title": "富途DAU券商断层第一",
+        "body": "富途DAU 22.1万，在所有券商中断层领先(第二名IBKR仅1.5万)，甚至超过HSBC(16.7万)和恒生(14.6万)，仅次于中银(27.9万)。说明富途用户粘性极强。",
+        "color": "green"
+      },
+      {
+        "title": "下载量:富途是直接竞品的4-5倍",
+        "body": "富途3个月下载12万，IBKR/uSMART/Tiger/Webull都在2-3万级别。但HSBC靠银行业务下载23万排第一——银行App是自然入口。",
+        "color": "blue"
+      },
+      {
+        "title": "uSMART下载量意外接近IBKR",
+        "body": "盈立uSMART 3个月下载2.6万接近IBKR的3.1万，可能与其在高铁站/口岸开设线下网点有关(瞄准内地来港人群)。但无DAU数据，用户留存未知。",
+        "color": "amber"
+      },
+      {
+        "title": "长桥基数小但粘性高",
+        "body": "长桥下载仅6226，但DAU达10836(接近Tiger的12979)。DAU/下载比极高，说明现有用户活跃度强，是值得关注的新兴对手。",
+        "color": "red"
+      }
+    ]
   }
 }

@@ -251,6 +251,84 @@
 </div>
 {% endif %}
 
+<!-- ===== 竞品格局 ===== -->
+{% if competitor_landscape %}
+<div class="stat-card mb-6" data-tab="tab-channels" id="sec-competitors">
+    <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ competitor_landscape.title }}</h3>
+    <p class="text-xs text-gray-400 mb-4">{{ competitor_landscape.subtitle }}</p>
+
+    <!-- 图例 -->
+    <div class="flex flex-wrap gap-3 mb-4 text-[10px] text-gray-500">
+        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-red-400 rounded"></span>银行</span>
+        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-emerald-500 rounded"></span>互联网券商</span>
+        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-amber-400 rounded"></span>传统券商</span>
+        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-sky-400 rounded"></span>资讯工具</span>
+        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-violet-400 rounded"></span>保险</span>
+        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-cyan-400 rounded"></span>社区</span>
+    </div>
+
+    <!-- 双栏: 下载量 + DAU -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-5">
+        <!-- 下载量排名 -->
+        <div>
+            <h4 class="text-sm font-semibold text-gray-700 mb-2">下载量（3个月累计）</h4>
+            {% set max_dl = competitor_landscape.apps[0].downloads %}
+            <div class="space-y-1.5">
+                {% set type_colors_bg = {"银行": "bg-red-400", "互联网券商": "bg-emerald-500", "传统券商": "bg-amber-400", "资讯工具": "bg-sky-400", "保险": "bg-violet-400", "社区": "bg-cyan-400"} %}
+                {% for app in competitor_landscape.apps %}
+                <div class="flex items-center gap-2">
+                    <div class="w-28 sm:w-32 text-right text-[11px] shrink-0 {{ 'font-bold text-orange-600' if app.is_futu else 'text-gray-600' }}">{{ app.name }}</div>
+                    <div class="flex-1 bg-gray-100 rounded-full h-4 relative overflow-hidden">
+                        <div class="{{ type_colors_bg.get(app.type, 'bg-gray-400') }} h-4 rounded-full flex items-center justify-end pr-1.5 {{ 'ring-2 ring-orange-400' if app.is_futu else '' }}"
+                             style="width: {{ (app.downloads / max_dl * 100) | round | int }}%; min-width: 30px">
+                            <span class="text-[9px] font-bold text-white">{{ "{:,}".format(app.downloads) }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- DAU排名 -->
+        <div>
+            <h4 class="text-sm font-semibold text-gray-700 mb-2">日活用户（DAU）</h4>
+            {% set dau_apps = [] %}
+            {% for app in competitor_landscape.apps %}
+                {% if app.dau %}{% set _ = dau_apps.append(app) %}{% endif %}
+            {% endfor %}
+            {% set max_dau = 278508 %}
+            <div class="space-y-1.5">
+                {% for app in competitor_landscape.apps | selectattr('dau') | sort(attribute='dau', reverse=True) %}
+                <div class="flex items-center gap-2">
+                    <div class="w-28 sm:w-32 text-right text-[11px] shrink-0 {{ 'font-bold text-orange-600' if app.is_futu else 'text-gray-600' }}">{{ app.name }}</div>
+                    <div class="flex-1 bg-gray-100 rounded-full h-4 relative overflow-hidden">
+                        <div class="{{ type_colors_bg.get(app.type, 'bg-gray-400') }} h-4 rounded-full flex items-center justify-end pr-1.5 {{ 'ring-2 ring-orange-400' if app.is_futu else '' }}"
+                             style="width: {{ (app.dau / max_dau * 100) | round | int }}%; min-width: 30px">
+                            <span class="text-[9px] font-bold text-white">{{ "{:,}".format(app.dau) }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- 洞察 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {% for ins in competitor_landscape.insights %}
+        {% set ins_colors = {"green": "bg-green-50 border-green-200 text-green-700", "blue": "bg-blue-50 border-blue-200 text-blue-700", "amber": "bg-amber-50 border-amber-200 text-amber-700", "red": "bg-red-50 border-red-200 text-red-700"} %}
+        {% set ic = ins_colors.get(ins.color, "bg-gray-50 border-gray-200 text-gray-700") %}
+        <div class="{{ ic }} border rounded-xl p-3">
+            <h5 class="text-sm font-semibold mb-1">{{ ins.title }}</h5>
+            <p class="text-xs text-gray-600 leading-relaxed">{{ ins.body }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-[10px] text-gray-300 mt-3">{{ competitor_landscape.source }} | {{ competitor_landscape.period }}</div>
+</div>
+{% endif %}
+
 <!-- ===== 筛选栏 ===== -->
 <div class="stat-card mb-6" data-tab="tab-channels" id="sec-filter">
     <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -1267,6 +1345,82 @@
     </div>
 
     <p class="text-xs text-gray-400 mt-3">来源: {{ new_investor_analysis.data_sources }}</p>
+
+    <!-- 人口结构 — 满18岁人口预测 -->
+    {% if new_investor_analysis.population_pipeline %}
+    {% set pp = new_investor_analysis.population_pipeline %}
+    <div class="mt-6 pt-6 border-t border-gray-200">
+        <h4 class="text-lg font-semibold text-gray-900 mb-1">{{ pp.title }}</h4>
+        <p class="text-xs text-gray-400 mb-1">{{ pp.subtitle }}</p>
+        <p class="text-[10px] text-amber-500 mb-4">{{ pp.note }}</p>
+
+        <!-- 主图: 未来5年满18岁人口柱状图 -->
+        <div class="mb-4">
+            <div class="text-xs font-medium text-gray-600 mb-2">2026-2030年 每年满18岁人口（估计在港居民）</div>
+            <div class="space-y-2">
+                {% for yr in pp.years %}
+                {% set max_val = 70000 %}
+                {% set pct = (yr.est_hk_residents_mid / max_val * 100) | round %}
+                <div class="flex items-center gap-2">
+                    <div class="w-12 text-xs font-semibold text-gray-700 text-right">{{ yr.turn_18_year }}</div>
+                    <div class="flex-1 relative">
+                        <div class="flex items-center gap-1">
+                            <!-- 在港居民(实心) -->
+                            <div class="h-7 rounded bg-blue-500 relative flex items-center" style="width: {{ pct }}%">
+                                <span class="text-[10px] text-white font-bold pl-2 whitespace-nowrap">~{{ (yr.est_hk_residents_mid / 10000) | round(1) }}万</span>
+                            </div>
+                            <!-- 双非(虚线) -->
+                            <div class="h-7 rounded border-2 border-dashed border-gray-300 bg-gray-50 flex items-center" style="width: {{ (yr.type2_births / max_val * 100) | round }}%">
+                                <span class="text-[10px] text-gray-400 pl-1 whitespace-nowrap">双非{{ (yr.type2_births / 10000) | round(1) }}万</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-20 text-[10px] text-gray-400 text-right">总{{ (yr.total_births / 10000) | round(1) }}万出生</div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="flex items-center gap-4 mt-2 text-[10px] text-gray-400">
+                <span><span class="inline-block w-3 h-2 bg-blue-500 rounded mr-1"></span>估计在港居民</span>
+                <span><span class="inline-block w-3 h-2 border border-dashed border-gray-400 rounded mr-1"></span>双非婴儿（多数不在港）</span>
+            </div>
+        </div>
+
+        <!-- 远期对比: 2031年后断崖 -->
+        <div class="mb-4 p-3 bg-red-50 rounded-lg border border-red-100">
+            <div class="text-xs font-semibold text-red-700 mb-2">远期对比 — 2031年后满18岁人口断崖</div>
+            <div class="grid grid-cols-5 gap-1 text-center">
+                {% for cy in pp.context_years %}
+                <div>
+                    <div class="text-[10px] text-gray-500">{{ cy.turn_18_year }}年</div>
+                    <div class="text-xs font-bold {% if cy.est_hk_residents_mid < 40000 %}text-red-600{% else %}text-gray-700{% endif %}">
+                        ~{{ (cy.est_hk_residents_mid / 10000) | round(1) }}万
+                    </div>
+                    <div class="text-[9px] text-gray-400">{{ cy.note }}</div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="mt-2 h-16 flex items-end gap-1">
+                {% for cy in pp.context_years %}
+                {% set h = (cy.est_hk_residents_mid / 60000 * 100) | round %}
+                <div class="flex-1 rounded-t {% if cy.est_hk_residents_mid < 40000 %}bg-red-400{% else %}bg-gray-400{% endif %}" style="height: {{ h }}%" title="{{ cy.turn_18_year }}: ~{{ (cy.est_hk_residents_mid / 10000) | round(1) }}万"></div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Insights -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {% set ins_colors = {"blue": "bg-blue-50 border-blue-200 text-blue-800", "red": "bg-red-50 border-red-200 text-red-800", "green": "bg-emerald-50 border-emerald-200 text-emerald-800"} %}
+            {% for ins in pp.insights %}
+            <div class="p-3 rounded-lg border {{ ins_colors.get(ins.color, 'bg-gray-50 border-gray-200 text-gray-800') }}">
+                <div class="text-xs font-semibold mb-1">{{ ins.title }}</div>
+                <div class="text-[11px] leading-relaxed">{{ ins.body }}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <p class="text-[10px] text-gray-400 mt-2">来源: {{ pp.source }}</p>
+    </div>
+    {% endif %}
 
     <!-- 加开账户流向分析 -->
     {% if new_investor_analysis.account_switching %}

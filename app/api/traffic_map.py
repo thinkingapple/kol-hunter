@@ -199,6 +199,7 @@ async def traffic_map(request: Request):
     acquisition_plan = data.get("acquisition_plan", {})
     investor_motivations = data.get("investor_motivations", {})
     wealth_panorama = data.get("wealth_panorama", {})
+    competitor_landscape = data.get("competitor_landscape", {})
 
     # Build waterfall data: merge platform/channel total users with scatter conversion data
     waterfall_data = []
@@ -451,4 +452,5 @@ async def traffic_map(request: Request):
         "waterfall_data": waterfall_data,
         "investor_motivations": investor_motivations,
         "wealth_panorama": wealth_panorama,
+        "competitor_landscape": competitor_landscape,
     })
