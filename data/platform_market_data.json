@@ -6,7 +6,7 @@
   "executive_summary": [
     {
       "title": "Instagram是最大社媒盲区",
-      "body": "Meltwater Q1实测：富途在YouTube(61%)、Facebook(57%)、X(60%)、小红书(63%)、论坛(68%)券商声量均超6成。唯一例外是Instagram——老虎89.8%声量绝对主导，富途仅8.5%，且富途无独立HK IG账号。",
+      "body": "Meltwater全年实测：富途在论坛(73%)、新闻(63%)、小红书(62%)、YouTube(55%)、X(52%)均超5成。唯一例外是Instagram——老虎70.5%声量主导，富途仅18.1%，且富途无独立HK IG账号；Facebook也只有42.1%，微牛和老虎合计43%侵蚀明显。",
       "action": "Instagram补位：开设HK独立账号 + 布局Reels KOL合作，对标老虎的KOL密度",
       "color": "red",
       "sources": "Meltwater HK Q1 2026社交监听 + YouTube频道数据"
@@ -102,8 +102,8 @@
       "competitive_advantage": "最大的金融视频生态, 长内容深度分析, 搜索发现性强",
       "futu_in_finance_pct": 4,
       "futu_in_finance_note": "券商内容约占 HK YouTube 金融内容 ~18%; 富途在券商内容中份额 ~50% × 18% ≈ 4%（搜索「投资」时富途相关内容极少，需搜「券商」「开户」才出现）",
-      "futu_in_broker_pct": 61.3,
-      "futu_in_broker_note": "Meltwater Apr HK + 频道订阅加权; Q1 2026",
+      "futu_in_broker_pct": 55.2,
+      "futu_in_broker_note": "Meltwater全年HK May2025-Apr2026; 第二微牛 17.8%",
       "hk_investor_profile": {
         "age": "25-45岁为主",
         "gender": "男性约65%",
@@ -146,8 +146,8 @@
       "competitive_advantage": "HK 用户基数大, 群组生态活跃, 但年轻用户流失",
       "futu_in_finance_pct": 2,
       "futu_in_finance_note": "FB HK 金融内容以新闻/宏观/房地产/保险为主, 券商内容约占 ~10%; 富途在券商讨论约 30% × 10% ≈ 2%（群组中偶有讨论但非主流话题）",
-      "futu_in_broker_pct": 57.1,
-      "futu_in_broker_note": "Meltwater Q1 HK; 2026",
+      "futu_in_broker_pct": 42.1,
+      "futu_in_broker_note": "Meltwater全年HK May2025-Apr2026; 第二微牛 26.5%",
       "hk_investor_profile": {
         "age": "35-55岁为主",
         "gender": "男性约60%",
@@ -190,8 +190,8 @@
       "competitive_advantage": "实时性最强, 金融专业人士密集, 英文内容生态好",
       "futu_in_finance_pct": 1,
       "futu_in_finance_note": "X HK 以加密货币/宏观/即时行情为主, 券商几乎不是话题; 券商内容约占 ~8%, 富途份额约 15% → 8% × 15% ≈ 1%; 实查: moomoo 官方 X 偏英文/新加坡, 老虎全球仅 445 粉丝, 所有券商在 X 存在感极低",
-      "futu_in_broker_pct": 60.2,
-      "futu_in_broker_note": "Meltwater Q1 HK; IBKR 24.4%; 2026",
+      "futu_in_broker_pct": 51.5,
+      "futu_in_broker_note": "Meltwater全年HK May2025-Apr2026; 第二IBKR 23.8%",
       "hk_investor_profile": {
         "age": "25-40岁为主",
         "gender": "男性约70%",
@@ -232,8 +232,8 @@
       "competitive_advantage": "女性用户占比高(70%), 种草转化率强, 增长最快的金融内容平台",
       "futu_in_finance_pct": 3,
       "futu_in_finance_note": "IAB HK: 小红书 banking 帖子中 stock 仅占 8%, 券商开户是 stock 的子集; 搜「理财」「投资」时券商内容占比约 ~10%, 富途约占券商的 35% → 10% × 35% ≈ 3%; 大量笔记是储蓄/保险/基金, 不涉及具体券商",
-      "futu_in_broker_pct": 62.5,
-      "futu_in_broker_note": "Meltwater Q1 HK; 2026",
+      "futu_in_broker_pct": 62.2,
+      "futu_in_broker_note": "Meltwater全年HK May2025-Apr2026; 第二长桥 10.8%",
       "hk_investor_profile": {
         "age": "22-35岁为主，女性偏年轻",
         "gender": "女性约70%",
@@ -275,8 +275,8 @@
       "competitive_advantage": "Reels 短视频增长快, 年轻高收入用户, 视觉化金融内容",
       "futu_in_finance_pct": 1,
       "futu_in_finance_note": "IG HK 金融内容以理财 infographic/Reels 为主, 券商几乎不是话题; 券商内容占 ~5%, 富途约 20% → 5% × 20% ≈ 1%; 实查: moomoo US IG 仅 9.3K 粉丝/每帖 14-37 赞, HK 无独立 IG 账号",
-      "futu_in_broker_pct": 8.5,
-      "futu_in_broker_note": "Meltwater Q1 HK; 老虎主导 89.8%; 2026",
+      "futu_in_broker_pct": 18.1,
+      "futu_in_broker_note": "Meltwater全年HK May2025-Apr2026; 第二老虎 70.5%",
       "hk_investor_profile": {
         "age": "22-35岁为主",
         "gender": "女性约55%",
@@ -6318,13 +6318,13 @@
     "competitors": [
       {
         "title": "Instagram：老虎KOL策略碾压",
-        "body": "Q1 Instagram券商声量：老虎89.8% vs 富途8.5%。老虎通过密集KOL合作主导Instagram，富途无HK独立账号，是最大内容空白。",
+        "body": "全年Instagram券商声量：老虎70.5% vs 富途18.1%。老虎从2025年7月起每月稳定50+条Instagram内容，全年持续KOL输出；富途无HK独立账号，是唯一社媒严重落后的平台。",
         "color": "red",
         "source": "Meltwater Q1 2026"
       },
       {
         "title": "富途在5个主流平台声量超六成",
-        "body": "YouTube 61%、Facebook 57%、X 60%、小红书63%、论坛68%。原有估算严重低估（原估20-50%），实测后整体社媒地位强于预期。",
+        "body": "全年SoV：论坛72.7%、新闻62.8%、小红书62.2%、YouTube 55.2%、X 51.5%。原估算（20-50%）整体偏保守，实测地位强于预期。Facebook例外：仅42.1%，微牛(26.5%)和老虎(16.4%)侵蚀明显。",
         "color": "emerald",
         "source": "Meltwater Q1 2026"
       },
@@ -7868,7 +7868,7 @@
       },
       {
         "title": "Instagram被老虎KOL策略占领",
-        "body": "Q1 Instagram券商提及：老虎89.8%，富途8.5%。老虎通过密集KOL合作主导Instagram，富途无HK独立IG账号，是唯一社媒严重落后的平台。",
+        "body": "全年Instagram券商提及：老虎70.5%，富途18.1%。老虎7月起每月50+次Instagram提及，全年持续KOL输出；富途无HK独立IG账号，是唯一社媒严重落后的平台。",
         "confidence": "strong",
         "color": "red"
       },
@@ -7892,57 +7892,57 @@
       }
     ],
     "social_sov": {
-      "title": "券商社媒声量 Share of Voice（Meltwater Q1 2026，HK过滤）",
-      "source": "Meltwater + YouTube频道订阅数（盈立/uSMART数据）",
+      "title": "券商社媒声量 Share of Voice（Meltwater全年，HK过滤）",
+      "source": "Meltwater May 2025 – Apr 2026，HK过滤，6家券商",
       "note": "Meltwater为新增提及量（Flow），YouTube含频道订阅存量加权；Instagram老虎以KOL合作为主",
       "platforms": [
         {
           "name": "YouTube",
-          "futu": 61.3,
+          "futu": 55.2,
           "runner_up": "微牛",
-          "runner_up_pct": 14.1,
-          "note": "Flow+Stock加权"
+          "runner_up_pct": 17.8,
+          "note": ""
         },
         {
           "name": "Facebook",
-          "futu": 57.1,
-          "runner_up": "老虎",
-          "runner_up_pct": 22.4,
+          "futu": 42.1,
+          "runner_up": "微牛",
+          "runner_up_pct": 26.5,
           "note": ""
         },
         {
           "name": "Instagram",
-          "futu": 8.5,
+          "futu": 18.1,
           "runner_up": "老虎",
-          "runner_up_pct": 89.8,
+          "runner_up_pct": 70.5,
           "note": "⚠️ 老虎KOL策略主导"
         },
         {
           "name": "X/Twitter",
-          "futu": 60.2,
+          "futu": 51.5,
           "runner_up": "IBKR",
-          "runner_up_pct": 24.4,
+          "runner_up_pct": 23.8,
           "note": ""
         },
         {
           "name": "小红书",
-          "futu": 62.5,
-          "runner_up": "盈立",
-          "runner_up_pct": 10.2,
+          "futu": 62.2,
+          "runner_up": "长桥",
+          "runner_up_pct": 10.8,
           "note": ""
         },
         {
           "name": "论坛",
-          "futu": 68.3,
-          "runner_up": "微牛",
-          "runner_up_pct": 17.1,
+          "futu": 72.7,
+          "runner_up": "IBKR",
+          "runner_up_pct": 10.7,
           "note": ""
         },
         {
           "name": "新闻",
-          "futu": 60.3,
-          "runner_up": "盈立",
-          "runner_up_pct": 13.3,
+          "futu": 62.8,
+          "runner_up": "老虎",
+          "runner_up_pct": 10.5,
           "note": ""
         }
       ]
