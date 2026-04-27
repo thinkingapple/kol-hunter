@@ -817,6 +817,39 @@
         </div>
     </div>
 
+    <!-- Part 5: 社媒声量 SoV -->
+    {% if bost.social_sov %}
+    {% set sov = bost.social_sov %}
+    <div class="mt-6 pt-5 border-t border-gray-100">
+        <div class="flex items-center gap-2 mb-1">
+            <h4 class="text-sm font-bold text-gray-800">{{ sov.title }}</h4>
+        </div>
+        <p class="text-[10px] text-gray-400 mb-3">{{ sov.note }}</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+        {% for pl in sov.platforms %}
+        {% set futu_pct = pl.futu %}
+        {% set bar_color = 'emerald' if futu_pct >= 50 else ('amber' if futu_pct >= 20 else 'red') %}
+        <div class="rounded-xl border border-gray-100 bg-gray-50/40 p-3">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-semibold text-gray-700">{{ pl.name }}</span>
+                {% if pl.note %}<span class="text-[9px] text-amber-600 font-medium">{{ pl.note }}</span>{% endif %}
+            </div>
+            <div class="flex items-center gap-2 mb-1.5">
+                <div class="flex-1 h-5 bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-{{ bar_color }}-400 rounded-full flex items-center justify-end pr-1.5" style="width:{{ futu_pct }}%">
+                        {% if futu_pct >= 15 %}<span class="text-[9px] font-bold text-white">{{ futu_pct }}%</span>{% endif %}
+                    </div>
+                </div>
+                {% if futu_pct < 15 %}<span class="text-[10px] font-bold text-{{ bar_color }}-600 flex-shrink-0">{{ futu_pct }}%</span>{% endif %}
+            </div>
+            <div class="text-[10px] text-gray-400">第二 {{ pl.runner_up }} {{ pl.runner_up_pct }}%</div>
+        </div>
+        {% endfor %}
+        </div>
+        <div class="text-[10px] text-gray-300 mt-2">{{ sov.source }}</div>
+    </div>
+    {% endif %}
+
     <div class="text-[10px] text-gray-300 mt-4">{{ bost.source }} | {{ bost.period }} | 交叉安装 ≠ 资金迁移，结论基于安装行为推断</div>
 </div>
 {% endif %}

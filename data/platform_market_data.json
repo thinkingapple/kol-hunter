@@ -102,8 +102,8 @@
       "competitive_advantage": "最大的金融视频生态, 长内容深度分析, 搜索发现性强",
       "futu_in_finance_pct": 4,
       "futu_in_finance_note": "券商内容约占 HK YouTube 金融内容 ~18%; 富途在券商内容中份额 ~50% × 18% ≈ 4%（搜索「投资」时富途相关内容极少，需搜「券商」「开户」才出现）",
-      "futu_in_broker_pct": 50,
-      "futu_in_broker_note": "实查: 富途HK频道 107K 订阅 = 老虎HK 25.5K 的 4.2 倍; 华盛 27.4K; 长桥仅 137; 几乎所有券商评测视频都将富途列为首位; 按订阅影响力占 65%, 按视频数量占 30%, 综合约 50%",
+      "futu_in_broker_pct": 61.3,
+      "futu_in_broker_note": "Meltwater Apr HK + 频道订阅加权; Q1 2026",
       "hk_investor_profile": {
         "age": "25-45岁为主",
         "gender": "男性约65%",
@@ -146,8 +146,8 @@
       "competitive_advantage": "HK 用户基数大, 群组生态活跃, 但年轻用户流失",
       "futu_in_finance_pct": 2,
       "futu_in_finance_note": "FB HK 金融内容以新闻/宏观/房地产/保险为主, 券商内容约占 ~10%; 富途在券商讨论约 30% × 10% ≈ 2%（群组中偶有讨论但非主流话题）",
-      "futu_in_broker_pct": 30,
-      "futu_in_broker_note": "HK 港股群组中富途为常被提及的线上券商之一, 但 FB 群组讨论分散, 传统券商（耀才/辉立/银行系）也有较高提及; 线上券商中富途领先, 全部券商中约 30%",
+      "futu_in_broker_pct": 57.1,
+      "futu_in_broker_note": "Meltwater Q1 HK; 2026",
       "hk_investor_profile": {
         "age": "35-55岁为主",
         "gender": "男性约60%",
@@ -190,8 +190,8 @@
       "competitive_advantage": "实时性最强, 金融专业人士密集, 英文内容生态好",
       "futu_in_finance_pct": 1,
       "futu_in_finance_note": "X HK 以加密货币/宏观/即时行情为主, 券商几乎不是话题; 券商内容约占 ~8%, 富途份额约 15% → 8% × 15% ≈ 1%; 实查: moomoo 官方 X 偏英文/新加坡, 老虎全球仅 445 粉丝, 所有券商在 X 存在感极低",
-      "futu_in_broker_pct": 20,
-      "futu_in_broker_note": "实查: 老虎全球 X 仅 445 粉丝, moomoo 约 1000 粉丝, 所有 HK 券商在 X 的存在感都极低; Truescope 数据（新加坡）显示 moomoo 社交互动量为老虎的 3.1 倍; 在极少量的 HK 券商讨论中富途约占 20%",
+      "futu_in_broker_pct": 60.2,
+      "futu_in_broker_note": "Meltwater Q1 HK; IBKR 24.4%; 2026",
       "hk_investor_profile": {
         "age": "25-40岁为主",
         "gender": "男性约70%",
@@ -232,8 +232,8 @@
       "competitive_advantage": "女性用户占比高(70%), 种草转化率强, 增长最快的金融内容平台",
       "futu_in_finance_pct": 3,
       "futu_in_finance_note": "IAB HK: 小红书 banking 帖子中 stock 仅占 8%, 券商开户是 stock 的子集; 搜「理财」「投资」时券商内容占比约 ~10%, 富途约占券商的 35% → 10% × 35% ≈ 3%; 大量笔记是储蓄/保险/基金, 不涉及具体券商",
-      "futu_in_broker_pct": 35,
-      "futu_in_broker_note": "小红书「港股开户」「券商对比」笔记中富途为最高频品牌（种草属性契合）; 但竞品长桥/老虎也有大量种草内容; 无公开数据（需千瓜/新红付费工具验证）, 估算约 35%",
+      "futu_in_broker_pct": 62.5,
+      "futu_in_broker_note": "Meltwater Q1 HK; 2026",
       "hk_investor_profile": {
         "age": "22-35岁为主，女性偏年轻",
         "gender": "女性约70%",
@@ -275,8 +275,8 @@
       "competitive_advantage": "Reels 短视频增长快, 年轻高收入用户, 视觉化金融内容",
       "futu_in_finance_pct": 1,
       "futu_in_finance_note": "IG HK 金融内容以理财 infographic/Reels 为主, 券商几乎不是话题; 券商内容占 ~5%, 富途约 20% → 5% × 20% ≈ 1%; 实查: moomoo US IG 仅 9.3K 粉丝/每帖 14-37 赞, HK 无独立 IG 账号",
-      "futu_in_broker_pct": 20,
-      "futu_in_broker_note": "实查: moomoo US IG 9.3K 粉丝, 316 帖, 每帖仅 14-37 赞; HK 无独立 moomoo IG; IG 非券商营销主力平台, 极少量券商讨论中富途约占 20%",
+      "futu_in_broker_pct": 8.5,
+      "futu_in_broker_note": "Meltwater Q1 HK; 老虎主导 89.8%; 2026",
       "hk_investor_profile": {
         "age": "22-35岁为主",
         "gender": "女性约55%",
@@ -318,7 +318,7 @@
       "futu_in_finance_pct": 1,
       "futu_in_finance_note": "#FinTok 以理财小知识/省钱挑战为主, 券商内容极少; 券商约占 ~8%, 富途约 18% → 8% × 18% ≈ 1%; 实查: 未找到 moomoo 官方 HK TikTok 账号, @moomoodaily 仅 1,706 粉丝非官方",
       "futu_in_broker_pct": 18,
-      "futu_in_broker_note": "实查: 无 moomoo 官方 HK TikTok 账号; 东南亚有投放但 HK 本地极少; TikTok 非券商营销主力; 偶有用户自发券商对比短视频中提及富途, 约 18%",
+      "futu_in_broker_note": "估算，暂无Meltwater数据",
       "hk_investor_profile": {
         "age": "18-30岁为主",
         "gender": "男女约各50%",
@@ -400,7 +400,7 @@
       "futu_in_finance_pct": 5,
       "futu_in_finance_note": "B站金融内容含量化/A股/宏观/财报等大量与券商无关内容; 券商/交易平台内容约占 ~20%; 港股 UP 主频繁用富途行情截图; 富途约占券商内容 40% × 20% ≈ 5%（B站不公开搜索结果数, 需抽样估算）",
       "futu_in_broker_pct": 40,
-      "futu_in_broker_note": "B站港股/券商评测视频中富途出现率高（行业报告称富途社区活跃度比肩B站/小红书）; 搜索「港股券商」可见多个富途为首的对比视频; 无精确数据, 基于视频抽样约 40%",
+      "futu_in_broker_note": "估算，暂无Meltwater数据",
       "hk_investor_profile": {
         "age": "20-35岁为主",
         "gender": "男性约75%",
@@ -7858,6 +7858,62 @@
         "confidence": "strong",
         "color": "blue"
       }
-    ]
+    ],
+    "social_sov": {
+      "title": "券商社媒声量 Share of Voice（Meltwater Q1 2026，HK过滤）",
+      "source": "Meltwater + YouTube频道订阅数（盈立/uSMART数据）",
+      "note": "Meltwater为新增提及量（Flow），YouTube含频道订阅存量加权；Instagram老虎以KOL合作为主",
+      "platforms": [
+        {
+          "name": "YouTube",
+          "futu": 61.3,
+          "runner_up": "微牛",
+          "runner_up_pct": 14.1,
+          "note": "Flow+Stock加权"
+        },
+        {
+          "name": "Facebook",
+          "futu": 57.1,
+          "runner_up": "老虎",
+          "runner_up_pct": 22.4,
+          "note": ""
+        },
+        {
+          "name": "Instagram",
+          "futu": 8.5,
+          "runner_up": "老虎",
+          "runner_up_pct": 89.8,
+          "note": "⚠️ 老虎KOL策略主导"
+        },
+        {
+          "name": "X/Twitter",
+          "futu": 60.2,
+          "runner_up": "IBKR",
+          "runner_up_pct": 24.4,
+          "note": ""
+        },
+        {
+          "name": "小红书",
+          "futu": 62.5,
+          "runner_up": "盈立",
+          "runner_up_pct": 10.2,
+          "note": ""
+        },
+        {
+          "name": "论坛",
+          "futu": 68.3,
+          "runner_up": "微牛",
+          "runner_up_pct": 17.1,
+          "note": ""
+        },
+        {
+          "name": "新闻",
+          "futu": 60.3,
+          "runner_up": "盈立",
+          "runner_up_pct": 13.3,
+          "note": ""
+        }
+      ]
+    }
   }
 }
