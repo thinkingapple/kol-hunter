@@ -305,15 +305,15 @@
 {% endif %}
 
 <!-- ===== 竞品洞察 核心洞察 ===== -->
-{% if tab_insights.channels %}
+{% if tab_insights.competitors %}
 <div class="mb-5" data-tab="tab-competitors">
     <div class="flex items-center gap-2 mb-3">
         <span class="inline-block w-1 h-5 rounded bg-red-500"></span>
         <h3 class="text-sm font-bold text-gray-700">核心洞察</h3>
-        <span class="ml-auto text-[9px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-400">data.ai 2026.03</span>
+        <span class="ml-auto text-[9px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-400">Meltwater Q1 2026</span>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-        {% for ins in tab_insights.channels %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {% for ins in tab_insights.competitors %}
         {% set c = ins.color or 'gray' %}
         <div class="rounded-xl border border-{{ c }}-200 bg-gradient-to-br from-{{ c }}-50/80 to-white p-3 shadow-sm">
             <div class="text-xs font-bold text-{{ c }}-800 mb-1">{{ ins.title }}</div>

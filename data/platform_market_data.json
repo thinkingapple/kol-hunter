@@ -5,11 +5,11 @@
   "data_date_detail": "IFEC 2025投资者调查 | data.ai 2026年3月 | Truescope 2024.07-2025.01 | DataReportal 2026 | SFC AWMAS 2024",
   "executive_summary": [
     {
-      "title": "市占率40% vs 社媒覆盖不足",
-      "body": "富途HK付费客户约100万(~40%市占率)，但88%投资者通过社媒获取投资信息(IFEC 2025)。富途在YouTube/FB/IG等主流社媒的券商内容中存在感有限，品牌声量与市场地位不匹配。",
-      "action": "加大社媒内容产出与KOL合作覆盖",
+      "title": "Instagram是最大社媒盲区",
+      "body": "Meltwater Q1实测：富途在YouTube(61%)、Facebook(57%)、X(60%)、小红书(63%)、论坛(68%)券商声量均超6成。唯一例外是Instagram——老虎89.8%声量绝对主导，富途仅8.5%，且富途无独立HK IG账号。",
+      "action": "Instagram补位：开设HK独立账号 + 布局Reels KOL合作，对标老虎的KOL密度",
       "color": "red",
-      "sources": "富途FY2025年报 + IFEC 2025"
+      "sources": "Meltwater HK Q1 2026社交监听 + YouTube频道数据"
     },
     {
       "title": "IBKR在关键渠道Affinity反超",
@@ -6314,6 +6314,32 @@
         "color": "indigo",
         "source": "入境处人才签证数据 + new_investor_analysis"
       }
+    ],
+    "competitors": [
+      {
+        "title": "Instagram：老虎KOL策略碾压",
+        "body": "Q1 Instagram券商声量：老虎89.8% vs 富途8.5%。老虎通过密集KOL合作主导Instagram，富途无HK独立账号，是最大内容空白。",
+        "color": "red",
+        "source": "Meltwater Q1 2026"
+      },
+      {
+        "title": "富途在5个主流平台声量超六成",
+        "body": "YouTube 61%、Facebook 57%、X 60%、小红书63%、论坛68%。原有估算严重低估（原估20-50%），实测后整体社媒地位强于预期。",
+        "color": "emerald",
+        "source": "Meltwater Q1 2026"
+      },
+      {
+        "title": "IBKR在X/Twitter声量24%，是最活跃英文竞品",
+        "body": "X/Twitter券商声量：富途60% vs IBKR 24%。IBKR在X的英文内容持续产出，针对英文投资者社群；富途X内容以中文为主，英文受众覆盖不足。",
+        "color": "amber",
+        "source": "Meltwater Q1 2026"
+      },
+      {
+        "title": "盈立新闻媒体声量13%，超出其市场份额",
+        "body": "新闻媒体声量：盈立13.3% vs 其10%下载份额。盈立通过媒体公关维持超比例声量，是份额快速增长的助推因素之一。",
+        "color": "amber",
+        "source": "Meltwater Q1 2026"
+      }
     ]
   },
   "incremental_channel_matrix": {
@@ -7839,6 +7865,12 @@
         "body": "长桥Q1下载份额降至2.3%（-0.7pp），其用户中63%同时装富途。富途用户中长桥装机率从2.51%降至1.82%，两侧数据方向一致。",
         "confidence": "strong",
         "color": "emerald"
+      },
+      {
+        "title": "Instagram被老虎KOL策略占领",
+        "body": "Q1 Instagram券商提及：老虎89.8%，富途8.5%。老虎通过密集KOL合作主导Instagram，富途无HK独立IG账号，是唯一社媒严重落后的平台。",
+        "confidence": "strong",
+        "color": "red"
       },
       {
         "title": "IBKR是最大直接竞品",
