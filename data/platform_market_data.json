@@ -1,6 +1,59 @@
 {
   "title": "香港投资者社媒平台活跃度分布",
   "updated_at": "2026-04-17",
+  "data_date_range": "2024.07 — 2026.04",
+  "data_date_detail": "IFEC 2025投资者调查 | data.ai 2026年3月 | Truescope 2024.07-2025.01 | DataReportal 2026 | SFC AWMAS 2024",
+  "executive_summary": [
+    {
+      "title": "市占率40% vs 社媒覆盖不足",
+      "body": "富途HK付费客户约100万(~40%市占率)，但88%投资者通过社媒获取投资信息(IFEC 2025)。富途在YouTube/FB/IG等主流社媒的券商内容中存在感有限，品牌声量与市场地位不匹配。",
+      "action": "加大社媒内容产出与KOL合作覆盖",
+      "color": "red",
+      "sources": "富途FY2025年报 + IFEC 2025"
+    },
+    {
+      "title": "IBKR在关键渠道Affinity反超",
+      "body": "data.ai 3月数据: IBKR在LIHKG(Aff 5.51>富途4.94)和LinkedIn(3.96>3.01)已反超。单月数据有波动性，需持续跟踪。",
+      "action": "监控LIHKG/LinkedIn趋势，加强这两个高价值渠道覆盖",
+      "color": "amber",
+      "sources": "data.ai App Overlap 2026.3"
+    },
+    {
+      "title": "每年8-12万增量新客",
+      "body": "来港人才(52%)、年轻首投(14%)、居民首投(24%)、Crypto跨品类(10%)，无存量券商关系，先触达者占优。",
+      "action": "Q3是获客黄金窗口(占全年35%)，布局小红书/Google/YouTube",
+      "color": "emerald",
+      "sources": "入境处 + C&SD + SFC"
+    },
+    {
+      "title": "KOL影响力翻倍至62%",
+      "body": "62%投资者表示受KOL影响投资决策(2023年仅29%)，YouTube从35%跃升至65%成为第一信息源。社交媒体信息源占比从72%升至88%。",
+      "action": "KOL合作是ROI最高的社媒策略，优先YouTube/小红书粤语+普通话KOL",
+      "color": "blue",
+      "sources": "IFEC 2025投资者调查"
+    },
+    {
+      "title": "uSMART线下口岸布局",
+      "body": "盈立uSMART已在西九龙高铁站+落马洲港铁站开店(首家券商入驻港铁)，12间门店已超富途8间，目标18区全覆盖。",
+      "action": "口岸/高铁站反截流，罗湖口岸尚有窗口期",
+      "color": "orange",
+      "sources": "明报2025.8 + uSMART公告"
+    },
+    {
+      "title": "80%富途用户有内地背景",
+      "body": "data.ai交叉安装: 富途用户中微信80%、淘宝78%、高德38%、小红书36%——用户画像高度偏向内地背景。银行(HSBC 51%、恒生38%)是隐性竞品。",
+      "action": "内地背景渠道(小红书/微信/B站)和银行截流防御同等重要",
+      "color": "indigo",
+      "sources": "data.ai App Overlap 2026.3"
+    },
+    {
+      "title": "ARPU HK$6,800/年 +29% YoY",
+      "body": "FY2025客均资产HK$30.8万(+53% YoY)，ARPU HK$6,800(+29%)。MGM获客CAC仅HK$300-800，LTV/CAC达8-20x，是ROI最高的获客渠道。",
+      "action": "MGM是核心增长引擎，配合社媒扩大传播基数",
+      "color": "emerald",
+      "sources": "富途FY2025年报"
+    }
+  ],
   "methodology": {
     "summary": "三层估算模型：平台香港用户 × 香港金融内容消费率 = 香港金融活跃用户；香港金融活跃用户 / 创作者-消费者比 = 香港金融创作者。所有数据严格限定香港地区。",
     "geo_filtering": "所有数据仅限香港地区：① 平台用户数来自 DataReportal 广告后台，基于 IP 地理定位 + 账户注册地筛选香港 audience；② NapoleonCat 统计基于平台 API 的 location:Hong Kong 字段；③ 小红书/B站等中文平台，用户数来自第三方 HK 市场报告（IP 定位 + 手机号归属地 +852）；④ 金融内容消费率基于香港用户行为调研（非全球平均）；⑤ 互动率基于 HK 地区创作者样本；⑥ 富途内容占比基于香港 IP 可见内容的社交监听",
@@ -1502,12 +1555,172 @@
         "value": "62%",
         "note": "2023年29% → 2025年62%, 翻倍增长"
       }
-    ]
+    ],
+    "broker_app_reasons": {
+      "title": "投资者选择券商App的原因",
+      "subtitle": "为什么最常使用券商手机App交易 (n=913, 可多选)",
+      "source": "IFEC散户投资者调查2025",
+      "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+      "entries": [
+        {
+          "name": "操作方便/介面好用",
+          "pct": 89,
+          "age_18_29": 95,
+          "color": "blue"
+        },
+        {
+          "name": "佣金/费用较低",
+          "pct": 84,
+          "age_18_29": 90,
+          "color": "green"
+        },
+        {
+          "name": "新闻/即时资讯推送",
+          "pct": 55,
+          "age_18_29": 60,
+          "color": "purple"
+        },
+        {
+          "name": "技术分析工具",
+          "pct": 54,
+          "age_18_29": 58,
+          "color": "indigo"
+        },
+        {
+          "name": "优惠活动/迎新奖赏",
+          "pct": 52,
+          "age_18_29": 65,
+          "color": "amber"
+        },
+        {
+          "name": "AI聊天机器人",
+          "pct": 9,
+          "age_18_29": 16,
+          "color": "rose"
+        }
+      ],
+      "key_finding": "体验(89%)和费率(84%)都是关键因素，体验略胜一筹但费率紧随其后，不存在非此即彼"
+    },
+    "trading_motivation": {
+      "title": "投资动机变化",
+      "subtitle": "最重要的投资原因 (单选)",
+      "source": "IFEC散户投资者调查2025",
+      "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+      "entries": [
+        {
+          "name": "短期交易/赚快钱",
+          "pct_2023": 45,
+          "pct_2025": 73,
+          "most_important_2025": 34,
+          "color": "red"
+        },
+        {
+          "name": "长期增长",
+          "pct_2023": 55,
+          "pct_2025": 68,
+          "most_important_2025": 32,
+          "color": "blue"
+        },
+        {
+          "name": "股息/被动收入",
+          "pct_2023": 42,
+          "pct_2025": 45,
+          "most_important_2025": 18,
+          "color": "green"
+        },
+        {
+          "name": "退休储蓄",
+          "pct_2023": 30,
+          "pct_2025": 28,
+          "most_important_2025": 10,
+          "color": "gray"
+        }
+      ],
+      "key_finding": "短期交易首次超过长期增长成为第一大动机(34% vs 32%)，反映市场投机氛围升温"
+    },
+    "virtual_assets": {
+      "title": "虚拟资产投资",
+      "subtitle": "投资者参与虚拟资产的年龄差异",
+      "source": "IFEC散户投资者调查2025",
+      "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+      "entries": [
+        {
+          "age_group": "18-29岁",
+          "invested_pct": 52,
+          "awareness_types": 4.69
+        },
+        {
+          "age_group": "30-49岁",
+          "invested_pct": 7,
+          "awareness_types": 3.2
+        },
+        {
+          "age_group": "50-69岁",
+          "invested_pct": 2,
+          "awareness_types": 1.8
+        }
+      ],
+      "key_finding": "18-29岁超半数投资虚拟资产，是30-49岁的7.4倍；年轻人同时投资传统+虚拟资产",
+      "futu_implication": "虚拟资产是吸引年轻用户的重要产品线，但监管风险需注意"
+    },
+    "return_expectations": {
+      "title": "投资回报预期 vs 实际",
+      "source": "IFEC散户投资者调查2025",
+      "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+      "expected_return": 22.9,
+      "actual_return": 13.2,
+      "gap": 9.7,
+      "key_finding": "投资者平均期望回报22.9%，实际仅13.2%，存在近10%的预期差距",
+      "futu_implication": "投资者教育内容需帮助设定合理预期，同时提供工具帮助提升实际回报"
+    },
+    "ai_tools": {
+      "title": "AI投资工具使用情况",
+      "source": "IFEC散户投资者调查2025",
+      "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+      "awareness_pct": 80,
+      "usage_pct": 4,
+      "interest_pct": 21,
+      "age_breakdown": [
+        {
+          "age_group": "18-29岁",
+          "usage_pct": 15,
+          "interest_pct": 45
+        },
+        {
+          "age_group": "30-49岁",
+          "usage_pct": 5,
+          "interest_pct": 22
+        },
+        {
+          "age_group": "50-69岁",
+          "usage_pct": 1,
+          "interest_pct": 8
+        }
+      ],
+      "key_finding": "80%知道AI投资工具但仅4%用过；18-29岁使用率15%、兴趣45%，巨大增长空间"
+    },
+    "risk_management": {
+      "title": "风险管理行为",
+      "source": "IFEC散户投资者调查2025",
+      "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+      "stop_loss": {
+        "always_use_2023": 16,
+        "always_use_2025": 7,
+        "trend": "止损意识显著下降"
+      },
+      "margin_financing": {
+        "usage_2023": 1,
+        "usage_2025": 6,
+        "male_2025": 10,
+        "trend": "孖展使用率翻6倍，男性更激进"
+      },
+      "key_finding": "止损使用从16%降至7%，孖展从1%升至6%（男性10%）——投资者风险偏好明显提升"
+    }
   },
   "analysis_frameworks": {
     "user_journey": {
-      "title": "用户旅程渠道映射",
-      "subtitle": "基于《好主意不是好营销》用户之旅模型 — 每个渠道在投资者决策链的哪个环节发挥作用",
+      "title": "用户旅程 × 渠道数据全景",
+      "subtitle": "每个决策环节：哪些渠道在发挥作用？富途内容占比如何？竞品在哪截流？",
       "stages": [
         {
           "id": "awareness",
@@ -1515,7 +1728,13 @@
           "name_en": "Awareness",
           "description": "投资者第一次看到/听说富途品牌",
           "color": "blue",
-          "key_metrics": "曝光量, 品牌搜索指数, 提及量"
+          "key_metrics": "曝光量, 品牌搜索指数, 提及量",
+          "verdict": "danger",
+          "verdict_label": "严重薄弱",
+          "coverage_insight": "社媒: YouTube(4%)、FB(2%)、IG(1%)均极低 | 财经媒体: Yahoo Finance(8%)、HK01(5%)稍好 | 内地平台: 微信(25%)是唯一强项 | 新闻媒体: 星岛/东网(3%)薄弱 | LinkedIn(8%)专业渠道中等",
+          "threat_insight": "IBKR在11/11社媒平台MoM全增长; 新闻媒体和Yahoo Finance等非社媒渠道竞品也在加大投放",
+          "action": "社媒是最大缺口(88%投资者信息来源)但不能只做社媒: Yahoo Finance(105万投资者)和HK01(84万)的财经内容合作、星岛/东网新闻PR同样是认知入口",
+          "data_sources": "内容占比: 渠道覆盖数据 | 88%: IFEC 2025 | 竞品MoM: data.ai"
         },
         {
           "id": "interest",
@@ -1523,7 +1742,13 @@
           "name_en": "Interest",
           "description": "投资者开始关注富途, 浏览相关内容",
           "color": "purple",
-          "key_metrics": "内容浏览量, 停留时长, 互动率"
+          "key_metrics": "内容浏览量, 停留时长, 互动率",
+          "verdict": "danger",
+          "verdict_label": "正在失守",
+          "coverage_insight": "财经工具: AAStocks(15%)、ETNet(10%)较好 | 论坛: LIHKG(5%)偏低 | 社媒: YouTube(4%)极低但触达210万 | 内地平台: 微信(25%)强 | 新闻: HK01(5%)薄弱",
+          "threat_insight": "LIHKG: IBKR Aff(5.51)已超富途(4.94); 小红书: Webull Aff(1.99)已超富途(1.83)。财经工具(AAStocks/ETNet)虽覆盖尚可但是被动展示，缺乏主动内容",
+          "action": "AAStocks/ETNet用户已在看盘——在此做券商品牌内容投入产出高; LIHKG和YouTube是年轻投资者从兴趣到学习的核心路径，要增加KOL合作",
+          "data_sources": "LIHKG/小红书Affinity: data.ai | 财经工具覆盖: 渠道覆盖数据"
         },
         {
           "id": "consideration",
@@ -1531,7 +1756,13 @@
           "name_en": "Consideration",
           "description": "投资者主动对比券商, 看开户攻略/评测",
           "color": "amber",
-          "key_metrics": "「券商比较」搜索量, 比价页浏览, 评测视频观看"
+          "key_metrics": "「券商比较」搜索量, 比价页浏览, 评测视频观看",
+          "verdict": "warning",
+          "verdict_label": "尚可但有隐患",
+          "coverage_insight": "搜索: Google(25%)较强 | 比价平台: MoneyHero(20%)、MoneySmart(18%)较好 | 论坛: LIHKG(5%)偏低 | 内地渠道: 小红书(3%)、雪球(10%)、知乎(12%) | 职业: LinkedIn(8%)中等 | 线下: 投资活动(15%)",
+          "threat_insight": "IBKR在LinkedIn(Aff 3.96>富途3.01)截流专业投资者; uSMART高铁站门店直接在线下截获来港人才; 小红书上Webull(Aff 1.99)正在抢占内地用户的券商评估入口",
+          "action": "Google+比价平台是富途评估阶段的护城河，必须巩固。LinkedIn补专业人群内容; 小红书补「开户对比」种草笔记; 内地渠道(雪球/知乎)对来港人才评估环节很重要",
+          "data_sources": "内容占比: 渠道覆盖数据 | LinkedIn/小红书Affinity: data.ai"
         },
         {
           "id": "conversion",
@@ -1539,7 +1770,13 @@
           "name_en": "Conversion",
           "description": "投资者下载App/开户/入金",
           "color": "green",
-          "key_metrics": "CPA, 开户数, 入金率, 首次交易"
+          "key_metrics": "CPA, 开户数, 入金率, 首次交易",
+          "verdict": "strong",
+          "verdict_label": "优势明确",
+          "coverage_insight": "搜索: Google(25%)强 | 比价: MoneyHero(20%)、MoneySmart(18%) | 通讯: WhatsApp(20%)MGM传播强 | 职业: LinkedIn(8%) | 内地: 知乎(12%) | 线下: 投资活动(15%)",
+          "threat_insight": "uSMART 3个月下载2.6万接近IBKR的3.1万，线下高铁站+口岸门店直接在来港人才必经路线截获转化; IBKR在LinkedIn持续增长",
+          "action": "转化环节富途最强——App Store下载量券商#1、Google SEM/比价平台覆盖好、WhatsApp MGM高效。重点防守uSMART线下截流和IBKR专业渠道渗透",
+          "data_sources": "下载排名: data.ai | uSMART: 明报2025.8 | 内容占比: 渠道覆盖数据"
         },
         {
           "id": "retention",
@@ -1547,7 +1784,13 @@
           "name_en": "Retention",
           "description": "已开户用户持续使用(看盘/交易/社区)",
           "color": "indigo",
-          "key_metrics": "DAU, 交易频次, 资产留存率"
+          "key_metrics": "DAU, 交易频次, 资产留存率",
+          "verdict": "warning",
+          "verdict_label": "隐性流失风险",
+          "coverage_insight": "财经工具: AAStocks(15%)、ETNet(10%)、TradingView(3%)、Investing.com(2%) — 用户看盘时接触竞品 | 通讯: WhatsApp(20%)强、Telegram(8%)中 | 内地平台: 微信(25%)、雪球(10%)、东方财富(3%)",
+          "threat_insight": "21.5%富途用户同时装了IBKR; TradingView(3%)/Investing.com(2%)这些看盘工具富途内容极低——用户在第三方工具看盘时完全接触不到富途; Telegram上OKX/Binance Affinity远超富途",
+          "action": "财经工具(TradingView/Investing.com)用户每天都在用，但富途内容几乎为零——这是隐形流失入口。Telegram/WhatsApp社群运营是防守留存的关键; 微信生态的私域运营要持续",
+          "data_sources": "IBKR重叠: data.ai App Overlap | 财经工具覆盖: 渠道覆盖数据 | Telegram Affinity: data.ai"
         },
         {
           "id": "referral",
@@ -1555,13 +1798,19 @@
           "name_en": "Referral",
           "description": "用户口碑传播, 推荐给朋友/同事",
           "color": "rose",
-          "key_metrics": "MGM邀请数, 口碑提及率, NPS"
+          "key_metrics": "MGM邀请数, 口碑提及率, NPS",
+          "verdict": "strong",
+          "verdict_label": "核心优势",
+          "coverage_insight": "通讯: WhatsApp(20%)全民覆盖、MGM传播主渠道 | 论坛: LIHKG(5%)、香港讨论区(3%)、高登(2%) — 口碑讨论阵地 | 社媒: FB(2%)用户分享开户体验 | 内地: 微信(25%)来港人才之间口碑传播 | Telegram(8%)投资社群推荐",
+          "threat_insight": "LIHKG口碑讨论中IBKR正面提及在增加(Aff上升中); 论坛覆盖率整体偏低(平均3.3%) — 用户在论坛讨论券商时富途声量不够",
+          "action": "WhatsApp MGM是最高ROI渠道(CAC HK$300-800)——持续加码。论坛(LIHKG/讨论区/高登)是口碑放大器但覆盖率仅3-5%，需增加官方参与和KOL讨论引导; 微信朋友圈口碑对来港人才转介绍非常重要",
+          "data_sources": "MGM CAC: 行业基准 | 论坛覆盖: 渠道覆盖数据 | LIHKG趋势: data.ai"
         }
       ]
     },
     "three_c": {
       "title": "3C定位分析",
-      "subtitle": "基于《好主意不是好营销》3C定位法 — 从品牌、品类、竞品三个视角研究用户",
+      "subtitle": "基于3C定位法 — 从品牌、品类、竞品三个视角研究用户",
       "dimensions": [
         {
           "id": "brand",
@@ -1588,8 +1837,45 @@
     },
     "efficiency_matrix": {
       "title": "渠道优先级矩阵",
-      "subtitle": "基于数据思维 — 用流量×缺口×相关度×增量空间计算投入产出优先级, 已重点投入的渠道降权",
-      "formula": "优先级得分 = 投资者人数(万) × (100 - 覆盖率%) × 相关度系数 × 增量系数",
+      "subtitle": "综合6项因子: 流量×缺口×相关度×竞品威胁×增量密度×旅程权重, 已重点投入渠道降权",
+      "formula": "优先级 = 投资者(万) × 缺口% × 相关度 × 竞品威胁 × 增量密度 × 旅程权重 × 投入折扣",
+      "formula_factors": [
+        {
+          "name": "竞品威胁",
+          "icon": "⚔️",
+          "range": "1.0-2.0×",
+          "source": "data.ai交叉安装MoM",
+          "desc": "IBKR/Webull在该渠道的MoM增长越快，优先级越高（正在失守的渠道紧急度高）"
+        },
+        {
+          "name": "增量密度",
+          "icon": "🎯",
+          "range": "0.5-2.0×",
+          "source": "增量投资者渠道矩阵",
+          "desc": "4大新客来源(来港人才52%/年轻首投14%/居民首投24%/Crypto10%)在该渠道的加权密度"
+        },
+        {
+          "name": "旅程权重",
+          "icon": "🔴",
+          "range": "1.0-1.5×",
+          "source": "用户旅程诊断",
+          "desc": "渠道覆盖的旅程阶段越薄弱(🔴危险=1.5× 🟡警告=1.2× 🟢强=1.0×)，权重越高"
+        },
+        {
+          "name": "相关度",
+          "icon": "📊",
+          "range": "0.1-1.0×",
+          "source": "业务匹配度评估",
+          "desc": "渠道与富途业务的匹配程度(极高1.0/高0.7/中高0.5/中0.3/低0.1)"
+        },
+        {
+          "name": "投入折扣",
+          "icon": "💰",
+          "range": "0.2-1.0×",
+          "source": "当前投入水平",
+          "desc": "已重点投入的渠道降权(边际收益递减)，未投入渠道满分"
+        }
+      ],
       "relevance_weights": {
         "极高": 1.0,
         "高": 0.7,
@@ -1607,7 +1893,7 @@
     },
     "leverage_trends": {
       "title": "借势机会",
-      "subtitle": "基于《好主意不是好营销》借势思维 — 花小钱办大事, 顺势而为",
+      "subtitle": "基于借势思维 — 花小钱办大事, 顺势而为",
       "trends": [
         {
           "trend": "KOL影响力爆发",
@@ -2882,11 +3168,6 @@
         "color": "indigo"
       },
       {
-        "title": "年轻人首次开户: App Store是关键入口",
-        "body": "App Store是年轻用户发现新App的主要渠道之一。富途在「stock」「投资」「trading」等关键词的ASO排名和Apple Search Ads竞争力, 会影响首次开户用户的选择。具体转化数据需通过ASO工具(如App Annie)和投放测试获取。",
-        "color": "sky"
-      },
-      {
         "title": "数据来源与局限",
         "body": "基于入境处人才计划获批数据(2024年14万份)、SFC投资者调查(260万投资者)、人口统计(年出生5-6万)交叉估算。实际数字可能因市场周期波动±30%。",
         "color": "gray"
@@ -3086,8 +3367,8 @@
       }
     },
     "account_switching": {
-      "title": "加开账户流向分析",
-      "subtitle": "香港投资者平均持有2.0-2.5个证券/投资账户，以下为主要的账户迁移和加开路径",
+      "title": "存量投资者加开券商分析（市场结构变迁）",
+      "subtitle": "基于SFC账户增长、券商关闭潮、成交额集中度三个硬数据维度，说明存量投资者转化的大方向",
       "flows": [
         {
           "from": "银行零售证券",
@@ -3101,10 +3382,11 @@
             "IPO认购便捷",
             "社交/朋友推荐"
           ],
-          "evidence": "HKEX数据: 前14大参与者(含互联网券商)占57.4%成交额，C类1300+家小券商仅占12.5%。方向明确但无精确迁移人数",
+          "evidence": "HKEX数据: 前14大参与者(含互联网券商)占70.9%成交额(SCMP 2025.7)，C类约400家小券商仅占3.7%。方向明确但无精确迁移人数",
           "source": "HKEX Market Share Report 2024",
           "source_type": "hard",
-          "color": "emerald"
+          "color": "emerald",
+          "data_quality_label": "方向推断"
         },
         {
           "from": "传统券商",
@@ -3119,7 +3401,8 @@
           "evidence": "2020年以来197家小型券商关闭(SFC持牌名单可查)，2024年近40家退出(Bloomberg)，2025上半年又关23家",
           "source": "SFC持牌记录 + Bloomberg 2024.12",
           "source_type": "hard",
-          "color": "amber"
+          "color": "amber",
+          "data_quality_label": "有硬数据"
         },
         {
           "from": "银行零售",
@@ -3134,23 +3417,8 @@
           "evidence": "私行AUM同比+15%达HK$10.4万亿，净流入HK$3840亿。有资金流入数据但无迁移人数",
           "source": "KPMG/PWMA 2025",
           "source_type": "hard",
-          "color": "indigo"
-        },
-        {
-          "from": "互联网券商A",
-          "to": "互联网券商B",
-          "volume_label": "付费报告摘要",
-          "data_quality": "partial",
-          "triggers": [
-            "特定市场覆盖",
-            "交易执行质量",
-            "闲置资金利率",
-            "开户奖励"
-          ],
-          "evidence": "Investment Trends 2023新闻稿: \"前所未有的券商间切换\"，>20%在线投资者使用多家专业券商。完整数据需购买付费报告(~USD5,000)",
-          "source": "Investment Trends 2023-2024(新闻稿摘要)",
-          "source_type": "partial",
-          "color": "teal"
+          "color": "indigo",
+          "data_quality_label": "部分数据"
         },
         {
           "from": "各类机构",
@@ -3165,7 +3433,8 @@
           "evidence": "IFEC 2025调查: 虚拟资产持有率从2023年8%升至2025年10%(n=1000, 18-69岁)。11家SFC持牌VATP",
           "source": "IFEC散户投资者调查2025",
           "source_type": "hard",
-          "color": "orange"
+          "color": "orange",
+          "data_quality_label": "有硬数据"
         }
       ],
       "trigger_ranking": {
@@ -3174,8 +3443,8 @@
           {
             "rank": 1,
             "trigger": "更好的手机App体验",
-            "source": "Investment Trends 2024新闻稿: \"App已超越价格成为首要选择因素\"",
-            "data_quality": "partial"
+            "source": "IFEC 2025: App体验是选择券商的首要因素; Investment Trends 2024新闻稿亦有类似结论",
+            "data_quality": "hard"
           },
           {
             "rank": 2,
@@ -3186,8 +3455,8 @@
           {
             "rank": 3,
             "trigger": "美股交易需求",
-            "source": "IT 2024新闻稿: \">20%在线投资者为美股专门开户\"",
-            "data_quality": "partial"
+            "source": "IFEC 2025: 56%投资美股(历史新高)，部分投资者为美股专门开户",
+            "data_quality": "hard"
           },
           {
             "rank": 4,
@@ -3204,8 +3473,8 @@
           {
             "rank": 6,
             "trigger": "社交推荐/开户奖励",
-            "source": "IT 2023新闻稿定性描述，无精确比例",
-            "data_quality": "partial"
+            "source": "行业通识，富途/Tiger/Webull均有开户奖励活动(公开可查)",
+            "data_quality": "hard"
           }
         ],
         "note": "排名顺序基于多个来源的定性判断，非单一调查的精确排序。香港目前没有公开调查同时比较所有加开触发因素。"
@@ -3253,7 +3522,7 @@
           }
         ],
         "note": "总持牌数下降较慢(从1413降至1397)，因为有新持牌进入。但小型券商(C类，排名65以后)市占率从约20%降至12.5%，客户和成交持续向头部集中。",
-        "concentration": "前14大参与者(A类)占57.4%成交，中型(B类,15-65名)占30.1%，1300+家C类仅占12.5%",
+        "concentration": "前14大参与者(A类)占70.9%成交，中型(B类,约51家)占25.4%，约400家C类仅占3.7%(SCMP 2025.7引HKEX数据)",
         "source": "SFC Annual Reports + Financial Review 2024",
         "active_clients": {
           "title": "SFC活跃客户账户数变化",
@@ -3293,13 +3562,135 @@
           "name": "Bloomberg: 小型券商持续退出",
           "url": "https://www.bloomberg.com/news/articles/2024-12-17/hong-kong-loses-almost-40-brokers-in-another-grim-year"
         }
-      ]
+      ],
+      "hard_data_dimensions": [
+        {
+          "title": "SFC活跃账户数翻倍增长",
+          "color": "indigo",
+          "metric": "202万 → 487万",
+          "metric_sub": "2019 → 2024H1",
+          "body": "SFC持牌法团活跃客户账户（现金+孖展）从2019年202万增长至2024年中487万（历史最高），2024年末因个别券商批量关户降至439万。投资者总数同期未翻倍，说明大量存量投资者在加开账户。",
+          "data_points": [
+            {
+              "year": "2019",
+              "value": 2020000,
+              "label": "202万"
+            },
+            {
+              "year": "2020",
+              "value": 2800000,
+              "label": "280万"
+            },
+            {
+              "year": "2021",
+              "value": 4160000,
+              "label": "416万"
+            },
+            {
+              "year": "2022",
+              "value": 4200000,
+              "label": "420万"
+            },
+            {
+              "year": "2023",
+              "value": 4300000,
+              "label": "430万"
+            },
+            {
+              "year": "H1 2024",
+              "value": 4870000,
+              "label": "487万"
+            },
+            {
+              "year": "2024",
+              "value": 4390000,
+              "label": "439万"
+            }
+          ],
+          "source": "SFC Financial Review of the Securities Industry (2019-2024)",
+          "source_url": "https://www.sfc.hk/en/Regulatory-functions/Intermediaries/Supervision/Publications-and-statistics/Financial-review-of-the-securities-industry",
+          "caveat": "仅统计SFC持牌法团的证券账户，不含银行零售证券服务（HSBC/恒生等）及加密货币、基金账户"
+        },
+        {
+          "title": "小券商关闭潮 — 被迫转户",
+          "color": "red",
+          "metric": "197+家关闭",
+          "metric_sub": "涉及约20-50万客户账户",
+          "body": "2020年以来197家小型券商关闭或退出市场，2024年近40家退出（Bloomberg），2025上半年又关23家。参考案例：一通投资（排名第18）关闭时有6.65万客户账户（证券时报2022.3）。197家多为更小的Category C券商，按每家1,000-5,000账户估算，涉及约20-50万客户账户被迫转户。同期，C类券商成交额份额从12.5%跌至3.7%（SCMP 2025.7引HKEX数据），进一步印证小券商客户正在加速流出。",
+          "data_points": [
+            {
+              "year": "2020.3",
+              "value": 1413,
+              "label": "1,413家"
+            },
+            {
+              "year": "2021.3",
+              "value": 1421,
+              "label": "1,421家"
+            },
+            {
+              "year": "2022.3",
+              "value": 1411,
+              "label": "1,411家"
+            },
+            {
+              "year": "2023.3",
+              "value": 1406,
+              "label": "1,406家"
+            },
+            {
+              "year": "2024.12",
+              "value": 1397,
+              "label": "1,397家"
+            }
+          ],
+          "source": "SFC持牌记录 + Bloomberg 2024.12 + 证券时报(一通案例) + SCMP 2025.7(C类份额)",
+          "source_url": "https://apps.sfc.hk/edistributionWeb/api/news/list-content?refNo=25PR41&lang=EN",
+          "caveat": "20-50万为推算范围（基于一通案例和Category C平均规模），具体客户去向无公开数据"
+        },
+        {
+          "title": "成交额向头部集中",
+          "color": "amber",
+          "metric": "前14家占70.9%",
+          "metric_sub": "400+家仅占3.7%",
+          "body": "HKEX将交易所参与者分为A/B/C三类：Category A（前14家）占成交额70.9%，Category B（约51家中型）占25.4%，Category C（约400家小型）仅占3.7%。2000年时C类占40%，如今几乎归零。头部集中趋势持续加速，互联网券商和大型银行是主要受益者。",
+          "data_points": [
+            {
+              "category": "A (前14家)",
+              "share": 70.9
+            },
+            {
+              "category": "B (约51家中型)",
+              "share": 25.4
+            },
+            {
+              "category": "C (约400家小型)",
+              "share": 3.7
+            }
+          ],
+          "source": "HKEX Stock Exchange Participants' Market Share Report",
+          "source_url": "https://www.hkex.com.hk/Market-Data/Statistics/Participant/Stock-Exchange-Participants_-Market-Share-Report?sc_lang=en",
+          "caveat": "成交额份额反映交易活跃度，不直接等于客户数量转移"
+        }
+      ],
+      "key_conclusion": {
+        "title": "账户翻倍 ≠ 投资者翻倍 → 存量加开是主要驱动力",
+        "body": "SFC活跃账户从2019年202万增至2024年487万（+141%），但同期香港投资者总数仅从约200万增至约250万（+25%）。差额说明大量增长来自存量投资者加开账户，而非纯新增投资者。",
+        "left_label": "活跃账户增长",
+        "left_value": "+141%",
+        "left_sub": "202万 → 487万",
+        "right_label": "投资者总数增长",
+        "right_value": "+25%",
+        "right_sub": "~200万 → ~250万",
+        "gap_label": "差额 = 存量投资者加开",
+        "source": "SFC Financial Review + SFC投资者调查"
+      }
     },
     "population_pipeline": {
-      "title": "人口结构 — 未来5年满18岁人口预测",
-      "subtitle": "基于统计处出生数据推算可开户人口基数，需扣除双非婴儿（多数不在港居住）",
+      "title": "未来5年新增投资者预测 — 四大来源",
+      "subtitle": "每年约12万新投资者进入香港市场，来自四个结构性来源",
       "source": "统计处活产婴儿统计 (Table 115-01011)、双非婴儿数据 (Table 115-01012)",
-      "note": "2008-2012年为双非婴儿高峰期（2013年零配额政策后骤降）。估计在港人数 = 总出生 - 双非×80%（约20%双非儿童后来回港就学）。单非婴儿（父亲为港人）几乎全部在港。",
+      "note": "数据基于统计处出生记录，已扣除约80%双非婴儿（多数不在港居住）。单非婴儿（父亲为港人）几乎全部在港。",
       "years": [
         {
           "birth_year": 2008,
@@ -3410,7 +3801,231 @@
           "body": "当前是抢占年轻首次投资者的黄金窗口——5年后满18岁人口将大幅萎缩。应在2026-2030年加大年轻用户获取投入（TikTok/Instagram/App Store ASO），建立品牌心智。",
           "color": "green"
         }
-      ]
+      ],
+      "four_sources": [
+        {
+          "name": "来港新人才",
+          "color": "indigo",
+          "annual_range": "5-8万",
+          "annual_mid": 65000,
+          "pct": 52,
+          "icon": "plane",
+          "logic": "2024年各人才计划获批14万份，实际抵港约8-10万/年，投资参与率预估60-80%（首年40-50%，第2-3年累计达60-80%）",
+          "source": "入境处人才签证数据(2024)",
+          "five_year": [
+            {
+              "year": 2026,
+              "low": 50000,
+              "mid": 65000,
+              "high": 80000,
+              "note": "高才通+IANG持续放量"
+            },
+            {
+              "year": 2027,
+              "low": 50000,
+              "mid": 65000,
+              "high": 80000,
+              "note": "稳定期"
+            },
+            {
+              "year": 2028,
+              "low": 45000,
+              "mid": 60000,
+              "high": 75000,
+              "note": "政策可能收紧"
+            },
+            {
+              "year": 2029,
+              "low": 40000,
+              "mid": 55000,
+              "high": 70000,
+              "note": "视政策延续"
+            },
+            {
+              "year": 2030,
+              "low": 40000,
+              "mid": 55000,
+              "high": 70000,
+              "note": "视政策延续"
+            }
+          ],
+          "five_year_total_mid": 300000,
+          "futu_advantage": "内地来港人群对富途品牌有认知基础",
+          "key_channels": [
+            "微信",
+            "小红书",
+            "Bilibili"
+          ]
+        },
+        {
+          "name": "本地首次入市年轻人",
+          "color": "sky",
+          "annual_range": "1.5-2万",
+          "annual_mid": 18000,
+          "pct": 14,
+          "icon": "academic",
+          "logic": "每年5.5-6.8万人满18岁达到开户年龄（已扣除双非），其中20-30%在头几年开始投资。Yahoo Finance HK 2024调查(n=1,500+)显示21%香港年轻人一参加工作就开始投资。",
+          "source": "C&SD活产婴儿统计(已扣除80%双非) + Yahoo Finance HK 2024",
+          "source_url": "https://www.marketing-interactive.com/gen-z-and-the-future-of-investing-what-financial-institutions-need-to-know",
+          "five_year": [
+            {
+              "year": 2026,
+              "low": 11000,
+              "mid": 17000,
+              "high": 20000,
+              "note": "2008年出生，扣双非后约5.7万满18"
+            },
+            {
+              "year": 2027,
+              "low": 11000,
+              "mid": 17000,
+              "high": 20000,
+              "note": "2009年出生，约5.6万满18"
+            },
+            {
+              "year": 2028,
+              "low": 12000,
+              "mid": 18000,
+              "high": 21000,
+              "note": "2010年出生，约6.0万满18"
+            },
+            {
+              "year": 2029,
+              "low": 12000,
+              "mid": 19000,
+              "high": 22000,
+              "note": "2011年出生，约6.4万满18（高位）"
+            },
+            {
+              "year": 2030,
+              "low": 13000,
+              "mid": 20000,
+              "high": 23000,
+              "note": "2012年出生，约6.8万满18（最高位）"
+            }
+          ],
+          "five_year_total_mid": 91000,
+          "futu_advantage": "年轻用户偏好移动端体验，开户奖励对学生有吸引力",
+          "key_channels": [
+            "TikTok",
+            "Instagram",
+            "YouTube"
+          ]
+        },
+        {
+          "name": "现有居民首次投资",
+          "color": "amber",
+          "annual_range": "2-4万",
+          "annual_mid": 30000,
+          "pct": 24,
+          "icon": "users",
+          "logic": "从未投资过的香港居民，因市场环境/退休规划/朋友推荐开始投资。基于IFEC调查（46%成年人从未持有金融产品）及人口结构推算",
+          "source": "IFEC投资者调查(2025)，推算值",
+          "five_year": [
+            {
+              "year": 2026,
+              "low": 20000,
+              "mid": 30000,
+              "high": 40000,
+              "note": "市场回暖带动入市意愿"
+            },
+            {
+              "year": 2027,
+              "low": 20000,
+              "mid": 30000,
+              "high": 40000,
+              "note": "稳定"
+            },
+            {
+              "year": 2028,
+              "low": 20000,
+              "mid": 30000,
+              "high": 40000,
+              "note": "稳定"
+            },
+            {
+              "year": 2029,
+              "low": 18000,
+              "mid": 28000,
+              "high": 38000,
+              "note": "易转化人群逐渐减少"
+            },
+            {
+              "year": 2030,
+              "low": 18000,
+              "mid": 28000,
+              "high": 38000,
+              "note": "易转化人群逐渐减少"
+            }
+          ],
+          "five_year_total_mid": 146000,
+          "futu_advantage": "首次投资者需要简单入门体验，模拟交易功能是差异化点",
+          "key_channels": [
+            "WhatsApp",
+            "Facebook",
+            "MoneyHero"
+          ]
+        },
+        {
+          "name": "其他（回流/外籍/投资移民）",
+          "color": "emerald",
+          "annual_range": "0.5-1万",
+          "annual_mid": 12000,
+          "pct": 10,
+          "icon": "globe",
+          "logic": "回流港人、外籍驻港人士、新资本投资者入境计划（3000万门槛）等",
+          "source": "入境处、统计处人口流动数据",
+          "five_year": [
+            {
+              "year": 2026,
+              "low": 5000,
+              "mid": 12000,
+              "high": 15000,
+              "note": "回流潮+投资移民"
+            },
+            {
+              "year": 2027,
+              "low": 5000,
+              "mid": 12000,
+              "high": 15000,
+              "note": "稳定"
+            },
+            {
+              "year": 2028,
+              "low": 5000,
+              "mid": 10000,
+              "high": 13000,
+              "note": "回流高峰过后"
+            },
+            {
+              "year": 2029,
+              "low": 5000,
+              "mid": 10000,
+              "high": 13000,
+              "note": "稳定"
+            },
+            {
+              "year": 2030,
+              "low": 5000,
+              "mid": 10000,
+              "high": 13000,
+              "note": "稳定"
+            }
+          ],
+          "five_year_total_mid": 54000,
+          "futu_advantage": "多语言支持和港美股覆盖可作为竞争点",
+          "key_channels": [
+            "LinkedIn",
+            "Google搜索",
+            "SCMP"
+          ]
+        }
+      ],
+      "five_year_summary": {
+        "total_mid": 591000,
+        "total_range": "48-60万",
+        "note": "5年累计约59万新增投资者，其中来港人才占半数以上，是最大增量来源"
+      }
     }
   },
   "ai_acquisition": {
@@ -3751,9 +4366,9 @@
           "name": "App体验与平台功能",
           "rank": 1,
           "pct_label": "#1因素",
-          "source": "Investment Trends 2024 HK (n=1,322)",
-          "source_url": "https://investmenttrends.com/resource/2024-hong-kong-online-investing-report/",
-          "detail": "移动端功能已超越价格成为选择券商的首要考量",
+          "source": "IFEC 2025: 93% 18-29岁用券商App交易",
+          "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+          "detail": "券商App从28%升至65%成为主要交易渠道（IFEC 2025），移动端体验是年轻投资者选择券商的首要考量",
           "color": "blue"
         },
         {
@@ -3766,21 +4381,21 @@
           "color": "green"
         },
         {
-          "name": "产品覆盖范围",
+          "name": "产品覆盖范围（美股）",
           "rank": 3,
-          "pct_label": "50万+人",
-          "source": "Investment Trends 2024",
-          "source_url": "https://investmenttrends.com/resource/2024-hong-kong-online-investing-report/",
-          "detail": "50万+港投资者交易国际股票，20%+用专门券商做美股",
+          "pct_label": "56%投美股",
+          "source": "IFEC 2025: 56%投资美股(历史新高)",
+          "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+          "detail": "56%港投资者投资美股（IFEC 2025），18-29岁达75%。富途美股体验远优于银行，是核心差异化卖点",
           "color": "purple"
         },
         {
           "name": "IPO打新机会",
           "rank": 4,
-          "pct_label": "81.7%",
-          "source": "SFC Stock Investor Survey 2006",
-          "source_url": "https://www.sfc.hk/sfc/doc/EN/speeches/public/surveys/06/stock_investor_survey_060602.pdf",
-          "detail": "81.7%认购者看重公司前景，IPO热度直接驱动开户",
+          "pct_label": "热门驱动",
+          "source": "HKEX 2024年报 + 各券商公开数据",
+          "source_url": "https://www.hkex.com.hk/-/media/HKEX-Market/Market-Data/Statistics/Consolidated-Reports/Annual-Market-Statistics/2024-Market-Statistics.pdf",
+          "detail": "2024年IPO重回活跃(72家上市)，热门新股首日涨幅吸引大量开户，各券商在IPO季密集获客",
           "color": "red"
         },
         {
@@ -3795,10 +4410,10 @@
         {
           "name": "同辈推荐/口碑",
           "rank": 6,
-          "pct_label": "43%",
-          "source": "Gallup 2025 (n=2,036)",
-          "source_url": "https://news.gallup.com/poll/660467/americans-financial-advice-rooted-people.aspx",
-          "detail": "43%投资者从朋友/家人获取投资建议，口碑是重要开户触发因素",
+          "pct_label": "MGM核心",
+          "source": "IFEC 2025 + 富途MGM数据",
+          "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+          "detail": "IFEC 2025显示社交网络和朋友推荐是重要投资信息来源；富途MGM(老带新)CAC仅HK$300-800，ROI最高",
           "color": "teal"
         }
       ]
@@ -3824,10 +4439,10 @@
         },
         {
           "name": "美股准入",
-          "pct_label": "20%+用专门券商",
-          "detail": "50万+港投资者交易国际股票，20%+另开专门券商降低美股成本",
-          "source": "Investment Trends 2024",
-          "source_url": "https://investmenttrends.com/resource/2024-hong-kong-online-investing-report/",
+          "pct_label": "56%投美股",
+          "detail": "56%港投资者投资美股（IFEC 2025），银行美股佣金偏高且品种有限，驱动投资者加开互联网券商",
+          "source": "IFEC 2025",
+          "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
           "icon": "globe"
         },
         {
@@ -3840,147 +4455,153 @@
         },
         {
           "name": "平台功能差异",
-          "pct_label": "17%已用AI",
-          "detail": "Level 2行情免费 vs 收费、AI工具(17%已用/43%想用)、加密货币(+246% YoY)",
-          "source": "Investment Trends 2024 + 富途2026报告",
-          "source_url": "https://www.futuhk.com/en/about-us/newsroom/futu-releases-2026-hong-kong-retail-investor-report",
+          "pct_label": "8%用AI工具",
+          "detail": "IFEC 2025: 仅8%用AI投资工具但84%听说过；18-29岁达25%。Level 2行情免费 vs 收费也是差异化卖点",
+          "source": "IFEC 2025 + 富途2026报告",
+          "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
           "icon": "chip"
         }
       ]
     },
     "learning_paths": {
-      "title": "投资者学习路径分布",
-      "subtitle": "基于Oliver Wyman(n=300K)、Betterment(2025)、Gallup(n=2,036)、CFA Institute(n=2,400)综合分析",
+      "title": "香港投资者信息获取路径",
+      "subtitle": "基于IFEC散户投资者调查2025 (n=1,000, 18-69岁, 面对面访问)",
       "paths": [
         {
           "name": "社媒驱动型",
           "name_en": "Social-Media-First",
-          "pct": 32,
+          "pct": 88,
+          "pct_label": "88%用社媒获取投资信息",
           "color": "rose",
-          "profile": "18-30岁，TikTok/YouTube/小红书入门",
-          "behavior": "先买crypto/meme股再扩展到主流股票",
-          "data_point": "55% Gen Z说社媒是开始投资的#1原因",
-          "source": "Oliver Wyman Forum (n=300,000, 5年追踪)",
-          "source_url": "https://fortune.com/2026/01/16/gen-z-richtok-social-media-stock-market-investing/",
+          "profile": "18-29岁最突出：93%用券商App、75%投美股、30%视KOL为最重要信息源",
+          "behavior": "YouTube(65%)、Facebook(34%)、Instagram(22%)是主要社媒渠道",
+          "data_point": "88%投资者用社媒获取投资信息（2023年72%），YouTube从35%升至65%",
+          "source": "IFEC散户投资者调查2025",
+          "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
           "futu_implication": "需要在社媒平台有强存在感，KOL合作是关键触达手段"
         },
         {
-          "name": "朋友带路型",
+          "name": "KOL/网红种草型",
+          "name_en": "KOL-Influenced",
+          "pct": 62,
+          "pct_label": "62%受KOL影响投资决策",
+          "color": "purple",
+          "profile": "18-29岁中30%视KOL为最重要信息源，是全年龄段最高",
+          "behavior": "从看KOL内容→关注→模仿操作→最终开户",
+          "data_point": "62%受KOL/网红影响做投资决策（2023年仅29%，两年翻倍）",
+          "source": "IFEC散户投资者调查2025",
+          "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+          "futu_implication": "KOL合作是获客ROI最高渠道之一，需从98位KOL扩展到200+"
+        },
+        {
+          "name": "券商App自主探索型",
+          "name_en": "App-Native",
+          "pct": 65,
+          "pct_label": "65%通过券商App交易(2023年28%)",
+          "color": "blue",
+          "profile": "各年龄段，银行App→券商App迁移，佣金差5-10倍驱动",
+          "behavior": "先下载App体验→比较功能→入金开户",
+          "data_point": "券商App从28%升至65%成为主要交易渠道，银行从61%降至31%",
+          "source": "IFEC散户投资者调查2025",
+          "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+          "futu_implication": "App体验和ASO（应用商店优化）是关键获客手段"
+        },
+        {
+          "name": "美股热驱动型",
+          "name_en": "US-Stock-Driven",
+          "pct": 56,
+          "pct_label": "56%投资美股(历史新高)",
+          "color": "emerald",
+          "profile": "18-29岁达75%投资美股，是富途核心优势赛道",
+          "behavior": "被Tesla/NVIDIA等明星股吸引→寻找低佣美股通道→开户",
+          "data_point": "美股投资者从28%升至56%（历史新高），18-29岁达75%",
+          "source": "IFEC散户投资者调查2025",
+          "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+          "futu_implication": "美股交易是富途最大差异化卖点，所有获客素材应主打美股体验"
+        },
+        {
+          "name": "朋友口碑带路型",
           "name_en": "Peer-Influenced",
           "pct": 23,
+          "pct_label": "约23%通过朋友/口碑开户",
           "color": "amber",
           "profile": "各年龄段，朋友赚钱后跟着开户",
           "behavior": "模仿朋友策略，高度信任口碑推荐",
-          "data_point": "43%从朋友/家人获取投资建议",
-          "source": "Gallup 2025 (n=2,036)",
-          "source_url": "https://news.gallup.com/poll/660467/americans-financial-advice-rooted-people.aspx",
-          "futu_implication": "MGM裂变和转介绍激励是最直接的获客杠杆"
-        },
-        {
-          "name": "银行/顾问引导型",
-          "name_en": "Advisor-Led",
-          "pct": 22,
-          "color": "blue",
-          "profile": "30-50岁，从银行理财经理推荐开始",
-          "behavior": "先买基金，逐步自主交易，多持保守策略",
-          "data_point": "90%+富裕年轻投资者使用付费顾问",
-          "source": "CFA Institute 2026 (n=2,400)",
-          "source_url": "https://www.cfainstitute.org/about/press-room/2026/next-gen-investors-report-march-2026",
-          "futu_implication": "需要展示专业度和研究能力，与银行差异化竞争"
-        },
-        {
-          "name": "自学研究型",
-          "name_en": "Self-Directed Researcher",
-          "pct": 15,
-          "color": "emerald",
-          "profile": "分析驱动，看财经网站/书/课程",
-          "behavior": "重视数据工具、图表分析、基本面研究",
-          "data_point": "47%通过在线媒体/财经网站学习投资",
-          "source": "Betterment 2025 Survey",
-          "source_url": "https://www.betterment.com/hubfs/PDFs/b4c/Betterment%20Retail%20Survey%202025.pdf",
-          "futu_implication": "SEO内容、专业工具(Level 2、AI分析)是关键吸引力"
-        },
-        {
-          "name": "被动/Robo理财型",
-          "name_en": "Passive/Robo-Advised",
-          "pct": 8,
-          "color": "slate",
-          "profile": "偏好自动管理，不愿花时间研究",
-          "behavior": "App广告进入，定投ETF/基金为主",
-          "data_point": "43% Gen Z只用robo-advice",
-          "source": "CFA Institute 2026 (n=2,400)",
-          "source_url": "https://www.cfainstitute.org/about/press-room/2026/next-gen-investors-report-march-2026",
-          "futu_implication": "智能组合、一键跟投等产品功能可覆盖此人群"
+          "data_point": "IFEC: 社交网络和朋友推荐是重要的投资信息来源",
+          "source": "IFEC散户投资者调查2025 + 富途MGM数据",
+          "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+          "futu_implication": "MGM裂变和转介绍激励是最直接的获客杠杆，CAC仅HK$300-800"
         }
-      ]
+      ],
+      "caveat": "百分比来自IFEC 2025不同问题的回答，非互斥分类（一个投资者可能同时属于多种路径），不可直接求和"
     },
     "info_sources": {
-      "title": "投资信息来源排名",
-      "source": "Betterment 2025 Survey",
-      "source_url": "https://www.betterment.com/hubfs/PDFs/b4c/Betterment%20Retail%20Survey%202025.pdf",
+      "title": "香港投资者信息来源排名",
+      "source": "IFEC散户投资者调查2025 (n=1,000)",
+      "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
       "items": [
         {
-          "name": "在线媒体/财经网站",
-          "pct": 47
-        },
-        {
-          "name": "电视",
-          "pct": 37
-        },
-        {
-          "name": "朋友/家人",
-          "pct": 37
-        },
-        {
           "name": "社交媒体",
-          "pct": 36
+          "pct": 88
         },
         {
-          "name": "理财顾问",
-          "pct": 31
+          "name": "YouTube",
+          "pct": 65
         },
         {
-          "name": "Podcast",
-          "pct": 19
+          "name": "券商App",
+          "pct": 65
+        },
+        {
+          "name": "财经App",
+          "pct": 45
+        },
+        {
+          "name": "Facebook",
+          "pct": 34
+        },
+        {
+          "name": "KOL/网红",
+          "pct": 62
         }
       ]
     },
     "generational_trust": {
-      "title": "代际信任差异",
-      "subtitle": "年轻人说信任顾问，但实际被社媒驱动 — 信任悖论",
-      "source": "Schwab Modern Wealth Survey 2024 (n=1,200)",
-      "source_url": "https://content.schwab.com/web/retail/public/about-schwab/schwab_modern_wealth_survey_2024_findings.pdf",
+      "title": "香港不同年龄段投资行为差异",
+      "subtitle": "年轻人社媒驱动，中年人财经媒体+银行，长者靠口碑",
+      "source": "IFEC散户投资者调查2025 (n=1,000)",
+      "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
       "data": [
         {
-          "platform": "Reddit",
-          "gen_z": 32,
-          "millennials": 22,
-          "gen_x": 11,
-          "boomers": 7
+          "platform": "券商App交易",
+          "age_18_29": 93,
+          "age_30_49": 65,
+          "age_50_69": 40,
+          "note": "年轻人几乎全用券商App"
         },
         {
-          "platform": "TikTok",
-          "gen_z": 32,
-          "millennials": 21,
-          "gen_x": 9,
-          "boomers": 3
+          "platform": "投资美股",
+          "age_18_29": 75,
+          "age_30_49": 56,
+          "age_50_69": 30,
+          "note": "美股是年轻人核心品类"
         },
         {
-          "platform": "YouTube",
-          "gen_z": 44,
-          "millennials": 38,
-          "gen_x": 25,
-          "boomers": 14
+          "platform": "KOL为最重要信息源",
+          "age_18_29": 30,
+          "age_30_49": 15,
+          "age_50_69": 5,
+          "note": "年轻人最受KOL影响"
         },
         {
-          "platform": "Instagram",
-          "gen_z": 33,
-          "millennials": 25,
-          "gen_x": 11,
-          "boomers": 4
+          "platform": "银行交易",
+          "age_18_29": 15,
+          "age_30_49": 31,
+          "age_50_69": 55,
+          "note": "银行随年龄上升"
         }
       ],
-      "trust_paradox": "76% Gen Z声称最信任专业顾问，但55%实际因社媒开始投资(Oliver Wyman)"
+      "trust_paradox": "IFEC 2025: 18-29岁中93%用券商App但30%视KOL为最重要信息源——实际行为被社媒驱动"
     },
     "hk_product_progression": {
       "title": "香港投资者产品渗透率",
@@ -4008,59 +4629,27 @@
           "penetration": 6
         }
       ],
-      "age_insight": "18-29岁年轻投资者平均持有4.69种产品，多于50-69岁的2.96种",
-      "key_finding": "年轻人并非只买简单产品，反而更多元化"
+      "age_insight": "18-29岁年轻投资者平均持有1.82种产品(30-49岁1.90种, 50-69岁1.73种), 但52%投资虚拟资产(30-49岁仅7%)",
+      "key_finding": "年轻投资者产品类型数相近，但虚拟资产参与度远高于其他年龄段"
     },
     "key_sources": [
       {
-        "name": "Oliver Wyman Forum",
-        "sample": "n=300,000 (5年追踪)",
-        "url": "https://fortune.com/2026/01/16/gen-z-richtok-social-media-stock-market-investing/"
+        "name": "IFEC散户投资者调查2025",
+        "sample": "n=1,000 (香港, 面对面)",
+        "url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf",
+        "region": "香港"
       },
       {
-        "name": "Investment Trends 2024 HK",
-        "sample": "n=1,322",
-        "url": "https://investmenttrends.com/resource/2024-hong-kong-online-investing-report/"
+        "name": "SFC Financial Review of the Securities Industry 2024",
+        "sample": "全行业持牌法团",
+        "url": "https://www.sfc.hk/-/media/EN/files/IS/publications/ENG-Financial-Review-of-the-Securities-Industry-for-the-year-ended-31-Dec-2024-20250326-final.pdf",
+        "region": "香港"
       },
       {
-        "name": "IFEC Retail Investor Study 2025",
-        "sample": "n=1,000",
-        "url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf"
-      },
-      {
-        "name": "BCG-WEF Global Retail Investor Outlook",
-        "sample": "n=13,036",
-        "url": "https://reports.weforum.org/docs/WEF_2024_Global_Retail_Investor_Outlook_2025.pdf"
-      },
-      {
-        "name": "Gallup 2025",
-        "sample": "n=2,036",
-        "url": "https://news.gallup.com/poll/660467/americans-financial-advice-rooted-people.aspx"
-      },
-      {
-        "name": "Schwab Modern Wealth 2024",
-        "sample": "n=1,200",
-        "url": "https://content.schwab.com/web/retail/public/about-schwab/schwab_modern_wealth_survey_2024_findings.pdf"
-      },
-      {
-        "name": "CFA Institute 2026",
-        "sample": "n=2,400",
-        "url": "https://www.cfainstitute.org/about/press-room/2026/next-gen-investors-report-march-2026"
-      },
-      {
-        "name": "FINRA 2024 Investor Survey",
-        "sample": "大规模",
-        "url": "https://www.finrafoundation.org/sites/finrafoundation/files/2025-11/NFCS_Investor_Survey_Report_White_Paper.pdf"
-      },
-      {
-        "name": "Betterment 2025 Survey",
-        "sample": "大规模",
-        "url": "https://www.betterment.com/hubfs/PDFs/b4c/Betterment%20Retail%20Survey%202025.pdf"
-      },
-      {
-        "name": "SFC Stock Investor Survey 2006",
-        "sample": "大规模",
-        "url": "https://www.sfc.hk/sfc/doc/EN/speeches/public/surveys/06/stock_investor_survey_060602.pdf"
+        "name": "HKEX交易所参与者成交额报告",
+        "sample": "全部参与者",
+        "url": "https://www.hkex.com.hk/Market-Data/Statistics/Participant/Stock-Exchange-Participants_-Market-Share-Report",
+        "region": "香港"
       },
       {
         "name": "富途2026 HK投资者报告",
@@ -4197,37 +4786,25 @@
         ]
       },
       "social_media_influence": {
-        "title": "社媒对投资决策的影响 (港数据)",
+        "title": "社媒对投资决策的影响 (IFEC 2025)",
         "items": [
           {
-            "stat": "33%",
-            "detail": "港投资者过去12个月因社媒信息做出投资决策",
-            "source": "IFEC 2021 (n=1,004)",
-            "source_url": "https://www.ifec.org.hk/web/en/about-ifec/press-release/pr-20211004.page"
+            "stat": "88%",
+            "detail": "港投资者使用社交媒体获取投资信息（2023年72%）",
+            "source": "IFEC 2025 (n=1,000)",
+            "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf"
           },
           {
-            "stat": "48%",
-            "detail": "18-29岁港投资者因社媒信息投资(显著高于平均)",
-            "source": "IFEC 2021",
-            "source_url": ""
+            "stat": "62%",
+            "detail": "港投资者受KOL/网红影响做投资决策（2023年仅29%）",
+            "source": "IFEC 2025",
+            "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf"
           },
           {
-            "stat": "49%",
-            "detail": "港投资者使用社交媒体作为投资信息来源",
-            "source": "IFEC 2021",
-            "source_url": ""
-          },
-          {
-            "stat": "67%",
-            "detail": "港投资者使用财经网站作为信息来源(排名第一)",
-            "source": "IFEC 2021",
-            "source_url": ""
-          },
-          {
-            "stat": "21%",
-            "detail": "香港年轻人一参加工作就开始投资",
-            "source": "Yahoo Finance HK 2024 (n=1,500+)",
-            "source_url": "https://www.marketing-interactive.com/gen-z-and-the-future-of-investing-what-financial-institutions-need-to-know"
+            "stat": "65%",
+            "detail": "YouTube成为最大投资信息社媒渠道（2023年35%）",
+            "source": "IFEC 2025",
+            "source_url": "https://www.ifec.org.hk/web/common/pdf/about-ifec/retail-investor-study-2025.pdf"
           }
         ]
       },
@@ -4580,9 +5157,9 @@
       },
       {
         "label": "银行账户持有人",
-        "value": "~700万+",
-        "detail": "几乎全民覆盖，8家虚拟银行加速渗透",
-        "source": "HKMA"
+        "value": "~530万(去重)",
+        "detail": "总户数700万+含重复/联名/企业户; 去重个人≈成年人口550万×95%+持有率",
+        "source": "HKMA + World Bank Findex 2021"
       },
       {
         "label": "成年人口(可开户基数)",
@@ -4604,8 +5181,8 @@
       },
       {
         "label": "证券账户(活跃)",
-        "value": "439万户",
-        "detail": "持牌法团需发月结单的账户数(现金185万+孖展254万)，同一人多券商开户重复计算，去重个人估计~150-200万",
+        "value": "439万户(去重~150-200万人)",
+        "detail": "持牌法团需发月结单的账户数(现金185万+孖展254万)。一人多券商开户重复计算——439万户实际对应约150-200万独立投资者",
         "source": "SFC Financial Review 2024"
       }
     ],
@@ -5020,6 +5597,2266 @@
         "title": "长桥基数小但粘性高",
         "body": "长桥下载仅6226，但DAU达10836(接近Tiger的12979)。DAU/下载比极高，说明现有用户活跃度强，是值得关注的新兴对手。",
         "color": "red"
+      }
+    ]
+  },
+  "user_overlap": {
+    "title": "富途用户App重叠分析",
+    "subtitle": "data.ai App Overlap | 2026年3月 | 香港 | 富途牛牛用户同时使用的其他App",
+    "source": "data.ai Unified App Overlap",
+    "period": "2026-03-01 至 2026-03-31",
+    "total_apps": 273,
+    "metric_explain": {
+      "share": "Share%: 富途用户中同时使用该App的比例",
+      "affinity": "Affinity: 富途用户使用该App的概率 vs 普通用户的倍数(>5为强相关)"
+    },
+    "categories": [
+      {
+        "name": "互联网券商(直接竞品)",
+        "color": "red",
+        "apps": [
+          {
+            "name": "IBKR盈透",
+            "share": 21.54,
+            "affinity": 6.64,
+            "insight": "每5个富途用户有1个同时用IBKR，最大直接竞品"
+          },
+          {
+            "name": "Webull微牛",
+            "share": 7.99,
+            "affinity": 7.13,
+            "insight": "重叠较高且强相关"
+          },
+          {
+            "name": "Tiger老虎",
+            "share": 3.53,
+            "affinity": 5.71,
+            "insight": "重叠度意外低于Webull"
+          },
+          {
+            "name": "uSMART盈立",
+            "share": 3.05,
+            "affinity": 13.17,
+            "insight": "Affinity最高——uSMART用户几乎都用富途"
+          },
+          {
+            "name": "VBrokers",
+            "share": 2.4,
+            "affinity": 10.33,
+            "insight": "小众但极强相关"
+          },
+          {
+            "name": "moomoo",
+            "share": 1.84,
+            "affinity": 11.9,
+            "insight": "富途自家国际品牌App"
+          },
+          {
+            "name": "长桥Longbridge",
+            "share": 1.73,
+            "affinity": 8.96,
+            "insight": "用户少但高度相关"
+          },
+          {
+            "name": "Syfe",
+            "share": 3.09,
+            "affinity": 8.0,
+            "insight": "智能投顾平台，强相关"
+          },
+          {
+            "name": "SoFi",
+            "share": 1.81,
+            "affinity": 7.8,
+            "insight": "美国互联网券商"
+          }
+        ]
+      },
+      {
+        "name": "银行(投资功能竞争)",
+        "color": "blue",
+        "apps": [
+          {
+            "name": "HSBC",
+            "share": 51.37,
+            "affinity": 2.94,
+            "insight": "过半富途用户有HSBC账户"
+          },
+          {
+            "name": "恒生银行",
+            "share": 37.65,
+            "affinity": 3.78,
+            "insight": "强渗透，Affinity中等"
+          },
+          {
+            "name": "BOCHK中银",
+            "share": 37.53,
+            "affinity": 3.61,
+            "insight": "与恒生几乎持平"
+          },
+          {
+            "name": "SC渣打",
+            "share": 20.95,
+            "affinity": 4.8,
+            "insight": "中高端客群重叠"
+          },
+          {
+            "name": "Mox Bank",
+            "share": 17.61,
+            "affinity": 4.26,
+            "insight": "虚拟银行中最高"
+          },
+          {
+            "name": "M+ Mobile招银国际",
+            "share": 7.41,
+            "affinity": 4.46,
+            "insight": "银行系投资App"
+          },
+          {
+            "name": "Citi花旗",
+            "share": 7.86,
+            "affinity": 3.28,
+            "insight": "财富管理客群"
+          },
+          {
+            "name": "ZA Bank众安",
+            "share": 11.24,
+            "affinity": 4.69,
+            "insight": "虚拟银行"
+          },
+          {
+            "name": "inMotion中银国际",
+            "share": 3.06,
+            "affinity": 6.1,
+            "insight": "证券交易App，强相关"
+          },
+          {
+            "name": "WeLab Bank",
+            "share": 4.99,
+            "affinity": 9.23,
+            "insight": "Affinity极高"
+          },
+          {
+            "name": "Fusion Bank富融",
+            "share": 2.44,
+            "affinity": 9.01,
+            "insight": "Affinity极高"
+          },
+          {
+            "name": "天星Airstar",
+            "share": 1.85,
+            "affinity": 11.95,
+            "insight": "Affinity第二高"
+          }
+        ]
+      },
+      {
+        "name": "加密货币",
+        "color": "purple",
+        "apps": [
+          {
+            "name": "Binance",
+            "share": 7.45,
+            "affinity": 7.42,
+            "insight": "近1/13的富途用户同时炒币"
+          },
+          {
+            "name": "OKX",
+            "share": 1.86,
+            "affinity": 6.88,
+            "insight": "第二大加密交易所"
+          },
+          {
+            "name": "Wirex",
+            "share": 1.8,
+            "affinity": 7.75,
+            "insight": "加密钱包"
+          }
+        ]
+      },
+      {
+        "name": "财经资讯/工具",
+        "color": "sky",
+        "apps": [
+          {
+            "name": "TradingView",
+            "share": 8.66,
+            "affinity": 4.67,
+            "insight": "图表工具标配"
+          },
+          {
+            "name": "Investing.com",
+            "share": 5.73,
+            "affinity": 4.01,
+            "insight": "全球行情资讯"
+          },
+          {
+            "name": "Yahoo Finance",
+            "share": 4.4,
+            "affinity": 4.38,
+            "insight": "传统财经入口"
+          },
+          {
+            "name": "信报HKEJ",
+            "share": 3.69,
+            "affinity": 8.69,
+            "insight": "Affinity极高——富途核心用户是信报读者"
+          },
+          {
+            "name": "Now财经",
+            "share": 2.35,
+            "affinity": 10.14,
+            "insight": "极强相关"
+          },
+          {
+            "name": "有线新闻(财经)",
+            "share": 2.43,
+            "affinity": 10.49,
+            "insight": "极强相关"
+          },
+          {
+            "name": "etnet经济通",
+            "share": 1.84,
+            "affinity": 5.95,
+            "insight": "本地财经资讯"
+          }
+        ]
+      },
+      {
+        "name": "内地生态(揭示用户背景)",
+        "color": "amber",
+        "apps": [
+          {
+            "name": "WeChat微信",
+            "share": 79.99,
+            "affinity": 1.6,
+            "insight": "80%使用微信，内地背景为主"
+          },
+          {
+            "name": "淘宝Taobao",
+            "share": 78.16,
+            "affinity": 1.86,
+            "insight": "近8成用户用淘宝"
+          },
+          {
+            "name": "招商银行",
+            "share": 3.66,
+            "affinity": 9.47,
+            "insight": "Affinity极高——内地来港人标配"
+          },
+          {
+            "name": "飞书Lark",
+            "share": 2.48,
+            "affinity": 10.71,
+            "insight": "Affinity最高之一——字节系/科技公司员工"
+          },
+          {
+            "name": "高德AMAP",
+            "share": 38.14,
+            "affinity": 3.1,
+            "insight": "近4成用户用高德"
+          },
+          {
+            "name": "小红书rednote",
+            "share": 35.93,
+            "affinity": 1.81,
+            "insight": "超1/3用户用小红书"
+          },
+          {
+            "name": "bilibili",
+            "share": 33.26,
+            "affinity": 1.54,
+            "insight": "1/3用户用B站"
+          },
+          {
+            "name": "拼多多",
+            "share": 32.4,
+            "affinity": 1.92,
+            "insight": "近1/3用户用拼多多"
+          },
+          {
+            "name": "美团",
+            "share": 20.99,
+            "affinity": 3.42,
+            "insight": "中等相关"
+          },
+          {
+            "name": "工行手机银行",
+            "share": 2.42,
+            "affinity": 4.18,
+            "insight": "内地四大行"
+          }
+        ]
+      },
+      {
+        "name": "保险/MPF",
+        "color": "teal",
+        "apps": [
+          {
+            "name": "AIA+",
+            "share": 11.58,
+            "affinity": 5.55,
+            "insight": "保险类最高重叠"
+          },
+          {
+            "name": "积金易eMPF",
+            "share": 16.34,
+            "affinity": 4.7,
+            "insight": "MPF管理"
+          },
+          {
+            "name": "Sun Life MPF",
+            "share": 2.38,
+            "affinity": 10.24,
+            "insight": "极强相关"
+          },
+          {
+            "name": "宏利Manulife",
+            "share": 4.75,
+            "affinity": 4.91,
+            "insight": "保险+投资"
+          },
+          {
+            "name": "FWD富卫",
+            "share": 3.03,
+            "affinity": 7.84,
+            "insight": "强相关"
+          },
+          {
+            "name": "Prudential保诚",
+            "share": 1.87,
+            "affinity": 6.92,
+            "insight": "强相关"
+          }
+        ]
+      }
+    ],
+    "key_insights": [
+      {
+        "title": "IBKR是唯一同时覆盖港股+美股的直接对手",
+        "body": "21.5%的重叠率远超Tiger(3.5%)+Webull(8%)+uSMART(3%)之和。IBKR和富途都主打港美股一站式交易，争夺的是同一批跨市场活跃用户。",
+        "color": "red"
+      },
+      {
+        "title": "用户画像: 80%内地背景",
+        "body": "微信80%、淘宝78%、高德38%、小红书36%、B站33%、拼多多32% — 富途用户压倒性地以内地来港人群为主。招商银行Affinity 9.47、飞书10.71进一步说明这是高收入科技/金融从业者。",
+        "color": "amber"
+      },
+      {
+        "title": "银行是隐形最大竞品",
+        "body": "HSBC(51%)、恒生(38%)、中银(38%)、渣打(21%) — 几乎所有富途用户都有银行账户。银行投资功能的改善(如M+ Mobile DAU 13万)是最大的结构性威胁。",
+        "color": "blue"
+      },
+      {
+        "title": "10%用户同时炒币",
+        "body": "Binance(7.5%)+OKX(1.9%)=近10%。加密货币交易是富途用户的显著需求，但富途目前不提供(受SFC牌照限制)。这部分需求在流向Binance/OKX。",
+        "color": "purple"
+      },
+      {
+        "title": "虚拟银行是富途的核心客群",
+        "body": "WeLab(Affinity 9.2)、Fusion(9.0)、天星(12.0)、Mox(4.3) — 虚拟银行用户与富途用户高度重合。说明富途用户是香港最数字化的金融消费者群体。",
+        "color": "green"
+      }
+    ]
+  },
+  "social_finance_overlap": {
+    "title": "🛡️ 防守视角：存量用户的渠道争夺",
+    "subtitle": "从App交叉安装看富途用户在各社媒上被竞品渗透的程度 — 哪些渠道正在失守？",
+    "source": "data.ai Unified App Overlap",
+    "period": "2026年3月",
+    "note": "Share% = 该社媒用户中同时安装该财经App的比例; Affinity = 相对普通用户的安装倍数(>2为强相关)",
+    "platforms": [
+      {
+        "platform": "LIHKG",
+        "futu_share": 31.5,
+        "futu_affinity": 4.94,
+        "futu_mom": -1.56,
+        "ibkr_share": 17.9,
+        "ibkr_mom": 1.65,
+        "webull_share": 0,
+        "webull_mom": null,
+        "binance_share": 6.7,
+        "tiger_share": 0,
+        "tag": "IBKR Aff 5.51>富途4.94"
+      },
+      {
+        "platform": "LinkedIn",
+        "futu_share": 19.2,
+        "futu_affinity": 3.01,
+        "futu_mom": 0.0,
+        "ibkr_share": 12.8,
+        "ibkr_mom": 1.38,
+        "webull_share": 2.8,
+        "webull_mom": -0.05,
+        "binance_share": 2.9,
+        "tiger_share": 0,
+        "tag": "IBKR Aff 3.96>富途3.01"
+      },
+      {
+        "platform": "Telegram",
+        "futu_share": 15.5,
+        "futu_affinity": 2.43,
+        "futu_mom": -1.3,
+        "ibkr_share": 7.1,
+        "ibkr_mom": 0.04,
+        "webull_share": 3.0,
+        "webull_mom": 1.18,
+        "binance_share": 3.5,
+        "tiger_share": 1.1,
+        "tag": "OKX Aff 3.87 Binance 3.44"
+      },
+      {
+        "platform": "小红书",
+        "futu_share": 11.7,
+        "futu_affinity": 1.83,
+        "futu_mom": -1.35,
+        "ibkr_share": 4.2,
+        "ibkr_mom": 0.69,
+        "webull_share": 2.2,
+        "webull_mom": 1.41,
+        "binance_share": 1.2,
+        "tiger_share": 0.8,
+        "tag": "Webull Aff 1.99>富途1.83"
+      },
+      {
+        "platform": "X/Twitter",
+        "futu_share": 10.8,
+        "futu_affinity": 1.69,
+        "futu_mom": -1.55,
+        "ibkr_share": 5.6,
+        "ibkr_mom": 0.32,
+        "webull_share": 1.8,
+        "webull_mom": 0.76,
+        "binance_share": 1.5,
+        "tiger_share": 1.4,
+        "tag": "Tiger Aff 2.20>富途1.69"
+      },
+      {
+        "platform": "WeChat",
+        "futu_share": 10.1,
+        "futu_affinity": 1.59,
+        "futu_mom": -1.23,
+        "ibkr_share": 4.7,
+        "ibkr_mom": 0.87,
+        "webull_share": 1.6,
+        "webull_mom": 0.52,
+        "binance_share": 1.1,
+        "tiger_share": 0.9,
+        "tag": ""
+      },
+      {
+        "platform": "Facebook",
+        "futu_share": 10.0,
+        "futu_affinity": 1.57,
+        "futu_mom": -0.48,
+        "ibkr_share": 5.3,
+        "ibkr_mom": 1.04,
+        "webull_share": 1.4,
+        "webull_mom": 0.78,
+        "binance_share": 1.5,
+        "tiger_share": 1.0,
+        "tag": "IBKR增长最快+1.04pp"
+      },
+      {
+        "platform": "Threads",
+        "futu_share": 9.7,
+        "futu_affinity": 1.53,
+        "futu_mom": -0.67,
+        "ibkr_share": 4.6,
+        "ibkr_mom": 0.12,
+        "webull_share": 1.5,
+        "webull_mom": 0.5,
+        "binance_share": 1.0,
+        "tiger_share": 1.0,
+        "tag": ""
+      },
+      {
+        "platform": "Instagram",
+        "futu_share": 7.9,
+        "futu_affinity": 1.24,
+        "futu_mom": -0.72,
+        "ibkr_share": 4.0,
+        "ibkr_mom": 0.24,
+        "webull_share": 1.4,
+        "webull_mom": 0.25,
+        "binance_share": 1.2,
+        "tiger_share": 0.7,
+        "tag": ""
+      },
+      {
+        "platform": "YouTube",
+        "futu_share": 7.5,
+        "futu_affinity": 1.18,
+        "futu_mom": -0.48,
+        "ibkr_share": 3.8,
+        "ibkr_mom": 0.33,
+        "webull_share": 1.3,
+        "webull_mom": 0.34,
+        "binance_share": 1.0,
+        "tiger_share": 0.7,
+        "tag": ""
+      },
+      {
+        "platform": "TikTok",
+        "futu_share": 6.4,
+        "futu_affinity": 1.0,
+        "futu_mom": -2.07,
+        "ibkr_share": 2.2,
+        "ibkr_mom": 0.1,
+        "webull_share": 0,
+        "webull_mom": null,
+        "binance_share": 0,
+        "tiger_share": 0,
+        "tag": "金融荒漠"
+      }
+    ],
+    "key_findings": [
+      {
+        "title": "IBKR 11/11平台MoM增长, 富途11/11下降(2026.3单月)",
+        "body": "data.ai 3月数据: IBKR在11个社媒平台Affinity均有MoM增长(+0.04~+1.65pp)，富途在11个平台均有下降(-0.48~-2.07pp)。LIHKG(IBKR Aff 5.51>富途4.94)和LinkedIn(3.96>3.01)两个高价值渠道IBKR已反超。需持续跟踪确认是否为趋势性变化。",
+        "color": "red",
+        "action": "优先防守LIHKG和LinkedIn",
+        "action_details": [
+          "LIHKG：增加投资讨论帖的官方回复/KOL帖，目标把Affinity从4.94拉回>5.5",
+          "LinkedIn：针对金融/科技从业者发英文投资教育内容，阻击IBKR的专业用户渗透",
+          "每月监控data.ai交叉安装数据，设MoM转正为KPI"
+        ]
+      },
+      {
+        "title": "Webull在7个平台逆势增长",
+        "body": "Webull在小红书(+1.41pp)、Telegram(+1.18pp)、Facebook(+0.78pp)、X(+0.76pp)等7个平台MoM正增长。小红书上Webull Affinity(1.99)已超过富途(1.83)。Webull正在抢占富途的内地背景用户群。",
+        "color": "amber",
+        "action": "小红书是主战场，必须抢回来",
+        "action_details": [
+          "小红书：加倍KOL种草预算，重点合作港股/美股实盘笔记类博主，抢在Webull建立内容壁垒前占位",
+          "Telegram：在投资群组中增加富途Bot或官方频道运营，Webull已在抢这批用户",
+          "分析Webull在小红书上投了什么内容，针对性做差异化（富途有牌照+产品线优势）"
+        ]
+      },
+      {
+        "title": "Binance/OKX在LIHKG和Telegram碾压",
+        "body": "Telegram: OKX Affinity 3.87、Binance 3.44，远超富途2.43。LIHKG: Binance Affinity 6.69，超富途4.94。加密用户高度集中在这两个平台，富途若推crypto需要在此布局。",
+        "color": "purple",
+        "action": "推crypto品类必须进Telegram和LIHKG",
+        "action_details": [
+          "Telegram：建立富途crypto官方频道/群组，发加密货币行情分析和SFC持牌优势内容",
+          "LIHKG：在crypto相关讨论区做KOL合作帖，主打「SFC持牌+港股美股+crypto一站式」",
+          "利用IFEC数据(18-29岁52%投资虚拟资产)包装年轻人定向广告"
+        ]
+      },
+      {
+        "title": "Tiger在X/Twitter Affinity(2.20)超富途(1.69)",
+        "body": "Tiger虽然Share小(1.4%)，但在X/Twitter的Affinity达2.20(富途1.69)，且MoM增长+0.25pp。X/Twitter上的英语交易者更倾向Tiger。Tiger在Facebook(Aff 1.64)、Threads(1.64)也略超富途。",
+        "color": "blue",
+        "action": "低优先级——英语用户非核心战场",
+        "action_details": [
+          "X/Twitter英语投资者体量小(Tiger Share仅1.4%)，不必大量投入",
+          "但如果有英语KOL合作机会可以顺带覆盖，阻止Tiger坐大",
+          "关注Tiger是否开始做中文内容抢内地背景用户——那才是真正的威胁信号"
+        ]
+      },
+      {
+        "title": "小红书比微信更精准触达投资者",
+        "body": "小红书富途Affinity 1.83高于微信1.59，HSBC仅4.8%(微信25.3%)——小红书用户更偏互联网券商而非银行。但Webull(Aff 1.99)和IBKR(+0.69pp MoM)正在加速渗透小红书。",
+        "color": "rose",
+        "action": "小红书应成为内地背景用户的主投放渠道",
+        "action_details": [
+          "相比微信(银行占主导)，小红书用户更偏好互联网券商——ROI更高",
+          "立即加大小红书KOL种草+信息流广告，在Webull(Aff已超富途)建立壁垒前抢回优势",
+          "内容方向：港股打新攻略、美股实盘、开户对比——直击内地来港用户痛点"
+        ]
+      },
+      {
+        "title": "TikTok是金融荒漠，不值得重投",
+        "body": "富途Affinity 1.00(零偏好)，IBKR 0.69(负偏好)。TikTok HK用户几乎不装财经App。富途MoM下降最快(-2.07pp)。投放ROI预期全平台最低。",
+        "color": "gray",
+        "action": "砍预算，把钱挪到LIHKG/小红书/Telegram",
+        "action_details": [
+          "TikTok HK的金融用户密度极低，继续投入是浪费预算",
+          "将TikTok预算转移到LIHKG(防守IBKR)和小红书(防守Webull)",
+          "保留最低限度品牌曝光即可，不追求转化"
+        ]
+      }
+    ]
+  },
+  "tab_insights": {
+    "market": [
+      {
+        "title": "150万增量空间",
+        "body": "香港约250万活跃投资者，富途已覆盖约100万(~40%市占率)，仍有约150万投资者未触达。",
+        "color": "indigo",
+        "source": "SFC投资者调查 + 富途2024年报"
+      },
+      {
+        "title": "来港人才是最大纯新入群体(52%)",
+        "body": "每年约12万新投资者：来港人才6万/年(52%) + 存量居民首次投资3万(24%) + 年轻人首次开户1.7万(14%) + 其他(10%)。来港人才无存量券商关系，是各家争夺的零switching-cost增量。",
+        "color": "blue",
+        "source": "入境处人才签证数据 + C&SD人口统计"
+      },
+      {
+        "title": "91%持股票，基金仅24%——跨品类空间",
+        "body": "股票/证券是绝对主场(~HK$3万亿，91%投资者持有)。但基金/ETF仅24%持有(HK$1.64万亿→已升至1.99万亿)、加密货币10%——从股票用户向基金/ETF/crypto跨品类转化是增量方向。",
+        "color": "emerald",
+        "source": "IFEC 2025 + SFC AWMAS 2024"
+      },
+      {
+        "title": "2026-2029黄金窗口",
+        "body": "2008-2012年香港本地出生人数处历史高位（扣除双非后仍有5.5-6.8万/年），这批人将在2026-2030年陆续满18岁。2013年零配额后出生数回落至5.7万，此后持续下滑至2022年3.3万历史新低，2031年起年轻新增人口将减半。",
+        "color": "amber",
+        "source": "C&SD活产婴儿统计, 已扣除约80%双非(不在港居住)"
+      }
+    ],
+    "investor": [
+      {
+        "title": "社交媒体信息源占88%",
+        "body": "较2023年的72%大幅上升16个百分点。YouTube增幅最大(35%→65%)，券商App交易占比翻倍(28%→65%)。",
+        "color": "indigo",
+        "source": "IFEC投资者教育调查2025"
+      },
+      {
+        "title": "KOL影响力翻倍",
+        "body": "62%投资者受KOL/网红影响做投资决策，2023年仅29%——两年翻倍。代表性财经KOL：RagaFinance(24.8万订阅，胡孟青/沈大師等主持40+档直播)、Coco哥(32.8万)、RainIsHere(29.7万)、InvesTalk(14.3万，范巧茹主持)。SFC已于2025年开始整治无牌finfluencer。",
+        "color": "purple",
+        "source": "IFEC投资者教育调查2025 + YouTube/KOLScanner公开数据"
+      },
+      {
+        "title": "体验89%+佣金84%=选券商双引擎",
+        "body": "选券商App原因：操作方便89%、佣金低84%、新闻推送55%、技术分析54%、优惠活动52%。体验和费率同样重要，不存在非此即彼。18-29岁AI聊天机器人使用率16%。",
+        "color": "emerald",
+        "source": "IFEC投资者教育调查2025"
+      },
+      {
+        "title": "短炒首次超越长线成第一动机",
+        "body": "短期交易73%(2023年45%)首次成为最重要投资动机(34%)，超过长期增长(32%)。孖展使用从1%升至6%，止损使用从16%降至7%——投资者风险偏好明显提升。",
+        "color": "amber",
+        "source": "IFEC投资者教育调查2025"
+      }
+    ],
+    "channels": [
+      {
+        "title": "uSMART线下抢客：高铁站+口岸开店",
+        "body": "盈立uSMART 3个月下载2.6万接近IBKR的3.1万。2025年8月进驻西九龙高铁站(G-14铺)+落马洲港铁站，系首家证券行入驻港铁，专攻内地来港开户。已扩至12间门店覆盖全港，目标18区全覆盖。周大福控股backing，月租超HK$100万。",
+        "color": "red",
+        "source": "明报2025.8.19 + uSMART官方公告"
+      },
+      {
+        "title": "10%用户同时炒币——富途的机会",
+        "body": "Binance(7.5%)+OKX(1.9%)=近10%富途用户同时交易加密货币。富途已持有SFC 1/7号牌照可提供虚拟资产交易，IFEC 2025显示18-29岁52%投资虚拟资产——这是现成的增量产品线。",
+        "color": "purple",
+        "source": "data.ai App Overlap 2026年3月 + IFEC 2025"
+      },
+      {
+        "title": "80%用户内地背景",
+        "body": "微信80%、淘宝78%、高德38%、小红书36%——富途核心用户是内地来港的高收入科技/金融从业者(飞书Affinity 10.7)。",
+        "color": "amber",
+        "source": "data.ai App Overlap 2026年3月"
+      },
+      {
+        "title": "银行是隐形最大竞品",
+        "body": "HSBC 51%、恒生38%、中银38%、渣打21%——几乎所有富途用户都有银行账户，银行投资功能改善是结构性威胁。",
+        "color": "blue",
+        "source": "data.ai App Overlap 2026年3月"
+      },
+      {
+        "title": "IBKR是唯一港美股直接对手",
+        "body": "21.5%富途用户同时使用IBKR，远超Tiger(3.5%)+Webull(8%)+uSMART(3%)之和(14.5%)。两者都主打港美股一站式交易，争夺同一批跨市场活跃用户。",
+        "color": "indigo",
+        "source": "data.ai App Overlap 2026年3月"
+      }
+    ],
+    "acquisition": [
+      {
+        "title": "认知+兴趣是最大漏洞",
+        "body": "88%投资者通过社媒获取信息(IFEC 2025)，但富途在YouTube(4%)/FB(2%)/IG(1%)几乎隐形。LIHKG/小红书兴趣阶段正被IBKR/Webull截流。",
+        "color": "red",
+        "source": "IFEC 2025 + 渠道覆盖数据 + data.ai交叉安装"
+      },
+      {
+        "title": "来港人才52%——最大增量入口",
+        "body": "每年12万新投资者中52%是来港人才(零switching成本)。核心触达渠道: 小红书/微信/Google搜索。uSMART已在高铁站+口岸抢跑。",
+        "color": "indigo",
+        "source": "入境处人才签证数据 + 增量来源渠道分析"
+      },
+      {
+        "title": "Q3是最佳获客窗口",
+        "body": "Q3新投资者占全年约35%(IANG毕业季+IPO旺季)，预计3.5-4.5万人入市，应集中预算投放。",
+        "color": "amber",
+        "source": "入境处IANG数据 + 港交所IPO日历"
+      },
+      {
+        "title": "防守LIHKG+小红书刻不容缓",
+        "body": "IBKR在LIHKG Affinity(5.51)已超富途(4.94)，Webull在小红书(1.99)已超富途(1.83)——两个最重要的讨论/种草渠道正在失守。",
+        "color": "purple",
+        "source": "data.ai交叉安装 2026年3月"
+      }
+    ],
+    "offline": [
+      {
+        "title": "uSMART已抢占口岸要塞",
+        "body": "盈立uSMART 2025年8月进驻西九龙高铁站+落马洲港铁站，系首家券商入驻港铁站内，专攻内地来港人才开户。月租超HK$100万，周大福控股backing。",
+        "color": "red",
+        "source": "明报2025.8.19 + uSMART官方公告"
+      },
+      {
+        "title": "富途8店 vs uSMART 12店",
+        "body": "uSMART门店数(12间)已超过富途(8间)，并宣布目标18区全覆盖。富途线下网点未扩张，面临线下触点密度落后风险。",
+        "color": "amber",
+        "source": "富途官网 + uSMART公告"
+      },
+      {
+        "title": "银行1,100+网点碾压",
+        "body": "HSBC(230+)、中银(190+)、恒生(260+)等银行线下网络远超互联网券商。51%富途用户同时用HSBC App——银行可直接在柜台推荐自家投资产品。",
+        "color": "blue",
+        "source": "银行年报 + data.ai重叠数据"
+      },
+      {
+        "title": "来港人才52%经口岸入港",
+        "body": "每年约12万新投资者，过半为来港人才(高才通/专才等)，入境必经口岸/高铁站。线下第一触点可能决定券商选择，uSMART正利用这一点。",
+        "color": "indigo",
+        "source": "入境处人才签证数据 + new_investor_analysis"
+      }
+    ]
+  },
+  "incremental_channel_matrix": {
+    "title": "增量投资者在哪？— 新客来源 × 渠道截获矩阵",
+    "subtitle": "每年约8-12万新增投资者(零switching成本)，他们在开户前主要活跃在哪些渠道？",
+    "note": "密度评分: 5=核心渠道(有硬数据支撑), 4=高密度(强推断), 3=中等, 2=低密度, 1=边缘, 0=几乎不在。标注★的有data.ai/IFEC数据支撑，其余为合理推断。",
+    "total_annual": "8-12万",
+    "sources": [
+      {
+        "id": "talent",
+        "name": "来港人才",
+        "short": "来港人才",
+        "annual": "5-8万",
+        "pct": 52,
+        "color": "indigo",
+        "profile": "25-40岁，内地背景，高学历高收入，熟悉内地互联网产品",
+        "channels": [
+          {
+            "channel": "小红书",
+            "density": 5,
+            "evidence": "★ data.ai: 富途用户36%装小红书; 来港攻略/开户教程是小红书热门品类",
+            "action": "KOL种草「港股开户攻略」笔记"
+          },
+          {
+            "channel": "微信",
+            "density": 5,
+            "evidence": "★ data.ai: 富途用户80%装微信; 来港人才初期生活圈仍在微信生态",
+            "action": "公众号+朋友圈广告+企微私域"
+          },
+          {
+            "channel": "Bilibili",
+            "density": 4,
+            "evidence": "年轻内地用户看B站学投资; 富途用户中B站安装比例较高",
+            "action": "UP主合作「来港开户实操」视频"
+          },
+          {
+            "channel": "YouTube",
+            "density": 4,
+            "evidence": "★ IFEC: YouTube信息源从35%→65%; 来港后逐步切换到YouTube",
+            "action": "粤语+普通话双语投资教育内容"
+          },
+          {
+            "channel": "Google搜索",
+            "density": 5,
+            "evidence": "★ 「港股开户」「香港券商比较」是高意图搜索词",
+            "action": "SEM竞价+SEO攻略页"
+          },
+          {
+            "channel": "LIHKG",
+            "density": 2,
+            "evidence": "内地背景用户较少上LIHKG(粤语社区); 但安顿后会开始浏览",
+            "action": "低优先级，自然渗透"
+          },
+          {
+            "channel": "LinkedIn",
+            "density": 3,
+            "evidence": "高才通/专才多为金融/科技从业者，用LinkedIn找工作和社交",
+            "action": "针对金融/科技行业定向广告"
+          },
+          {
+            "channel": "WhatsApp",
+            "density": 4,
+            "evidence": "来港后必装，朋友推荐(MGM)主要通过WhatsApp传播",
+            "action": "MGM链接+群组口碑"
+          },
+          {
+            "channel": "Telegram",
+            "density": 3,
+            "evidence": "科技从业者使用率高; 投资讨论群活跃",
+            "action": "投资群组运营+Bot集成"
+          },
+          {
+            "channel": "Facebook",
+            "density": 2,
+            "evidence": "内地用户较少用FB; 来港后使用率上升但非首选",
+            "action": "低优先级"
+          }
+        ]
+      },
+      {
+        "id": "young",
+        "name": "本地年轻人首次投资",
+        "short": "年轻首投",
+        "annual": "1.5-2万",
+        "pct": 14,
+        "color": "sky",
+        "profile": "18-25岁，本地成长，粤语/英语为主，受KOL和同辈影响",
+        "channels": [
+          {
+            "channel": "YouTube",
+            "density": 5,
+            "evidence": "★ IFEC: 18-29岁YouTube使用率最高; KOL影响力62%; RagaFinance/Coco哥等粤语财经KOL",
+            "action": "合作粤语财经KOL做开户教程+模拟盘挑战"
+          },
+          {
+            "channel": "Instagram",
+            "density": 5,
+            "evidence": "★ data.ai: IG是HK年轻人最活跃社媒; 财经meme/infographic触达率高",
+            "action": "Reels短视频+财经infographic投放"
+          },
+          {
+            "channel": "LIHKG",
+            "density": 4,
+            "evidence": "★ data.ai: LIHKG富途Aff 4.94(全平台最高); 年轻本地人讨论投资首选",
+            "action": "KOL发帖+官方回复「新手应该买什么」类帖子"
+          },
+          {
+            "channel": "TikTok",
+            "density": 3,
+            "evidence": "★ data.ai: Aff仅1.00(金融荒漠); 但年轻人时间花费大，品牌曝光有价值",
+            "action": "轻量品牌曝光，不追求转化"
+          },
+          {
+            "channel": "WhatsApp",
+            "density": 4,
+            "evidence": "同学/朋友间口碑传播; MGM在年轻群体效果好",
+            "action": "学生MGM计划+开户返现"
+          },
+          {
+            "channel": "Google搜索",
+            "density": 4,
+            "evidence": "★ 「best broker HK」「港股入门」搜索意图",
+            "action": "英文+粤语SEO内容"
+          },
+          {
+            "channel": "Facebook",
+            "density": 2,
+            "evidence": "年轻人使用率下降; 非首选信息渠道",
+            "action": "低优先级"
+          },
+          {
+            "channel": "App Store",
+            "density": 5,
+            "evidence": "首次投资者直接在App Store搜索「stock trading」「港股」",
+            "action": "ASO优化+评分维护"
+          },
+          {
+            "channel": "Threads",
+            "density": 2,
+            "evidence": "新兴平台，投资者密度低",
+            "action": "观望"
+          },
+          {
+            "channel": "X/Twitter",
+            "density": 2,
+            "evidence": "★ data.ai: Tiger Aff(2.20)>富途(1.69); 英语年轻人偏好",
+            "action": "低优先级除非做英语市场"
+          }
+        ]
+      },
+      {
+        "id": "existing",
+        "name": "存量居民首次投资",
+        "short": "居民首投",
+        "annual": "2-4万",
+        "pct": 24,
+        "color": "amber",
+        "profile": "30-55岁，本地居民，此前只存银行/买保险，因退休规划或朋友推荐开始投资",
+        "channels": [
+          {
+            "channel": "WhatsApp",
+            "density": 5,
+            "evidence": "香港全民使用; 朋友/同事推荐是最大触发因素",
+            "action": "MGM裂变 — 这群人最信朋友推荐"
+          },
+          {
+            "channel": "Facebook",
+            "density": 5,
+            "evidence": "★ data.ai: 30-55岁香港人FB使用率极高; 投资入门内容触达面广",
+            "action": "FB信息流广告+KOL帖子定向30+"
+          },
+          {
+            "channel": "Google搜索",
+            "density": 5,
+            "evidence": "★ 「投资入门」「定期存款利率」→「基金推荐」→「券商比较」搜索旅程",
+            "action": "SEO漏斗: 理财入门→产品比较→开户"
+          },
+          {
+            "channel": "YouTube",
+            "density": 4,
+            "evidence": "★ IFEC: YouTube信息源65%; 粤语理财教育视频",
+            "action": "合作理财KOL做「40岁开始投资」系列"
+          },
+          {
+            "channel": "MoneySmart",
+            "density": 4,
+            "evidence": "金融比价平台; 首次投资者比较佣金/开户优惠必经之路",
+            "action": "确保MoneySmart排名靠前+开户优惠突出"
+          },
+          {
+            "channel": "MoneyHero",
+            "density": 4,
+            "evidence": "同MoneySmart; 存量居民习惯在此比较金融产品",
+            "action": "优惠页面优化+CPA合作"
+          },
+          {
+            "channel": "LIHKG",
+            "density": 3,
+            "evidence": "投资理财版块活跃; 但这群人更偏向看不偏向发帖",
+            "action": "软性讨论引导"
+          },
+          {
+            "channel": "财经播客",
+            "density": 3,
+            "evidence": "通勤时间收听; 粤语财经播客如「投资高手」受众年龄偏大",
+            "action": "播客赞助+主持人口播"
+          },
+          {
+            "channel": "银行App",
+            "density": 5,
+            "evidence": "★ data.ai: HSBC 51%重叠; 这群人目前的钱在银行",
+            "action": "无法直接投放，但内容强调「从银行转来的好处」"
+          },
+          {
+            "channel": "小红书",
+            "density": 1,
+            "evidence": "本地居民使用率低; 非目标渠道",
+            "action": "不投入"
+          }
+        ]
+      },
+      {
+        "id": "crypto",
+        "name": "Crypto跨品类用户",
+        "short": "Crypto跨品类",
+        "annual": "0.5-1.5万",
+        "pct": 10,
+        "color": "purple",
+        "profile": "18-35岁，已在交易加密货币，可能对港股/美股/ETF有兴趣但未开传统券商账户",
+        "channels": [
+          {
+            "channel": "Telegram",
+            "density": 5,
+            "evidence": "★ data.ai: OKX Aff 3.87, Binance 3.44; crypto社群核心阵地",
+            "action": "建crypto×港股交叉内容频道，主打「一个账户炒币+炒股」"
+          },
+          {
+            "channel": "LIHKG",
+            "density": 5,
+            "evidence": "★ data.ai: Binance Aff 6.69; LIHKG crypto讨论极活跃",
+            "action": "在crypto版发「富途也能买比特币ETF」类帖子"
+          },
+          {
+            "channel": "X/Twitter",
+            "density": 4,
+            "evidence": "Crypto Twitter(CT)是全球加密货币信息中心; HK crypto用户必用",
+            "action": "英语crypto内容+KOL合作"
+          },
+          {
+            "channel": "YouTube",
+            "density": 4,
+            "evidence": "★ IFEC: 18-29岁52%投资虚拟资产; crypto KOL在YouTube活跃",
+            "action": "合作crypto KOL做「从币圈到股市」内容"
+          },
+          {
+            "channel": "Instagram",
+            "density": 2,
+            "evidence": "crypto内容在IG较少; 非核心渠道",
+            "action": "低优先级"
+          },
+          {
+            "channel": "小红书",
+            "density": 2,
+            "evidence": "内地crypto用户会在小红书讨论; 但HK crypto社区不在此",
+            "action": "边缘投入"
+          },
+          {
+            "channel": "Discord",
+            "density": 4,
+            "evidence": "crypto项目社群多在Discord; 用户高度活跃",
+            "action": "官方Discord服务器+crypto社区联名AMA"
+          },
+          {
+            "channel": "Reddit",
+            "density": 3,
+            "evidence": "r/cryptocurrency, r/hongkong有活跃投资讨论",
+            "action": "社区讨论引导+AMA"
+          }
+        ]
+      }
+    ],
+    "data_gaps": [
+      {
+        "question": "富途新开户用户的渠道归因数据",
+        "why": "能直接验证上述推断——实际新客从哪来的？App下载→注册→入金各环节哪个渠道转化最高？",
+        "priority": "极高"
+      },
+      {
+        "question": "来港人才开户前信息搜索行为",
+        "why": "52%增量来自这群人，但他们在哪搜「港股开户」、看了几个竞品、最终选了谁——目前全靠推断",
+        "priority": "高"
+      },
+      {
+        "question": "富途用户onboarding调研(首次开户/已有券商/crypto迁移)",
+        "why": "可直接区分新增量vs存量转化，量化各来源的实际比例",
+        "priority": "高"
+      },
+      {
+        "question": "各渠道KOL合作的CPA/ROI回传数据",
+        "why": "能验证哪些渠道×哪些人群组合的获客成本最低",
+        "priority": "中"
+      }
+    ]
+  },
+  "channel_strategy": {
+    "title": "渠道策略矩阵：已有渠道优化 + AI新渠道开拓",
+    "subtitle": "已有渠道按竞争态势分配预算，新渠道按AI自动化能力排上线优先级",
+    "total_monthly_budget": "HK$10-14M",
+    "budget_source": "建议值 — 基于渠道优先级矩阵得分分配，65%/35%比例参考行业惯例(已有渠道边际递减+新渠道增量弹性)",
+    "existing_channels": {
+      "title": "已有渠道优化（占预算65%）",
+      "description": "已在运营的渠道，按竞争态势决定加码/维持/收缩",
+      "budget_pct": 65,
+      "categories": [
+        {
+          "id": "defend",
+          "name": "防守加码",
+          "description": "竞品正在抢占，必须加大投入守住阵地",
+          "color": "red",
+          "budget_pct_of_existing": 40,
+          "channels": [
+            {
+              "name": "Google SEM/ASO",
+              "investment": "high",
+              "current_status": "已重点投入，覆盖率25%",
+              "threat": "IBKR/长桥/老虎抢品牌词+金融关键词",
+              "action": "加大竞品词防守+品牌词保护，防止高意图流量被截",
+              "monthly_budget": "HK$2.5-3.5M",
+              "priority": 1
+            },
+            {
+              "name": "MoneyHero/MoneySmart",
+              "investment": "medium/low",
+              "current_status": "MoneyHero已有合作(覆盖20%)，MoneySmart少量(18%)",
+              "threat": "IBKR/老虎/Webull在比较平台有CPA合作，用户在此做最终决策",
+              "action": "加大CPA合作力度，争取比较页面排名第一",
+              "monthly_budget": "HK$500K-1M",
+              "priority": 2
+            },
+            {
+              "name": "财经媒体(HKET/HKEJ/Finet)",
+              "investment": "medium",
+              "current_status": "有一定投入，覆盖率12%",
+              "threat": "竞品持续投放财经媒体展示广告",
+              "action": "维持品牌曝光，防止被竞品挤出核心财经阵地",
+              "monthly_budget": "HK$300-500K",
+              "priority": 3
+            }
+          ]
+        },
+        {
+          "id": "scale_up",
+          "name": "加码放量",
+          "description": "有基础但覆盖率低，加大投入可快速提升ROI",
+          "color": "amber",
+          "budget_pct_of_existing": 35,
+          "channels": [
+            {
+              "name": "YouTube",
+              "investment": "medium",
+              "current_status": "有运营(覆盖4%)，IFEC数据显示使用率35%→65%暴涨",
+              "action": "加大付费广告+内容产出，210万投资者仅覆盖4%空间巨大",
+              "monthly_budget": "HK$1-2M",
+              "priority": 1
+            },
+            {
+              "name": "小红书",
+              "investment": "medium",
+              "current_status": "有运营(覆盖3%)，30万投资者增长最快(+35% YoY)",
+              "action": "扩大种草内容+信息流广告投放",
+              "monthly_budget": "HK$300-600K",
+              "priority": 2
+            },
+            {
+              "name": "WhatsApp MGM",
+              "investment": "high",
+              "current_status": "已有MGM机制(覆盖20%)，482万用户月活最高",
+              "action": "优化裂变机制+奖励升级，MGM是CAC最低渠道(HK$300-800)",
+              "monthly_budget": "HK$500K-1M",
+              "priority": 3
+            }
+          ]
+        },
+        {
+          "id": "maintain",
+          "name": "维持运营",
+          "description": "保持现有投入水平，不额外加码",
+          "color": "gray",
+          "budget_pct_of_existing": 25,
+          "channels": [
+            {
+              "name": "微信公众号/小程序",
+              "investment": "high",
+              "current_status": "覆盖25%，内地来港人群核心触点",
+              "action": "保持运营节奏，不需额外加码"
+            },
+            {
+              "name": "雪球/知乎/微博",
+              "investment": "medium",
+              "current_status": "覆盖10-15%，中文投资社区基本盘",
+              "action": "维持内容更新频率"
+            },
+            {
+              "name": "LinkedIn",
+              "investment": "medium",
+              "current_status": "覆盖8%，高净值人群渠道",
+              "action": "维持品牌内容输出"
+            },
+            {
+              "name": "线下活动",
+              "investment": "high",
+              "current_status": "覆盖15%",
+              "action": "按节奏举办，配合线上引流"
+            }
+          ]
+        }
+      ]
+    },
+    "new_channels": {
+      "title": "新渠道开拓（占预算35%）",
+      "description": "之前没做或刚起步的渠道，按AI自动化能力排上线优先级",
+      "budget_pct": 35,
+      "tiers": [
+        {
+          "id": "ai_fast",
+          "name": "AI快速上线（1-2周）",
+          "description": "AI自动化程度≥80%，可在1-2周内跑通获客闭环",
+          "color": "green",
+          "channels": [
+            {
+              "name": "Facebook/Instagram Ads",
+              "investment": "low/none",
+              "investors": "197万+142万",
+              "ai_pct": 85,
+              "ai_role": "AI生成广告素材(图片+文案)、Lookalike受众、自动优化转化",
+              "launch_time": "1-2天上线",
+              "monthly_budget": "HK$1.5-2.5M",
+              "est_monthly_acq": "1,500-4,000",
+              "why_fast": "广告平台自带AI投放工具，素材用AI批量生成即可"
+            },
+            {
+              "name": "TikTok AI短视频+广告",
+              "investment": "none",
+              "investors": "45万(年轻增量最大)",
+              "ai_pct": 80,
+              "ai_role": "AI数字人生成投资短视频、In-feed广告自动投放",
+              "launch_time": "1周上线",
+              "monthly_budget": "HK$400-800K",
+              "est_monthly_acq": "500-1,500",
+              "why_fast": "数字人+AI脚本可日产10+视频，广告平台成熟"
+            },
+            {
+              "name": "Email/Newsletter drip",
+              "investment": "none",
+              "investors": "存量用户列表",
+              "ai_pct": 90,
+              "ai_role": "AI写个性化邮件序列、自动分群推送、开户引导",
+              "launch_time": "1周搭建",
+              "monthly_budget": "HK$50-100K",
+              "est_monthly_acq": "200-800",
+              "why_fast": "邮件工具(Brevo/Mailchimp)自带AI+模板，几乎零成本"
+            },
+            {
+              "name": "SEO内容矩阵",
+              "investment": "none",
+              "investors": "长尾搜索无上限",
+              "ai_pct": 90,
+              "ai_role": "AI批量生成100+篇比较文章(富途vs老虎/开户攻略等)",
+              "launch_time": "1周发布(2-4周见排名)",
+              "monthly_budget": "HK$100-200K",
+              "est_monthly_acq": "500-2,000(长期复利)",
+              "why_fast": "AI可日产10+高质量SEO文章，发布后持续引流"
+            }
+          ]
+        },
+        {
+          "id": "ai_assist",
+          "name": "AI辅助上线（3-4周）",
+          "description": "AI负责内容生产，人工负责质量把控和渠道对接",
+          "color": "amber",
+          "channels": [
+            {
+              "name": "Telegram Bot + 频道",
+              "investment": "low",
+              "investors": "44万(高质量crypto+高净值)",
+              "ai_pct": 80,
+              "ai_role": "AI驱动投资Bot(行情提醒/问答)、自动发频道内容",
+              "launch_time": "1-2周开发",
+              "monthly_budget": "HK$100-200K",
+              "est_monthly_acq": "200-600"
+            },
+            {
+              "name": "Bilibili 内容运营",
+              "investment": "low",
+              "investors": "内地来港年轻人",
+              "ai_pct": 60,
+              "ai_role": "AI生成视频脚本+字幕，人工把控内容质量",
+              "launch_time": "2-3周",
+              "monthly_budget": "HK$100-200K",
+              "est_monthly_acq": "100-400"
+            },
+            {
+              "name": "Threads/X 品牌号",
+              "investment": "low/none",
+              "investors": "X 51万 + Threads 26万",
+              "ai_pct": 85,
+              "ai_role": "AI自动生成每日行情帖、热点快速响应",
+              "launch_time": "3天上线",
+              "monthly_budget": "HK$50-100K",
+              "est_monthly_acq": "50-200"
+            },
+            {
+              "name": "KOL自动建联(扩展)",
+              "investment": "已有系统",
+              "investors": "KOL影响力29%→62%",
+              "ai_pct": 70,
+              "ai_role": "AI扫描发现KOL、评级打分、自动建联邮件",
+              "launch_time": "持续扩展",
+              "monthly_budget": "HK$500K-1M(含KOL费用)",
+              "est_monthly_acq": "500-2,000"
+            }
+          ]
+        },
+        {
+          "id": "human_lead",
+          "name": "人工主导（需商务谈判）",
+          "description": "社区性强或需B2B合作，AI只能辅助内容生成",
+          "color": "gray",
+          "channels": [
+            {
+              "name": "TradingView Broker集成",
+              "investment": "none",
+              "reason": "需产品对接+商务谈判，但用户极精准"
+            },
+            {
+              "name": "HongKongCard/经济一周",
+              "investment": "none",
+              "reason": "需CPA商务合作，比较页面影响开户决策"
+            },
+            {
+              "name": "LIHKG/高登/讨论区",
+              "investment": "none",
+              "reason": "社区极排斥商业内容，机器人会被秒封，需真人长期参与"
+            },
+            {
+              "name": "财经播客赞助",
+              "investment": "low",
+              "reason": "需人工对接主播+录制，AI数字人在播客不成熟"
+            }
+          ]
+        }
+      ]
+    },
+    "launch_roadmap": [
+      {
+        "phase": "Week 1-2",
+        "label": "AI闪电战",
+        "description": "4个AI全自动新渠道同步上线",
+        "channels": [
+          "FB/IG Ads",
+          "TikTok AI视频",
+          "Email drip",
+          "SEO矩阵"
+        ],
+        "focus": "new",
+        "color": "green"
+      },
+      {
+        "phase": "Week 3-4",
+        "label": "AI+人协同",
+        "description": "AI辅助渠道启动 + 已有渠道优化提效",
+        "channels": [
+          "Telegram Bot",
+          "Threads/X",
+          "B站",
+          "YouTube加码",
+          "小红书加码"
+        ],
+        "focus": "mixed",
+        "color": "amber"
+      },
+      {
+        "phase": "Month 2-3",
+        "label": "全面深耕",
+        "description": "人工谈判渠道推进 + 全渠道数据联动优化",
+        "channels": [
+          "TradingView集成",
+          "HongKongCard CPA",
+          "KOL扩展",
+          "MGM升级"
+        ],
+        "focus": "human",
+        "color": "blue"
+      }
+    ]
+  },
+  "offline_district_analysis": {
+    "title": "线下片区渠道分析",
+    "subtitle": "香港18区线下触点密度 · 竞品布局 · 投资者人口热力",
+    "data_sources": [
+      "富途官网门店列表",
+      "uSMART官方公告 + 明报2025.8.19",
+      "港铁广告费率2025",
+      "统计处2024中期人口统计",
+      "IFEC 2025投资者调查"
+    ],
+    "summary_stats": {
+      "futu_total_stores": 8,
+      "futu_stores_note": "覆盖港九新界，但无口岸/港铁站内布点",
+      "usmart_total_stores": 12,
+      "usmart_target": "18区全覆盖",
+      "usmart_stores_note": "含西九龙高铁站+落马洲港铁站，首家券商入驻港铁",
+      "bank_total_branches": 1100,
+      "bank_note": "HSBC 230+ / 恒生 260+ / 中银 190+ / 渣打 80+",
+      "mtr_stations_total": 98,
+      "mtr_daily_ridership": 5200000,
+      "mtr_daily_ridership_note": "日均520万人次(2024)",
+      "avg_mtr_station_ad_monthly_hkd": 120000
+    },
+    "regions": [
+      {
+        "name": "港岛核心",
+        "description": "金融CBD + 高净值住宅区",
+        "districts": [
+          {
+            "name": "中西区",
+            "population": 237000,
+            "investor_density": "极高",
+            "investor_density_score": 5,
+            "median_income_hkd": 45000,
+            "key_locations": [
+              "中环IFC",
+              "金钟太古广场",
+              "西营盘港铁站"
+            ],
+            "futu_presence": {
+              "stores": 1,
+              "locations": [
+                "中环皇后大道中"
+              ],
+              "coverage": "中等"
+            },
+            "competitor_presence": [
+              {
+                "name": "uSMART",
+                "stores": 1,
+                "locations": [
+                  "中环"
+                ],
+                "note": ""
+              },
+              {
+                "name": "IBKR",
+                "stores": 0,
+                "note": "纯线上"
+              },
+              {
+                "name": "银行",
+                "branches": 85,
+                "note": "HSBC/中银/恒生密集"
+              }
+            ],
+            "mtr_stations": [
+              "中环",
+              "金钟",
+              "上环",
+              "西营盘",
+              "香港大学"
+            ],
+            "mtr_ad_monthly_hkd": 180000,
+            "events_venues": [
+              "HKEX Connect Hall",
+              "JW万豪",
+              "香格里拉"
+            ],
+            "priority": "A",
+            "action": "金融心脏地带, 维持品牌存在感, 重点MTR灯箱+高端活动"
+          },
+          {
+            "name": "湾仔区",
+            "population": 166000,
+            "investor_density": "极高",
+            "investor_density_score": 5,
+            "median_income_hkd": 40000,
+            "key_locations": [
+              "湾仔会展",
+              "铜锣湾SOGO",
+              "跑马地"
+            ],
+            "futu_presence": {
+              "stores": 1,
+              "locations": [
+                "湾仔"
+              ],
+              "coverage": "中等"
+            },
+            "competitor_presence": [
+              {
+                "name": "uSMART",
+                "stores": 1,
+                "locations": [
+                  "铜锣湾"
+                ],
+                "note": ""
+              },
+              {
+                "name": "IBKR",
+                "stores": 0,
+                "note": "纯线上"
+              },
+              {
+                "name": "银行",
+                "branches": 65,
+                "note": "铜锣湾商圈密集"
+              }
+            ],
+            "mtr_stations": [
+              "湾仔",
+              "铜锣湾",
+              "天后"
+            ],
+            "mtr_ad_monthly_hkd": 160000,
+            "events_venues": [
+              "HKCEC会展中心",
+              "时代广场"
+            ],
+            "priority": "A",
+            "action": "会展中心是投资活动主场地(FinTech Week/iFX EXPO), 配合活动周期投放"
+          },
+          {
+            "name": "东区",
+            "population": 529000,
+            "investor_density": "高",
+            "investor_density_score": 4,
+            "median_income_hkd": 33000,
+            "key_locations": [
+              "太古城",
+              "�的鱼涌太古坊",
+              "北角"
+            ],
+            "futu_presence": {
+              "stores": 1,
+              "locations": [
+                "太古"
+              ],
+              "coverage": "基本"
+            },
+            "competitor_presence": [
+              {
+                "name": "uSMART",
+                "stores": 1,
+                "locations": [
+                  "北角"
+                ],
+                "note": ""
+              },
+              {
+                "name": "银行",
+                "branches": 55,
+                "note": "太古城/北角商圈"
+              }
+            ],
+            "mtr_stations": [
+              "太古",
+              "鰂鱼涌",
+              "西湾河",
+              "筲箕湾",
+              "北角"
+            ],
+            "mtr_ad_monthly_hkd": 100000,
+            "events_venues": [],
+            "priority": "B",
+            "action": "太古坊写字楼群上班族覆盖, 港铁站午间广告"
+          }
+        ]
+      },
+      {
+        "name": "九龙商业",
+        "description": "旺角/尖沙咀人流极大 + 内地游客密集",
+        "districts": [
+          {
+            "name": "油尖旺区",
+            "population": 318000,
+            "investor_density": "高",
+            "investor_density_score": 4,
+            "median_income_hkd": 28000,
+            "key_locations": [
+              "尖沙咀海港城",
+              "旺角朗豪坊",
+              "佐敦"
+            ],
+            "futu_presence": {
+              "stores": 1,
+              "locations": [
+                "旺角"
+              ],
+              "coverage": "基本"
+            },
+            "competitor_presence": [
+              {
+                "name": "uSMART",
+                "stores": 2,
+                "locations": [
+                  "尖沙咀",
+                  "旺角"
+                ],
+                "note": "旺角人流极大"
+              },
+              {
+                "name": "银行",
+                "branches": 70,
+                "note": "弥敦道沿线密集"
+              }
+            ],
+            "mtr_stations": [
+              "尖沙咀",
+              "佐敦",
+              "油麻地",
+              "旺角",
+              "太子"
+            ],
+            "mtr_ad_monthly_hkd": 200000,
+            "events_venues": [
+              "尖沙咀文化中心",
+              "K11 MUSEA"
+            ],
+            "priority": "A",
+            "action": "全港人流最大区域, 弥敦道沿线MTR广告覆盖, 旺角/尖沙咀双店策略"
+          },
+          {
+            "name": "九龙城区",
+            "population": 418000,
+            "investor_density": "中高",
+            "investor_density_score": 3,
+            "median_income_hkd": 30000,
+            "key_locations": [
+              "九龙塘又一城",
+              "红磡黄埔花园",
+              "启德"
+            ],
+            "futu_presence": {
+              "stores": 0,
+              "locations": [],
+              "coverage": "空白"
+            },
+            "competitor_presence": [
+              {
+                "name": "uSMART",
+                "stores": 1,
+                "locations": [
+                  "红磡"
+                ],
+                "note": ""
+              },
+              {
+                "name": "银行",
+                "branches": 40,
+                "note": ""
+              }
+            ],
+            "mtr_stations": [
+              "九龙塘",
+              "红磡",
+              "何文田",
+              "启德",
+              "宋皇台"
+            ],
+            "mtr_ad_monthly_hkd": 100000,
+            "events_venues": [],
+            "priority": "B",
+            "action": "九龙塘为教育/中产区, 红磡理工大学周边年轻投资者, 启德新发展区关注"
+          },
+          {
+            "name": "深水埗区",
+            "population": 405000,
+            "investor_density": "中",
+            "investor_density_score": 2,
+            "median_income_hkd": 22000,
+            "key_locations": [
+              "深水埗",
+              "长沙湾",
+              "荔枝角"
+            ],
+            "futu_presence": {
+              "stores": 0,
+              "locations": [],
+              "coverage": "空白"
+            },
+            "competitor_presence": [
+              {
+                "name": "uSMART",
+                "stores": 0,
+                "locations": [],
+                "note": ""
+              },
+              {
+                "name": "银行",
+                "branches": 30,
+                "note": ""
+              }
+            ],
+            "mtr_stations": [
+              "深水埗",
+              "长沙湾",
+              "荔枝角",
+              "美孚"
+            ],
+            "mtr_ad_monthly_hkd": 60000,
+            "events_venues": [],
+            "priority": "C",
+            "action": "低收入区, 非核心投资者区域, 仅MTR品牌曝光"
+          }
+        ]
+      },
+      {
+        "name": "新界东(来港人才聚居)",
+        "description": "靠近口岸, 来港人才/新移民首选居住区",
+        "districts": [
+          {
+            "name": "沙田区",
+            "population": 692000,
+            "investor_density": "高",
+            "investor_density_score": 4,
+            "median_income_hkd": 32000,
+            "key_locations": [
+              "沙田新城市广场",
+              "马鞍山",
+              "科学园"
+            ],
+            "futu_presence": {
+              "stores": 1,
+              "locations": [
+                "沙田"
+              ],
+              "coverage": "基本"
+            },
+            "competitor_presence": [
+              {
+                "name": "uSMART",
+                "stores": 1,
+                "locations": [
+                  "沙田"
+                ],
+                "note": ""
+              },
+              {
+                "name": "银行",
+                "branches": 50,
+                "note": "新城市广场周边密集"
+              }
+            ],
+            "mtr_stations": [
+              "沙田",
+              "大围",
+              "火炭",
+              "马鞍山",
+              "科学园"
+            ],
+            "mtr_ad_monthly_hkd": 100000,
+            "events_venues": [
+              "香港科学园"
+            ],
+            "priority": "A",
+            "action": "来港人才聚居区+科学园科技从业者, 中文内容覆盖, 社区活动+门店开户"
+          },
+          {
+            "name": "大埔区",
+            "population": 317000,
+            "investor_density": "中高",
+            "investor_density_score": 3,
+            "median_income_hkd": 30000,
+            "key_locations": [
+              "大埔超级城",
+              "大埔墟"
+            ],
+            "futu_presence": {
+              "stores": 0,
+              "locations": [],
+              "coverage": "空白"
+            },
+            "competitor_presence": [
+              {
+                "name": "uSMART",
+                "stores": 0,
+                "locations": [],
+                "note": ""
+              },
+              {
+                "name": "银行",
+                "branches": 25,
+                "note": ""
+              }
+            ],
+            "mtr_stations": [
+              "大埔墟",
+              "太和"
+            ],
+            "mtr_ad_monthly_hkd": 60000,
+            "events_venues": [],
+            "priority": "B",
+            "action": "来港人才外溢居住区, MTR站广告+社区传单"
+          },
+          {
+            "name": "北区",
+            "population": 304000,
+            "investor_density": "中",
+            "investor_density_score": 3,
+            "median_income_hkd": 26000,
+            "key_locations": [
+              "上水广场",
+              "粉岭"
+            ],
+            "futu_presence": {
+              "stores": 0,
+              "locations": [],
+              "coverage": "空白"
+            },
+            "competitor_presence": [
+              {
+                "name": "uSMART",
+                "stores": 1,
+                "locations": [
+                  "落马洲港铁站"
+                ],
+                "note": "首家券商入驻港铁站内"
+              },
+              {
+                "name": "银行",
+                "branches": 25,
+                "note": "上水/粉岭"
+              }
+            ],
+            "mtr_stations": [
+              "上水",
+              "粉岭",
+              "落马洲"
+            ],
+            "mtr_ad_monthly_hkd": 80000,
+            "events_venues": [],
+            "priority": "A",
+            "action": "落马洲口岸是深圳-香港通勤必经点, uSMART已布点, 富途需反截流(口岸广告/临时展位)"
+          }
+        ]
+      },
+      {
+        "name": "新界西",
+        "description": "新城镇中产家庭 + MTR西铁沿线",
+        "districts": [
+          {
+            "name": "荃湾区",
+            "population": 318000,
+            "investor_density": "中高",
+            "investor_density_score": 3,
+            "median_income_hkd": 30000,
+            "key_locations": [
+              "荃湾广场",
+              "如心广场"
+            ],
+            "futu_presence": {
+              "stores": 1,
+              "locations": [
+                "荃湾"
+              ],
+              "coverage": "基本"
+            },
+            "competitor_presence": [
+              {
+                "name": "uSMART",
+                "stores": 1,
+                "locations": [
+                  "荃湾"
+                ],
+                "note": ""
+              },
+              {
+                "name": "银行",
+                "branches": 35,
+                "note": ""
+              }
+            ],
+            "mtr_stations": [
+              "荃湾",
+              "荃湾西",
+              "大窝口"
+            ],
+            "mtr_ad_monthly_hkd": 80000,
+            "events_venues": [],
+            "priority": "B",
+            "action": "新界西交通枢纽, 维持门店运营, MTR品牌广告"
+          },
+          {
+            "name": "元朗区",
+            "population": 668000,
+            "investor_density": "中",
+            "investor_density_score": 3,
+            "median_income_hkd": 28000,
+            "key_locations": [
+              "元朗YOHO Mall",
+              "天水围"
+            ],
+            "futu_presence": {
+              "stores": 0,
+              "locations": [],
+              "coverage": "空白"
+            },
+            "competitor_presence": [
+              {
+                "name": "uSMART",
+                "stores": 1,
+                "locations": [
+                  "元朗"
+                ],
+                "note": ""
+              },
+              {
+                "name": "银行",
+                "branches": 35,
+                "note": ""
+              }
+            ],
+            "mtr_stations": [
+              "元朗",
+              "朗屏",
+              "天水围",
+              "锦上路"
+            ],
+            "mtr_ad_monthly_hkd": 70000,
+            "events_venues": [],
+            "priority": "B",
+            "action": "人口大区(66.8万), 来港人才外溢居住地, 可考虑YOHO Mall临时展位"
+          },
+          {
+            "name": "屯门区",
+            "population": 495000,
+            "investor_density": "中",
+            "investor_density_score": 2,
+            "median_income_hkd": 26000,
+            "key_locations": [
+              "屯门市广场",
+              "V City"
+            ],
+            "futu_presence": {
+              "stores": 0,
+              "locations": [],
+              "coverage": "空白"
+            },
+            "competitor_presence": [
+              {
+                "name": "uSMART",
+                "stores": 1,
+                "locations": [
+                  "屯门"
+                ],
+                "note": ""
+              },
+              {
+                "name": "银行",
+                "branches": 30,
+                "note": ""
+              }
+            ],
+            "mtr_stations": [
+              "屯门",
+              "兆康"
+            ],
+            "mtr_ad_monthly_hkd": 60000,
+            "events_venues": [],
+            "priority": "C",
+            "action": "偏远但人口多(49.5万), 低优先级, 仅线上覆盖"
+          }
+        ]
+      },
+      {
+        "name": "口岸/交通枢纽",
+        "description": "来港人才入境必经 · uSMART已布点 · 截流关键",
+        "districts": [
+          {
+            "name": "西九龙高铁站",
+            "population": 0,
+            "investor_density": "极高(过境)",
+            "investor_density_score": 5,
+            "median_income_hkd": null,
+            "key_locations": [
+              "西九龙站大堂",
+              "抵港层",
+              "离港层"
+            ],
+            "futu_presence": {
+              "stores": 0,
+              "locations": [],
+              "coverage": "空白"
+            },
+            "competitor_presence": [
+              {
+                "name": "uSMART",
+                "stores": 1,
+                "locations": [
+                  "G-14铺"
+                ],
+                "note": "2025年8月进驻, 月租超HK$100万"
+              }
+            ],
+            "mtr_stations": [
+              "柯士甸"
+            ],
+            "mtr_ad_monthly_hkd": 250000,
+            "daily_passenger_flow": 80000,
+            "daily_passenger_note": "日均约8万人次(高铁), 节假日超15万",
+            "events_venues": [],
+            "priority": "S",
+            "action": "uSMART已抢占! 52%增量投资者(来港人才)入境首站。富途必须在此设点或投放大型广告, 否则第一触点拱手让人"
+          },
+          {
+            "name": "落马洲/福田口岸",
+            "population": 0,
+            "investor_density": "极高(过境)",
+            "investor_density_score": 5,
+            "median_income_hkd": null,
+            "key_locations": [
+              "落马洲港铁站",
+              "福田口岸"
+            ],
+            "futu_presence": {
+              "stores": 0,
+              "locations": [],
+              "coverage": "空白"
+            },
+            "competitor_presence": [
+              {
+                "name": "uSMART",
+                "stores": 1,
+                "locations": [
+                  "落马洲港铁站内"
+                ],
+                "note": "首家证券行入驻港铁站"
+              }
+            ],
+            "mtr_stations": [
+              "落马洲"
+            ],
+            "mtr_ad_monthly_hkd": 150000,
+            "daily_passenger_flow": 150000,
+            "daily_passenger_note": "日均约15万人次(深港通勤最大口岸)",
+            "events_venues": [],
+            "priority": "S",
+            "action": "深港通勤客日均15万, uSMART已在站内开店。富途需在口岸通道/港铁站外设临时展位+大型广告牌"
+          },
+          {
+            "name": "罗湖口岸",
+            "population": 0,
+            "investor_density": "高(过境)",
+            "investor_density_score": 4,
+            "median_income_hkd": null,
+            "key_locations": [
+              "罗湖港铁站",
+              "罗湖商业城"
+            ],
+            "futu_presence": {
+              "stores": 0,
+              "locations": [],
+              "coverage": "空白"
+            },
+            "competitor_presence": [
+              {
+                "name": "uSMART",
+                "stores": 0,
+                "locations": [],
+                "note": "尚未布点"
+              },
+              {
+                "name": "银行",
+                "branches": 3,
+                "note": "中银/恒生ATM+迷你柜台"
+              }
+            ],
+            "mtr_stations": [
+              "罗湖"
+            ],
+            "mtr_ad_monthly_hkd": 120000,
+            "daily_passenger_flow": 120000,
+            "daily_passenger_note": "日均约12万人次",
+            "events_venues": [],
+            "priority": "A",
+            "action": "uSMART尚未布点, 窗口期! 富途应抢先在此设展位/广告位, 先发制人"
+          }
+        ]
+      }
+    ],
+    "recommendations": [
+      {
+        "rank": 1,
+        "action": "口岸/高铁站反截流",
+        "detail": "uSMART已在西九龙高铁站(G-14铺)+落马洲港铁站开店，专截来港人才。富途应在西九龙站抵港层+落马洲通道+罗湖口岸设大型广告牌或临时展位，至少确保品牌可见度。",
+        "priority": "紧急",
+        "est_cost_hkd": "50-100万/月",
+        "expected_impact": "拦截52%增量投资者(来港人才)的线下第一触点",
+        "timeline": "立即启动"
+      },
+      {
+        "rank": 2,
+        "action": "罗湖口岸抢先布点",
+        "detail": "罗湖口岸日均12万人次，uSMART尚未进驻。富途应在此设临时展位(周末驻点)+港铁站内广告，抢占uSMART到达前的窗口期。",
+        "priority": "紧急",
+        "est_cost_hkd": "20-40万/月",
+        "expected_impact": "先发制人，占领uSMART尚未覆盖的第二大陆路口岸",
+        "timeline": "1个月内"
+      },
+      {
+        "rank": 3,
+        "action": "MTR核心线路广告覆盖",
+        "detail": "东铁线(罗湖→金钟)是来港人才通勤主线，荃湾线(荃湾→中环)覆盖CBD上班族。建议投放这两条线路主要车站灯箱广告，强化品牌认知。",
+        "priority": "高",
+        "est_cost_hkd": "80-150万/月(10个核心站)",
+        "expected_impact": "日均覆盖300万+通勤人次，建立品牌认知基线",
+        "timeline": "Q3启动"
+      },
+      {
+        "rank": 4,
+        "action": "沙田/科学园来港人才社区渗透",
+        "detail": "沙田区69.2万人口，科学园聚集大量高才通科技从业者。在沙田新城市广场周末设展+科学园午间路演，定向触达高质量来港人才。",
+        "priority": "高",
+        "est_cost_hkd": "15-30万/月",
+        "expected_impact": "精准触达科技/金融来港人才，预估月获客200-400人",
+        "timeline": "Q3启动"
+      },
+      {
+        "rank": 5,
+        "action": "投资活动赞助/联名升级",
+        "detail": "富途已在HKEX Connect Hall联合UBS办活动，应扩大规模：FinTech Week(3.7万人/年)独家赞助+Wiki Finance Expo展位+季度自办投资沙龙(中环/湾仔)。",
+        "priority": "中",
+        "est_cost_hkd": "30-60万/季",
+        "expected_impact": "高意向投资者面对面接触，现场转化率5-15%",
+        "timeline": "按活动日历排期"
+      },
+      {
+        "rank": 6,
+        "action": "油尖旺/旺角加密门店",
+        "detail": "油尖旺区全港人流最大(弥敦道日均百万人次)，uSMART已在此设2店。富途旺角门店需升级：更大面积+街面展示+数字屏幕，与uSMART正面竞争。",
+        "priority": "中",
+        "est_cost_hkd": "10-20万/月(门店升级)",
+        "expected_impact": "全港最大人流区域品牌存在感，防止uSMART在此建立认知优势",
+        "timeline": "Q3-Q4"
+      }
+    ]
+  },
+  "broker_overlap_st": {
+    "title": "券商交叉安装动态 — Q4 2025 vs Q1 2026",
+    "subtitle": "SensorTower Unified App Overlap，富途牛牛用户视角，香港市场",
+    "period": "Q4 2025 (10-12月) vs Q1 2026 (1-3月)",
+    "source": "SensorTower API",
+    "data_note": "46.2% 为 12 款主要券商 App 相对份额，非 HK 全市场绝对占比",
+    "market_share": [
+      {
+        "name": "富途牛牛",
+        "q4": 48.8,
+        "q1": 46.2,
+        "chg": -2.6,
+        "color": "indigo"
+      },
+      {
+        "name": "IBKR盈透",
+        "q4": 10.0,
+        "q1": 10.0,
+        "chg": 0.0,
+        "color": "blue"
+      },
+      {
+        "name": "Tiger老虎",
+        "q4": 9.4,
+        "q1": 8.9,
+        "chg": -0.5,
+        "color": "amber"
+      },
+      {
+        "name": "Webull微牛",
+        "q4": 9.2,
+        "q1": 9.3,
+        "chg": 0.1,
+        "color": "sky"
+      },
+      {
+        "name": "uSMART盈立",
+        "q4": 7.2,
+        "q1": 10.1,
+        "chg": 2.9,
+        "color": "green"
+      },
+      {
+        "name": "众安证券",
+        "q4": 6.8,
+        "q1": 6.9,
+        "chg": 0.1,
+        "color": "gray"
+      },
+      {
+        "name": "耀才证券",
+        "q4": 2.2,
+        "q1": 2.7,
+        "chg": 0.5,
+        "color": "gray"
+      },
+      {
+        "name": "长桥证券",
+        "q4": 3.0,
+        "q1": 2.3,
+        "chg": -0.7,
+        "color": "red"
+      }
+    ],
+    "cross_install": [
+      {
+        "name": "IBKR盈透",
+        "q4": null,
+        "q1": 21.54,
+        "chg": null,
+        "affinity": 6.64,
+        "note": "最大直接竞品，每5个富途用户有1个同时用IBKR"
+      },
+      {
+        "name": "Webull微牛",
+        "q4": 10.49,
+        "q1": 10.81,
+        "chg": 0.32,
+        "affinity": 7.13,
+        "note": "用户画像高度相似，美股赛道直接竞争"
+      },
+      {
+        "name": "Tiger老虎",
+        "q4": 7.49,
+        "q1": 7.23,
+        "chg": -0.26,
+        "affinity": null,
+        "note": "Tiger下载量依赖富途，交叉安装微降"
+      },
+      {
+        "name": "uSMART盈立",
+        "q4": 1.67,
+        "q1": 2.73,
+        "chg": 1.06,
+        "affinity": 11.9,
+        "note": "亲密度最高（11.9x），三向信号一致，绝对值仍小"
+      },
+      {
+        "name": "长桥证券",
+        "q4": 2.51,
+        "q1": 1.82,
+        "chg": -0.69,
+        "affinity": null,
+        "note": "交叉安装下降，长桥63%用户同时装富途"
+      }
+    ],
+    "competitor_perspectives": [
+      {
+        "name": "长桥 → 富途",
+        "futu_share": 63.0,
+        "note": "长桥用户中63%同时装富途，两侧数据方向一致",
+        "confidence": "strong"
+      },
+      {
+        "name": "Tiger → 富途",
+        "futu_share": null,
+        "note": "Tiger用户IBKR装机+21.40pp（⚠️ 仅20行样本，可信度低）",
+        "confidence": "weak"
+      },
+      {
+        "name": "IBKR → 富途",
+        "futu_share": null,
+        "note": "样本量符合要求，详细数据待补充",
+        "confidence": "medium"
+      },
+      {
+        "name": "Webull → 富途",
+        "futu_share": null,
+        "note": "存在双向重叠",
+        "confidence": "medium"
+      }
+    ],
+    "non_broker": [
+      {
+        "name": "eMPF",
+        "chg": 1.83,
+        "from_pct": null,
+        "to_pct": null,
+        "note": "强积金平台上升，与证券交易无直接关联",
+        "verified": false
+      },
+      {
+        "name": "Mox",
+        "chg": -1.84,
+        "from_pct": 18.8,
+        "to_pct": 17.0,
+        "note": "虚拟银行使用率下降，原因不明",
+        "verified": false
+      },
+      {
+        "name": "Citi",
+        "chg": -3.53,
+        "from_pct": null,
+        "to_pct": null,
+        "note": "传统银行App使用率下降",
+        "verified": false
+      },
+      {
+        "name": "Yahoo Finance",
+        "chg": -1.44,
+        "from_pct": 7.2,
+        "to_pct": 5.8,
+        "note": "全市场DAU同期下滑57%（API验证），非富途特有",
+        "verified": true
+      },
+      {
+        "name": "Binance",
+        "chg": -1.38,
+        "from_pct": 9.9,
+        "to_pct": 8.5,
+        "note": "全市场DAU同期下滑26%（API验证），非富途特有",
+        "verified": true
+      }
+    ],
+    "conclusions": [
+      {
+        "title": "长桥持续萎缩，用户向富途集中",
+        "body": "长桥Q1下载份额降至2.3%（-0.7pp），其用户中63%同时装富途。富途用户中长桥装机率从2.51%降至1.82%，两侧数据方向一致。",
+        "confidence": "strong",
+        "color": "emerald"
+      },
+      {
+        "title": "IBKR是最大直接竞品",
+        "body": "富途用户中IBKR装机率21.54%，亲密度6.64x，份额稳定。争夺同一批港美股活跃交易者。",
+        "confidence": "strong",
+        "color": "red"
+      },
+      {
+        "title": "uSMART异动值得持续观察",
+        "body": "富途用户中uSMART装机率+1.06pp（1.67%→2.73%），亲密度11.9x（竞品最高），下载份额+2.9pp，三向信号一致。但绝对值小，无法排除开户奖励安装。需内部数据验证。",
+        "confidence": "medium",
+        "color": "amber"
+      },
+      {
+        "title": "Yahoo Finance / Binance下降非富途特有",
+        "body": "SensorTower API验证：Yahoo Finance HK全市场DAU同期-57%，Binance HK -26%，属于全市场趋势。",
+        "confidence": "strong",
+        "color": "blue"
       }
     ]
   }

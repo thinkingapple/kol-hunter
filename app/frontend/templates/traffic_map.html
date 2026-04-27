@@ -1,10 +1,42 @@
 {% extends "base.html" %}
 {% block title %}投资者流量地图{% endblock %}
 {% block content %}
-<div class="mb-6">
-    <h2 class="text-2xl font-bold text-gray-900">香港投资者流量地图</h2>
-    <p class="text-gray-500 mt-1">香港 750 万人口中约 250 万活跃投资者的线上渠道分布 | 更新于 {{ updated_at }}</p>
+<div class="mb-4">
+    <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold text-gray-900">香港投资者流量地图</h2>
+        <div class="text-right">
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] bg-amber-100 text-amber-700 border border-amber-200" title="{{ data_date_detail }}">Tier 1 估算 · 数据区间 {{ data_date_range }}</span>
+        </div>
+    </div>
+    <p class="text-gray-500 mt-1 text-sm">香港 750 万人口中约 250 万活跃投资者的线上渠道分布</p>
 </div>
+
+<!-- ===== Executive Summary ===== -->
+{% if executive_summary %}
+<div class="mb-5 bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-5 shadow-lg">
+    <div class="flex items-center gap-2 mb-3">
+        <span class="text-sm font-bold text-white">重点发现</span>
+        <span class="text-[10px] text-slate-400 ml-auto">基于{{ data_date_detail }}</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+        {% set es_colors = {"red": "border-red-400 from-red-500/10", "amber": "border-amber-400 from-amber-500/10", "emerald": "border-emerald-400 from-emerald-500/10", "blue": "border-blue-400 from-blue-500/10", "orange": "border-orange-400 from-orange-500/10", "indigo": "border-indigo-400 from-indigo-500/10"} %}
+        {% set es_text = {"red": "text-red-400", "amber": "text-amber-400", "emerald": "text-emerald-400", "blue": "text-blue-400", "orange": "text-orange-400", "indigo": "text-indigo-400"} %}
+        {% for item in executive_summary %}
+        {% set ec = es_colors.get(item.color, "border-gray-400 from-gray-500/10") %}
+        {% set et = es_text.get(item.color, "text-gray-400") %}
+        <div class="border-l-2 {{ ec }} bg-gradient-to-r to-transparent rounded-r-lg p-3">
+            <div class="flex items-start gap-1.5 mb-1">
+                <span class="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 {{ et | replace('text-', 'bg-') }}"></span>
+                <span class="text-xs font-bold {{ et }}">{{ item.title }}</span>
+            </div>
+            <p class="text-[11px] text-slate-300 leading-relaxed mb-1.5">{{ item.body }}</p>
+            <p class="text-[10px] font-medium text-slate-200">→ {{ item.action }}</p>
+            <p class="text-[9px] text-slate-500 mt-1">{{ item.sources }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 
 {% set type_colors = {
     'social': {'bg': 'bg-indigo-50', 'border': 'border-indigo-200', 'text': 'text-indigo-700', 'dot': 'bg-indigo-500', 'bar': 'bg-indigo-500'},
@@ -28,11 +60,34 @@
     <nav class="flex gap-1 overflow-x-auto" id="sub-tabs">
         <button class="sub-tab active px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-indigo-500 text-indigo-700 bg-indigo-50 whitespace-nowrap" data-tab="tab-market">市场全景</button>
         <button class="sub-tab px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50 whitespace-nowrap" data-tab="tab-investor">投资者画像</button>
+        <button class="sub-tab px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50 whitespace-nowrap" data-tab="tab-competitors">竞品洞察</button>
         <button class="sub-tab px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50 whitespace-nowrap" data-tab="tab-channels">渠道分析</button>
         <button class="sub-tab px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50 whitespace-nowrap" data-tab="tab-acquisition">获客策略</button>
+        <button class="sub-tab px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50 whitespace-nowrap" data-tab="tab-offline">线下片区</button>
         <button class="sub-tab px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50 whitespace-nowrap" data-tab="tab-methodology">方法论</button>
     </nav>
 </div>
+
+<!-- ===== 市场全景 核心洞察 ===== -->
+{% if tab_insights.market %}
+<div class="mb-5" data-tab="tab-market">
+    <div class="flex items-center gap-2 mb-3">
+        <span class="inline-block w-1 h-5 rounded bg-indigo-500"></span>
+        <h3 class="text-sm font-bold text-gray-700">核心洞察</h3>
+        <span class="ml-auto text-[9px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-400">Tier 1 估算</span>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {% for ins in tab_insights.market %}
+        {% set c = ins.color or 'gray' %}
+        <div class="rounded-xl border border-{{ c }}-200 bg-gradient-to-br from-{{ c }}-50/80 to-white p-3 shadow-sm">
+            <div class="text-xs font-bold text-{{ c }}-800 mb-1">{{ ins.title }}</div>
+            <div class="text-[11px] text-{{ c }}-700/90 leading-relaxed">{{ ins.body }}</div>
+            <div class="text-[9px] text-gray-300 mt-1.5">{{ ins.source }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 
 <!-- ===== 香港个人财富全景图 ===== -->
 {% if wealth_panorama %}
@@ -54,16 +109,14 @@
         </div>
         {% endfor %}
     </div>
-    <!-- 差额说明 -->
+    <!-- 未投资成年人说明 -->
     <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-6 text-xs text-gray-600 leading-relaxed">
-        <span class="font-semibold text-amber-700">银行账户 vs 持有金融产品的差额（~400万人）：</span>
-        这部分人有银行账户但不持有投资产品，主要构成——
-        <span class="font-medium">纯储蓄存款</span>（最大头，尤其长者群体，IFEC调查显示65岁以上有46%从不投资）、
-        <span class="font-medium">纯保险</span>（有人寿/医疗保险但不买股票基金，保险渗透率极高）、
-        <span class="font-medium">纯强积金被动持有</span>（479万人强制参与但IFEC不计为"主动持有金融产品"）、
-        <span class="font-medium">未成年人/学生账户</span>、
-        <span class="font-medium">外佣等低收入群体</span>（~37万人有工资账户但基本不投资）。
-        <span class="text-amber-600 font-medium">这~400万人是券商获客的潜在增量空间，但转化门槛较高。</span>
+        <span class="font-semibold text-amber-700">46%成年人从未持有金融投资产品（~253万人，IFEC 2025）：</span>
+        香港成年人约550万，54%（~297万）持有股票/基金/债券等金融投资产品，其余46%（~253万）从未投资。主要构成——
+        <span class="font-medium">长者群体</span>（65岁以上有46%从不投资，纯储蓄/定存为主）、
+        <span class="font-medium">纯强积金被动持有者</span>（479万人强制参与MPF，但不主动做投资决策）、
+        <span class="font-medium">低收入群体</span>（含~37万外佣等，无可投资资产）。
+        <span class="text-amber-600 font-medium">这~253万人是券商获客的远期空间，但转化门槛高——需要先完成投资者教育。</span>
     </div>
 
     <!-- 零售金融产品渗透率 -->
@@ -251,9 +304,30 @@
 </div>
 {% endif %}
 
+<!-- ===== 竞品洞察 核心洞察 ===== -->
+{% if tab_insights.channels %}
+<div class="mb-5" data-tab="tab-competitors">
+    <div class="flex items-center gap-2 mb-3">
+        <span class="inline-block w-1 h-5 rounded bg-red-500"></span>
+        <h3 class="text-sm font-bold text-gray-700">核心洞察</h3>
+        <span class="ml-auto text-[9px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-400">data.ai 2026.03</span>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        {% for ins in tab_insights.channels %}
+        {% set c = ins.color or 'gray' %}
+        <div class="rounded-xl border border-{{ c }}-200 bg-gradient-to-br from-{{ c }}-50/80 to-white p-3 shadow-sm">
+            <div class="text-xs font-bold text-{{ c }}-800 mb-1">{{ ins.title }}</div>
+            <div class="text-[11px] text-{{ c }}-700/90 leading-relaxed">{{ ins.body }}</div>
+            <div class="text-[9px] text-gray-300 mt-1.5">{{ ins.source }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
 <!-- ===== 竞品格局 ===== -->
 {% if competitor_landscape %}
-<div class="stat-card mb-6" data-tab="tab-channels" id="sec-competitors">
+<div class="stat-card mb-6" data-tab="tab-competitors" id="sec-competitors">
     <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ competitor_landscape.title }}</h3>
     <p class="text-xs text-gray-400 mb-4">{{ competitor_landscape.subtitle }}</p>
 
@@ -296,7 +370,7 @@
             {% for app in competitor_landscape.apps %}
                 {% if app.dau %}{% set _ = dau_apps.append(app) %}{% endif %}
             {% endfor %}
-            {% set max_dau = 278508 %}
+            {% set max_dau = (competitor_landscape.apps | selectattr('dau') | sort(attribute='dau', reverse=True) | first).dau | default(1) %}
             <div class="space-y-1.5">
                 {% for app in competitor_landscape.apps | selectattr('dau') | sort(attribute='dau', reverse=True) %}
                 <div class="flex items-center gap-2">
@@ -326,6 +400,756 @@
     </div>
 
     <div class="text-[10px] text-gray-300 mt-3">{{ competitor_landscape.source }} | {{ competitor_landscape.period }}</div>
+</div>
+{% endif %}
+
+<!-- ===== 用户App交叉安装 — 竞争态势(对手维度) ===== -->
+{% if user_overlap and user_overlap.categories %}
+<div class="stat-card mb-6" data-tab="tab-competitors" id="sec-user-overlap">
+    <h3 class="text-lg font-semibold text-gray-900 mb-1">富途用户交叉安装 — 竞争态势图</h3>
+    <p class="text-xs text-gray-400 mb-1">{{ user_overlap.subtitle }}</p>
+    <p class="text-[10px] text-gray-300 mb-4">视角: 按竞品App分类(银行/券商/工具/社区) — 看「谁是对手」| 渠道维度的防守分析见「渠道分析」tab</p>
+
+    {# ── Part 1: Threat Matrix scatter (canvas) ── #}
+    <div class="mb-6">
+        <div class="flex items-center justify-between mb-2">
+            <h4 class="text-sm font-bold text-gray-800">竞品威胁矩阵</h4>
+            <div class="flex items-center gap-3 text-[10px] text-gray-400">
+                <span>横轴: Share% (用户重叠率)</span>
+                <span>纵轴: Affinity (相关性倍数)</span>
+                <span>气泡大小: Share%</span>
+            </div>
+        </div>
+        <div class="border border-gray-200 rounded-xl bg-white p-2 overflow-hidden" style="height:420px">
+            <canvas id="overlap-scatter" style="width:100%;height:100%"></canvas>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 mt-2 text-[10px] text-gray-400">
+            {% for cat in user_overlap.categories %}
+            <div class="flex items-center gap-1">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-{{ cat.color or 'gray' }}-500"></span>
+                <span>{{ cat.name }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {# ── Part 2: Top threats summary cards ── #}
+    <div class="mb-6">
+        <h4 class="text-sm font-bold text-gray-800 mb-3">重点竞品一览</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {# Pick key threats from each category #}
+            {% set threats = [
+                {"name": "IBKR盈透", "share": 21.54, "affinity": 6.64, "color": "red", "tag": "最大直接竞品", "detail": "每5个富途用户有1个同时用IBKR，争夺同一批港美股活跃交易者"},
+                {"name": "HSBC", "share": 51.37, "affinity": 2.94, "color": "blue", "tag": "最高用户重叠", "detail": "过半富途用户持有HSBC账户，银行投资功能升级是最大结构性威胁"},
+                {"name": "Binance", "share": 7.45, "affinity": 7.42, "color": "purple", "tag": "加密赛道流失", "detail": "近1/13富途用户同时炒币，但富途无加密牌照，需求流向Binance/OKX"},
+                {"name": "Webull微牛", "share": 7.99, "affinity": 7.13, "color": "red", "tag": "增长最快竞品", "detail": "Share 8%+Affinity 7.1，用户画像与富途高度相似，在美股赛道直接竞争"}
+            ] %}
+            {% for t in threats %}
+            <div class="rounded-xl border-2 border-{{ t.color }}-200 bg-{{ t.color }}-50/50 p-3 relative">
+                <div class="absolute top-2 right-2 px-1.5 py-0.5 rounded text-[9px] font-bold bg-{{ t.color }}-100 text-{{ t.color }}-700">{{ t.tag }}</div>
+                <div class="text-base font-bold text-gray-900 mb-0.5">{{ t.name }}</div>
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="text-lg font-black text-{{ t.color }}-600">{{ t.share }}%</span>
+                    <span class="text-[10px] text-gray-400">Share</span>
+                    <span class="text-sm font-bold text-{{ t.color }}-500">×{{ t.affinity }}</span>
+                    <span class="text-[10px] text-gray-400">Affinity</span>
+                </div>
+                <div class="text-[11px] text-gray-600 leading-relaxed">{{ t.detail }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {# ── Part 3: Category bar charts (collapsible) ── #}
+    <details class="mb-4">
+        <summary class="cursor-pointer text-sm font-bold text-gray-700 hover:text-indigo-600 transition-colors select-none py-2">
+            展开全部 {{ user_overlap.total_apps }} 个交叉安装App详情 ▾
+        </summary>
+        <div class="mt-3 text-[10px] text-gray-400 mb-4 flex flex-wrap gap-4">
+            <div class="flex items-center gap-1"><div class="w-6 h-2 rounded bg-indigo-400"></div>Share%: 富途用户中同时安装该App的比例</div>
+            <div class="flex items-center gap-1">
+                <span class="inline-flex items-center justify-center w-5 h-4 rounded-full bg-red-100 text-red-700 text-[8px] font-bold">×10</span>
+                Affinity ≥10 极强相关
+            </div>
+            <div class="flex items-center gap-1">
+                <span class="inline-flex items-center justify-center w-5 h-4 rounded-full bg-orange-100 text-orange-700 text-[8px] font-bold">×7</span>
+                ≥7 强相关
+            </div>
+            <div class="flex items-center gap-1">
+                <span class="inline-flex items-center justify-center w-5 h-4 rounded-full bg-amber-50 text-amber-700 text-[8px] font-bold">×5</span>
+                ≥5 中等
+            </div>
+        </div>
+        <div class="space-y-5">
+            {% for cat in user_overlap.categories %}
+            {% set color = cat.color or 'gray' %}
+            <div>
+                <div class="flex items-center gap-2 mb-2 pb-1.5 border-b border-gray-100">
+                    <span class="inline-block w-3 h-3 rounded bg-{{ color }}-500"></span>
+                    <span class="text-sm font-bold text-gray-800">{{ cat.name }}</span>
+                    <span class="text-[10px] text-gray-400">{{ cat.apps | length }}个</span>
+                </div>
+                <div class="space-y-1">
+                    {% for app in cat.apps | sort(attribute='share', reverse=True) %}
+                    <div class="flex items-center gap-2 group relative" title="{{ app.insight or '' }}">
+                        <div class="w-28 sm:w-36 flex-shrink-0 text-right pr-2">
+                            <span class="text-[11px] text-gray-700 font-medium">{{ app.name }}</span>
+                        </div>
+                        <div class="flex-1 flex items-center gap-2 min-w-0">
+                            <div class="flex-1 h-6 bg-gray-50 rounded-r relative overflow-hidden">
+                                <div class="absolute inset-y-0 left-0 rounded-r bg-{{ color }}-400/70 flex items-center"
+                                     style="width: {{ (app.share / 80 * 100) | round(1) }}%; min-width: 2px">
+                                    {% if app.share >= 5 %}
+                                    <span class="text-[10px] font-bold text-white ml-1.5 whitespace-nowrap">{{ app.share }}%</span>
+                                    {% endif %}
+                                </div>
+                                {% if app.share < 5 %}
+                                <span class="absolute top-1/2 -translate-y-1/2 text-[10px] font-bold text-{{ color }}-700" style="left: {{ (app.share / 80 * 100 + 1) }}%">{{ app.share }}%</span>
+                                {% endif %}
+                            </div>
+                            {% set af_intensity = 'bg-gray-100 text-gray-500' %}
+                            {% if app.affinity >= 10 %}
+                                {% set af_intensity = 'bg-red-100 text-red-700 ring-1 ring-red-200' %}
+                            {% elif app.affinity >= 7 %}
+                                {% set af_intensity = 'bg-orange-100 text-orange-700' %}
+                            {% elif app.affinity >= 5 %}
+                                {% set af_intensity = 'bg-amber-50 text-amber-700' %}
+                            {% endif %}
+                            <span class="flex-shrink-0 w-10 h-5 rounded-full {{ af_intensity }} text-[9px] font-bold flex items-center justify-center">×{{ app.affinity }}</span>
+                        </div>
+                        {% if app.insight %}
+                        <div class="hidden group-hover:block absolute z-20 bottom-full left-1/3 mb-1 px-2.5 py-1.5 text-[10px] text-white bg-gray-800 rounded-lg shadow-lg max-w-xs pointer-events-none">{{ app.insight }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </details>
+
+    <div class="text-[10px] text-gray-300 mt-3">{{ user_overlap.source }} | {{ user_overlap.period }} | 共分析 {{ user_overlap.total_apps }} 个重叠App</div>
+</div>
+
+{# Scatter chart script #}
+<script>
+(function() {
+    const canvas = document.getElementById('overlap-scatter');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
+    ctx.scale(dpr, dpr);
+    const W = rect.width, H = rect.height;
+    const pad = {top: 20, right: 30, bottom: 35, left: 45};
+    const pW = W - pad.left - pad.right, pH = H - pad.top - pad.bottom;
+
+    const colorMap = {red:'#ef4444',blue:'#3b82f6',purple:'#a855f7',sky:'#0ea5e9',amber:'#f59e0b',teal:'#14b8a6',gray:'#6b7280'};
+    const colorMapLight = {red:'rgba(239,68,68,0.15)',blue:'rgba(59,130,246,0.15)',purple:'rgba(168,85,247,0.15)',sky:'rgba(14,165,233,0.15)',amber:'rgba(245,158,11,0.15)',teal:'rgba(20,184,166,0.15)',gray:'rgba(107,114,128,0.15)'};
+
+    // Collect all points
+    const allPts = [];
+    {% for cat in user_overlap.categories %}
+    {% for app in cat.apps %}
+    allPts.push({name:"{{app.name}}",share:{{app.share}},affinity:{{app.affinity}},color:"{{cat.color or 'gray'}}",insight:"{{app.insight|replace('"','\\"')|default('')}}"});
+    {% endfor %}
+    {% endfor %}
+
+    // Axis: share 0-55, affinity 0-16
+    const maxX = 55, maxY = 16;
+    function toX(v) { return pad.left + (v / maxX) * pW; }
+    function toY(v) { return pad.top + pH - (v / maxY) * pH; }
+
+    // Grid
+    ctx.strokeStyle = '#f3f4f6'; ctx.lineWidth = 1;
+    for (let x = 10; x <= 50; x += 10) { ctx.beginPath(); ctx.moveTo(toX(x), pad.top); ctx.lineTo(toX(x), pad.top + pH); ctx.stroke(); }
+    for (let y = 2; y <= 14; y += 2) { ctx.beginPath(); ctx.moveTo(pad.left, toY(y)); ctx.lineTo(pad.left + pW, toY(y)); ctx.stroke(); }
+
+    // Quadrant backgrounds
+    const qx = toX(10), qy = toY(7);
+    // High share + high affinity = top-right = RED ZONE
+    ctx.fillStyle = 'rgba(239,68,68,0.04)';
+    ctx.fillRect(qx, pad.top, pad.left + pW - qx, qy - pad.top);
+    // High share + low affinity = bottom-right
+    ctx.fillStyle = 'rgba(59,130,246,0.04)';
+    ctx.fillRect(qx, qy, pad.left + pW - qx, pad.top + pH - qy);
+
+    // Quadrant labels
+    ctx.font = '10px sans-serif'; ctx.fillStyle = '#d1d5db';
+    ctx.textAlign = 'right';
+    ctx.fillText('高重叠 + 高相关 = 核心竞品', pad.left + pW - 5, pad.top + 14);
+    ctx.fillText('高重叠 + 低相关 = 大众App', pad.left + pW - 5, pad.top + pH - 5);
+    ctx.textAlign = 'left';
+    ctx.fillText('低重叠 + 高相关 = 利基竞品', pad.left + 5, pad.top + 14);
+
+    // Threshold lines
+    ctx.setLineDash([4, 3]);
+    ctx.strokeStyle = '#e5e7eb'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(toX(10), pad.top); ctx.lineTo(toX(10), pad.top + pH); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(pad.left, toY(7)); ctx.lineTo(pad.left + pW, toY(7)); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Axes
+    ctx.strokeStyle = '#d1d5db'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(pad.left, pad.top + pH); ctx.lineTo(pad.left + pW, pad.top + pH); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, pad.top + pH); ctx.stroke();
+
+    // Axis labels
+    ctx.font = '10px sans-serif'; ctx.fillStyle = '#9ca3af'; ctx.textAlign = 'center';
+    for (let x = 0; x <= 50; x += 10) ctx.fillText(x + '%', toX(x), pad.top + pH + 14);
+    ctx.fillText('Share% (富途用户中同时安装比例) →', pad.left + pW / 2, pad.top + pH + 28);
+    ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+    for (let y = 0; y <= 14; y += 2) ctx.fillText('×' + y, pad.left - 6, toY(y));
+    ctx.save(); ctx.translate(12, pad.top + pH / 2); ctx.rotate(-Math.PI / 2);
+    ctx.textAlign = 'center'; ctx.fillText('Affinity (相关性倍数) →', 0, 0);
+    ctx.restore();
+
+    // Sort: draw small bubbles last (on top)
+    allPts.sort((a, b) => b.share - a.share);
+
+    // Draw bubbles
+    allPts.forEach(p => {
+        const x = toX(Math.min(p.share, maxX - 1));
+        const y = toY(Math.min(p.affinity, maxY - 0.5));
+        const r = Math.max(Math.sqrt(p.share) * 3.5, 4);
+        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle = colorMapLight[p.color] || colorMapLight.gray;
+        ctx.fill();
+        ctx.strokeStyle = colorMap[p.color] || colorMap.gray;
+        ctx.lineWidth = 1.5; ctx.stroke();
+    });
+
+    // Labels for important apps (share > 7 or affinity > 9)
+    ctx.font = 'bold 10px sans-serif'; ctx.textBaseline = 'bottom';
+    allPts.forEach(p => {
+        if (p.share < 7 && p.affinity < 9) return;
+        const x = toX(Math.min(p.share, maxX - 1));
+        const y = toY(Math.min(p.affinity, maxY - 0.5));
+        const r = Math.max(Math.sqrt(p.share) * 3.5, 4);
+        ctx.fillStyle = colorMap[p.color] || '#374151';
+        ctx.textAlign = p.share > 35 ? 'right' : 'left';
+        const offsetX = p.share > 35 ? -r - 2 : r + 2;
+        ctx.fillText(p.name, x + offsetX, y - 2);
+    });
+
+    // Tooltip on hover
+    canvas.addEventListener('mousemove', function(e) {
+        const br = canvas.getBoundingClientRect();
+        const mx = e.clientX - br.left, my = e.clientY - br.top;
+        let hit = null;
+        for (const p of allPts) {
+            const x = toX(Math.min(p.share, maxX - 1));
+            const y = toY(Math.min(p.affinity, maxY - 0.5));
+            const r = Math.max(Math.sqrt(p.share) * 3.5, 4) + 3;
+            if (Math.hypot(mx - x, my - y) < r) { hit = p; break; }
+        }
+        canvas.style.cursor = hit ? 'pointer' : 'default';
+        canvas.title = hit ? hit.name + ' | Share: ' + hit.share + '% | Affinity: ×' + hit.affinity + (hit.insight ? ' | ' + hit.insight : '') : '';
+    });
+})();
+</script>
+{% endif %}
+
+<!-- ===== ST券商交叉安装动态 ===== -->
+{% if broker_overlap_st %}
+{% set bost = broker_overlap_st %}
+<div class="stat-card mb-6" data-tab="tab-competitors" id="sec-broker-overlap-st">
+    <div class="flex items-center justify-between mb-1">
+        <h3 class="text-lg font-semibold text-gray-900">{{ bost.title }}</h3>
+        <span class="text-[10px] text-gray-400">{{ bost.source }}</span>
+    </div>
+    <p class="text-xs text-gray-400 mb-1">{{ bost.subtitle }}</p>
+    <p class="text-[10px] text-gray-300 mb-4">{{ bost.period }}</p>
+
+    <!-- Part 1: 下载份额变化 -->
+    <div class="mb-6">
+        <h4 class="text-sm font-bold text-gray-800 mb-1">券商下载份额变化</h4>
+        <p class="text-[10px] text-gray-400 mb-3">※ {{ bost.data_note }}</p>
+        <div class="overflow-x-auto">
+            <table class="w-full text-xs border-collapse">
+                <thead>
+                    <tr class="bg-gray-50 text-gray-500 text-[11px]">
+                        <th class="text-left py-2 px-3 font-medium">App</th>
+                        <th class="text-right py-2 px-3 font-medium">Q4 份额</th>
+                        <th class="text-right py-2 px-3 font-medium">Q1 份额</th>
+                        <th class="text-right py-2 px-3 font-medium">变化</th>
+                        <th class="text-left py-2 px-3 font-medium">趋势</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for app in bost.market_share %}
+                {% set chg = app.chg %}
+                {% set bar_w = (app.q1 / 55 * 100) | round(1) %}
+                {% set chg_cls = 'text-red-600' if chg < -0.5 else ('text-emerald-600' if chg > 0.5 else 'text-gray-400') %}
+                {% set sign = '+' if chg > 0 else '' %}
+                <tr class="border-t border-gray-100 hover:bg-gray-50 transition-colors {% if loop.first %}font-semibold{% endif %}">
+                    <td class="py-2 px-3 text-gray-800">{{ app.name }}</td>
+                    <td class="py-2 px-3 text-right text-gray-500">{{ app.q4 }}%</td>
+                    <td class="py-2 px-3 text-right font-medium text-gray-800">{{ app.q1 }}%</td>
+                    <td class="py-2 px-3 text-right font-bold {{ chg_cls }}">{{ sign }}{{ chg }}pp</td>
+                    <td class="py-2 px-3">
+                        <div class="flex items-center gap-1.5">
+                            <div class="h-4 rounded-sm bg-{{ app.color }}-{% if loop.first %}500{% else %}400{% endif %}/70" style="width: {{ bar_w }}%; min-width:2px; max-width:100%"></div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Part 2: 富途用户交叉安装变化 -->
+    <div class="mb-6">
+        <h4 class="text-sm font-bold text-gray-800 mb-3">富途用户中竞品装机变化（Q4→Q1）</h4>
+        <div class="overflow-x-auto">
+            <table class="w-full text-xs border-collapse">
+                <thead>
+                    <tr class="bg-gray-50 text-gray-500 text-[11px]">
+                        <th class="text-left py-2 px-3 font-medium">竞品</th>
+                        <th class="text-right py-2 px-3 font-medium">Q4 装机率</th>
+                        <th class="text-right py-2 px-3 font-medium">Q1 装机率</th>
+                        <th class="text-right py-2 px-3 font-medium">变化</th>
+                        <th class="text-right py-2 px-3 font-medium">Affinity</th>
+                        <th class="text-left py-2 px-3 font-medium">注记</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for app in bost.cross_install %}
+                {% set chg = app.chg %}
+                {% set chg_str = ('+' if chg > 0 else '') + (chg | string) + 'pp' if chg is not none else '—' %}
+                {% set chg_cls = 'text-red-600 font-bold' if chg and chg > 0.5 else ('text-emerald-600 font-bold' if chg and chg < -0.5 else 'text-gray-400') %}
+                {% set af = app.affinity %}
+                {% set af_cls = 'bg-red-100 text-red-700 ring-1 ring-red-200' if af and af >= 10 else ('bg-orange-100 text-orange-700' if af and af >= 7 else 'bg-gray-100 text-gray-500') %}
+                <tr class="border-t border-gray-100 hover:bg-gray-50 transition-colors">
+                    <td class="py-2 px-3 font-medium text-gray-800">{{ app.name }}</td>
+                    <td class="py-2 px-3 text-right text-gray-500">{{ app.q4 ~ '%' if app.q4 is not none else '—' }}</td>
+                    <td class="py-2 px-3 text-right font-medium text-gray-800">{{ app.q1 ~ '%' if app.q1 is not none else '—' }}</td>
+                    <td class="py-2 px-3 text-right {{ chg_cls }}">{{ chg_str }}</td>
+                    <td class="py-2 px-3 text-right">
+                        {% if af %}
+                        <span class="inline-flex items-center justify-center px-1.5 py-0.5 rounded-full text-[10px] font-bold {{ af_cls }}">×{{ af }}</span>
+                        {% else %}—{% endif %}
+                    </td>
+                    <td class="py-2 px-3 text-[11px] text-gray-500">{{ app.note }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Part 3: 竞品视角 + 非券商异动 side-by-side -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+        <!-- 竞品视角 -->
+        <div>
+            <h4 class="text-sm font-bold text-gray-800 mb-3">竞品视角（竞品用户中富途装机率）</h4>
+            <div class="space-y-2">
+            {% for p in bost.competitor_perspectives %}
+            {% set conf_color = 'emerald' if p.confidence == 'strong' else ('amber' if p.confidence == 'medium' else 'gray') %}
+            {% set conf_label = '强' if p.confidence == 'strong' else ('中' if p.confidence == 'medium' else '弱') %}
+            <div class="rounded-lg border border-gray-100 bg-gray-50/50 px-3 py-2 flex items-start gap-3">
+                <div class="flex-shrink-0 mt-0.5">
+                    <span class="inline-block px-1.5 py-0.5 rounded text-[9px] font-bold bg-{{ conf_color }}-100 text-{{ conf_color }}-700">{{ conf_label }}</span>
+                </div>
+                <div>
+                    <div class="text-[11px] font-semibold text-gray-700">{{ p.name }}
+                        {% if p.futu_share %}<span class="ml-1 text-indigo-600 font-black">{{ p.futu_share }}%</span>{% endif %}
+                    </div>
+                    <div class="text-[10px] text-gray-500 mt-0.5">{{ p.note }}</div>
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+
+        <!-- 非券商异动 -->
+        <div>
+            <h4 class="text-sm font-bold text-gray-800 mb-3">非券商 App 异动（富途经济类目）</h4>
+            <div class="overflow-x-auto">
+                <table class="w-full text-xs border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 text-gray-500 text-[10px]">
+                            <th class="text-left py-1.5 px-2 font-medium">App</th>
+                            <th class="text-right py-1.5 px-2 font-medium">变化</th>
+                            <th class="text-left py-1.5 px-2 font-medium">解读</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in bost.non_broker %}
+                    {% set chg = item.chg %}
+                    {% set chg_cls = 'text-red-600 font-bold' if chg < -1 else ('text-emerald-600 font-bold' if chg > 1 else 'text-gray-500') %}
+                    {% set sign = '+' if chg > 0 else '' %}
+                    <tr class="border-t border-gray-100 hover:bg-gray-50">
+                        <td class="py-1.5 px-2 font-medium text-gray-700 whitespace-nowrap">
+                            {{ item.name }}
+                            {% if item.verified %}<span class="ml-1 text-[9px] text-emerald-600">✓API</span>{% endif %}
+                        </td>
+                        <td class="py-1.5 px-2 text-right {{ chg_cls }}">{{ sign }}{{ chg }}pp</td>
+                        <td class="py-1.5 px-2 text-[10px] text-gray-500 leading-snug">{{ item.note }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Part 4: 结论 -->
+    <div>
+        <h4 class="text-sm font-bold text-gray-800 mb-3">核心结论</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {% for c in bost.conclusions %}
+        {% set conf_badge = 'bg-emerald-100 text-emerald-700' if c.confidence == 'strong' else ('bg-amber-100 text-amber-700' if c.confidence == 'medium' else 'bg-gray-100 text-gray-500') %}
+        {% set conf_label = '结论确定' if c.confidence == 'strong' else ('需验证' if c.confidence == 'medium' else '参考') %}
+        <div class="rounded-xl border border-{{ c.color }}-200 bg-{{ c.color }}-50/40 p-3">
+            <div class="flex items-start justify-between gap-2 mb-1.5">
+                <span class="text-[11px] font-bold text-{{ c.color }}-800">{{ c.title }}</span>
+                <span class="flex-shrink-0 px-1.5 py-0.5 rounded text-[9px] font-bold {{ conf_badge }}">{{ conf_label }}</span>
+            </div>
+            <p class="text-[11px] text-gray-600 leading-relaxed">{{ c.body }}</p>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+
+    <div class="text-[10px] text-gray-300 mt-4">{{ bost.source }} | {{ bost.period }} | 交叉安装 ≠ 资金迁移，结论基于安装行为推断</div>
+</div>
+{% endif %}
+
+<!-- ===== 市占率 vs 社媒覆盖提示 ===== -->
+{% if futu_hk_stats %}
+<div class="mb-5 px-4 py-3 bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-amber-400 rounded-r-lg" data-tab="tab-channels">
+    <div class="flex items-center gap-3">
+        <div class="flex-shrink-0">
+            <div class="flex items-baseline gap-1">
+                <span class="text-2xl font-black text-amber-700">~40%</span>
+                <span class="text-sm text-gray-400">市占率</span>
+            </div>
+        </div>
+        <div class="text-gray-300 text-lg">vs</div>
+        <div class="flex-shrink-0">
+            <div class="flex items-baseline gap-1">
+                <span class="text-2xl font-black text-amber-600">偏低</span>
+                <span class="text-sm text-gray-400">社媒覆盖</span>
+            </div>
+        </div>
+        <div class="flex-1 ml-2">
+            <p class="text-xs font-semibold text-amber-800">市占率与社媒内容覆盖存在差距</p>
+            <p class="text-[11px] text-gray-500">88%投资者通过社媒获取投资信息(IFEC 2025)。富途在YouTube/FB/IG等平台的官方内容产出和KOL合作规模与40%的市场地位不匹配，加大内容投入可提升品牌主动触达能力</p>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- ===== 渠道分析: 双视角框架说明 ===== -->
+<div class="stat-card mb-6" data-tab="tab-channels" id="sec-channel-framework">
+    <div class="flex items-start gap-4 mb-4">
+        <div class="flex-1">
+            <h3 class="text-lg font-bold text-gray-900 mb-2">渠道分析：防守 + 进攻双视角</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">渠道工作有两个方向——<strong class="text-red-600">防守</strong>看存量用户在各渠道是否被竞品侵蚀，<strong class="text-blue-600">进攻</strong>看站外营销能覆盖多少新投资者、富途内容占比如何。</p>
+        </div>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+        <div class="rounded-xl border-2 border-red-200 bg-red-50/50 p-4">
+            <div class="flex items-center gap-2 mb-2">
+                <span class="text-lg">🛡️</span>
+                <span class="text-sm font-bold text-red-800">防守：App交叉安装</span>
+            </div>
+            <p class="text-xs text-red-700/80 leading-relaxed">从 data.ai 交叉安装数据看：富途现有用户同时装了哪些竞品？在哪些社媒平台上竞品的渗透率正在超越富途？——识别正在失守的阵地。</p>
+        </div>
+        <div class="rounded-xl border-2 border-blue-200 bg-blue-50/50 p-4">
+            <div class="flex items-center gap-2 mb-2">
+                <span class="text-lg">⚔️</span>
+                <span class="text-sm font-bold text-blue-800">进攻：渠道营销内容覆盖</span>
+            </div>
+            <p class="text-xs text-blue-700/80 leading-relaxed">从渠道去重投资者人数看：每个渠道能触达多少 HK 投资者？富途在其中的营销/原创内容占比是多少？——识别可进攻的蓝海渠道。</p>
+        </div>
+    </div>
+    <!-- 核心洞察 -->
+    {% if tab_insights.channels %}
+    <div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-3 mt-5">
+        {% for ins in tab_insights.channels %}
+        {% set ic = ins.color or 'gray' %}
+        <div class="rounded-xl border border-{{ ic }}-200 bg-gradient-to-br from-{{ ic }}-50/80 to-white p-3">
+            <div class="text-xs font-bold text-{{ ic }}-800 mb-1">{{ ins.title }}</div>
+            <div class="text-[11px] text-{{ ic }}-700/90 leading-relaxed">{{ ins.body }}</div>
+            <div class="text-[9px] text-{{ ic }}-400 mt-1.5">{{ ins.source }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+<!-- ===== 防守视角：App交叉安装 ===== -->
+{% if social_finance_overlap and social_finance_overlap.platforms %}
+<div class="stat-card mb-6" data-tab="tab-channels" id="sec-social-finance-overlap">
+    <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ social_finance_overlap.title }}</h3>
+    <p class="text-xs text-gray-400 mb-1">{{ social_finance_overlap.subtitle }}</p>
+    <p class="text-[10px] text-gray-300 mb-1">{{ social_finance_overlap.note }}</p>
+    <p class="text-[10px] text-gray-300 mb-4">视角: 按社媒渠道分(11个平台) — 看「哪个渠道正在失守」| 竞品App维度的对手分析见「竞品洞察」tab</p>
+
+    <!-- 主表格 -->
+    <!-- 关键发现速览 -->
+    <div class="flex flex-wrap gap-2 mb-4">
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium bg-red-100 text-red-700">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd"/></svg>
+            富途11/11平台MoM均下降(单月数据)
+        </span>
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium bg-blue-100 text-blue-700">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd"/></svg>
+            IBKR 11/11平台MoM均增长(单月数据)
+        </span>
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium bg-teal-100 text-teal-700">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd"/></svg>
+            Webull 7/11平台增长中
+        </span>
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium bg-amber-100 text-amber-700">⚠️ LIHKG+LinkedIn: IBKR Affinity已超富途</span>
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium bg-rose-100 text-rose-700">⚠️ 小红书: Webull Aff 1.99 > 富途 1.83</span>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-xs">
+            <thead>
+                <tr class="border-b-2 border-gray-300">
+                    <th class="text-left py-2.5 px-2 text-gray-500 font-medium">平台</th>
+                    <th class="text-right py-2.5 px-2 text-orange-600 font-bold" colspan="2">富途 Share / Aff</th>
+                    <th class="text-right py-2.5 px-2 text-orange-400 font-medium">趋势</th>
+                    <th class="text-right py-2.5 px-2 text-blue-600 font-bold">IBKR</th>
+                    <th class="text-right py-2.5 px-2 text-blue-400 font-medium">趋势</th>
+                    <th class="text-right py-2.5 px-2 text-teal-600 font-medium">Webull</th>
+                    <th class="text-right py-2.5 px-2 text-teal-400 font-medium">趋势</th>
+                    <th class="text-right py-2.5 px-2 text-emerald-600 font-medium">Tiger</th>
+                    <th class="text-right py-2.5 px-2 text-purple-500 font-medium">Binance</th>
+                    <th class="text-center py-2.5 px-2 text-red-600 font-bold text-[10px]">威胁信号</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in social_finance_overlap.platforms %}
+                {% set has_threat = p.tag and '>' in p.tag %}
+                {% set ibkr_winning = p.ibkr_mom is not none and p.ibkr_mom > 0 and p.futu_mom is not none and p.futu_mom < 0 %}
+                <tr class="border-b border-gray-100 hover:bg-gray-50/80 {{ 'bg-red-50/50' if has_threat else '' }}">
+                    <td class="py-2 px-2 font-semibold text-gray-800">
+                        {{ p.platform }}
+                        {% if has_threat %}<span class="ml-1 inline-block w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>{% endif %}
+                    </td>
+                    <!-- 富途 Share + bar -->
+                    <td class="py-2 px-2 text-right">
+                        <div class="flex items-center justify-end gap-1">
+                            <div class="w-16 bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                                <div class="bg-orange-500 h-2.5 rounded-full" style="width: {{ (p.futu_share / 35 * 100) | round }}%"></div>
+                            </div>
+                            <span class="font-bold text-orange-600 w-10 text-right">{{ p.futu_share }}%</span>
+                        </div>
+                    </td>
+                    <!-- 富途 Affinity -->
+                    <td class="py-2 px-1 text-right">
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold {{ 'bg-orange-100 text-orange-800' if p.futu_affinity >= 2 else 'bg-gray-100 text-gray-500' }}">{{ p.futu_affinity }}x</span>
+                    </td>
+                    <!-- 富途 MoM -->
+                    <td class="py-2 px-2 text-right">
+                        {% if p.futu_mom is not none %}
+                        <span class="inline-flex items-center gap-0.5 font-bold {{ 'text-red-600' if p.futu_mom < 0 else 'text-green-600' }}">
+                            {% if p.futu_mom < 0 %}
+                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            {% else %}
+                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+                            {% endif %}
+                            {{ "%.1f"|format(p.futu_mom|abs) }}
+                        </span>
+                        {% else %}-{% endif %}
+                    </td>
+                    <!-- IBKR Share -->
+                    <td class="py-2 px-2 text-right {{ 'font-bold' if p.ibkr_share > 0 else '' }}">
+                        {% if p.ibkr_share > 0 %}
+                        <div class="flex items-center justify-end gap-1">
+                            <div class="w-10 bg-gray-100 rounded-full h-2 overflow-hidden">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: {{ (p.ibkr_share / 20 * 100) | round }}%"></div>
+                            </div>
+                            <span class="text-blue-700 w-8 text-right">{{ p.ibkr_share }}%</span>
+                        </div>
+                        {% else %}<span class="text-gray-300">-</span>{% endif %}
+                    </td>
+                    <!-- IBKR MoM -->
+                    <td class="py-2 px-2 text-right">
+                        {% if p.ibkr_mom is not none %}
+                        <span class="inline-flex items-center gap-0.5 font-bold {{ 'text-green-600' if p.ibkr_mom > 0 else 'text-red-600' }}">
+                            {% if p.ibkr_mom > 0 %}
+                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+                            {% else %}
+                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            {% endif %}
+                            {{ "%.1f"|format(p.ibkr_mom|abs) }}
+                        </span>
+                        {% else %}<span class="text-gray-300">-</span>{% endif %}
+                    </td>
+                    <!-- Webull Share -->
+                    <td class="py-2 px-2 text-right">
+                        {% if p.webull_share > 0 %}<span class="text-teal-700 font-medium">{{ p.webull_share }}%</span>{% else %}<span class="text-gray-300">-</span>{% endif %}
+                    </td>
+                    <!-- Webull MoM -->
+                    <td class="py-2 px-2 text-right">
+                        {% if p.webull_mom is not none %}
+                        <span class="inline-flex items-center gap-0.5 {{ 'text-green-600 font-bold' if p.webull_mom > 0 else 'text-gray-400' }}">
+                            {% if p.webull_mom > 0 %}
+                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+                            {% endif %}
+                            {{ "%+.1f"|format(p.webull_mom) }}
+                        </span>
+                        {% else %}<span class="text-gray-300">-</span>{% endif %}
+                    </td>
+                    <!-- Tiger -->
+                    <td class="py-2 px-2 text-right">
+                        {% if p.tiger_share > 0 %}<span class="text-emerald-700">{{ p.tiger_share }}%</span>{% else %}<span class="text-gray-300">-</span>{% endif %}
+                    </td>
+                    <!-- Binance -->
+                    <td class="py-2 px-2 text-right">
+                        {% if p.binance_share > 0 %}<span class="text-purple-600 font-medium">{{ p.binance_share }}%</span>{% else %}<span class="text-gray-300">-</span>{% endif %}
+                    </td>
+                    <!-- 威胁信号 -->
+                    <td class="py-2 px-2 text-center">
+                        {% if has_threat %}
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 text-red-700">{{ p.tag }}</span>
+                        {% elif ibkr_winning %}
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-amber-50 text-amber-600">此消彼长</span>
+                        {% elif p.tag %}
+                        <span class="text-[10px] text-gray-400">{{ p.tag }}</span>
+                        {% else %}
+                        <span class="text-gray-300">-</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 表格图例 -->
+    <div class="flex flex-wrap gap-3 mt-2 text-[10px] text-gray-400">
+        <span class="flex items-center gap-1"><svg class="w-3 h-3 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>MoM下降</span>
+        <span class="flex items-center gap-1"><svg class="w-3 h-3 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>MoM增长</span>
+        <span>Share% = 该社媒用户中安装该App比例</span>
+        <span>Aff = Affinity(>2为强相关)</span>
+        <span>红底行 = 竞品Affinity已超富途</span>
+    </div>
+
+    <!-- 竞品威胁洞察 + 行动建议 -->
+    {% if social_finance_overlap.key_findings %}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+        {% for ins in social_finance_overlap.key_findings %}
+        {% set ic = ins.color or 'gray' %}
+        <div class="rounded-xl border border-{{ ic }}-200 bg-gradient-to-br from-{{ ic }}-50/60 to-white p-4">
+            <div class="flex items-start justify-between gap-2 mb-2">
+                <div class="text-xs font-bold text-{{ ic }}-800">{{ ins.title }}</div>
+            </div>
+            <div class="text-[11px] text-{{ ic }}-700/80 leading-relaxed mb-3">{{ ins.body }}</div>
+            {% if ins.action %}
+            <div class="border-t border-{{ ic }}-200/60 pt-2.5">
+                <div class="flex items-center gap-1.5 mb-1.5">
+                    <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-{{ ic }}-600 text-white">怎么做</span>
+                    <span class="text-xs font-bold text-{{ ic }}-900">{{ ins.action }}</span>
+                </div>
+                {% if ins.action_details %}
+                <ul class="space-y-1">
+                    {% for detail in ins.action_details %}
+                    <li class="text-[11px] text-gray-600 leading-relaxed flex items-start gap-1.5">
+                        <span class="mt-1 w-1 h-1 rounded-full bg-{{ ic }}-400 flex-shrink-0"></span>
+                        {{ detail }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="text-[10px] text-gray-300 mt-3">{{ social_finance_overlap.source }} | {{ social_finance_overlap.period }} | 经济类App交叉安装</div>
+</div>
+{% endif %}
+
+<!-- ===== 增量来源 × 渠道截获矩阵 ===== -->
+{% if incremental_channel_matrix and incremental_channel_matrix.sources %}
+{% set icm = incremental_channel_matrix %}
+<div class="stat-card mb-6" data-tab="tab-channels" id="sec-incremental-matrix">
+    <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ icm.title }}</h3>
+    <p class="text-xs text-gray-500 mb-1">{{ icm.subtitle }}</p>
+    <p class="text-[10px] text-gray-400 mb-4">{{ icm.note }}</p>
+
+    <!-- 来源概览条 -->
+    <div class="flex items-center gap-2 mb-5">
+        <span class="text-xs text-gray-500 font-medium whitespace-nowrap">每年 {{ icm.total_annual }}:</span>
+        <div class="flex-1 flex h-8 rounded-lg overflow-hidden">
+            {% for src in icm.sources %}
+            <div class="flex items-center justify-center text-[10px] font-bold text-white px-2 bg-{{ src.color }}-500" style="width: {{ src.pct }}%"
+                 title="{{ src.name }} {{ src.annual }}/年 ({{ src.pct }}%)">
+                {{ src.short }} {{ src.pct }}%
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 按来源分组 — 每组一个热力图 -->
+    {% for src in icm.sources %}
+    <div class="mb-6 last:mb-0">
+        <div class="flex items-center gap-3 mb-3">
+            <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-{{ src.color }}-500"></span>
+                <span class="text-sm font-bold text-gray-800">{{ src.name }}</span>
+                <span class="text-xs text-{{ src.color }}-600 font-medium bg-{{ src.color }}-50 px-2 py-0.5 rounded-full">{{ src.annual }}/年 · {{ src.pct }}%</span>
+            </div>
+            <span class="text-[11px] text-gray-400 ml-auto">{{ src.profile }}</span>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
+            {% for ch in src.channels %}
+            {% if ch.density >= 2 %}
+            {% set opacity = ch.density * 20 %}
+            {% set bg_class = 'bg-' ~ src.color ~ '-' ~ (ch.density * 100) %}
+            <div class="rounded-lg border p-2.5 {{ 'border-' ~ src.color ~ '-300 bg-' ~ src.color ~ '-50' if ch.density >= 4 else ('border-' ~ src.color ~ '-200 bg-' ~ src.color ~ '-50/50' if ch.density >= 3 else 'border-gray-200 bg-gray-50') }}">
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-bold {{ 'text-' ~ src.color ~ '-800' if ch.density >= 4 else 'text-gray-700' }}">{{ ch.channel }}</span>
+                    <div class="flex gap-0.5">
+                        {% for i in range(5) %}
+                        <div class="w-1.5 h-1.5 rounded-full {{ ('bg-' ~ src.color ~ '-500') if i < ch.density else 'bg-gray-200' }}"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <p class="text-[10px] text-gray-500 leading-tight mb-1.5">{{ ch.evidence }}</p>
+                <div class="text-[10px] font-medium text-{{ src.color }}-700 bg-{{ src.color }}-100/60 rounded px-1.5 py-0.5 inline-block">→ {{ ch.action }}</div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- 数据缺口 — 需要什么数据才能做得更准 -->
+    {% if icm.data_gaps %}
+    <div class="mt-5 pt-4 border-t border-gray-200">
+        <h4 class="text-xs font-bold text-gray-500 mb-3 flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+            要让这个矩阵更准，还需要这些数据
+        </h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {% for gap in icm.data_gaps %}
+            <div class="flex items-start gap-2 p-3 rounded-lg bg-amber-50/60 border border-amber-200/60">
+                <span class="text-[10px] font-bold px-1.5 py-0.5 rounded {{ 'bg-red-100 text-red-700' if gap.priority == '极高' else ('bg-amber-100 text-amber-700' if gap.priority == '高' else 'bg-gray-100 text-gray-600') }} whitespace-nowrap mt-0.5">{{ gap.priority }}</span>
+                <div>
+                    <div class="text-xs font-medium text-gray-800">{{ gap.question }}</div>
+                    <div class="text-[10px] text-gray-500 mt-0.5">{{ gap.why }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 </div>
 {% endif %}
 
@@ -359,8 +1183,12 @@
 
 <!-- ===== 流量全景条 ===== -->
 <div class="stat-card mb-6" data-tab="tab-channels" id="sec-traffic-bar">
-    <h3 class="text-sm font-semibold text-gray-700 mb-1">HK 投资者覆盖排行（去重人数）</h3>
-    <p class="text-xs text-gray-400 mb-3">基于各渠道 HK 用户量 × 投资者渗透率估算。香港约 250 万活跃投资者，同一投资者平均使用 3-5 个渠道，各渠道人数不可求和。</p>
+    <h3 class="text-sm font-semibold text-gray-700 mb-1">⚔️ 进攻视角：各渠道可触达投资者 × 富途内容占比</h3>
+    <p class="text-xs text-gray-400 mb-1">站外营销能覆盖到多少投资者？富途营销/原创内容在各渠道的份额如何？</p>
+    <div class="flex items-center gap-2 mb-3 px-2.5 py-1.5 bg-amber-50 border border-amber-200 rounded-lg">
+        <span class="text-amber-500 text-sm flex-shrink-0">&#9888;</span>
+        <span class="text-[11px] text-amber-700">各渠道投资者有大量重叠（同一人平均使用3-5个渠道），<strong>不可跨渠道求和</strong>。HK实际投资者总数约250万。内容占比为Tier 1估算值(Truescope + 人工校准)。</span>
+    </div>
     <div class="space-y-2">
         {% for ch in all_channels %}
         {% if ch.users > 0 %}
@@ -380,11 +1208,11 @@
                 <div class="{{ tc.bar }} rounded-full h-5 flex items-center justify-end pr-2 transition-all opacity-40"
                      style="width: {{ pct }}%; min-width: 2.5rem">
                 </div>
-                <!-- 富途已覆盖（橙色叠加） -->
+                <!-- 富途营销内容占比（橙色叠加） -->
                 {% if futu_bar_w > 0 %}
                 <div class="bg-orange-500 rounded-full h-5 absolute top-0 left-0 flex items-center justify-end pr-1 cursor-help"
                      style="width: {{ futu_bar_w }}%; min-width: {% if futu_pct > 0 %}1.2rem{% else %}0{% endif %}"
-                     title="覆盖率 {{ futu_pct }}% — {{ ch.coverage_note[:80] if ch.coverage_note else '点击查看详情' }}">
+                     title="富途内容占比 {{ futu_pct }}% — {{ ch.coverage_note[:80] if ch.coverage_note else '点击查看详情' }}">
                     {% if futu_bar_w >= 3 %}
                     <span class="text-xs text-white font-medium">{{ futu_pct }}%</span>
                     {% endif %}
@@ -413,7 +1241,7 @@
     <div class="flex flex-wrap gap-3 mt-4 pt-3 border-t border-gray-100">
         <span class="flex items-center gap-1.5 text-xs text-orange-600 font-medium">
             <span class="bg-orange-500 w-2.5 h-2.5 rounded-full inline-block"></span>
-            富途已覆盖
+            富途营销/原创内容占比
         </span>
         <span class="text-xs text-gray-300">|</span>
         {% set legend = [
@@ -463,6 +1291,27 @@
                 {% endfor %}
             </ul>
             {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- ===== 投资者画像 核心洞察 ===== -->
+{% if tab_insights.investor %}
+<div class="mb-5" data-tab="tab-investor">
+    <div class="flex items-center gap-2 mb-3">
+        <span class="inline-block w-1 h-5 rounded bg-purple-500"></span>
+        <h3 class="text-sm font-bold text-gray-700">核心洞察</h3>
+        <span class="ml-auto text-[9px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-400">Tier 1 估算</span>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {% for ins in tab_insights.investor %}
+        {% set c = ins.color or 'gray' %}
+        <div class="rounded-xl border border-{{ c }}-200 bg-gradient-to-br from-{{ c }}-50/80 to-white p-3 shadow-sm">
+            <div class="text-xs font-bold text-{{ c }}-800 mb-1">{{ ins.title }}</div>
+            <div class="text-[11px] text-{{ c }}-700/90 leading-relaxed">{{ ins.body }}</div>
+            <div class="text-[9px] text-gray-300 mt-1.5">{{ ins.source }}</div>
         </div>
         {% endfor %}
     </div>
@@ -620,16 +1469,209 @@
             </div>
         </div>
     </div>
+
+    <!-- 选择券商App的原因 -->
+    {% if investor_behavior.broker_app_reasons %}
+    <div class="mt-5">
+        <h4 class="text-sm font-semibold text-gray-700 mb-1">{{ investor_behavior.broker_app_reasons.title }}</h4>
+        <p class="text-xs text-gray-400 mb-3">{{ investor_behavior.broker_app_reasons.subtitle }}</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+            {% for item in investor_behavior.broker_app_reasons.entries %}
+            <div class="flex items-center gap-2 bg-{{ item.color }}-50 border border-{{ item.color }}-100 rounded-lg p-2.5">
+                <div class="text-lg font-bold text-{{ item.color }}-600 flex-shrink-0">{{ item.pct }}%</div>
+                <div>
+                    <div class="text-xs font-medium text-gray-700">{{ item.name }}</div>
+                    <div class="text-[10px] text-gray-400">18-29岁: {{ item.age_18_29 }}%</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="mt-2 text-xs text-gray-500 bg-blue-50 border border-blue-100 rounded-lg p-2">
+            <strong class="text-blue-700">结论：</strong>{{ investor_behavior.broker_app_reasons.key_finding }}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- 投资动机变化 + 风险行为 -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
+        <!-- 投资动机 -->
+        {% if investor_behavior.trading_motivation %}
+        <div>
+            <h4 class="text-sm font-semibold text-gray-700 mb-1">{{ investor_behavior.trading_motivation.title }}</h4>
+            <p class="text-xs text-gray-400 mb-3">{{ investor_behavior.trading_motivation.subtitle }}</p>
+            <div class="space-y-2">
+                {% for item in investor_behavior.trading_motivation.entries %}
+                <div>
+                    <div class="flex items-center justify-between text-xs mb-0.5">
+                        <span class="text-gray-600">{{ item.name }}</span>
+                        <span class="font-semibold text-{{ item.color }}-600">{{ item.pct_2025 }}% <span class="text-gray-400 font-normal">(最重要: {{ item.most_important_2025 }}%)</span></span>
+                    </div>
+                    <div class="flex-1 bg-gray-100 rounded-full h-4 relative overflow-hidden">
+                        <div class="bg-gray-300 rounded-full h-4 absolute top-0 left-0" style="width: {{ item.pct_2023 }}%"></div>
+                        <div class="bg-{{ item.color }}-500 rounded-full h-4 relative flex items-center justify-end pr-1.5" style="width: {{ item.pct_2025 }}%; min-width: 1.5rem">
+                            <span class="text-[10px] text-white font-medium">{{ item.pct_2025 }}%</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="flex items-center gap-3 mt-2 text-xs text-gray-400">
+                <span class="flex items-center gap-1"><span class="w-3 h-2 bg-gray-300 rounded inline-block"></span>2023</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-2 bg-red-500 rounded inline-block"></span>2025</span>
+            </div>
+            <div class="mt-2 text-[11px] text-red-600 bg-red-50 border border-red-100 rounded p-2">{{ investor_behavior.trading_motivation.key_finding }}</div>
+        </div>
+        {% endif %}
+
+        <!-- 风险管理行为 -->
+        {% if investor_behavior.risk_management %}
+        <div>
+            <h4 class="text-sm font-semibold text-gray-700 mb-1">{{ investor_behavior.risk_management.title }}</h4>
+            <p class="text-xs text-gray-400 mb-3">风险偏好变化 (2023 → 2025)</p>
+            <div class="space-y-3">
+                <!-- 止损 -->
+                <div class="bg-orange-50 border border-orange-100 rounded-lg p-3">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-xs font-medium text-gray-700">始终使用止损</span>
+                        <span class="text-xs text-orange-600 font-semibold">{{ investor_behavior.risk_management.stop_loss.always_use_2023 }}% → {{ investor_behavior.risk_management.stop_loss.always_use_2025 }}%</span>
+                    </div>
+                    <div class="flex gap-1 h-4">
+                        <div class="bg-orange-300 rounded h-4 flex items-center justify-center" style="width: {{ investor_behavior.risk_management.stop_loss.always_use_2023 * 3 }}px">
+                            <span class="text-[9px] text-white">{{ investor_behavior.risk_management.stop_loss.always_use_2023 }}%</span>
+                        </div>
+                        <span class="text-gray-400 text-xs">→</span>
+                        <div class="bg-orange-500 rounded h-4 flex items-center justify-center" style="width: {{ investor_behavior.risk_management.stop_loss.always_use_2025 * 3 }}px">
+                            <span class="text-[9px] text-white">{{ investor_behavior.risk_management.stop_loss.always_use_2025 }}%</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 孖展 -->
+                <div class="bg-red-50 border border-red-100 rounded-lg p-3">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-xs font-medium text-gray-700">使用孖展融资</span>
+                        <span class="text-xs text-red-600 font-semibold">{{ investor_behavior.risk_management.margin_financing.usage_2023 }}% → {{ investor_behavior.risk_management.margin_financing.usage_2025 }}% (男性{{ investor_behavior.risk_management.margin_financing.male_2025 }}%)</span>
+                    </div>
+                    <div class="flex gap-1 h-4">
+                        <div class="bg-red-300 rounded h-4 flex items-center justify-center" style="width: {{ investor_behavior.risk_management.margin_financing.usage_2023 * 3 }}px; min-width: 20px">
+                            <span class="text-[9px] text-white">{{ investor_behavior.risk_management.margin_financing.usage_2023 }}%</span>
+                        </div>
+                        <span class="text-gray-400 text-xs">→</span>
+                        <div class="bg-red-500 rounded h-4 flex items-center justify-center" style="width: {{ investor_behavior.risk_management.margin_financing.usage_2025 * 3 }}px; min-width: 20px">
+                            <span class="text-[9px] text-white">{{ investor_behavior.risk_management.margin_financing.usage_2025 }}%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-2 text-[11px] text-gray-600 bg-gray-50 border border-gray-200 rounded p-2">{{ investor_behavior.risk_management.key_finding }}</div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- 虚拟资产 + 回报预期 + AI工具 -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+        <!-- 虚拟资产 -->
+        {% if investor_behavior.virtual_assets %}
+        <div class="bg-violet-50 border border-violet-100 rounded-xl p-4">
+            <h5 class="text-xs font-semibold text-violet-700 mb-2">{{ investor_behavior.virtual_assets.title }}</h5>
+            <div class="space-y-2">
+                {% for item in investor_behavior.virtual_assets.entries %}
+                <div class="flex items-center justify-between">
+                    <span class="text-xs text-gray-600">{{ item.age_group }}</span>
+                    <span class="text-sm font-bold text-violet-600">{{ item.invested_pct }}%</span>
+                </div>
+                <div class="bg-violet-100 rounded-full h-3 overflow-hidden">
+                    <div class="bg-violet-500 rounded-full h-3" style="width: {{ item.invested_pct }}%"></div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="mt-2 text-[10px] text-violet-600">{{ investor_behavior.virtual_assets.key_finding }}</div>
+        </div>
+        {% endif %}
+
+        <!-- 回报预期差 -->
+        {% if investor_behavior.return_expectations %}
+        <div class="bg-amber-50 border border-amber-100 rounded-xl p-4">
+            <h5 class="text-xs font-semibold text-amber-700 mb-2">{{ investor_behavior.return_expectations.title }}</h5>
+            <div class="flex items-end gap-3 mt-3 mb-2">
+                <div class="text-center">
+                    <div class="text-xl font-bold text-amber-600">{{ investor_behavior.return_expectations.expected_return }}%</div>
+                    <div class="text-[10px] text-gray-500">期望回报</div>
+                </div>
+                <div class="text-gray-300 text-lg mb-1">vs</div>
+                <div class="text-center">
+                    <div class="text-xl font-bold text-emerald-600">{{ investor_behavior.return_expectations.actual_return }}%</div>
+                    <div class="text-[10px] text-gray-500">实际回报</div>
+                </div>
+                <div class="text-center ml-1">
+                    <div class="text-lg font-bold text-red-500">-{{ investor_behavior.return_expectations.gap }}%</div>
+                    <div class="text-[10px] text-gray-500">差距</div>
+                </div>
+            </div>
+            <div class="text-[10px] text-amber-600">{{ investor_behavior.return_expectations.key_finding }}</div>
+        </div>
+        {% endif %}
+
+        <!-- AI工具 -->
+        {% if investor_behavior.ai_tools %}
+        <div class="bg-cyan-50 border border-cyan-100 rounded-xl p-4">
+            <h5 class="text-xs font-semibold text-cyan-700 mb-2">{{ investor_behavior.ai_tools.title }}</h5>
+            <div class="grid grid-cols-3 gap-2 text-center mb-3">
+                <div>
+                    <div class="text-lg font-bold text-cyan-600">{{ investor_behavior.ai_tools.awareness_pct }}%</div>
+                    <div class="text-[10px] text-gray-500">听说过</div>
+                </div>
+                <div>
+                    <div class="text-lg font-bold text-cyan-700">{{ investor_behavior.ai_tools.usage_pct }}%</div>
+                    <div class="text-[10px] text-gray-500">用过</div>
+                </div>
+                <div>
+                    <div class="text-lg font-bold text-cyan-800">{{ investor_behavior.ai_tools.interest_pct }}%</div>
+                    <div class="text-[10px] text-gray-500">有兴趣</div>
+                </div>
+            </div>
+            <div class="space-y-1">
+                {% for age in investor_behavior.ai_tools.age_breakdown %}
+                <div class="flex items-center justify-between text-[10px]">
+                    <span class="text-gray-500">{{ age.age_group }}</span>
+                    <span class="text-cyan-700">用过{{ age.usage_pct }}% / 兴趣{{ age.interest_pct }}%</span>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="mt-2 text-[10px] text-cyan-600">{{ investor_behavior.ai_tools.key_finding }}</div>
+        </div>
+        {% endif %}
+    </div>
 </div>
 {% endif %}
 
-<!-- ===== 分析框架 (《好主意不是好营销》) ===== -->
+<!-- ===== 获客策略 核心洞察 ===== -->
+{% if tab_insights.acquisition %}
+<div class="mb-5" data-tab="tab-acquisition">
+    <div class="flex items-center gap-2 mb-3">
+        <span class="inline-block w-1 h-5 rounded bg-emerald-500"></span>
+        <h3 class="text-sm font-bold text-gray-700">核心洞察</h3>
+        <span class="ml-auto text-[9px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-400">Tier 1 估算</span>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        {% for ins in tab_insights.acquisition %}
+        {% set c = ins.color or 'gray' %}
+        <div class="rounded-xl border border-{{ c }}-200 bg-gradient-to-br from-{{ c }}-50/80 to-white p-3 shadow-sm">
+            <div class="text-xs font-bold text-{{ c }}-800 mb-1">{{ ins.title }}</div>
+            <div class="text-[11px] text-{{ c }}-700/90 leading-relaxed">{{ ins.body }}</div>
+            <div class="text-[9px] text-gray-300 mt-1.5">{{ ins.source }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- ===== 分析框架 ===== -->
 {% if analysis_frameworks %}
 <div class="stat-card mb-6" data-tab="tab-acquisition" id="sec-framework">
     <div class="flex items-center justify-between mb-4">
         <div>
             <h3 class="text-lg font-semibold text-gray-900">营销分析框架</h3>
-            <p class="text-xs text-gray-400">基于《好主意不是好营销》(王泽蕴) 数据思维 — 3C定位法 + 用户旅程 + 渠道效率矩阵 + 借势机会</p>
+            <p class="text-xs text-gray-400">3C定位法 + 用户旅程 + 渠道效率矩阵 + 借势机会</p>
         </div>
     </div>
 
@@ -637,7 +1679,7 @@
     {% if futu_hk_stats %}
     <div class="mb-6 p-4 bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-xl">
         <div class="flex items-center gap-2 mb-3">
-            <span class="text-sm font-semibold text-orange-700">核心发现: 客户渗透率 vs 内容覆盖率的「声量断层」</span>
+            <span class="text-sm font-semibold text-orange-700">核心发现: 客户渗透率 vs 社媒内容覆盖率差距</span>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
             <div class="bg-white/70 rounded-lg p-3 text-center">
@@ -663,54 +1705,118 @@
         </div>
         <div class="text-xs text-gray-600 leading-relaxed">
             <strong class="text-orange-700">解读:</strong>
-            富途拥有HK约40%投资者作为付费客户(Q1 2025电话会议), 但在YouTube/Facebook/Instagram等投资者最常用的信息渠道, 内容声量仅1-5%。
-            这意味着: <strong>富途的100万客户在刷YouTube/FB/IG获取投资信息时, 几乎看不到富途的内容 — 他们看到的是竞品和第三方KOL的内容。</strong>
-            这是留存风险, 也是内容投入的核心论据。
+            富途HK付费客户约100万(~40%市占率, Q1 2025电话会议), 88%投资者通过社媒获取投资信息(IFEC 2025), 但富途在YouTube/Facebook/Instagram等主流平台的官方内容产出和KOL合作覆盖相对有限。
+            <strong>市占率领先但社媒内容覆盖不足, 意味着品牌认知主要依赖产品口碑而非主动内容触达 — 加大社媒内容投入可释放增量空间。</strong>
         </div>
         <div class="text-xs text-gray-400 mt-2">数据来源: {{ futu_hk_stats.source }}</div>
     </div>
     {% endif %}
 
-    <!-- 用户旅程渠道映射 -->
+    <!-- 用户旅程渠道映射 (enriched with cross-install + coverage) -->
     {% if analysis_frameworks.user_journey %}
     <div class="mb-6">
-        <h4 class="text-sm font-semibold text-gray-700 mb-1">{{ analysis_frameworks.user_journey.title }}</h4>
-        <p class="text-xs text-gray-400 mb-3">{{ analysis_frameworks.user_journey.subtitle }}</p>
+        <h4 class="text-lg font-bold text-gray-900 mb-1">{{ analysis_frameworks.user_journey.title }}</h4>
+        <p class="text-xs text-gray-500 mb-1">{{ analysis_frameworks.user_journey.subtitle }}</p>
+        <div class="flex flex-wrap gap-x-4 gap-y-0.5 text-[10px] text-gray-400 mb-4">
+            <span>判定标准:</span>
+            <span><span class="text-red-500">🔴 危险</span> = 多数渠道内容占比&lt;5%且竞品MoM正增长</span>
+            <span><span class="text-amber-500">🟡 警告</span> = 覆盖不均(部分渠道强/部分弱)或竞品在追</span>
+            <span><span class="text-green-500">🟢 强</span> = 核心渠道覆盖>15%且有产品/App优势</span>
+            <span class="text-gray-300">| 基于渠道覆盖数据 + data.ai竞品MoM + IFEC 2025</span>
+        </div>
+
         {% set stage_colors = {
-            'awareness': {'bg': 'bg-blue-50', 'border': 'border-blue-200', 'text': 'text-blue-700', 'dot': 'bg-blue-500'},
-            'interest': {'bg': 'bg-purple-50', 'border': 'border-purple-200', 'text': 'text-purple-700', 'dot': 'bg-purple-500'},
-            'consideration': {'bg': 'bg-amber-50', 'border': 'border-amber-200', 'text': 'text-amber-700', 'dot': 'bg-amber-500'},
-            'conversion': {'bg': 'bg-green-50', 'border': 'border-green-200', 'text': 'text-green-700', 'dot': 'bg-green-500'},
-            'retention': {'bg': 'bg-indigo-50', 'border': 'border-indigo-200', 'text': 'text-indigo-700', 'dot': 'bg-indigo-500'},
-            'referral': {'bg': 'bg-rose-50', 'border': 'border-rose-200', 'text': 'text-rose-700', 'dot': 'bg-rose-500'},
+            'awareness': {'bg': 'bg-blue-50', 'border': 'border-blue-200', 'text': 'text-blue-700', 'dot': 'bg-blue-500', 'ring': 'ring-blue-300'},
+            'interest': {'bg': 'bg-purple-50', 'border': 'border-purple-200', 'text': 'text-purple-700', 'dot': 'bg-purple-500', 'ring': 'ring-purple-300'},
+            'consideration': {'bg': 'bg-amber-50', 'border': 'border-amber-200', 'text': 'text-amber-700', 'dot': 'bg-amber-500', 'ring': 'ring-amber-300'},
+            'conversion': {'bg': 'bg-green-50', 'border': 'border-green-200', 'text': 'text-green-700', 'dot': 'bg-green-500', 'ring': 'ring-green-300'},
+            'retention': {'bg': 'bg-indigo-50', 'border': 'border-indigo-200', 'text': 'text-indigo-700', 'dot': 'bg-indigo-500', 'ring': 'ring-indigo-300'},
+            'referral': {'bg': 'bg-rose-50', 'border': 'border-rose-200', 'text': 'text-rose-700', 'dot': 'bg-rose-500', 'ring': 'ring-rose-300'},
         } %}
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        {% set verdict_styles = {
+            'danger': {'bg': 'bg-red-100', 'text': 'text-red-700', 'icon': '🔴'},
+            'warning': {'bg': 'bg-amber-100', 'text': 'text-amber-700', 'icon': '🟡'},
+            'strong': {'bg': 'bg-green-100', 'text': 'text-green-700', 'icon': '🟢'},
+        } %}
+
+        <!-- 旅程概览条 — 一眼看哪里强哪里弱 -->
+        <div class="flex items-stretch mb-5 rounded-xl overflow-hidden border border-gray-200">
             {% for stage in analysis_frameworks.user_journey.stages %}
             {% set sc = stage_colors.get(stage.id, stage_colors.awareness) %}
-            <div class="{{ sc.bg }} {{ sc.border }} border rounded-xl p-3">
-                <div class="flex items-center gap-1.5 mb-1.5">
-                    <span class="{{ sc.dot }} w-2.5 h-2.5 rounded-full"></span>
-                    <span class="text-sm font-semibold {{ sc.text }}">{{ stage.name }}</span>
-                    <span class="text-xs text-gray-400">{{ stage.name_en }}</span>
+            {% set vs = verdict_styles.get(stage.verdict, verdict_styles.warning) %}
+            <div class="flex-1 {{ sc.bg }} px-3 py-2.5 {{ 'border-r border-gray-200' if not loop.last else '' }} text-center">
+                <div class="text-xs font-bold {{ sc.text }}">{{ stage.name }}</div>
+                <div class="mt-1">
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold {{ vs.bg }} {{ vs.text }}">
+                        {{ vs.icon }} {{ stage.verdict_label }}
+                    </span>
                 </div>
-                <p class="text-xs text-gray-500 mb-2">{{ stage.description }}</p>
-                {% if journey_map and journey_map[stage.id] %}
-                <div class="space-y-0.5">
-                    {% for ch in journey_map[stage.id][:6] %}
-                    <div class="flex items-center justify-between text-xs">
-                        <span class="text-gray-600 truncate">{{ ch.name }}</span>
-                        <span class="{{ 'text-red-500' if ch.coverage <= 5 else ('text-amber-500' if ch.coverage <= 15 else 'text-green-600') }} font-medium">{{ ch.coverage }}%</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- 每阶段详细分析 -->
+        <div class="space-y-4">
+            {% for stage in analysis_frameworks.user_journey.stages %}
+            {% set sc = stage_colors.get(stage.id, stage_colors.awareness) %}
+            {% set vs = verdict_styles.get(stage.verdict, verdict_styles.warning) %}
+            <div class="{{ sc.bg }} {{ sc.border }} border rounded-xl p-4">
+                <!-- 标题行 -->
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="{{ sc.dot }} w-3 h-3 rounded-full"></span>
+                        <span class="text-base font-bold {{ sc.text }}">{{ stage.name }}</span>
+                        <span class="text-xs text-gray-400">{{ stage.name_en }}</span>
+                        <span class="text-xs text-gray-500">— {{ stage.description }}</span>
                     </div>
-                    {% endfor %}
-                    {% if journey_map[stage.id] | length > 6 %}
-                    <div class="text-xs text-gray-400">+{{ journey_map[stage.id] | length - 6 }} 更多</div>
-                    {% endif %}
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold {{ vs.bg }} {{ vs.text }}">
+                        {{ vs.icon }} {{ stage.verdict_label }}
+                    </span>
                 </div>
-                {% endif %}
-                <div class="mt-1.5 pt-1.5 border-t {{ sc.border }}">
-                    <span class="text-xs text-gray-400">关键指标:</span>
-                    <span class="text-xs text-gray-500">{{ stage.key_metrics }}</span>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
+                    <!-- 各渠道内容占比 -->
+                    <div class="bg-white/70 rounded-lg p-3">
+                        <div class="text-[10px] font-bold text-gray-500 mb-1.5 flex items-center gap-1">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                            渠道内容覆盖
+                        </div>
+                        <p class="text-[11px] text-gray-600 leading-relaxed">{{ stage.coverage_insight }}</p>
+                        {% if journey_map and journey_map[stage.id] %}
+                        <div class="mt-2 space-y-0.5">
+                            {% for ch in journey_map[stage.id][:5] %}
+                            <div class="flex items-center gap-1.5 text-[10px]">
+                                <span class="text-gray-500 truncate w-20">{{ ch.name }}</span>
+                                <div class="flex-1 bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                                    <div class="{{ 'bg-red-400' if ch.coverage <= 5 else ('bg-amber-400' if ch.coverage <= 15 else 'bg-green-400') }} h-1.5 rounded-full" style="width: {{ [ch.coverage * 3, 100] | min }}%"></div>
+                                </div>
+                                <span class="{{ 'text-red-500 font-bold' if ch.coverage <= 5 else ('text-amber-600' if ch.coverage <= 15 else 'text-green-600') }} w-7 text-right">{{ ch.coverage }}%</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- 竞品威胁 -->
+                    <div class="bg-white/70 rounded-lg p-3">
+                        <div class="text-[10px] font-bold text-red-500 mb-1.5 flex items-center gap-1">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+                            竞品威胁 (交叉安装)
+                        </div>
+                        <p class="text-[11px] text-gray-600 leading-relaxed">{{ stage.threat_insight }}</p>
+                    </div>
+
+                    <!-- 行动建议 -->
+                    <div class="bg-white/70 rounded-lg p-3">
+                        <div class="text-[10px] font-bold {{ sc.text }} mb-1.5 flex items-center gap-1">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                            怎么做
+                        </div>
+                        <p class="text-[11px] text-gray-600 leading-relaxed">{{ stage.action }}</p>
+                    </div>
                 </div>
+
+                <div class="text-[9px] text-gray-300 mt-2">{{ stage.data_sources }}</div>
             </div>
             {% endfor %}
         </div>
@@ -744,37 +1850,80 @@
     </div>
     {% endif %}
 
-    <!-- 渠道优先级排行 -->
+    <!-- 渠道优先级排行 — 6因子模型 -->
     <div class="mb-6">
         <h4 class="text-sm font-semibold text-gray-700 mb-1">{{ analysis_frameworks.efficiency_matrix.title }}</h4>
         <p class="text-xs text-gray-400 mb-1">{{ analysis_frameworks.efficiency_matrix.subtitle }}</p>
-        <p class="text-xs text-gray-300 mb-3">公式: {{ analysis_frameworks.efficiency_matrix.formula }}</p>
+
+        <!-- 公式因子说明 -->
+        {% if analysis_frameworks.efficiency_matrix.formula_factors %}
+        <details class="mb-3">
+            <summary class="text-xs text-gray-400 cursor-pointer hover:text-gray-600">
+                公式: {{ analysis_frameworks.efficiency_matrix.formula }} <span class="text-gray-300 ml-1">点击展开因子说明 ▾</span>
+            </summary>
+            <div class="mt-2 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2">
+                {% for f in analysis_frameworks.efficiency_matrix.formula_factors %}
+                <div class="bg-gray-50 border border-gray-100 rounded-lg p-2.5">
+                    <div class="flex items-center gap-1 mb-1">
+                        <span class="text-sm">{{ f.icon }}</span>
+                        <span class="text-xs font-semibold text-gray-700">{{ f.name }}</span>
+                        <span class="text-xs text-gray-400 ml-auto">{{ f.range }}</span>
+                    </div>
+                    <p class="text-xs text-gray-500 leading-relaxed">{{ f.desc }}</p>
+                    <p class="text-xs text-gray-300 mt-1">来源: {{ f.source }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </details>
+        {% endif %}
+
         {% set sorted_by_priority = all_channels | sort(attribute='priority_score', reverse=true) %}
         {% set max_score = sorted_by_priority[0].priority_score if sorted_by_priority and sorted_by_priority[0].priority_score else 1 %}
-        <div class="space-y-1.5">
-            {% for ch in sorted_by_priority[:12] %}
+        <div class="space-y-1">
+            {% for ch in sorted_by_priority[:15] %}
             {% if ch.priority_score > 0 %}
             {% set tc = type_colors.get(ch.type, default_color) %}
             {% set pct = (ch.priority_score / max_score * 100) | round %}
-            <div class="flex items-center gap-3">
-                <span class="w-5 text-xs font-bold text-gray-400 text-right">{{ loop.index }}</span>
-                <span class="w-32 text-xs font-medium {{ tc.text }} truncate flex items-center gap-1.5">
-                    <span class="{{ tc.dot }} w-2 h-2 rounded-full inline-block flex-shrink-0"></span>
-                    {{ ch.display_name }}
-                </span>
-                <div class="flex-1 bg-gray-100 rounded-full h-4 relative overflow-hidden">
-                    <div class="bg-gradient-to-r from-orange-400 to-red-500 rounded-full h-4 flex items-center justify-end pr-2"
-                         style="width: {{ pct }}%; min-width: 3rem">
-                        <span class="text-xs text-white font-medium">{{ ch.priority_score }}</span>
+            {% set pf = ch.priority_factors if ch.priority_factors else {} %}
+            <div class="group">
+                <div class="flex items-center gap-2">
+                    <span class="w-5 text-xs font-bold text-gray-400 text-right">{{ loop.index }}</span>
+                    <span class="w-28 text-xs font-medium {{ tc.text }} truncate flex items-center gap-1">
+                        <span class="{{ tc.dot }} w-2 h-2 rounded-full inline-block flex-shrink-0"></span>
+                        {{ ch.display_name }}
+                    </span>
+                    <div class="flex-1 bg-gray-100 rounded-full h-5 relative overflow-hidden">
+                        <div class="bg-gradient-to-r from-orange-400 to-red-500 rounded-full h-5 flex items-center justify-end pr-2"
+                             style="width: {{ pct }}%; min-width: 3rem">
+                            <span class="text-xs text-white font-bold">{{ ch.priority_score }}</span>
+                        </div>
                     </div>
+                    <!-- Factor tags -->
+                    <div class="hidden lg:flex items-center gap-1 flex-shrink-0">
+                        {% if pf.threat and pf.threat > 1.0 %}
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs {{ 'bg-red-100 text-red-700' if pf.threat >= 1.5 else 'bg-amber-100 text-amber-700' }}" title="竞品威胁">⚔️{{ pf.threat }}×</span>
+                        {% endif %}
+                        {% if pf.incremental and pf.incremental > 1.2 %}
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs bg-indigo-100 text-indigo-700" title="增量密度高">🎯{{ pf.incremental }}×</span>
+                        {% endif %}
+                        {% if pf.journey and pf.journey > 1.1 %}
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs {{ 'bg-red-100 text-red-700' if pf.journey >= 1.4 else 'bg-yellow-100 text-yellow-700' }}" title="旅程薄弱">🔴{{ pf.journey }}×</span>
+                        {% endif %}
+                    </div>
+                    <span class="w-14 text-xs text-gray-400 text-right flex-shrink-0">覆盖{{ ch.futu_coverage_pct }}%</span>
+                    <span class="w-16 text-xs text-right flex-shrink-0 {{ 'text-green-600' if ch.futu_investment == 'none' else ('text-blue-500' if ch.futu_investment == 'low' else ('text-amber-500' if ch.futu_investment == 'medium' else 'text-gray-400')) }}">{{ ch.investment_label }}</span>
                 </div>
-                <span class="w-16 text-xs text-gray-400 text-right">覆盖{{ ch.futu_coverage_pct }}%</span>
-                <span class="w-20 text-xs text-right {{ 'text-green-600' if ch.futu_investment == 'none' else ('text-blue-500' if ch.futu_investment == 'low' else ('text-amber-500' if ch.futu_investment == 'medium' else 'text-gray-400')) }}">{{ ch.investment_label }}</span>
             </div>
             {% endif %}
             {% endfor %}
         </div>
-        <p class="text-xs text-gray-400 mt-2">得分越高 = 增量投入产出潜力越大（高流量 × 低覆盖 × 高相关度 × 增量空间）| <span class="text-green-600">未投入</span> &gt; <span class="text-blue-500">少量</span> &gt; <span class="text-amber-500">有一定投入</span> &gt; <span class="text-gray-400">已重点投入(降权)</span></p>
+        <div class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-400">
+            <span>得分越高 = 越应优先投入</span>
+            <span class="text-red-500">⚔️竞品威胁(IBKR/Webull正在抢)</span>
+            <span class="text-indigo-500">🎯增量密度(新客集中)</span>
+            <span class="text-amber-500">🔴旅程薄弱(认知/兴趣缺口)</span>
+            <span>| <span class="text-green-600">未投入</span> &gt; <span class="text-blue-500">少量</span> &gt; <span class="text-amber-500">有一定投入</span> &gt; <span class="text-gray-400">已重点投入(降权)</span></span>
+        </div>
     </div>
 
     <!-- 借势机会 -->
@@ -794,154 +1943,9 @@
     </div>
     {% endif %}
 
-    <!-- ===== 细节营销分析 (柏唯良) ===== -->
-    {% if analysis_frameworks.detail_marketing %}
-    {% set dm = analysis_frameworks.detail_marketing %}
-    <div class="mb-6">
-        <h4 class="text-sm font-semibold text-gray-700 mb-1">{{ dm.title }}</h4>
-        <p class="text-xs text-gray-400 mb-3">{{ dm.subtitle }}</p>
-        {% set dm_colors = {
-            'blue': {'bg': 'bg-blue-50', 'border': 'border-blue-200', 'text': 'text-blue-700', 'grad_from': 'from-blue-50', 'grad_to': 'to-indigo-50'},
-            'purple': {'bg': 'bg-purple-50', 'border': 'border-purple-200', 'text': 'text-purple-700', 'grad_from': 'from-purple-50', 'grad_to': 'to-violet-50'},
-            'amber': {'bg': 'bg-amber-50', 'border': 'border-amber-200', 'text': 'text-amber-700', 'grad_from': 'from-amber-50', 'grad_to': 'to-yellow-50'},
-            'red': {'bg': 'bg-red-50', 'border': 'border-red-200', 'text': 'text-red-700', 'grad_from': 'from-red-50', 'grad_to': 'to-rose-50'},
-            'green': {'bg': 'bg-green-50', 'border': 'border-green-200', 'text': 'text-green-700', 'grad_from': 'from-green-50', 'grad_to': 'to-emerald-50'},
-        } %}
-        <div class="space-y-3">
-            {% for dim in dm.dimensions %}
-            {% set dc = dm_colors.get(dim.color, dm_colors.blue) %}
-            <div class="bg-gradient-to-r {{ dc.grad_from }} {{ dc.grad_to }} {{ dc.border }} border rounded-xl p-4">
-                <div class="flex items-start gap-3">
-                    <span class="flex-shrink-0 w-7 h-7 rounded-full {{ dc.bg }} {{ dc.border }} border flex items-center justify-center text-xs font-bold {{ dc.text }}">{{ loop.index }}</span>
-                    <div class="flex-1 min-w-0">
-                        <h5 class="text-sm font-semibold {{ dc.text }} mb-1">{{ dim.name }}</h5>
-                        <p class="text-xs text-gray-500 italic mb-2">{{ dim.principle }}</p>
-                        <p class="text-xs text-gray-600 leading-relaxed mb-2"><strong>富途场景:</strong> {{ dim.application }}</p>
-                        <div class="pt-2 border-t {{ dc.border }}">
-                            <span class="text-xs font-medium {{ dc.text }}">行动建议:</span>
-                            <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">{{ dim.action }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        <p class="text-xs text-gray-400 mt-2">来源: {{ dm.source }}</p>
-    </div>
-    {% endif %}
 </div>
 {% endif %}
 
-<!-- ===== ARPU 分析 ===== -->
-{% if arpu_analysis %}
-<div class="stat-card mb-6" data-tab="tab-acquisition" id="sec-arpu">
-    <div class="flex items-center justify-between mb-4">
-        <div>
-            <h3 class="text-lg font-semibold text-gray-900">{{ arpu_analysis.title }}</h3>
-            <p class="text-xs text-gray-400">{{ arpu_analysis.subtitle }}</p>
-        </div>
-    </div>
-
-    <!-- 核心洞察 -->
-    <div class="mb-6 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl">
-        <p class="text-xs text-gray-700 leading-relaxed">{{ arpu_analysis.key_insight }}</p>
-    </div>
-
-    <!-- 券商 ARPU 对比 -->
-    <div class="mb-6">
-        <h4 class="text-sm font-semibold text-gray-700 mb-3">券商平台 ARPU 对比</h4>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <!-- 富途 -->
-            <div class="bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-4 text-center">
-                <div class="text-sm font-semibold text-orange-700 mb-2">富途/moomoo</div>
-                <div class="text-2xl font-bold text-orange-600">HK${{ "{:,}".format(arpu_analysis.futu_arpu.fy2024) }}</div>
-                <div class="text-xs text-gray-500 mt-1">FY2024 ARPU/年</div>
-                <div class="text-lg font-bold text-green-600 mt-1">{{ arpu_analysis.futu_arpu.arpu_yoy_growth }}</div>
-                <div class="text-xs text-gray-400">同比增长</div>
-                <div class="mt-2 pt-2 border-t border-orange-200">
-                    <div class="text-xs text-gray-600">CAC: HK${{ "{:,}".format(arpu_analysis.futu_arpu.cac_hkd) }}</div>
-                    <div class="text-xs text-gray-600">LTV/CAC: {{ arpu_analysis.futu_arpu.ltv_cac_ratio }}x</div>
-                    <div class="text-xs text-gray-600">客均资产: HK${{ "{:,}".format(arpu_analysis.futu_arpu.client_assets_per_user_hkd // 1000) }}K</div>
-                </div>
-            </div>
-            <!-- 竞品 -->
-            {% for comp in arpu_analysis.competitor_arpu %}
-            {% set comp_colors = [
-                {'from': 'from-blue-50', 'to': 'to-indigo-50', 'border': 'border-blue-200', 'text': 'text-blue-700', 'num': 'text-blue-600'},
-                {'from': 'from-purple-50', 'to': 'to-violet-50', 'border': 'border-purple-200', 'text': 'text-purple-700', 'num': 'text-purple-600'},
-                {'from': 'from-gray-50', 'to': 'to-slate-50', 'border': 'border-gray-300', 'text': 'text-gray-700', 'num': 'text-gray-600'},
-            ] %}
-            {% set cc = comp_colors[loop.index0] %}
-            <div class="bg-gradient-to-br {{ cc.from }} {{ cc.to }} border {{ cc.border }} rounded-xl p-4 text-center">
-                <div class="text-sm font-semibold {{ cc.text }} mb-2">{{ comp.name }}</div>
-                <div class="text-2xl font-bold {{ cc.num }}">HK${{ "{:,}".format(comp.arpu_hkd) }}</div>
-                <div class="text-xs text-gray-500 mt-1">ARPU/年(估)</div>
-                <div class="mt-2 pt-2 border-t {{ cc.border }}">
-                    <div class="text-xs text-gray-500">{{ comp.position }}</div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <!-- 广告平台 ARPU -->
-    <div class="mb-6">
-        <h4 class="text-sm font-semibold text-gray-700 mb-1">广告平台投资者 ARPU</h4>
-        <p class="text-xs text-gray-400 mb-3">每位HK投资者在各平台的广告商业价值 — 说明为何金融客户值得高价获取</p>
-        {% set max_inv_arpu = 5000 %}
-        <div class="space-y-2">
-            {% for pa in arpu_analysis.platform_ad_arpu %}
-            {% set pct = (pa.investor_arpu_est_hkd / max_inv_arpu * 100) | round %}
-            <div class="flex items-center gap-3">
-                <span class="w-28 text-xs font-medium text-gray-700 truncate">{{ pa.name }}</span>
-                <div class="flex-1">
-                    <div class="flex gap-0.5 h-5">
-                        <div class="bg-gray-200 rounded-l-full h-5 flex items-center justify-end pr-2 relative" style="width: {{ (pa.ad_arpu_hkd / max_inv_arpu * 100) | round }}%">
-                            <span class="text-xs text-gray-600 font-medium whitespace-nowrap">HK${{ "{:,}".format(pa.ad_arpu_hkd) }}</span>
-                        </div>
-                        <div class="bg-gradient-to-r from-emerald-400 to-teal-500 rounded-r-full h-5 flex items-center justify-end pr-2" style="width: {{ ((pa.investor_arpu_est_hkd - pa.ad_arpu_hkd) / max_inv_arpu * 100) | round }}%">
-                            <span class="text-xs text-white font-medium whitespace-nowrap">HK${{ "{:,}".format(pa.investor_arpu_est_hkd) }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        <div class="flex items-center gap-4 mt-2 text-xs text-gray-400">
-            <span class="flex items-center gap-1"><span class="w-3 h-2 bg-gray-200 rounded"></span>平台整体ARPU</span>
-            <span class="flex items-center gap-1"><span class="w-3 h-2 bg-emerald-400 rounded"></span>投资者ARPU(金融广告溢价)</span>
-        </div>
-    </div>
-
-    <!-- 获客成本基准 -->
-    <div>
-        <h4 class="text-sm font-semibold text-gray-700 mb-3">各渠道获客成本(CAC)基准</h4>
-        <div class="overflow-x-auto">
-            <table class="w-full text-xs">
-                <thead>
-                    <tr class="border-b border-gray-200">
-                        <th class="text-left py-2 text-gray-500 font-medium">渠道</th>
-                        <th class="text-left py-2 text-gray-500 font-medium">CAC范围</th>
-                        <th class="text-left py-2 text-gray-500 font-medium">客户质量</th>
-                        <th class="text-right py-2 text-gray-500 font-medium">LTV/CAC</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for b in arpu_analysis.cac_benchmarks %}
-                    <tr class="border-b border-gray-100 hover:bg-gray-50">
-                        <td class="py-2 font-medium text-gray-700">{{ b.channel }}</td>
-                        <td class="py-2 text-gray-600">{{ b.cac_range }}</td>
-                        <td class="py-2 text-gray-600">{{ b.quality }}</td>
-                        <td class="py-2 text-right font-semibold {{ 'text-green-600' if '8' in b.ltv_cac or '12' in b.ltv_cac or '20' in b.ltv_cac else ('text-amber-600' if '3' in b.ltv_cac or '4' in b.ltv_cac or '5' in b.ltv_cac else 'text-red-500') }}">{{ b.ltv_cac }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <p class="text-xs text-gray-400 mt-2">来源: {{ arpu_analysis.source }} | LTV按3年计算, CAC基于HK市场数据</p>
-    </div>
-</div>
-{% endif %}
 
 <!-- ===== 转化率分析 ===== -->
 {% if conversion_analysis %}
@@ -962,7 +1966,12 @@
     {% if conversion_analysis.full_scatter %}
     <div class="mb-6">
         <h4 class="text-sm font-semibold text-gray-700 mb-1">全渠道可转化用户潜力图 ({{ conversion_analysis.full_scatter | length }} 个渠道)</h4>
-        <p class="text-xs text-gray-400 mb-3">圆圈面积 = 可转化人数 (剩余未转化投资者 × 可转化比例) | 颜色 = 饱和度 | X=执行难度 Y=转化难度 | 悬停查看详情</p>
+        <div class="flex flex-wrap gap-x-5 gap-y-1 text-[11px] text-gray-400 mb-3">
+            <span><strong class="text-gray-600">X轴:</strong> 执行难度(1=易, 10=难) — KOL资源、内容制作、平台规则等</span>
+            <span><strong class="text-gray-600">Y轴:</strong> 转化难度(1=易, 10=难) — 用户投资意图、决策距离、竞品饱和度</span>
+            <span><strong class="text-gray-600">圆圈面积:</strong> 可转化人数(剩余未转化投资者 × 转化率)</span>
+            <span><strong class="text-gray-600">颜色:</strong> <span class="text-green-500">绿=低饱和(蓝海)</span> <span class="text-amber-500">黄=中</span> <span class="text-red-500">红=高饱和</span></span>
+        </div>
         <div id="scatter-container" class="relative bg-gray-50 border border-gray-200 rounded-xl" style="height: 780px; padding: 40px 50px 50px 50px">
             <!-- 四象限标签 -->
             <div class="absolute top-3 left-14 text-xs font-semibold text-red-300">难转化 · 易执行 (低效渠道)</div>
@@ -1296,39 +2305,6 @@
             {% endfor %}
         </div>
 
-        <!-- SFC官方数据: 活跃客户账户数 -->
-        {% if new_investor_analysis.seasonality.sfc_data %}
-        {% set sfc = new_investor_analysis.seasonality.sfc_data %}
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-4">
-            <div class="flex items-center justify-between mb-2">
-                <h5 class="text-xs font-semibold text-slate-700">{{ sfc.title }}</h5>
-                <a href="{{ sfc.source_url }}" target="_blank" class="text-[10px] text-blue-400 hover:underline">{{ sfc.source }}</a>
-            </div>
-            <p class="text-[10px] text-slate-400 mb-2">{{ sfc.note }}</p>
-            <!-- 柱状图 -->
-            <div class="flex items-end gap-2 justify-center mb-3" style="height: 140px">
-                {% set max_total = 4870000 %}
-                {% for yr in sfc.years %}
-                {% set h = (yr.total / max_total * 120) | round | int %}
-                {% set is_peak = yr.total == max_total %}
-                <div class="flex flex-col items-center gap-0.5">
-                    <span class="text-[10px] font-bold {{ 'text-green-600' if is_peak else 'text-slate-600' }}">{{ "%.0f" | format(yr.total / 10000) }}万</span>
-                    <div class="w-10 rounded-t-md transition-all {{ 'bg-green-400' if is_peak else ('bg-red-300' if yr.total < 3000000 else 'bg-indigo-400') }}" style="height: {{ h }}px"></div>
-                    <span class="text-[9px] text-slate-400">{{ yr.year }}</span>
-                </div>
-                {% endfor %}
-            </div>
-            <div class="p-2.5 bg-indigo-50 border border-indigo-200 rounded-lg text-xs text-indigo-700">
-                {{ sfc.key_insight }}
-            </div>
-            <!-- 来源PDF -->
-            <div class="flex flex-wrap gap-3 mt-2">
-                {% for pdf in sfc.source_pdfs %}
-                <a href="{{ pdf.url }}" target="_blank" class="text-[10px] text-blue-400 hover:underline">{{ pdf.name }}</a>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
 
         <!-- 脉冲事件 -->
         <div class="flex flex-wrap gap-2">
@@ -1364,7 +2340,7 @@
 
     <p class="text-xs text-gray-400 mt-3">来源: {{ new_investor_analysis.data_sources }}</p>
 
-    <!-- 人口结构 — 满18岁人口预测 -->
+    <!-- 未来5年新增投资者预测 — 四大来源 -->
     {% if new_investor_analysis.population_pipeline %}
     {% set pp = new_investor_analysis.population_pipeline %}
     <div class="mt-6 pt-6 border-t border-gray-200">
@@ -1372,10 +2348,73 @@
         <p class="text-xs text-gray-400 mb-1">{{ pp.subtitle }}</p>
         <p class="text-[10px] text-amber-500 mb-4">{{ pp.note }}</p>
 
-        <!-- 主图: 未来5年满18岁人口柱状图 -->
-        <div class="mb-4">
-            <div class="text-xs font-medium text-gray-600 mb-2">2026-2030年 每年满18岁人口（估计在港居民）</div>
-            <div class="space-y-2">
+        {% if pp.four_sources %}
+        <!-- 汇总卡片 -->
+        {% if pp.five_year_summary %}
+        <div class="mb-5 p-4 bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-200 rounded-xl flex items-center justify-between">
+            <div>
+                <div class="text-sm font-semibold text-indigo-800">5年累计新增投资者</div>
+                <div class="text-[10px] text-indigo-500 mt-0.5">{{ pp.five_year_summary.note }}</div>
+            </div>
+            <div class="text-right">
+                <div class="text-2xl font-black text-indigo-700">{{ pp.five_year_summary.total_range }}</div>
+                <div class="text-[10px] text-indigo-400">2026-2030年</div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 四大来源卡片 -->
+        {% set src_styles = {
+            "indigo": {"bg": "bg-indigo-50", "border": "border-indigo-200", "text": "text-indigo-700", "bar": "bg-indigo-500", "light": "text-indigo-400", "badge": "bg-indigo-100"},
+            "sky": {"bg": "bg-sky-50", "border": "border-sky-200", "text": "text-sky-700", "bar": "bg-sky-500", "light": "text-sky-400", "badge": "bg-sky-100"},
+            "amber": {"bg": "bg-amber-50", "border": "border-amber-200", "text": "text-amber-700", "bar": "bg-amber-500", "light": "text-amber-400", "badge": "bg-amber-100"},
+            "emerald": {"bg": "bg-emerald-50", "border": "border-emerald-200", "text": "text-emerald-700", "bar": "bg-emerald-500", "light": "text-emerald-400", "badge": "bg-emerald-100"}
+        } %}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+            {% for src in pp.four_sources %}
+            {% set st = src_styles.get(src.color, src_styles.indigo) %}
+            <div class="{{ st.bg }} {{ st.border }} border rounded-xl p-4">
+                <!-- 头部: 名称 + 占比 -->
+                <div class="flex items-center justify-between mb-2">
+                    <h5 class="text-sm font-bold {{ st.text }}">{{ src.name }}</h5>
+                    <span class="{{ st.badge }} {{ st.text }} text-xs font-bold px-2 py-0.5 rounded-full">{{ src.pct }}%</span>
+                </div>
+                <!-- 年均人数 -->
+                <div class="text-lg font-black {{ st.text }} mb-1">{{ src.annual_range }}<span class="text-xs font-normal {{ st.light }}"> /年</span></div>
+                <!-- 逻辑说明 -->
+                <p class="text-[11px] text-gray-600 leading-relaxed mb-3">{{ src.logic }}</p>
+                <!-- 5年趋势条 -->
+                <div class="space-y-1 mb-3">
+                    {% for yr in src.five_year %}
+                    {% set bar_pct = (yr.mid / 80000 * 100) | round %}
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] text-gray-500 w-8">{{ yr.year }}</span>
+                        <div class="flex-1 bg-white/60 rounded-full h-4 overflow-hidden">
+                            <div class="{{ st.bar }} h-full rounded-full flex items-center" style="width: {{ bar_pct }}%">
+                                <span class="text-[9px] text-white font-bold pl-1.5 whitespace-nowrap">{{ (yr.mid / 10000) | round(1) }}万</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- 关键渠道 -->
+                <div class="flex flex-wrap gap-1 mb-2">
+                    {% for ch in src.key_channels %}
+                    <span class="text-[10px] {{ st.text }} {{ st.badge }} px-1.5 py-0.5 rounded">{{ ch }}</span>
+                    {% endfor %}
+                </div>
+                <!-- 富途优势 -->
+                <div class="text-[10px] text-gray-400">{{ src.futu_advantage }}</div>
+                <div class="text-[9px] {{ st.light }} mt-1">来源: {{ src.source }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- 年轻人满18岁详细数据（折叠） -->
+        <details class="mb-4">
+            <summary class="text-xs font-medium text-gray-500 cursor-pointer hover:text-gray-700">展开查看：本地年轻人满18岁人口逐年明细（含双非扣除）</summary>
+            <div class="mt-3 space-y-2">
                 {% for yr in pp.years %}
                 {% set max_val = 70000 %}
                 {% set pct = (yr.est_hk_residents_mid / max_val * 100) | round %}
@@ -1383,168 +2422,215 @@
                     <div class="w-12 text-xs font-semibold text-gray-700 text-right">{{ yr.turn_18_year }}</div>
                     <div class="flex-1 relative">
                         <div class="flex items-center gap-1">
-                            <!-- 在港居民(实心) -->
-                            <div class="h-7 rounded bg-blue-500 relative flex items-center" style="width: {{ pct }}%">
+                            <div class="h-6 rounded bg-blue-500 relative flex items-center" style="width: {{ pct }}%">
                                 <span class="text-[10px] text-white font-bold pl-2 whitespace-nowrap">~{{ (yr.est_hk_residents_mid / 10000) | round(1) }}万</span>
                             </div>
-                            <!-- 双非(虚线) -->
-                            <div class="h-7 rounded border-2 border-dashed border-gray-300 bg-gray-50 flex items-center" style="width: {{ (yr.type2_births / max_val * 100) | round }}%">
+                            <div class="h-6 rounded border-2 border-dashed border-gray-300 bg-gray-50 flex items-center" style="width: {{ (yr.type2_births / max_val * 100) | round }}%">
                                 <span class="text-[10px] text-gray-400 pl-1 whitespace-nowrap">双非{{ (yr.type2_births / 10000) | round(1) }}万</span>
                             </div>
                         </div>
                     </div>
-                    <div class="w-20 text-[10px] text-gray-400 text-right">总{{ (yr.total_births / 10000) | round(1) }}万出生</div>
+                    <div class="w-20 text-[10px] text-gray-400 text-right">总{{ (yr.total_births / 10000) | round(1) }}万</div>
                 </div>
                 {% endfor %}
+                <div class="flex items-center gap-4 mt-1 text-[10px] text-gray-400">
+                    <span><span class="inline-block w-3 h-2 bg-blue-500 rounded mr-1"></span>估计在港居民</span>
+                    <span><span class="inline-block w-3 h-2 border border-dashed border-gray-400 rounded mr-1"></span>双非（多数不在港）</span>
+                </div>
             </div>
-            <div class="flex items-center gap-4 mt-2 text-[10px] text-gray-400">
-                <span><span class="inline-block w-3 h-2 bg-blue-500 rounded mr-1"></span>估计在港居民</span>
-                <span><span class="inline-block w-3 h-2 border border-dashed border-gray-400 rounded mr-1"></span>双非婴儿（多数不在港）</span>
-            </div>
-        </div>
-
-        <!-- 远期对比: 2031年后断崖 -->
-        <div class="mb-4 p-3 bg-red-50 rounded-lg border border-red-100">
-            <div class="text-xs font-semibold text-red-700 mb-2">远期对比 — 2031年后满18岁人口断崖</div>
-            <div class="grid grid-cols-5 gap-1 text-center">
-                {% for cy in pp.context_years %}
-                <div>
-                    <div class="text-[10px] text-gray-500">{{ cy.turn_18_year }}年</div>
-                    <div class="text-xs font-bold {% if cy.est_hk_residents_mid < 40000 %}text-red-600{% else %}text-gray-700{% endif %}">
-                        ~{{ (cy.est_hk_residents_mid / 10000) | round(1) }}万
+            <!-- 远期对比: 2031年后断崖 -->
+            <div class="mb-4 p-3 bg-red-50 rounded-lg border border-red-100 mt-4">
+                <div class="text-xs font-semibold text-red-700 mb-2">远期对比 — 2031年后年轻新增人口减半</div>
+                <div class="grid grid-cols-5 gap-1 text-center">
+                    {% for cy in pp.context_years %}
+                    <div>
+                        <div class="text-[10px] text-gray-500">{{ cy.turn_18_year }}年</div>
+                        <div class="text-xs font-bold {% if cy.est_hk_residents_mid < 40000 %}text-red-600{% else %}text-gray-700{% endif %}">
+                            ~{{ (cy.est_hk_residents_mid / 10000) | round(1) }}万
+                        </div>
+                        <div class="text-[9px] text-gray-400">{{ cy.note }}</div>
                     </div>
-                    <div class="text-[9px] text-gray-400">{{ cy.note }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mt-2 h-16 flex items-end gap-1">
+                    {% for cy in pp.context_years %}
+                    {% set h = (cy.est_hk_residents_mid / 60000 * 100) | round %}
+                    <div class="flex-1 rounded-t {% if cy.est_hk_residents_mid < 40000 %}bg-red-400{% else %}bg-gray-400{% endif %}" style="height: {{ h }}%" title="{{ cy.turn_18_year }}: ~{{ (cy.est_hk_residents_mid / 10000) | round(1) }}万"></div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Insights -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {% set ins_colors = {"blue": "bg-blue-50 border-blue-200 text-blue-800", "red": "bg-red-50 border-red-200 text-red-800", "green": "bg-emerald-50 border-emerald-200 text-emerald-800"} %}
+                {% for ins in pp.insights %}
+                <div class="p-3 rounded-lg border {{ ins_colors.get(ins.color, 'bg-gray-50 border-gray-200 text-gray-800') }}">
+                    <div class="text-xs font-semibold mb-1">{{ ins.title }}</div>
+                    <div class="text-[11px] leading-relaxed">{{ ins.body }}</div>
                 </div>
                 {% endfor %}
             </div>
-            <div class="mt-2 h-16 flex items-end gap-1">
-                {% for cy in pp.context_years %}
-                {% set h = (cy.est_hk_residents_mid / 60000 * 100) | round %}
-                <div class="flex-1 rounded-t {% if cy.est_hk_residents_mid < 40000 %}bg-red-400{% else %}bg-gray-400{% endif %}" style="height: {{ h }}%" title="{{ cy.turn_18_year }}: ~{{ (cy.est_hk_residents_mid / 10000) | round(1) }}万"></div>
-                {% endfor %}
-            </div>
-        </div>
 
-        <!-- Insights -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {% set ins_colors = {"blue": "bg-blue-50 border-blue-200 text-blue-800", "red": "bg-red-50 border-red-200 text-red-800", "green": "bg-emerald-50 border-emerald-200 text-emerald-800"} %}
-            {% for ins in pp.insights %}
-            <div class="p-3 rounded-lg border {{ ins_colors.get(ins.color, 'bg-gray-50 border-gray-200 text-gray-800') }}">
-                <div class="text-xs font-semibold mb-1">{{ ins.title }}</div>
-                <div class="text-[11px] leading-relaxed">{{ ins.body }}</div>
-            </div>
-            {% endfor %}
-        </div>
-
-        <p class="text-[10px] text-gray-400 mt-2">来源: {{ pp.source }}</p>
+            <p class="text-[10px] text-gray-400 mt-2">来源: {{ pp.source }}</p>
+        </details>
     </div>
     {% endif %}
 
-    <!-- 加开账户流向分析 -->
+    <!-- 存量投资者加开券商分析（市场结构变迁） -->
     {% if new_investor_analysis.account_switching %}
     {% set asw = new_investor_analysis.account_switching %}
     <div class="mt-6 pt-6 border-t border-gray-200">
         <h4 class="text-lg font-semibold text-gray-900 mb-1">{{ asw.title }}</h4>
         <p class="text-xs text-gray-400 mb-4">{{ asw.subtitle }}</p>
 
-        <!-- 流向卡片 -->
-        {% set flow_colors = {"emerald": "border-l-emerald-500 bg-emerald-50", "amber": "border-l-amber-500 bg-amber-50", "indigo": "border-l-indigo-500 bg-indigo-50", "teal": "border-l-teal-500 bg-teal-50", "orange": "border-l-orange-500 bg-orange-50"} %}
-        {% set flow_text = {"emerald": "text-emerald-700", "amber": "text-amber-700", "indigo": "text-indigo-700", "teal": "text-teal-700", "orange": "text-orange-700"} %}
-        {% set flow_bar = {"emerald": "bg-emerald-500", "amber": "bg-amber-500", "indigo": "bg-indigo-500", "teal": "bg-teal-500", "orange": "bg-orange-500"} %}
-        {% set dq_badge = {"hard": "bg-green-100 text-green-700 border-green-300", "partial": "bg-amber-100 text-amber-700 border-amber-300", "inferred": "bg-red-100 text-red-700 border-red-300"} %}
-        {% set dq_label = {"hard": "有硬数据", "partial": "部分数据", "inferred": "推断"} %}
-        <div class="flex flex-wrap gap-3 mb-3 text-[10px] text-gray-400">
-            <span class="flex items-center gap-1"><span class="px-1.5 py-0.5 bg-green-100 text-green-700 border border-green-300 rounded">有硬数据</span>来源可查证</span>
-            <span class="flex items-center gap-1"><span class="px-1.5 py-0.5 bg-amber-100 text-amber-700 border border-amber-300 rounded">部分数据</span>付费报告摘要/仅AUM</span>
-            <span class="flex items-center gap-1"><span class="px-1.5 py-0.5 bg-red-100 text-red-700 border border-red-300 rounded">推断</span>基于市场数据推断</span>
-        </div>
-        <div class="space-y-3 mb-5">
-            {% for flow in asw.flows %}
-            <div class="border-l-4 {{ flow_colors.get(flow.color, 'border-l-gray-400 bg-gray-50') }} rounded-r-xl p-3">
-                <div class="flex items-center gap-2 mb-1.5">
-                    <span class="text-sm font-bold text-gray-800">{{ flow['from'] }}</span>
-                    <span class="text-gray-400">→</span>
-                    <span class="text-sm font-bold text-gray-800">{{ flow.to }}</span>
-                    <span class="text-[10px] px-1.5 py-0.5 rounded border font-medium ml-auto {{ dq_badge.get(flow.data_quality, 'bg-gray-100 text-gray-600 border-gray-300') }}">{{ flow.volume_label }}</span>
+        <!-- 核心结论 -->
+        {% if asw.key_conclusion %}
+        {% set kc = asw.key_conclusion %}
+        <div class="mb-5 p-4 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-xl text-white">
+            <div class="text-sm font-bold mb-3">{{ kc.title }}</div>
+            <div class="grid grid-cols-2 gap-4 mb-3">
+                <div class="bg-white/15 rounded-lg p-3 text-center">
+                    <div class="text-[10px] text-white/70">{{ kc.left_label }}</div>
+                    <div class="text-3xl font-black">{{ kc.left_value }}</div>
+                    <div class="text-xs text-white/80">{{ kc.left_sub }}</div>
                 </div>
-                <div class="text-xs text-gray-600 mb-1.5">{{ flow.evidence }}</div>
-                <div class="flex flex-wrap gap-1.5">
-                    {% for t in flow.triggers %}
-                    <span class="text-[10px] px-1.5 py-0.5 bg-white border border-gray-200 text-gray-500 rounded">{{ t }}</span>
+                <div class="bg-white/15 rounded-lg p-3 text-center">
+                    <div class="text-[10px] text-white/70">{{ kc.right_label }}</div>
+                    <div class="text-3xl font-black">{{ kc.right_value }}</div>
+                    <div class="text-xs text-white/80">{{ kc.right_sub }}</div>
+                </div>
+            </div>
+            <div class="text-center text-xs font-semibold bg-white/20 rounded-lg py-2">{{ kc.gap_label }}</div>
+            <div class="text-[10px] text-white/60 mt-2">{{ kc.body }}</div>
+            <div class="text-[9px] text-white/40 mt-1">来源: {{ kc.source }}</div>
+        </div>
+        {% endif %}
+
+        <!-- 三大硬数据维度 -->
+        {% if asw.hard_data_dimensions %}
+        {% set dim_styles = {
+            "indigo": {"bg": "bg-indigo-50", "border": "border-indigo-200", "text": "text-indigo-700", "bar": "bg-indigo-500", "badge": "bg-indigo-100", "light": "text-indigo-400"},
+            "red": {"bg": "bg-red-50", "border": "border-red-200", "text": "text-red-700", "bar": "bg-red-500", "badge": "bg-red-100", "light": "text-red-400"},
+            "amber": {"bg": "bg-amber-50", "border": "border-amber-200", "text": "text-amber-700", "bar": "bg-amber-500", "badge": "bg-amber-100", "light": "text-amber-400"}
+        } %}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            {% for dim in asw.hard_data_dimensions %}
+            {% set ds = dim_styles.get(dim.color, dim_styles.indigo) %}
+            <div class="{{ ds.bg }} {{ ds.border }} border rounded-xl p-4">
+                <h5 class="text-sm font-bold {{ ds.text }} mb-2">{{ dim.title }}</h5>
+                <div class="text-2xl font-black {{ ds.text }}">{{ dim.metric }}</div>
+                <div class="text-[10px] {{ ds.light }} mb-2">{{ dim.metric_sub }}</div>
+                <p class="text-[11px] text-gray-600 leading-relaxed mb-3">{{ dim.body }}</p>
+
+                <!-- 数据柱状图 -->
+                {% if dim.data_points and dim.data_points[0].value is defined %}
+                {% set max_val = 4870000 if dim.color == 'indigo' else 1421 %}
+                <div class="flex items-end gap-1 h-16 mb-2">
+                    {% for dp in dim.data_points %}
+                    {% if dp.value is defined %}
+                    {% set h = (dp.value / max_val * 100) | round | int %}
+                    <div class="flex-1 flex flex-col items-center">
+                        <span class="text-[8px] {{ ds.text }} font-bold mb-0.5">{{ dp.label }}</span>
+                        <div class="w-full {{ ds.bar }} rounded-t opacity-80" style="height: {{ h }}%"></div>
+                        <span class="text-[8px] text-gray-400 mt-0.5">{{ dp.year }}</span>
+                    </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
-                <div class="text-[10px] text-gray-300 mt-1">{{ flow.source }}</div>
-            </div>
-            {% endfor %}
-        </div>
+                {% endif %}
 
-        <!-- 触发因素排名 -->
-        {% if asw.trigger_ranking %}
-        <h5 class="text-sm font-semibold text-gray-700 mb-2">{{ asw.trigger_ranking.title }}</h5>
-        <div class="text-[10px] text-amber-500 mb-2">{{ asw.trigger_ranking.note }}</div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 mb-5">
-            {% for item in asw.trigger_ranking["items"] %}
-            <div class="flex items-start gap-2 text-xs">
-                <span class="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center shrink-0 text-[10px]">{{ item.rank }}</span>
-                <div>
-                    <span class="font-medium text-gray-700">{{ item.trigger }}</span>
-                    <span class="text-[10px] px-1 py-0.5 rounded border ml-1 {{ dq_badge.get(item.data_quality, 'bg-gray-100 text-gray-500 border-gray-200') }}">{{ dq_label.get(item.data_quality, '') }}</span>
-                    <span class="text-gray-400 ml-1">{{ item.source }}</span>
+                <!-- 成交额份额（amber特殊处理） -->
+                {% if dim.data_points and dim.data_points[0].share is defined %}
+                <div class="space-y-1.5 mb-2">
+                    {% for dp in dim.data_points %}
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] text-gray-500 w-20">{{ dp.category }}</span>
+                        <div class="flex-1 bg-white/60 rounded-full h-4 overflow-hidden">
+                            <div class="{{ ds.bar }} h-full rounded-full opacity-80 flex items-center" style="width: {{ dp.share }}%">
+                                <span class="text-[9px] text-white font-bold pl-1.5">{{ dp.share }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
+                {% endif %}
+
+                <div class="text-[9px] text-gray-400 mb-1">{{ dim.caveat }}</div>
+                <a href="{{ dim.source_url }}" target="_blank" class="text-[9px] {{ ds.light }} hover:underline">{{ dim.source }}</a>
             </div>
             {% endfor %}
         </div>
         {% endif %}
 
-        <!-- 市场结构变迁 -->
-        {% if asw.market_structure_shift %}
-        {% set mss = asw.market_structure_shift %}
-        <h5 class="text-sm font-semibold text-gray-700 mb-1">{{ mss.title }}</h5>
-        <p class="text-[10px] text-gray-400 mb-3">{{ mss.subtitle }}</p>
-        <!-- 持牌数条形图 -->
-        <div class="flex items-end gap-2 h-32 mb-2">
-            {% for item in mss["items"] %}
-            <div class="flex-1 flex flex-col items-center">
-                <span class="text-[10px] text-gray-600 font-bold mb-1">{{ item.count }}</span>
-                <div class="w-full bg-indigo-400 rounded-t transition-all" style="height: {{ ((item.count - 1380) / 50 * 100) | round | int }}%"></div>
-                <span class="text-[10px] text-gray-400 mt-1">{{ item.year }}</span>
-            </div>
-            {% endfor %}
-        </div>
-        <!-- 关闭数据 -->
-        <div class="flex flex-wrap gap-3 mb-2">
-            {% for c in mss.closures %}
-            <div class="text-xs"><span class="font-medium text-amber-600">{{ c.period }}:</span> <span class="text-gray-600">关闭{{ c.closed }}</span> <span class="text-[10px] text-gray-300">({{ c.source }})</span></div>
-            {% endfor %}
-        </div>
-        <!-- 集中度 -->
-        <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-2.5 mb-2 text-xs text-gray-600">
-            <span class="font-semibold text-indigo-700">成交集中度:</span> {{ mss.concentration }}
-        </div>
-        <div class="text-[10px] text-gray-400 mb-3">{{ mss.note }}</div>
-        <div class="text-[10px] text-gray-300 mb-3">{{ mss.source }}</div>
+        <!-- 折叠：流向推断 + 触发因素 + 详细数据 -->
+        <details class="mb-4">
+            <summary class="text-xs font-medium text-gray-500 cursor-pointer hover:text-gray-700">展开查看：流向推断、加开触发因素、持牌法团数量变化</summary>
+            <div class="mt-4">
 
-        <!-- 活跃客户账户数 -->
-        {% if mss.active_clients %}
-        {% set ac = mss.active_clients %}
-        <h5 class="text-sm font-semibold text-gray-700 mb-1 mt-4">{{ ac.title }}</h5>
-        <p class="text-[10px] text-gray-400 mb-2">{{ ac.note }}</p>
-        <div class="grid grid-cols-2 gap-3 mb-2">
-            {% for d in ac.data %}
-            <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-center">
-                <div class="text-xs text-gray-400 mb-1">{{ d.year }}年末</div>
-                <div class="text-sm font-bold text-gray-800">现金账户 {{ "{:,}".format(d.cash) }}</div>
-                <div class="text-sm font-bold text-gray-800">保证金账户 {{ "{:,}".format(d.margin) }}</div>
-                <div class="text-[10px] text-gray-300 mt-1">{{ d.source }}</div>
+            <!-- 流向卡片（标注为推断） -->
+            {% set flow_colors = {"emerald": "border-l-emerald-500 bg-emerald-50", "amber": "border-l-amber-500 bg-amber-50", "indigo": "border-l-indigo-500 bg-indigo-50", "orange": "border-l-orange-500 bg-orange-50"} %}
+            {% set dq_badge = {"hard": "bg-green-100 text-green-700 border-green-300", "partial": "bg-amber-100 text-amber-700 border-amber-300", "inferred": "bg-red-100 text-red-700 border-red-300"} %}
+            <h5 class="text-xs font-semibold text-gray-600 mb-2">流向推断（基于间接数据）</h5>
+            <div class="space-y-2 mb-5">
+                {% for flow in asw.flows %}
+                <div class="border-l-4 {{ flow_colors.get(flow.color, 'border-l-gray-400 bg-gray-50') }} rounded-r-xl p-3">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-xs font-bold text-gray-800">{{ flow['from'] }}</span>
+                        <span class="text-gray-400">→</span>
+                        <span class="text-xs font-bold text-gray-800">{{ flow.to }}</span>
+                        <span class="text-[10px] px-1.5 py-0.5 rounded border font-medium ml-auto {{ dq_badge.get(flow.data_quality, 'bg-gray-100 text-gray-600 border-gray-300') }}">{{ flow.get('data_quality_label', flow.volume_label) }}</span>
+                    </div>
+                    <div class="text-[11px] text-gray-600 mb-1">{{ flow.evidence }}</div>
+                    <div class="flex flex-wrap gap-1">
+                        {% for t in flow.triggers %}
+                        <span class="text-[10px] px-1.5 py-0.5 bg-white border border-gray-200 text-gray-500 rounded">{{ t }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="text-[9px] text-gray-300 mt-1">{{ flow.source }}</div>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
-        <div class="bg-amber-50 border border-amber-200 rounded-lg p-2.5 mb-2 text-xs text-gray-600 leading-relaxed">
-            <span class="font-semibold text-amber-700">重要说明:</span> {{ ac.caveat }}
-            <span class="text-[10px] text-gray-400 ml-1">({{ ac.caveat_source }})</span>
-        </div>
-        {% endif %}
-        {% endif %}
+
+            <!-- 触发因素排名 -->
+            {% if asw.trigger_ranking %}
+            <h5 class="text-xs font-semibold text-gray-600 mb-2">{{ asw.trigger_ranking.title }}</h5>
+            <div class="text-[10px] text-amber-500 mb-2">{{ asw.trigger_ranking.note }}</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 mb-5">
+                {% for item in asw.trigger_ranking["items"] %}
+                <div class="flex items-start gap-2 text-xs">
+                    <span class="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center shrink-0 text-[10px]">{{ item.rank }}</span>
+                    <div>
+                        <span class="font-medium text-gray-700">{{ item.trigger }}</span>
+                        <div class="text-[10px] text-gray-400 mt-0.5">{{ item.source }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- 持牌法团数量变化 -->
+            {% if asw.market_structure_shift %}
+            {% set mss = asw.market_structure_shift %}
+            <h5 class="text-xs font-semibold text-gray-600 mb-1">{{ mss.title }}</h5>
+            <p class="text-[10px] text-gray-400 mb-2">{{ mss.subtitle }}</p>
+            <div class="flex items-end gap-2 h-24 mb-2">
+                {% for item in mss["items"] %}
+                <div class="flex-1 flex flex-col items-center">
+                    <span class="text-[10px] text-gray-600 font-bold mb-1">{{ item.count }}</span>
+                    <div class="w-full bg-indigo-400 rounded-t transition-all" style="height: {{ ((item.count - 1380) / 50 * 100) | round | int }}%"></div>
+                    <span class="text-[10px] text-gray-400 mt-1">{{ item.year }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="flex flex-wrap gap-3 mb-2">
+                {% for c in mss.closures %}
+                <div class="text-xs"><span class="font-medium text-amber-600">{{ c.period }}:</span> <span class="text-gray-600">关闭{{ c.closed }}</span> <span class="text-[10px] text-gray-300">({{ c.source }})</span></div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            </div>
+        </details>
 
         <div class="flex flex-wrap gap-2">
             {% for src in asw.key_sources %}
@@ -1556,7 +2642,186 @@
 </div>
 {% endif %}
 
-<!-- ===== Q2获客方案 ===== -->
+<!-- ===== 渠道策略矩阵 ===== -->
+{% if channel_strategy %}
+<div class="stat-card mb-6" data-tab="tab-acquisition" id="sec-channel-strategy">
+    <div class="mb-4">
+        <h3 class="text-lg font-semibold text-gray-900">{{ channel_strategy.title }}</h3>
+        <p class="text-xs text-gray-400">{{ channel_strategy.subtitle }} | 月预算: {{ channel_strategy.total_monthly_budget }}</p>
+        {% if channel_strategy.budget_source %}<p class="text-[10px] text-gray-300 mt-0.5">{{ channel_strategy.budget_source }}</p>{% endif %}
+    </div>
+
+    <!-- 预算大盘: 已有65% vs 新开拓35% -->
+    <div class="grid grid-cols-2 gap-3 mb-6">
+        <div class="bg-gradient-to-br from-slate-50 to-gray-50 border border-gray-200 rounded-xl p-4 text-center">
+            <div class="text-3xl font-bold text-gray-800">65%</div>
+            <div class="text-sm font-medium text-gray-600 mt-1">已有渠道优化</div>
+            <div class="text-[10px] text-gray-400 mt-0.5">按竞争态势分配</div>
+            <div class="flex justify-center gap-2 mt-2">
+                <span class="px-1.5 py-0.5 rounded text-[9px] bg-red-100 text-red-600">防守40%</span>
+                <span class="px-1.5 py-0.5 rounded text-[9px] bg-amber-100 text-amber-600">加码35%</span>
+                <span class="px-1.5 py-0.5 rounded text-[9px] bg-gray-100 text-gray-500">维持25%</span>
+            </div>
+        </div>
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4 text-center">
+            <div class="text-3xl font-bold text-green-700">35%</div>
+            <div class="text-sm font-medium text-green-700 mt-1">新渠道开拓</div>
+            <div class="text-[10px] text-green-500 mt-0.5">按AI自动化能力排优先级</div>
+            <div class="flex justify-center gap-2 mt-2">
+                <span class="px-1.5 py-0.5 rounded text-[9px] bg-green-100 text-green-700">AI快上</span>
+                <span class="px-1.5 py-0.5 rounded text-[9px] bg-amber-100 text-amber-600">AI辅助</span>
+                <span class="px-1.5 py-0.5 rounded text-[9px] bg-gray-100 text-gray-500">人工主导</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== Part 1: 已有渠道 ====== -->
+    {% if channel_strategy.existing_channels %}
+    {% set ex = channel_strategy.existing_channels %}
+    <div class="mb-6">
+        <div class="flex items-center gap-2 mb-4">
+            <span class="inline-block w-1 h-5 rounded bg-gray-700"></span>
+            <h4 class="text-sm font-bold text-gray-800">{{ ex.title }}</h4>
+            <span class="text-[10px] text-gray-400">{{ ex.description }}</span>
+        </div>
+
+        {% set ex_styles = {
+            "red": {"bg": "bg-red-50", "border": "border-red-200", "text": "text-red-700", "badge": "bg-red-100 text-red-700"},
+            "amber": {"bg": "bg-amber-50", "border": "border-amber-200", "text": "text-amber-700", "badge": "bg-amber-100 text-amber-700"},
+            "gray": {"bg": "bg-gray-50", "border": "border-gray-200", "text": "text-gray-600", "badge": "bg-gray-100 text-gray-600"}
+        } %}
+
+        {% for cat in ex.categories %}
+        {% set es = ex_styles.get(cat.color, ex_styles.gray) %}
+        <div class="mb-4">
+            <div class="flex items-center gap-2 mb-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold {{ es.badge }}">{{ cat.name }}</span>
+                <span class="text-[10px] text-gray-400">{{ cat.description }}</span>
+                <span class="text-[10px] text-gray-300 ml-auto">占已有渠道预算{{ cat.budget_pct_of_existing }}%</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-{{ cat.channels | length if cat.channels | length <= 3 else 3 }} gap-2">
+                {% for ch in cat.channels %}
+                <div class="{{ es.bg }} {{ es.border }} border rounded-lg p-2.5">
+                    <div class="text-xs font-semibold {{ es.text }} mb-1">{{ ch.name }}</div>
+                    {% if ch.current_status %}
+                    <div class="text-[10px] text-gray-400 mb-1">现状: {{ ch.current_status }}</div>
+                    {% endif %}
+                    {% if ch.threat %}
+                    <div class="text-[10px] text-red-500 mb-1">威胁: {{ ch.threat }}</div>
+                    {% endif %}
+                    {% if ch.action %}
+                    <div class="text-[10px] text-gray-600 font-medium">策略: {{ ch.action }}</div>
+                    {% endif %}
+                    {% if ch.monthly_budget %}
+                    <div class="text-[10px] text-gray-400 mt-1 pt-1 border-t border-gray-100">预算: <strong class="text-gray-600">{{ ch.monthly_budget }}</strong></div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ====== Part 2: 新渠道开拓 (AI优先级) ====== -->
+    {% if channel_strategy.new_channels %}
+    {% set nc = channel_strategy.new_channels %}
+    <div class="mb-6">
+        <div class="flex items-center gap-2 mb-4">
+            <span class="inline-block w-1 h-5 rounded bg-green-600"></span>
+            <h4 class="text-sm font-bold text-green-800">{{ nc.title }}</h4>
+            <span class="text-[10px] text-gray-400">{{ nc.description }}</span>
+        </div>
+
+        {% set nc_styles = {
+            "green": {"bg": "from-green-50/80 to-white", "border": "border-green-200", "text": "text-green-700", "badge": "bg-green-100 text-green-700"},
+            "amber": {"bg": "from-amber-50/80 to-white", "border": "border-amber-200", "text": "text-amber-700", "badge": "bg-amber-100 text-amber-700"},
+            "gray": {"bg": "from-gray-50/80 to-white", "border": "border-gray-200", "text": "text-gray-600", "badge": "bg-gray-100 text-gray-600"}
+        } %}
+
+        {% for tier in nc.tiers %}
+        {% set ns_style = nc_styles.get(tier.color, nc_styles.gray) %}
+        <div class="mb-4">
+            <div class="flex items-center gap-2 mb-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold {{ ns_style.badge }}">{{ tier.name }}</span>
+                <span class="text-[10px] text-gray-400">{{ tier.description }}</span>
+            </div>
+
+            {% if tier.channels[0] is mapping and tier.channels[0].ai_pct is defined %}
+            <!-- AI快速上线/辅助上线 — 详细卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {% for ch in tier.channels %}
+                <div class="bg-gradient-to-br {{ ns_style.bg }} {{ ns_style.border }} border rounded-xl p-3">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-sm font-semibold {{ ns_style.text }}">{{ ch.name }}</span>
+                        <div class="flex items-center gap-1 text-[10px] text-gray-400">
+                            <div class="w-10 bg-gray-200 rounded-full h-1.5">
+                                <div class="{% if ch.ai_pct >= 80 %}bg-green-500{% elif ch.ai_pct >= 60 %}bg-amber-500{% else %}bg-gray-400{% endif %} h-1.5 rounded-full" style="width: {{ ch.ai_pct }}%"></div>
+                            </div>
+                            AI {{ ch.ai_pct }}%
+                        </div>
+                    </div>
+                    {% if ch.investors %}
+                    <div class="text-[10px] text-gray-400 mb-1">覆盖: {{ ch.investors }}</div>
+                    {% endif %}
+                    <p class="text-[11px] text-gray-600 mb-1.5"><strong>AI:</strong> {{ ch.ai_role }}</p>
+                    {% if ch.why_fast %}
+                    <div class="text-[10px] text-green-600 bg-green-50 rounded px-1.5 py-0.5 mb-1.5 inline-block">{{ ch.why_fast }}</div>
+                    {% endif %}
+                    <div class="grid grid-cols-3 gap-x-2 text-[11px] text-gray-500 border-t border-gray-100 pt-1.5">
+                        <div><span class="text-gray-300">预算:</span> <span class="font-medium text-gray-600">{{ ch.monthly_budget }}</span></div>
+                        <div><span class="text-gray-300">月获客:</span> <span class="font-semibold {{ ns_style.text }}">{{ ch.est_monthly_acq }}</span></div>
+                        <div><span class="text-gray-300">上线:</span> <span class="font-medium text-gray-600">{{ ch.launch_time }}</span></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <!-- 人工主导 — 简洁标签 -->
+            <div class="flex flex-wrap gap-2">
+                {% for ch in tier.channels %}
+                <div class="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-xs">
+                    <span class="font-medium text-gray-700">{{ ch.name }}</span>
+                    <span class="text-gray-400 ml-1">— {{ ch.reason }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- ====== 上线路线图 ====== -->
+    {% if channel_strategy.launch_roadmap %}
+    <div class="bg-gradient-to-r from-gray-50 to-slate-50 border border-gray-200 rounded-xl p-4">
+        <h4 class="text-sm font-bold text-gray-800 mb-3">上线路线图</h4>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {% for phase in channel_strategy.launch_roadmap %}
+            {% set phase_colors = {"green": "bg-green-100 text-green-700", "amber": "bg-amber-100 text-amber-700", "blue": "bg-blue-100 text-blue-700"} %}
+            <div class="relative bg-white border border-gray-200 rounded-xl p-3">
+                {% if not loop.last %}
+                <div class="hidden md:block absolute -right-2 top-1/2 transform -translate-y-1/2 text-gray-300 text-lg z-10">&rarr;</div>
+                {% endif %}
+                <div class="flex items-center gap-2 mb-1.5">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold {{ phase_colors.get(phase.color, 'bg-gray-100 text-gray-600') }}">{{ phase.phase }}</span>
+                    <span class="text-[10px] font-semibold text-gray-700">{{ phase.label }}</span>
+                </div>
+                <p class="text-xs text-gray-500 mb-2">{{ phase.description }}</p>
+                <div class="flex flex-wrap gap-1">
+                    {% for ch_name in phase.channels %}
+                    <span class="px-1.5 py-0.5 rounded text-[10px] {% if phase.focus == 'new' %}bg-green-50 text-green-600 border border-green-100{% elif phase.focus == 'mixed' %}bg-amber-50 text-amber-600 border border-amber-100{% else %}bg-blue-50 text-blue-600 border border-blue-100{% endif %}">{{ ch_name }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+<!-- ===== Q2获客方案 (moved to last in acquisition tab) ===== -->
 {% if acquisition_plan %}
 <div class="stat-card mb-6" data-tab="tab-acquisition" id="sec-q2-plan">
     <div class="flex items-center justify-between mb-4">
@@ -1570,7 +2835,6 @@
         </div>
     </div>
 
-    <!-- 预算摘要 -->
     <div class="grid grid-cols-3 gap-3 mb-5">
         <div class="bg-orange-50 border border-orange-200 rounded-xl p-3 text-center">
             <div class="text-xs text-gray-400">总预算</div>
@@ -1586,7 +2850,6 @@
         </div>
     </div>
 
-    <!-- 渠道分配表 -->
     <div class="overflow-x-auto mb-4">
         <table class="w-full text-xs">
             <thead>
@@ -1636,7 +2899,6 @@
         </table>
     </div>
 
-    <!-- 占比条形图 -->
     <div class="flex rounded-full overflow-hidden h-6 bg-gray-100 mb-3">
         {% set plan_colors = ['bg-blue-500', 'bg-indigo-500', 'bg-sky-500', 'bg-amber-500', 'bg-red-400', 'bg-violet-500', 'bg-pink-500', 'bg-cyan-500', 'bg-emerald-500', 'bg-orange-400', 'bg-lime-500', 'bg-teal-500', 'bg-rose-400'] %}
         {% for ch in acquisition_plan.channels %}
@@ -1658,100 +2920,19 @@
 </div>
 {% endif %}
 
-<!-- ===== AI获客矩阵 ===== -->
-{% if ai_acquisition %}
-<div class="stat-card mb-6" data-tab="tab-acquisition" id="sec-ai-matrix">
-    <div class="mb-4">
-        <h3 class="text-lg font-semibold text-gray-900">{{ ai_acquisition.title }}</h3>
-        <p class="text-xs text-gray-400">{{ ai_acquisition.subtitle }}</p>
-    </div>
-
-    {% set tier_styles = {'green': {'bg': 'bg-green-50', 'border': 'border-green-200', 'text': 'text-green-700', 'badge': 'bg-green-100 text-green-700'},
-                          'amber': {'bg': 'bg-amber-50', 'border': 'border-amber-200', 'text': 'text-amber-700', 'badge': 'bg-amber-100 text-amber-700'},
-                          'gray': {'bg': 'bg-gray-50', 'border': 'border-gray-200', 'text': 'text-gray-600', 'badge': 'bg-gray-100 text-gray-600'}} %}
-
-    {% for tier in ai_acquisition.tiers %}
-    {% set ts = tier_styles.get(tier.color, tier_styles.gray) %}
-    <div class="mb-4">
-        <div class="flex items-center gap-2 mb-2">
-            <span class="px-2 py-0.5 rounded text-xs font-bold {{ ts.badge }}">{{ tier.name }}</span>
-            <span class="text-xs text-gray-400">{{ tier.description }}</span>
-        </div>
-
-        {% if tier.channels[0] is mapping and tier.channels[0].ai_role is defined %}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {% for ch in tier.channels %}
-            <div class="{{ ts.bg }} {{ ts.border }} border rounded-xl p-3">
-                <div class="flex items-center justify-between mb-1.5">
-                    <span class="text-sm font-semibold {{ ts.text }}">{{ ch.name }}</span>
-                    <div class="flex items-center gap-1 text-xs text-gray-400">
-                        <div class="w-12 bg-gray-200 rounded-full h-1.5">
-                            <div class="bg-green-500 h-1.5 rounded-full" style="width: {{ ch.automation_pct }}%"></div>
-                        </div>
-                        AI {{ ch.automation_pct }}%
-                    </div>
-                </div>
-                <p class="text-xs text-gray-600 mb-1.5"><strong>AI:</strong> {{ ch.ai_role }}</p>
-                <div class="grid grid-cols-2 gap-x-3 text-xs text-gray-500">
-                    <div><span class="text-gray-400">预算:</span> {{ ch.budget_model }}</div>
-                    <div><span class="text-gray-400">月获客:</span> <span class="font-semibold text-gray-700">{{ ch.est_monthly_leads }}</span></div>
-                    <div><span class="text-gray-400">CAC:</span> {{ ch.est_cac }}</div>
-                    <div><span class="text-gray-400">启动:</span> {{ ch.speed }}</div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div class="flex flex-wrap gap-2">
-            {% for ch in tier.channels %}
-            <div class="{{ ts.bg }} {{ ts.border }} border rounded-lg px-3 py-2 text-xs">
-                <span class="font-medium {{ ts.text }}">{{ ch.name }}</span>
-                <span class="text-gray-400 ml-1">— {{ ch.reason }}</span>
-            </div>
-            {% endfor %}
-        </div>
-        {% endif %}
-    </div>
-    {% endfor %}
-
-    <!-- Quick wins -->
-    {% if ai_acquisition.quick_wins %}
-    <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4 mt-4">
-        <h5 class="text-sm font-bold text-green-700 mb-2">{{ ai_acquisition.quick_wins.title }}</h5>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs mb-3">
-            <div class="bg-white rounded-lg p-2 border border-green-100">
-                <div class="font-semibold text-green-600">Week 1</div>
-                <div class="text-gray-600">{{ ai_acquisition.quick_wins.week1 }}</div>
-            </div>
-            <div class="bg-white rounded-lg p-2 border border-green-100">
-                <div class="font-semibold text-green-600">Week 2</div>
-                <div class="text-gray-600">{{ ai_acquisition.quick_wins.week2 }}</div>
-            </div>
-            <div class="bg-white rounded-lg p-2 border border-green-100">
-                <div class="font-semibold text-green-600">Week 3</div>
-                <div class="text-gray-600">{{ ai_acquisition.quick_wins.week3 }}</div>
-            </div>
-            <div class="bg-white rounded-lg p-2 border border-green-100">
-                <div class="font-semibold text-green-600">Week 4</div>
-                <div class="text-gray-600">{{ ai_acquisition.quick_wins.week4 }}</div>
-            </div>
-        </div>
-        <div class="flex gap-4 text-xs">
-            <span class="text-gray-500">月预算: <strong class="text-green-700">{{ ai_acquisition.quick_wins.est_monthly_budget }}</strong></span>
-            <span class="text-gray-500">月获客: <strong class="text-green-700">{{ ai_acquisition.quick_wins.est_monthly_new_accounts }}</strong></span>
-        </div>
-    </div>
-    {% endif %}
-</div>
-{% endif %}
-
 <!-- ===== 各渠道可转化用户瀑布图 ===== -->
 {% if waterfall_data %}
 <div class="stat-card mb-6" data-tab="tab-channels" id="sec-waterfall">
-    <div class="mb-4">
-        <h3 class="text-lg font-semibold text-gray-900">各渠道可转化用户拆解</h3>
-        <p class="text-xs text-gray-400">平台总用户 → 投资者 → 去除富途已转化 → 富途可转化 | Top 20 渠道</p>
-    </div>
+    <details>
+    <summary class="cursor-pointer mb-4 list-none">
+        <div class="flex items-center justify-between">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900 inline">各渠道可转化用户拆解</h3>
+                <span class="text-xs text-gray-400 ml-2">点击展开 ▸</span>
+            </div>
+            <p class="text-xs text-gray-400">平台总用户 → 投资者 → 去除富途已转化 → 富途可转化 | Top 20 渠道</p>
+        </div>
+    </summary>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {% for wf in waterfall_data[:20] %}
         {% set max_val = [wf.total_users, wf.investors] | max %}
@@ -1818,6 +2999,7 @@
         {% endif %}
         {% endfor %}
     </div>
+    </details>
 </div>
 {% endif %}
 
@@ -1893,28 +3075,28 @@
         <!-- 多份调查对比 -->
         {% if pt.investment_objectives %}
         {% set bar_colors = {"emerald": "from-emerald-400 to-emerald-500", "blue": "from-blue-400 to-blue-500", "rose": "from-rose-400 to-rose-500", "indigo": "from-indigo-400 to-indigo-500", "amber": "from-amber-400 to-amber-500", "violet": "from-violet-400 to-violet-500"} %}
-        <div class="space-y-5 mb-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-6">
             {% for ds in pt.investment_objectives.datasets %}
-            <div class="bg-gray-50 rounded-xl p-4">
-                <div class="flex items-center justify-between mb-2">
-                    <a href="{{ ds.source_url }}" target="_blank" class="text-sm font-semibold text-gray-800 hover:text-blue-600">{{ ds.source }}</a>
-                    <span class="text-[10px] text-gray-400">{{ ds.sample }}</span>
+            <div class="bg-gray-50 rounded-lg p-3">
+                <div class="flex items-center justify-between mb-1.5">
+                    <a href="{{ ds.source_url }}" target="_blank" class="text-xs font-semibold text-gray-800 hover:text-blue-600 truncate">{{ ds.source }}</a>
+                    <span class="text-[10px] text-gray-400 shrink-0 ml-2">{{ ds.sample }}</span>
                 </div>
-                <div class="space-y-2">
+                <div class="space-y-1">
                     {% for item in ds["items"] %}
-                    <div class="flex items-center gap-3">
-                        <div class="w-36 text-xs text-right text-gray-600 shrink-0">{{ item.name }}</div>
-                        <div class="flex-1 bg-gray-200 rounded-full h-6 overflow-hidden">
-                            <div class="h-full rounded-full bg-gradient-to-r {{ bar_colors.get(item.color, 'from-gray-400 to-gray-500') }} flex items-center justify-end pr-2"
+                    <div class="flex items-center gap-2">
+                        <div class="w-28 text-[11px] text-right text-gray-600 shrink-0 truncate">{{ item.name }}</div>
+                        <div class="flex-1 bg-gray-200 rounded-full h-4 overflow-hidden">
+                            <div class="h-full rounded-full bg-gradient-to-r {{ bar_colors.get(item.color, 'from-gray-400 to-gray-500') }} flex items-center justify-end pr-1.5"
                                  style="width: {{ item.pct }}%">
-                                <span class="text-[10px] font-bold text-white">{{ item.pct }}%</span>
+                                <span class="text-[9px] font-bold text-white">{{ item.pct }}%</span>
                             </div>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
                 {% if ds.age_note %}
-                <div class="text-[10px] text-rose-500 mt-2">{{ ds.age_note }}</div>
+                <div class="text-[10px] text-rose-500 mt-1">{{ ds.age_note }}</div>
                 {% endif %}
             </div>
             {% endfor %}
@@ -1937,68 +3119,49 @@
         </div>
         {% endif %}
 
-        <!-- 决策影响因素 + 增加配置驱动 并排 -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-            {% if pt.decision_drivers %}
-            <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4">
-                <h4 class="text-sm font-semibold text-indigo-800 mb-2">{{ pt.decision_drivers.title }}</h4>
-                <div class="space-y-2">
-                    {% for item in pt.decision_drivers["items"] %}
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs w-24 text-right text-gray-500 shrink-0">{{ item.name }}</span>
-                        <div class="flex-1 bg-indigo-100 rounded-full h-5 overflow-hidden">
-                            <div class="bg-indigo-400 h-full rounded-full" style="width: {{ item.pct }}%"></div>
+        <!-- 决策影响因素 + 增加配置驱动 — 折叠 -->
+        <details class="mb-4">
+            <summary class="text-xs text-gray-400 cursor-pointer hover:text-gray-600">展开查看：宏观决策因素 (HKIFA 2024 + 富途2026报告)</summary>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-3">
+                {% if pt.decision_drivers %}
+                <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4">
+                    <h4 class="text-sm font-semibold text-indigo-800 mb-2">{{ pt.decision_drivers.title }}</h4>
+                    <div class="space-y-2">
+                        {% for item in pt.decision_drivers["items"] %}
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs w-24 text-right text-gray-500 shrink-0">{{ item.name }}</span>
+                            <div class="flex-1 bg-indigo-100 rounded-full h-5 overflow-hidden">
+                                <div class="bg-indigo-400 h-full rounded-full" style="width: {{ item.pct }}%"></div>
+                            </div>
+                            <span class="text-xs font-semibold text-indigo-700 w-8">{{ item.pct }}%</span>
                         </div>
-                        <span class="text-xs font-semibold text-indigo-700 w-8">{{ item.pct }}%</span>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
+                    <a href="{{ pt.decision_drivers.source_url }}" target="_blank" class="text-[10px] text-blue-400 hover:underline mt-2 block">{{ pt.decision_drivers.source }}</a>
                 </div>
-                <a href="{{ pt.decision_drivers.source_url }}" target="_blank" class="text-[10px] text-blue-400 hover:underline mt-2 block">{{ pt.decision_drivers.source }}</a>
-            </div>
-            {% endif %}
-            {% if pt.increase_drivers %}
-            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
-                <h4 class="text-sm font-semibold text-emerald-800 mb-2">{{ pt.increase_drivers.title }}</h4>
-                <div class="space-y-2">
-                    {% for item in pt.increase_drivers["items"] %}
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs w-24 text-right text-gray-500 shrink-0">{{ item.name }}</span>
-                        <div class="flex-1 bg-emerald-100 rounded-full h-5 overflow-hidden">
-                            <div class="bg-emerald-400 h-full rounded-full" style="width: {{ item.pct }}%"></div>
+                {% endif %}
+                {% if pt.increase_drivers %}
+                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+                    <h4 class="text-sm font-semibold text-emerald-800 mb-2">{{ pt.increase_drivers.title }}</h4>
+                    <div class="space-y-2">
+                        {% for item in pt.increase_drivers["items"] %}
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs w-24 text-right text-gray-500 shrink-0">{{ item.name }}</span>
+                            <div class="flex-1 bg-emerald-100 rounded-full h-5 overflow-hidden">
+                                <div class="bg-emerald-400 h-full rounded-full" style="width: {{ item.pct }}%"></div>
+                            </div>
+                            <span class="text-xs font-semibold text-emerald-700 w-8">{{ item.pct }}%</span>
                         </div>
-                        <span class="text-xs font-semibold text-emerald-700 w-8">{{ item.pct }}%</span>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
+                    <div class="text-[10px] text-emerald-600 mt-2">{{ pt.increase_drivers.context }}</div>
+                    <a href="{{ pt.increase_drivers.source_url }}" target="_blank" class="text-[10px] text-blue-400 hover:underline mt-1 block">{{ pt.increase_drivers.source }}</a>
                 </div>
-                <div class="text-[10px] text-emerald-600 mt-2">{{ pt.increase_drivers.context }}</div>
-                <a href="{{ pt.increase_drivers.source_url }}" target="_blank" class="text-[10px] text-blue-400 hover:underline mt-1 block">{{ pt.increase_drivers.source }}</a>
+                {% endif %}
             </div>
-            {% endif %}
-        </div>
+        </details>
     </div>
     {% endif %}
-
-    <!-- 信息来源排名 横向条 -->
-    {% set info = investor_motivations.info_sources %}
-    <div class="mb-8">
-        <div class="flex items-center justify-between mb-3">
-            <h3 class="text-lg font-semibold text-gray-900">{{ info.title }}</h3>
-            <span class="text-[10px] text-gray-400">来源: {{ info.source }}</span>
-        </div>
-        <div class="space-y-2.5">
-            {% for item in info["items"] %}
-            <div class="flex items-center gap-3">
-                <div class="w-32 text-sm text-gray-700 text-right shrink-0">{{ item.name }}</div>
-                <div class="flex-1 bg-gray-100 rounded-full h-7 relative overflow-hidden">
-                    <div class="h-full rounded-full bg-gradient-to-r from-indigo-400 to-indigo-500 flex items-center justify-end pr-2.5 transition-all duration-700"
-                         style="width: {{ item.pct }}%">
-                        <span class="text-xs font-bold text-white">{{ item.pct }}%</span>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
 
     <!-- 纯新开 vs 加开 双栏 -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
@@ -2056,18 +3219,17 @@
             <table class="w-full text-sm">
                 <thead>
                     <tr class="border-b-2 border-gray-200">
-                        <th class="text-left py-2 px-3 text-gray-600 font-medium">平台</th>
-                        <th class="text-center py-2 px-3 text-gray-600 font-medium">Gen Z</th>
-                        <th class="text-center py-2 px-3 text-gray-600 font-medium">Millennials</th>
-                        <th class="text-center py-2 px-3 text-gray-600 font-medium">Gen X</th>
-                        <th class="text-center py-2 px-3 text-gray-600 font-medium">Boomers</th>
+                        <th class="text-left py-2 px-3 text-gray-600 font-medium">行为指标</th>
+                        <th class="text-center py-2 px-3 text-gray-600 font-medium">18-29岁</th>
+                        <th class="text-center py-2 px-3 text-gray-600 font-medium">30-49岁</th>
+                        <th class="text-center py-2 px-3 text-gray-600 font-medium">50-69岁</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for row in gt.data %}
                     <tr class="border-b border-gray-100">
                         <td class="py-2.5 px-3 font-medium text-gray-800">{{ row.platform }}</td>
-                        {% for gen in [row.gen_z, row.millennials, row.gen_x, row.boomers] %}
+                        {% for gen in [row.age_18_29, row.age_30_49, row.age_50_69] %}
                         <td class="text-center py-2.5 px-3">
                             {% if gen >= 30 %}
                             <span class="inline-block w-14 py-0.5 rounded-full text-xs font-bold bg-rose-100 text-rose-700">{{ gen }}%</span>
@@ -2142,6 +3304,7 @@
         <div>
             <h3 class="text-lg font-semibold text-gray-900">社媒平台</h3>
             <p class="text-xs text-gray-400">8 个主要社媒平台的 HK 投资者分布、富途渗透率与客群画像</p>
+            <p class="text-[10px] text-gray-300 mt-0.5">「富途/投资」= Truescope社交监听+校准点估算(Tier 1) — 非精确值，仅代表数量级。公式: 券商占金融内容% × 富途占券商%</p>
         </div>
         <a href="/" class="text-sm text-indigo-600 hover:text-indigo-800">详细看板 &rarr;</a>
     </div>
@@ -2276,6 +3439,211 @@
 </div>
 {% endfor %}
 
+<!-- ===== 线下片区 核心洞察 ===== -->
+{% if tab_insights.offline %}
+<div class="mb-5" data-tab="tab-offline">
+    <div class="flex items-center gap-2 mb-3">
+        <span class="inline-block w-1 h-5 rounded bg-indigo-500"></span>
+        <h3 class="text-sm font-semibold text-gray-900">核心洞察</h3>
+        <span class="ml-auto text-[9px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-400">Tier 1 — 实际数据</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+        {% for insight in tab_insights.offline %}
+        {% set colors = {'red': {'bg': 'bg-red-50', 'border': 'border-red-200', 'title': 'text-red-800', 'dot': 'bg-red-500'}, 'amber': {'bg': 'bg-amber-50', 'border': 'border-amber-200', 'title': 'text-amber-800', 'dot': 'bg-amber-500'}, 'blue': {'bg': 'bg-blue-50', 'border': 'border-blue-200', 'title': 'text-blue-800', 'dot': 'bg-blue-500'}, 'indigo': {'bg': 'bg-indigo-50', 'border': 'border-indigo-200', 'title': 'text-indigo-800', 'dot': 'bg-indigo-500'}, 'emerald': {'bg': 'bg-emerald-50', 'border': 'border-emerald-200', 'title': 'text-emerald-800', 'dot': 'bg-emerald-500'}} %}
+        {% set c = colors.get(insight.color, colors.blue) %}
+        <div class="{{ c.bg }} {{ c.border }} border rounded-lg p-3">
+            <div class="flex items-center gap-1.5 mb-1">
+                <span class="w-1.5 h-1.5 rounded-full {{ c.dot }}"></span>
+                <span class="text-xs font-bold {{ c.title }}">{{ insight.title }}</span>
+            </div>
+            <p class="text-[11px] text-gray-600 leading-relaxed">{{ insight.body }}</p>
+            {% if insight.source %}<p class="text-[9px] text-gray-400 mt-1.5">{{ insight.source }}</p>{% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- ===== 线下片区 竞品布局概览 ===== -->
+{% if offline_district_analysis %}
+{% set oda = offline_district_analysis %}
+{% set stats = oda.summary_stats %}
+<div class="stat-card mb-6" data-tab="tab-offline" id="sec-offline-overview">
+    <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ oda.title }}</h3>
+    <p class="text-xs text-gray-400 mb-4">{{ oda.subtitle }}</p>
+
+    <!-- 汇总数字 -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-indigo-50 rounded-lg p-4 text-center">
+            <div class="text-2xl font-bold text-indigo-700">{{ stats.futu_total_stores }}</div>
+            <div class="text-xs text-indigo-600 mt-1">富途门店</div>
+            <div class="text-[10px] text-gray-400 mt-0.5">{{ stats.futu_stores_note }}</div>
+        </div>
+        <div class="bg-red-50 rounded-lg p-4 text-center">
+            <div class="text-2xl font-bold text-red-700">{{ stats.usmart_total_stores }}</div>
+            <div class="text-xs text-red-600 mt-1">uSMART门店</div>
+            <div class="text-[10px] text-gray-400 mt-0.5">目标: {{ stats.usmart_target }}</div>
+        </div>
+        <div class="bg-gray-50 rounded-lg p-4 text-center">
+            <div class="text-2xl font-bold text-gray-700">{{ stats.bank_total_branches }}+</div>
+            <div class="text-xs text-gray-600 mt-1">银行网点</div>
+            <div class="text-[10px] text-gray-400 mt-0.5">{{ stats.bank_note }}</div>
+        </div>
+        <div class="bg-blue-50 rounded-lg p-4 text-center">
+            <div class="text-2xl font-bold text-blue-700">{{ stats.mtr_stations_total }}</div>
+            <div class="text-xs text-blue-600 mt-1">港铁站</div>
+            <div class="text-[10px] text-gray-400 mt-0.5">日均{{ (stats.mtr_daily_ridership / 10000) | int }}万人次</div>
+        </div>
+    </div>
+
+    <!-- uSMART 威胁警告 -->
+    <div class="mb-6 px-4 py-3 bg-gradient-to-r from-red-50 to-orange-50 border-l-4 border-red-400 rounded-r-lg">
+        <div class="flex items-start gap-2">
+            <span class="text-red-500 text-lg mt-0.5">&#9888;</span>
+            <div>
+                <p class="text-sm font-semibold text-red-800">uSMART线下抢客警报</p>
+                <p class="text-xs text-gray-700 mt-1">盈立uSMART已在<strong>西九龙高铁站</strong>(G-14铺)和<strong>落马洲港铁站</strong>开设门店，系<strong>首家券商入驻港铁站内</strong>。目标18区全覆盖，周大福控股backing，月租超HK$100万。富途在口岸/港铁站内布点为<strong>零</strong>。</p>
+                <p class="text-[10px] text-gray-400 mt-1">来源: 明报2025.8.19 + uSMART官方公告</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 门店对比条 -->
+    <div class="mb-6">
+        <h4 class="text-sm font-semibold text-gray-700 mb-3">线下门店对比</h4>
+        {% set max_stores = [stats.futu_total_stores, stats.usmart_total_stores] | max %}
+        <div class="space-y-3">
+            <div>
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-medium text-indigo-700">富途 {{ stats.futu_total_stores }}间</span>
+                    <span class="text-[10px] text-gray-400">{{ stats.futu_stores_note }}</span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-4">
+                    <div class="bg-indigo-500 h-4 rounded-full flex items-center justify-end pr-2" style="width: {{ (stats.futu_total_stores / (max_stores * 1.5) * 100) | int }}%">
+                        <span class="text-[10px] text-white font-bold">{{ stats.futu_total_stores }}</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-medium text-red-700">uSMART {{ stats.usmart_total_stores }}间</span>
+                    <span class="text-[10px] text-gray-400">{{ stats.usmart_stores_note }}</span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-4">
+                    <div class="bg-red-500 h-4 rounded-full flex items-center justify-end pr-2" style="width: {{ (stats.usmart_total_stores / (max_stores * 1.5) * 100) | int }}%">
+                        <span class="text-[10px] text-white font-bold">{{ stats.usmart_total_stores }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== 线下片区 密度矩阵表 ===== -->
+<div class="stat-card mb-6" data-tab="tab-offline" id="sec-offline-matrix">
+    <h3 class="text-lg font-semibold text-gray-900 mb-1">片区密度矩阵</h3>
+    <p class="text-xs text-gray-400 mb-4">投资者密度 × 竞品布局 × 富途覆盖, 按优先级排序</p>
+
+    {% for region in oda.regions %}
+    <div class="mb-6">
+        <div class="flex items-center gap-2 mb-2">
+            <h4 class="text-sm font-bold text-gray-800">{{ region.name }}</h4>
+            <span class="text-[10px] text-gray-400">{{ region.description }}</span>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-xs">
+                <thead>
+                    <tr class="border-b border-gray-200">
+                        <th class="text-left py-2 px-2 text-gray-500 font-medium">区域</th>
+                        <th class="text-center py-2 px-2 text-gray-500 font-medium">人口</th>
+                        <th class="text-center py-2 px-2 text-gray-500 font-medium">投资者密度</th>
+                        <th class="text-center py-2 px-2 text-gray-500 font-medium">富途</th>
+                        <th class="text-center py-2 px-2 text-gray-500 font-medium">uSMART</th>
+                        <th class="text-center py-2 px-2 text-gray-500 font-medium">银行</th>
+                        <th class="text-center py-2 px-2 text-gray-500 font-medium">港铁站</th>
+                        <th class="text-center py-2 px-2 text-gray-500 font-medium">优先级</th>
+                        <th class="text-left py-2 px-2 text-gray-500 font-medium">建议行动</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for d in region.districts %}
+                    {% set priority_colors = {'S': 'bg-red-100 text-red-800', 'A': 'bg-green-100 text-green-800', 'B': 'bg-blue-100 text-blue-800', 'C': 'bg-gray-100 text-gray-600'} %}
+                    {% set futu_colors = {'空白': 'text-red-600 font-bold', '基本': 'text-amber-600', '中等': 'text-green-600'} %}
+                    <tr class="border-b border-gray-50 hover:bg-gray-50">
+                        <td class="py-2 px-2 font-medium text-gray-800">{{ d.name }}</td>
+                        <td class="py-2 px-2 text-center text-gray-600">
+                            {% if d.population > 0 %}{{ (d.population / 10000) | round(1) }}万{% else %}—{% endif %}
+                        </td>
+                        <td class="py-2 px-2 text-center">
+                            <span class="text-amber-500">{{ '●' * d.investor_density_score }}{{ '○' * (5 - d.investor_density_score) }}</span>
+                        </td>
+                        <td class="py-2 px-2 text-center {{ futu_colors.get(d.futu_presence.coverage, '') }}">
+                            {% if d.futu_presence.stores > 0 %}{{ d.futu_presence.stores }}间{% else %}—{% endif %}
+                        </td>
+                        <td class="py-2 px-2 text-center">
+                            {% set usmart = d.competitor_presence | selectattr('name', 'equalto', 'uSMART') | first %}
+                            {% if usmart and usmart.stores > 0 %}
+                                <span class="text-red-600 font-medium">{{ usmart.stores }}间</span>
+                            {% else %}—{% endif %}
+                        </td>
+                        <td class="py-2 px-2 text-center text-gray-500">
+                            {% set bank = d.competitor_presence | selectattr('name', 'equalto', '银行') | first %}
+                            {% if bank %}{{ bank.branches }}{% else %}—{% endif %}
+                        </td>
+                        <td class="py-2 px-2 text-center text-gray-500">{{ d.mtr_stations | length }}</td>
+                        <td class="py-2 px-2 text-center">
+                            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold {{ priority_colors.get(d.priority, 'bg-gray-100 text-gray-600') }}">{{ d.priority }}</span>
+                        </td>
+                        <td class="py-2 px-2 text-gray-600 max-w-[200px]">{{ d.action }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- ===== 线下片区 行动建议 ===== -->
+<div class="stat-card mb-6" data-tab="tab-offline" id="sec-offline-recommendations">
+    <h3 class="text-lg font-semibold text-gray-900 mb-1">行动建议排名</h3>
+    <p class="text-xs text-gray-400 mb-4">按紧急程度和预期影响排序</p>
+
+    <div class="space-y-3">
+        {% for rec in oda.recommendations %}
+        {% set rec_colors = {'紧急': {'bg': 'bg-red-50', 'border': 'border-red-300', 'badge': 'bg-red-100 text-red-800', 'num': 'bg-red-600'}, '高': {'bg': 'bg-amber-50', 'border': 'border-amber-300', 'badge': 'bg-amber-100 text-amber-800', 'num': 'bg-amber-600'}, '中': {'bg': 'bg-blue-50', 'border': 'border-blue-300', 'badge': 'bg-blue-100 text-blue-800', 'num': 'bg-blue-600'}} %}
+        {% set rc = rec_colors.get(rec.priority, rec_colors['中']) %}
+        <div class="{{ rc.bg }} border {{ rc.border }} rounded-lg p-4">
+            <div class="flex items-start gap-3">
+                <div class="flex-shrink-0 w-8 h-8 {{ rc.num }} rounded-full flex items-center justify-center">
+                    <span class="text-white text-sm font-bold">{{ rec.rank }}</span>
+                </div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-sm font-bold text-gray-900">{{ rec.action }}</span>
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold {{ rc.badge }}">{{ rec.priority }}</span>
+                        {% if rec.timeline %}<span class="text-[10px] text-gray-400">{{ rec.timeline }}</span>{% endif %}
+                    </div>
+                    <p class="text-xs text-gray-700 mb-2">{{ rec.detail }}</p>
+                    <div class="flex items-center gap-4 text-[10px] text-gray-500">
+                        <span>预算: <strong class="text-gray-700">HK${{ rec.est_cost_hkd }}</strong></span>
+                        <span>预期效果: <strong class="text-gray-700">{{ rec.expected_impact }}</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- 数据来源 -->
+    <div class="mt-4 pt-3 border-t border-gray-100">
+        <p class="text-[10px] text-gray-400">
+            数据来源: {{ oda.data_sources | join(' · ') }}
+        </p>
+    </div>
+</div>
+{% endif %}
+
 <!-- ===== 覆盖率测算方法 ===== -->
 <details class="stat-card mb-6">
     <summary class="text-xs text-indigo-600 cursor-pointer hover:text-indigo-800 font-medium">覆盖率测算方法与改进方向</summary>
@@ -2283,7 +3651,7 @@
         <div>
             <p class="font-semibold text-gray-700 mb-1">当前测算方法（Tier 1: 估算）</p>
             <ul class="list-disc list-inside space-y-0.5">
-                <li><strong>社媒平台:</strong> 覆盖率 = 券商内容占金融内容比例 × 富途在券商内容中份额。例: YouTube 18%(券商/金融) × 50%(富途/券商) ≈ 4%</li>
+                <li><strong>社媒平台:</strong> 内容占比 = 券商内容占金融内容比例 × 富途在券商内容中份额。例: YouTube 18%(券商/金融) × 50%(富途/券商) ≈ 4%</li>
                 <li><strong>其他渠道:</strong> 基于广告投放观察 + 品牌提及频率 + 官方运营活跃度的综合估算</li>
                 <li><strong>校准数据:</strong> YouTube 频道订阅数对比、Truescope 社交监听、IAB HK 小红书报告等已知锚点</li>
             </ul>
@@ -2318,9 +3686,13 @@
 
 <!-- ===== 数据来源 ===== -->
 {% if methodology %}
-<details class="stat-card mb-6">
-    <summary class="text-xs text-indigo-600 cursor-pointer hover:text-indigo-800 font-medium">查看数据来源与方法论</summary>
-    <div class="mt-3 text-xs text-gray-600 space-y-2" data-tab="tab-methodology" id="sec-sources">
+<div class="stat-card mb-6" data-tab="tab-methodology" id="sec-sources">
+    <div class="flex items-center gap-2 mb-3">
+        <span class="inline-block w-1 h-5 rounded bg-amber-400"></span>
+        <h3 class="text-sm font-bold text-gray-700">数据来源与时效</h3>
+        <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-700">数据区间 {{ data_date_range }}</span>
+    </div>
+    <div class="text-xs text-gray-600 space-y-2">
         <p><strong>地域限定：</strong>{{ methodology.geo_filtering }}</p>
         <p class="mt-2"><strong>数据来源：</strong></p>
         <ul class="list-disc list-inside space-y-0.5">
@@ -2329,7 +3701,7 @@
             {% endfor %}
         </ul>
     </div>
-</details>
+</div>
 {% endif %}
 
 <script>

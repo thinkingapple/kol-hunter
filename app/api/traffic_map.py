@@ -4,9 +4,15 @@ import re
 from pathlib import Path
 
 from fastapi import APIRouter, Request
+from fastapi.responses import RedirectResponse
 from app import templates
 
 router = APIRouter()
+
+
+@router.get("/")
+async def root_redirect():
+    return RedirectResponse(url="/traffic-map")
 
 DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"
 
@@ -87,10 +93,10 @@ def _generate_insights(all_channels: list) -> list:
 
     insights.append({
         "type": "summary",
-        "title": f"覆盖率中位数: {median_pct}%  |  {n_total} 个渠道",
+        "title": f"内容占比中位数: {median_pct}%  |  {n_total} 个渠道",
         "body": (
             f"香港约 250 万投资者分布在 {n_total} 个线上渠道中。"
-            f"富途在 {len(low_cov)} 个渠道覆盖率 ≤5%（薄弱），"
+            f"富途在 {len(low_cov)} 个渠道营销内容占比 ≤5%（薄弱），"
             f"{len(mid_cov)} 个在 5-15%（中等），"
             f"{len(high_cov)} 个 >15%（已有优势）。"
             f"各渠道投资者人数为去重估算（平台用户 × 投资者渗透率），同一投资者平均使用 3-5 个渠道，不可跨渠道求和。"
@@ -105,11 +111,11 @@ def _generate_insights(all_channels: list) -> list:
         def _fmt_traffic(ch):
             u = ch["users"]
             label = f"{u // 10000}万" if u >= 10000 else f"{u:,}"
-            return f"{ch['display_name']}（{label}/月, 覆盖{ch['futu_coverage_pct']}%）"
+            return f"{ch['display_name']}（{label}/月, 内容占比{ch['futu_coverage_pct']}%）"
         insights.append({
             "type": "gap",
             "title": f"高流量低覆盖 — {len(gaps)} 个蓝海渠道",
-            "body": "以下渠道月流量均超百万但富途覆盖率 ≤5%，是最大的增量空间：",
+            "body": "以下渠道月流量均超百万但富途内容占比 ≤5%，是最大的增量空间：",
             "details": [_fmt_traffic(ch) for ch in gaps[:6]],
             "color": "red",
         })
@@ -126,7 +132,7 @@ def _generate_insights(all_channels: list) -> list:
             "title": f"高相关度低覆盖 — {len(quick_wins)} 个快速突破点",
             "body": "与富途业务高度相关但覆盖不足，投入产出比最高的渠道：",
             "details": [
-                f"{ch['display_name']}（覆盖{ch['futu_coverage_pct']}%）"
+                f"{ch['display_name']}（内容占比{ch['futu_coverage_pct']}%）"
                 for ch in quick_wins[:5]
             ],
             "color": "amber",
@@ -150,7 +156,7 @@ def _generate_insights(all_channels: list) -> list:
         insights.append({
             "type": "category",
             "title": "覆盖最薄弱的渠道类型",
-            "body": "以下类型渠道的平均覆盖率最低，建议优先制定策略：",
+            "body": "以下类型渠道富途内容占比最低，建议优先制定策略：",
             "details": [
                 f"{c['name']}：平均 {c['pct']}%（{c['count']} 个渠道）"
                 for c in low_cats
@@ -164,9 +170,9 @@ def _generate_insights(all_channels: list) -> list:
         insights.append({
             "type": "strength",
             "title": "富途已有优势的阵地",
-            "body": "这些渠道覆盖率领先，建议巩固优势、提升转化效率：",
+            "body": "这些渠道富途内容占比领先，建议巩固优势、提升转化效率：",
             "details": [
-                f"{ch['display_name']}（覆盖{ch['futu_coverage_pct']}%）"
+                f"{ch['display_name']}（内容占比{ch['futu_coverage_pct']}%）"
                 for ch in top_covered
             ],
             "color": "emerald",
@@ -200,6 +206,16 @@ async def traffic_map(request: Request):
     investor_motivations = data.get("investor_motivations", {})
     wealth_panorama = data.get("wealth_panorama", {})
     competitor_landscape = data.get("competitor_landscape", {})
+    user_overlap = data.get("user_overlap", {})
+    broker_overlap_st = data.get("broker_overlap_st", {})
+    social_finance_overlap = data.get("social_finance_overlap", {})
+    tab_insights = data.get("tab_insights", {})
+    incremental_channel_matrix = data.get("incremental_channel_matrix", {})
+    channel_strategy = data.get("channel_strategy", {})
+    executive_summary = data.get("executive_summary", [])
+    offline_district_analysis = data.get("offline_district_analysis", {})
+    data_date_range = data.get("data_date_range", "")
+    data_date_detail = data.get("data_date_detail", "")
 
     # Build waterfall data: merge platform/channel total users with scatter conversion data
     waterfall_data = []
@@ -332,10 +348,79 @@ async def traffic_map(request: Request):
     all_channels.sort(key=lambda x: x["users"], reverse=True)
     max_users = all_channels[0]["users"] if all_channels else 1
 
-    # Compute priority scores (traffic × gap × relevance × investment discount)
+    # Compute priority scores — 6-factor model:
+    # traffic × gap × relevance × threat × incremental × journey × investment
     rel_weights = {"极高": 1.0, "高": 0.7, "中高": 0.5, "中": 0.3, "中(竞品)": 0.1, "低": 0.1}
     inv_discount = {"high": 0.2, "medium": 0.5, "low": 0.8, "none": 1.0}
     inv_labels = {"high": "已重点投入", "medium": "有一定投入", "low": "少量投入", "none": "未投入"}
+
+    # Collect all display names for fuzzy matching in lookups
+    all_display_names = [ch["display_name"] for ch in all_channels]
+
+    # Build competitive threat lookup: channel display_name → threat multiplier
+    # Uses IBKR + Webull MoM from social_finance_overlap (positive MoM = growing threat)
+    overlap_platforms = social_finance_overlap.get("platforms", [])
+    threat_raw = {}  # overlap platform name → threat value
+    for op in overlap_platforms:
+        ibkr_mom = op.get("ibkr_mom") or 0
+        webull_mom = op.get("webull_mom") or 0
+        raw_threat = max(ibkr_mom, 0) + max(webull_mom, 0)
+        threat_raw[op["platform"]] = round(1.0 + min(raw_threat / 3.0, 1.0), 2)
+    # Match overlap names to channel display_names (prefix/contains matching)
+    threat_lookup = {}
+    for olap_name, val in threat_raw.items():
+        for dn in all_display_names:
+            if olap_name == dn or dn.startswith(olap_name) or olap_name in dn:
+                threat_lookup[dn] = val
+    # Handle WeChat → 微信 special case
+    if "WeChat" in threat_raw:
+        for dn in all_display_names:
+            if "微信" in dn:
+                threat_lookup[dn] = threat_raw["WeChat"]
+    if "X/Twitter" in threat_raw:
+        for dn in all_display_names:
+            if "X /" in dn or "Twitter" in dn:
+                threat_lookup[dn] = threat_raw["X/Twitter"]
+
+    # Build incremental density lookup: channel → weighted avg density (0-5)
+    # Weight each source by its pct contribution (来港人才52%, 年轻首投14%, etc.)
+    inc_sources = incremental_channel_matrix.get("sources", [])
+    inc_raw = {}  # short channel name → weighted density
+    total_pct = sum(s.get("pct", 0) for s in inc_sources) or 100
+    for source in inc_sources:
+        src_weight = source.get("pct", 0) / total_pct
+        for ch_data in source.get("channels", []):
+            ch_name = ch_data["channel"]
+            density = ch_data.get("density", 0) * src_weight
+            inc_raw[ch_name] = inc_raw.get(ch_name, 0) + density
+    # Match short names to display_names and normalize to multiplier
+    inc_density_lookup = {}
+    for inc_name, raw in inc_raw.items():
+        multiplier = round(0.5 + raw * 0.3, 2)  # 0→0.5, 5→2.0
+        for dn in all_display_names:
+            if inc_name == dn or dn.startswith(inc_name) or inc_name in dn:
+                inc_density_lookup[dn] = multiplier
+    # Special mappings
+    if "微信" in inc_raw:
+        for dn in all_display_names:
+            if "微信" in dn:
+                inc_density_lookup[dn] = round(0.5 + inc_raw["微信"] * 0.3, 2)
+    if "Google搜索" in inc_raw:
+        for dn in all_display_names:
+            if "Google" in dn:
+                inc_density_lookup[dn] = round(0.5 + inc_raw["Google搜索"] * 0.3, 2)
+    if "X/Twitter" in inc_raw:
+        for dn in all_display_names:
+            if "X /" in dn or "Twitter" in dn:
+                inc_density_lookup[dn] = round(0.5 + inc_raw["X/Twitter"] * 0.3, 2)
+
+    # Build journey stage verdict lookup
+    journey_stages = analysis_frameworks.get("user_journey", {}).get("stages", [])
+    verdict_weights = {"danger": 1.5, "warning": 1.2, "strong": 1.0}
+    stage_verdict = {}
+    for stage in journey_stages:
+        stage_verdict[stage["id"]] = verdict_weights.get(stage.get("verdict", ""), 1.0)
+
     for ch in all_channels:
         rel = ch.get("futu_relevance", "")
         rel_w = 0.3
@@ -346,8 +431,31 @@ async def traffic_map(request: Request):
         gap = 100 - ch["futu_coverage_pct"]
         inv = ch.get("futu_investment", "none")
         inv_w = inv_discount.get(inv, 1.0)
-        ch["priority_score"] = round(ch["users"] / 10000 * gap * rel_w * inv_w)
+
+        # Factor 1: Competitive threat (1.0-2.0×)
+        threat_w = threat_lookup.get(ch["display_name"], 1.0)
+
+        # Factor 2: Incremental investor density (0.5-2.0×)
+        inc_w = inc_density_lookup.get(ch["display_name"], 0.8)
+
+        # Factor 3: Journey stage weakness (avg verdict weight of channel's stages)
+        ch_stages = ch.get("journey_stages", [])
+        if ch_stages:
+            journey_w = round(sum(stage_verdict.get(s, 1.0) for s in ch_stages) / len(ch_stages), 2)
+        else:
+            journey_w = 1.0
+
+        ch["priority_score"] = round(ch["users"] / 10000 * gap * rel_w * threat_w * inc_w * journey_w * inv_w)
         ch["investment_label"] = inv_labels.get(inv, "")
+        # Store factor breakdown for display
+        ch["priority_factors"] = {
+            "threat": threat_w,
+            "incremental": inc_w,
+            "journey": journey_w,
+            "relevance": rel_w,
+            "gap": gap,
+            "investment": inv_w,
+        }
 
     # Build journey stage grouping
     stage_ids = ["awareness", "interest", "consideration", "conversion", "retention", "referral"]
@@ -453,4 +561,14 @@ async def traffic_map(request: Request):
         "investor_motivations": investor_motivations,
         "wealth_panorama": wealth_panorama,
         "competitor_landscape": competitor_landscape,
+        "user_overlap": user_overlap,
+        "broker_overlap_st": broker_overlap_st,
+        "social_finance_overlap": social_finance_overlap,
+        "tab_insights": tab_insights,
+        "channel_strategy": channel_strategy,
+        "incremental_channel_matrix": incremental_channel_matrix,
+        "executive_summary": executive_summary,
+        "data_date_range": data_date_range,
+        "data_date_detail": data_date_detail,
+        "offline_district_analysis": offline_district_analysis,
     })
