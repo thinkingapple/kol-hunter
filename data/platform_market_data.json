@@ -4924,9 +4924,9 @@
           "pct": 0.5,
           "amount": "HK,500亿（HKEX ETF AUM）",
           "color": "cyan",
-          "detail": "186只上市ETF；全球成交周转率第一；含虚拟资产ETF（BTC/ETH现货，2024年亚洲首批）；持有率仅9%（~27万投资者）",
-          "source": "HKEX 2024 + IFEC 2025",
-          "source_url": "https://www.hkex.com.hk/-/media/HKEX-Market/Market-Data/Statistics/Consolidated-Reports/Annual-Market-Statistics/2024FY-Ann-Mkt-Stat_eng.pdf"
+          "detail": "186只上市ETF；HK ETP市场（ETF+L&I）周转速度全球第一（2025年9月）、AUM HK$6,540亿全球第三；含虚拟资产ETF（BTC/ETH现货，2024年亚洲首批）；零售持有率仅9%（~27万投资者），知晓率74%但持有转化率仅12%——全品类最低",
+          "source": "HKEX ETP Markets 2025 + IFEC 2025",
+          "source_url": "https://www.hkexgroup.com/Media-Centre/Insight/Insight/2025/Jean-Mesnard-Sense/Hong-Kong-ETP-Markets-Six-Trends-in-2025?sc_lang=en"
         },
         {
           "name": "债券",
@@ -5317,9 +5317,10 @@
           "holders": 270000,
           "holders_label": "~27万",
           "pct_of_investors": 9,
-          "detail": "全球成交周转率第一，AUM达HK亿，186只上市ETF",
-          "source": "IFEC 2025 + HKEX",
-          "color": "cyan"
+          "detail": "HK ETP市场（ETF+L&I）周转速度全球第一（2025年9月，HKEX官方）；186只上市ETF；AUM HK$6,540亿（全球第三）。知晓率74%但持有率仅9%，知晓-持有转化率12%为全品类最低——知道但不买的空间最大",
+          "source": "HKEX ETP Markets Six Trends 2025 + IFEC 2025",
+          "color": "cyan",
+          "source_url": "https://www.hkexgroup.com/Media-Centre/Insight/Insight/2025/Jean-Mesnard-Sense/Hong-Kong-ETP-Markets-Six-Trends-in-2025?sc_lang=en"
         },
         {
           "name": "期货/期权",
@@ -6204,9 +6205,9 @@
       },
       {
         "title": "基金24% / 场内ETF仅9%——双重跨品类空间",
-        "body": "股票91%是绝对主场。但场外基金持有率仅24%（~71万人），场内ETF更低至9%（~27万人，186只上市ETF，全球周转率第一）。两个品类独立计算，均是从股票用户转化的增量方向——ETF因为在券商App内直接交易，转化路径比场外基金更短。",
+        "body": "股票91%是绝对主场。但场外基金持有率仅24%（~71万人），场内ETF更低至9%（~27万人）。关键洞察：ETF知晓率高达74%，但持有转化率仅12%——是全部投资品类里知晓-持有Gap最大的。对比：股票100%知晓→91%持有，基金100%知晓→24%持有，ETF 74%知晓→仅9%持有。知道但不买，说明门槛/信任/工具缺失，不是需求缺失。ETF因在券商App内直接交易，富途是最短的转化路径。",
         "color": "emerald",
-        "source": "IFEC 2025 + HKEX 2024"
+        "source": "IFEC 2025 + HKEX ETP Markets 2025"
       },
       {
         "title": "2026-2029黄金窗口",
