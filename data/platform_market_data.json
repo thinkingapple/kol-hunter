@@ -1,15 +1,15 @@
 {
   "title": "香港投资者社媒平台活跃度分布",
-  "updated_at": "2026-04-17",
+  "updated_at": "2026-04-28",
   "data_date_range": "2024.07 — 2026.04",
   "data_date_detail": "IFEC 2025投资者调查 | data.ai 2026年3月 | Truescope 2024.07-2025.01 | DataReportal 2026 | SFC AWMAS 2024",
   "executive_summary": [
     {
       "title": "Instagram是最大社媒盲区",
-      "body": "Meltwater全年实测：富途在论坛(73%)、新闻(63%)、小红书(62%)、YouTube(55%)、X(52%)均超5成。唯一例外是Instagram——老虎70.5%声量主导，富途仅18.1%，且富途无独立HK IG账号；Facebook也只有42.1%，微牛和老虎合计43%侵蚀明显。",
+      "body": "Meltwater全年实测（6家券商）：富途在论坛(72.7%)、新闻(62.8%)、小红书(62.2%)、YouTube(55.2%)、X(51.5%)均超5成。唯一例外是Instagram——老虎70.5%声量主导，富途仅18.1%，且富途无独立HK IG账号；Facebook也只有42.1%，微牛(26.5%)和老虎(16.4%)侵蚀明显。",
       "action": "Instagram补位：开设HK独立账号 + 布局Reels KOL合作，对标老虎的KOL密度",
       "color": "red",
-      "sources": "Meltwater HK Q1 2026社交监听 + YouTube频道数据"
+      "sources": "Meltwater全年 May2025-Apr2026 HK社交监听（6家券商）"
     },
     {
       "title": "IBKR在关键渠道Affinity反超",
@@ -60,11 +60,12 @@
     "step_1": "各平台香港用户数：来自 DataReportal Digital 2026 HK 报告，基于各平台广告后台 IP 地理定位 + 账户所在地 = Hong Kong 的去重 audience 数据",
     "step_2": "香港金融内容消费率：基于香港用户行为调研及本地内容分析（非全球平均值），如 YouTube HK 用户中金融内容观看率、小红书 HK 用户中理财搜索比例等",
     "step_3": "香港创作者数：按平台特性的创作者/消费者比例推算（YouTube 1:400, 小红书 1:300, TikTok 1:400 等），仅计入 IP 定位香港或账户标注香港的创作者",
-    "futu_content_method": "富途内容占比分两层：① 投资内容中占比 = 公式：券商内容占金融内容比例 × 富途在券商内容中份额；② 券商内容中占比 = 富途提及量 / 全部券商提及量。校准数据来源：YouTube 官方频道订阅数（富途HK 107K = 4倍于老虎HK 25.5K，为 HK 券商频道最大）、Truescope 社交监听（新加坡，moomoo 社交互动量 17,961 = 3倍于老虎 5,729）、IAB HK 小红书报告（stock 仅占 banking 帖子 8%）、Digital Business Lab HK 调查（仅 7.4% HK 小红书用户主动搜索金融内容）。注意：各平台均不公开搜索结果总数，券商品牌在小红书/B站的精确提及量需千瓜/新红等付费工具获取，当前数据为基于已知校准点的估算。HK 主要线上券商：富途/moomoo、老虎/Tiger、盈透/IBKR、长桥/Longbridge、华盛/Webull，富途为港股线上交易量市占率第一",
+    "futu_content_method": "富途内容占比（券商内容中份额）= 富途品牌提及量 / 全部券商提及量。数据来源：Meltwater社交监听全年实测（May 2025–Apr 2026，HK地理过滤），覆盖6家主要香港线上券商（富途/moomoo、老虎/Tiger、长桥/Longbridge、IBKR、微牛/Webull、盈立/uSMART）。统计指标为新增提及量（Flow），涵盖新闻、论坛、X/Twitter、Instagram、Facebook、小红书、YouTube等平台。注：Facebook不含盈立（该券商Meltwater无Facebook数据）；YouTube单月激增（Apr 1-27 富途412条）为品牌活动推广所致，已纳入全年合计。各平台富途SoV：论坛72.7%、新闻62.8%、小红书62.2%、YouTube 55.2%、X 51.5%、Facebook 42.1%、Instagram 18.1%。",
     "hk_population": 7500000,
     "hk_internet_users": 7160000,
     "hk_investor_population": "约 250 万活跃投资者（IFEC 2025散户调查: 54% HK成年人持有金融产品≈297万, 其中过去12个月有交易的约200-250万; 港交所账户约390万含重复/僵尸户）",
     "data_sources": [
+      "Meltwater社交监听 May 2025–Apr 2026 HK过滤: 6家券商品牌提及量，计算各平台 Share of Voice（富途/老虎/长桥/IBKR/微牛/盈立）",
       "DataReportal Digital 2026: Hong Kong (datareportal.com/reports/digital-2026-hong-kong)",
       "DataReportal Digital 2025: Hong Kong (datareportal.com/reports/digital-2025-hong-kong)",
       "NapoleonCat Social Media Users HK 2026 (stats.napoleoncat.com)",
@@ -6320,25 +6321,25 @@
         "title": "Instagram：老虎KOL策略碾压",
         "body": "全年Instagram券商声量：老虎70.5% vs 富途18.1%。老虎从2025年7月起每月稳定50+条Instagram内容，全年持续KOL输出；富途无HK独立账号，是唯一社媒严重落后的平台。",
         "color": "red",
-        "source": "Meltwater Q1 2026"
+        "source": "Meltwater全年 May2025-Apr2026"
       },
       {
         "title": "富途在5个主流平台声量超六成",
-        "body": "全年SoV：论坛72.7%、新闻62.8%、小红书62.2%、YouTube 55.2%、X 51.5%。原估算（20-50%）整体偏保守，实测地位强于预期。Facebook例外：仅42.1%，微牛(26.5%)和老虎(16.4%)侵蚀明显。",
+        "body": "全年SoV：论坛72.7%、新闻62.8%、小红书62.2%、YouTube 55.2%、X 51.5%。Facebook例外：仅42.1%，微牛(26.5%)和老虎(16.4%)侵蚀明显。",
         "color": "emerald",
-        "source": "Meltwater Q1 2026"
+        "source": "Meltwater全年 May2025-Apr2026"
       },
       {
         "title": "IBKR在X/Twitter声量24%，是最活跃英文竞品",
-        "body": "X/Twitter券商声量：富途60% vs IBKR 24%。IBKR在X的英文内容持续产出，针对英文投资者社群；富途X内容以中文为主，英文受众覆盖不足。",
+        "body": "X/Twitter券商声量：富途51.5% vs IBKR 23.8%。IBKR全年英文内容持续产出，针对英文投资者社群；富途X内容以中文为主，英文受众覆盖不足。",
         "color": "amber",
-        "source": "Meltwater Q1 2026"
+        "source": "Meltwater全年 May2025-Apr2026"
       },
       {
         "title": "盈立新闻媒体声量13%，超出其市场份额",
-        "body": "新闻媒体声量：盈立13.3% vs 其10%下载份额。盈立通过媒体公关维持超比例声量，是份额快速增长的助推因素之一。",
+        "body": "新闻媒体声量：盈立7.8% vs 富途62.8%。盈立通过媒体公关维持超比例声量（下载份额约5%），是份额快速增长的助推因素之一。",
         "color": "amber",
-        "source": "Meltwater Q1 2026"
+        "source": "Meltwater全年 May2025-Apr2026"
       }
     ]
   },
@@ -7893,57 +7894,235 @@
     ],
     "social_sov": {
       "title": "券商社媒声量 Share of Voice（Meltwater全年，HK过滤）",
-      "source": "Meltwater May 2025 – Apr 2026，HK过滤，6家券商",
-      "note": "Meltwater为新增提及量（Flow），YouTube含频道订阅存量加权；Instagram老虎以KOL合作为主",
+      "source": "Meltwater May 2025 – Apr 2026，HK过滤，6家券商（富途/老虎/长桥/IBKR/微牛/盈立）",
+      "note": "新增提及量（Flow）统计；Facebook未检测到盈立数据，仅含5家",
       "platforms": [
         {
           "name": "YouTube",
           "futu": 55.2,
           "runner_up": "微牛",
           "runner_up_pct": 17.8,
-          "note": ""
+          "note": "",
+          "brokers": [
+            {
+              "name": "富途",
+              "pct": 55.2
+            },
+            {
+              "name": "微牛",
+              "pct": 17.8
+            },
+            {
+              "name": "IBKR",
+              "pct": 14.4
+            },
+            {
+              "name": "盈立",
+              "pct": 4.7
+            },
+            {
+              "name": "老虎",
+              "pct": 4.5
+            },
+            {
+              "name": "长桥",
+              "pct": 3.4
+            }
+          ]
         },
         {
           "name": "Facebook",
           "futu": 42.1,
           "runner_up": "微牛",
           "runner_up_pct": 26.5,
-          "note": ""
+          "note": "",
+          "brokers": [
+            {
+              "name": "富途",
+              "pct": 42.1
+            },
+            {
+              "name": "微牛",
+              "pct": 26.5
+            },
+            {
+              "name": "老虎",
+              "pct": 16.4
+            },
+            {
+              "name": "长桥",
+              "pct": 13.4
+            },
+            {
+              "name": "IBKR",
+              "pct": 1.6
+            }
+          ]
         },
         {
           "name": "Instagram",
           "futu": 18.1,
           "runner_up": "老虎",
           "runner_up_pct": 70.5,
-          "note": "⚠️ 老虎KOL策略主导"
+          "note": "⚠️ 老虎KOL策略主导",
+          "brokers": [
+            {
+              "name": "老虎",
+              "pct": 70.5
+            },
+            {
+              "name": "富途",
+              "pct": 18.1
+            },
+            {
+              "name": "微牛",
+              "pct": 6.0
+            },
+            {
+              "name": "长桥",
+              "pct": 2.9
+            },
+            {
+              "name": "盈立",
+              "pct": 2.4
+            },
+            {
+              "name": "IBKR",
+              "pct": 0.2
+            }
+          ]
         },
         {
           "name": "X/Twitter",
           "futu": 51.5,
           "runner_up": "IBKR",
           "runner_up_pct": 23.8,
-          "note": ""
+          "note": "",
+          "brokers": [
+            {
+              "name": "富途",
+              "pct": 51.5
+            },
+            {
+              "name": "IBKR",
+              "pct": 23.8
+            },
+            {
+              "name": "长桥",
+              "pct": 14.1
+            },
+            {
+              "name": "老虎",
+              "pct": 4.5
+            },
+            {
+              "name": "盈立",
+              "pct": 4.5
+            },
+            {
+              "name": "微牛",
+              "pct": 1.6
+            }
+          ]
         },
         {
           "name": "小红书",
           "futu": 62.2,
           "runner_up": "长桥",
           "runner_up_pct": 10.8,
-          "note": ""
+          "note": "",
+          "brokers": [
+            {
+              "name": "富途",
+              "pct": 62.2
+            },
+            {
+              "name": "长桥",
+              "pct": 10.8
+            },
+            {
+              "name": "IBKR",
+              "pct": 10.7
+            },
+            {
+              "name": "老虎",
+              "pct": 6.1
+            },
+            {
+              "name": "盈立",
+              "pct": 6.1
+            },
+            {
+              "name": "微牛",
+              "pct": 4.1
+            }
+          ]
         },
         {
           "name": "论坛",
           "futu": 72.7,
           "runner_up": "IBKR",
           "runner_up_pct": 10.7,
-          "note": ""
+          "note": "",
+          "brokers": [
+            {
+              "name": "富途",
+              "pct": 72.7
+            },
+            {
+              "name": "IBKR",
+              "pct": 10.7
+            },
+            {
+              "name": "微牛",
+              "pct": 10.4
+            },
+            {
+              "name": "老虎",
+              "pct": 5.1
+            },
+            {
+              "name": "长桥",
+              "pct": 0.9
+            },
+            {
+              "name": "盈立",
+              "pct": 0.3
+            }
+          ]
         },
         {
           "name": "新闻",
           "futu": 62.8,
           "runner_up": "老虎",
           "runner_up_pct": 10.5,
-          "note": ""
+          "note": "",
+          "brokers": [
+            {
+              "name": "富途",
+              "pct": 62.8
+            },
+            {
+              "name": "老虎",
+              "pct": 10.5
+            },
+            {
+              "name": "IBKR",
+              "pct": 8.5
+            },
+            {
+              "name": "盈立",
+              "pct": 7.8
+            },
+            {
+              "name": "长桥",
+              "pct": 5.7
+            },
+            {
+              "name": "微牛",
+              "pct": 4.8
+            }
+          ]
         }
       ]
     }
