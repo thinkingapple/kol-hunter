@@ -4911,13 +4911,22 @@
           "source_url": "https://www.mpfa.org.hk/en/info-centre/press-releases/20251006"
         },
         {
-          "name": "基金/ETF",
-          "pct": 3,
-          "amount": "HK$1.64万亿(SFC认可基金NAV)",
+          "name": "基金（共同基金）",
+          "pct": 2.5,
+          "amount": "HK.64万亿（SFC认可基金NAV）",
           "color": "indigo",
-          "detail": "954只SFC认可基金; 2024年净流入HK$1630亿; 2025年5月NAV升至HK$1.99万亿(+21%)",
+          "detail": "954只SFC认可基金；2024年净流入HK亿；2025年5月NAV升至HK.99万亿(+21%)；持有率24%（~71万投资者）",
           "source": "SFC AWMAS 2024",
           "source_url": "https://www.sfc.hk/-/media/EN/files/COM/Reports-and-surveys/EN_AWMAS-2024.pdf"
+        },
+        {
+          "name": "场内ETF",
+          "pct": 0.5,
+          "amount": "HK,500亿（HKEX ETF AUM）",
+          "color": "cyan",
+          "detail": "186只上市ETF；全球成交周转率第一；含虚拟资产ETF（BTC/ETH现货，2024年亚洲首批）；持有率仅9%（~27万投资者）",
+          "source": "HKEX 2024 + IFEC 2025",
+          "source_url": "https://www.hkex.com.hk/-/media/HKEX-Market/Market-Data/Statistics/Consolidated-Reports/Annual-Market-Statistics/2024FY-Ann-Mkt-Stat_eng.pdf"
         },
         {
           "name": "债券",
@@ -6194,10 +6203,10 @@
         "source": "入境处人才签证数据 + C&SD人口统计"
       },
       {
-        "title": "91%持股票，基金仅24%——跨品类空间",
-        "body": "股票/证券是绝对主场(~HK$3万亿，91%投资者持有)。但基金/ETF仅24%持有(HK$1.64万亿→已升至1.99万亿)、加密货币10%——从股票用户向基金/ETF/crypto跨品类转化是增量方向。",
+        "title": "基金24% / 场内ETF仅9%——双重跨品类空间",
+        "body": "股票91%是绝对主场。但场外基金持有率仅24%（~71万人），场内ETF更低至9%（~27万人，186只上市ETF，全球周转率第一）。两个品类独立计算，均是从股票用户转化的增量方向——ETF因为在券商App内直接交易，转化路径比场外基金更短。",
         "color": "emerald",
-        "source": "IFEC 2025 + SFC AWMAS 2024"
+        "source": "IFEC 2025 + HKEX 2024"
       },
       {
         "title": "2026-2029黄金窗口",
